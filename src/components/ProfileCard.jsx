@@ -21,6 +21,8 @@ export default function ProfileCard () {
     networkMethods.unselectAll()
   }
 
+  if (!activeNodeID) return null
+
   return (
     <Modal isOpen onClose={onClose}>
       <ModalOverlay />
