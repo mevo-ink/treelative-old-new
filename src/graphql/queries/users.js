@@ -105,6 +105,50 @@ export const LIST_USER_AVAILABLE_CHILDREN = gql`
   }
 `
 
+export const GET_USER = gql`
+  query GET_USER($filter: UserUniqueFilter!) {
+    getUser (filter: $filter) {
+      id
+      username
+      avatar
+      email
+      phoneNumber
+      fullName
+      shortName
+      dateOfBirth
+      dateOfDeath
+      birthLocation
+      currentLocation
+      parents {
+        id
+        fullName
+        avatar
+      }
+      children {
+        id
+        fullName
+        avatar
+      }
+      couple {
+        id
+        dateOfMarriage
+        marriageLocation
+        partner {
+          id
+          fullName
+          avatar
+        }
+      }
+      socialLinks {
+        id
+        type
+        url
+      }
+      settings
+    }
+  }
+`
+
 export const GET_USER_GENERAL = gql`
   query GET_USER_GENERAL ($filter: UserUniqueFilter!) {
     getUser (filter: $filter) {

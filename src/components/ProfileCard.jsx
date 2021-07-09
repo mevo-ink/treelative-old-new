@@ -24,11 +24,11 @@ export default function ProfileCard () {
   if (!activeNodeID) return null
 
   return (
-    <Modal isOpen isCentered onClose={() => {}}>
+    <Modal isOpen isCentered onClose={onClose} closeOnOverlayClick={false}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Modal Title</ModalHeader>
-        <ModalCloseButton onClick={onClose} />
+        <ModalCloseButton />
         <ModalBody>
           <p>ASDASD</p>
         </ModalBody>

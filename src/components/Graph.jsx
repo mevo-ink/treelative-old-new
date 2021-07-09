@@ -41,7 +41,9 @@ export default function Graph ({ networkData }) {
     // set activeNodeID on user node click
     network.on('selectNode', ({ nodes }) => {
       const activeNode = networkData.nodes.find(node => nodes[0] === node.id)
-      if (activeNode.group !== 'couple') setActiveNodeID(activeNode.id)
+      if (activeNode.group !== 'couple') {
+        setTimeout(() => setActiveNodeID(activeNode.id), 1)
+      }
     })
     // limit the zoom
     const MIN_ZOOM = 0.3
