@@ -92,7 +92,10 @@ export default function Slider ({ children = [] }) {
             dragElastic={0.2}
             onDragEnd={onDragEnd}
             // additional props
-            h='100%'
+            w='100%'
+            minH='100%'
+            display='flex'
+            justifyContent='center'
             position='absolute'
             borderRadius='20px'
           >

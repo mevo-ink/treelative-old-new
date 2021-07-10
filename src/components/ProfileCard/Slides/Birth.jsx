@@ -7,8 +7,7 @@ import {
 export default function Birth ({ user }) {
   return (
     <Flex
-      width='255px'
-      minH='285px'
+      width='80%'
       flexDirection='column'
       alignItems='center'
       background='rgba(255, 255, 255, 0.20)'
