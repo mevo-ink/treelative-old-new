@@ -45,7 +45,6 @@ const schemaValidation = object().shape({
 
 export default function Login ({ onSuccess }) {
   const { isDesktop } = useDevice()
-  console.log(isDesktop)
 
   const [isForgotPasswordOpen, setIsForgotPasswordOpen] = useState(false)
 
