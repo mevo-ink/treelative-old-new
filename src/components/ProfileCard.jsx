@@ -17,6 +17,7 @@ import { GET_USER } from 'graphql/queries/users'
 
 import Slider from 'components/ProfileCard/Slider'
 import Birth from 'components/ProfileCard/Slides/Birth'
+import Current from 'components/ProfileCard/Slides/Current'
 import OuterWrapper from 'components/ProfileCard/OuterWrapper'
 import InnerWrapper from 'components/ProfileCard/InnerWrapper'
 
@@ -86,7 +87,7 @@ export default function ProfileCard () {
               </Text>
               <Slider>
                 <Birth user={user} />
-                <Birth user={user} />
+                <Current user={user} />
               </Slider>
             </InnerWrapper>
           </OuterWrapper>

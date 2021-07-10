@@ -93,7 +93,7 @@ export default function Slider ({ children = [] }) {
             onDragEnd={onDragEnd}
             // additional props
             w='100%'
-            maxH='100%'
+            h='100%'
             display='flex'
             justifyContent='center'
             position='absolute'
