@@ -20,7 +20,8 @@ const theme = extendTheme({
       },
       '*': {
         scrollbarWidth: 'thin',
-        scrollbarColor: 'var(--chakra-colors-blue-600) transparent'
+        scrollbarColor: 'var(--chakra-colors-blue-600) transparent',
+        fontFamily: 'Lato'
       }
     }
   },
@@ -112,8 +113,23 @@ const theme = extendTheme({
     },
     Text: {
       baseStyle: {
-        color: '#26114D',
-        fontFamily: 'Lato'
+        color: '#26114D'
+      },
+      variants: {
+        'info-title': {
+          mb: '0px',
+          fontWeight: '100',
+          fontSize: '.5rem',
+          lineHeight: '1.3em',
+          userSelect: 'none'
+        },
+        info: {
+          m: '0px',
+          w: '85%',
+          textAlign: 'center',
+          fontSize: '1rem',
+          lineHeight: '1.2em'
+        }
       }
     }
   }

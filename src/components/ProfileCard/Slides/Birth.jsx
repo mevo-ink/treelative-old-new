@@ -8,37 +8,35 @@ export default function Birth ({ user }) {
   return (
     <Flex
       width='80%'
+      display='flex'
       flexDirection='column'
       alignItems='center'
-      background='rgba(255, 255, 255, 0.20)'
-      boxShadow='0px 3px 5px rgba(0, 0, 0, 0.20)'
+      justifyContent='center'
+      background='hsla(0, 0%, 100%, .2)'
+      boxShadow='0px 3px 5px hsla(0, 0%, 0%, .2)'
       borderRadius='20px'
-      userSelect='none'
-      fontFamily='Lato'
-      color='#26114D'
-      position='relative'
     >
-      <Text position='absolute' top='31px' lineHeight='7px' fontSize='7px'>
+      <Text variant='info-title'>
         Date Of Birth
       </Text>
-      <Text position='absolute' top='38px' lineHeight='18px' fontSize='18px'>
+      <Text variant='info'>
         {user.dateOfBirth.slice(0, 10).replaceAll('-', '/')}
       </Text>
-      <Text position='absolute' top='69px' lineHeight='7px' fontSize='7px'>
+      <Text variant='info-title' mt='1rem'>
         Birth Location
       </Text>
-      <Text position='absolute' top='76px' lineHeight='18px' fontSize='18px'>
+      <Text variant='info'>
         {user.birthLocation.terms.slice(-3).map(({ value }) => value).join(', ')}
       </Text>
       <Image
         src='https://assets-global.website-files.com/6050a76fa6a633d5d54ae714/609147088669907f652110b0_report-an-issue(about-maps).jpeg'
-        draggable='false'
-        width='227px'
-        height='152px'
-        boxShadow='0px 3px 5px rgba(0, 0, 0, 0.15)'
+        w='85%'
+        minH='20%'
+        mt='1rem'
+        border='none'
+        boxShadow='0px 3px 5px hsla(0, 0%, 0%, .25)'
         borderRadius='20px'
-        position='absolute'
-        top='114px'
+        cursor='pointer'
       />
     </Flex>
   )
