@@ -1,11 +1,12 @@
 import { useQuery } from 'urql'
 import { GET_NETWORK_DATA } from 'graphql/queries/networkData'
 
-import Graph from 'components/Graph'
-import ProfileCardChumma from 'components/ProfileCardChumma'
-
 import { useRecoilValue } from 'recoil'
 import { activeNodeIDAtom } from 'utils/atoms.js'
+
+import Graph from 'components/Graph'
+import ProfileCard from 'components/ProfileCard'
+// import ProfileCardChumma from 'components/ProfileCardChumma'
 
 export default function App () {
   const activeNodeID = useRecoilValue(activeNodeIDAtom)
@@ -18,7 +19,7 @@ export default function App () {
 
   return (
     <>
-      {activeNodeID && <ProfileCardChumma />}
+      {activeNodeID && <ProfileCard />}
       <Graph networkData={result.data.getNetworkData} />
     </>
   )

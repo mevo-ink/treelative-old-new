@@ -102,12 +102,18 @@ const theme = extendTheme({
       baseStyle: {
         mb: '1',
         fontSize: 'sm',
-        fontWeight: 'semibold'
+        fontWeight: 'semi-bold'
       }
     },
     Badge: {
       defaultProps: {
         colorScheme: 'blue'
+      }
+    },
+    Text: {
+      baseStyle: {
+        color: '#26114D',
+        fontFamily: 'Lato'
       }
     }
   }

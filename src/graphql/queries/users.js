@@ -108,37 +108,37 @@ export const LIST_USER_AVAILABLE_CHILDREN = gql`
 export const GET_USER = gql`
   query GET_USER($filter: UserUniqueFilter!) {
     getUser (filter: $filter) {
-      id
-      username
+      role
       avatar
-      email
-      phoneNumber
       fullName
-      shortName
+      # death
       dateOfBirth
-      dateOfDeath
       birthLocation
+      # birth
+      dateOfDeath
+      deathLocation
+      # currentLocation
       currentLocation
+       # relations
       parents {
         id
-        fullName
         avatar
       }
       children {
         id
-        fullName
         avatar
       }
       couple {
-        id
-        dateOfMarriage
-        marriageLocation
         partner {
           id
-          fullName
           avatar
         }
+        dateOfMarriage
+        marriageLocation
       }
+      # social
+      email
+      phoneNumber
       socialLinks {
         id
         type
