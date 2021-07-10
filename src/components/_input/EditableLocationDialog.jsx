@@ -32,14 +32,18 @@ export default function InputDialogTrigger (props) {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   if (!isEditMode) {
-    return <Text>{inputProps?.value?.description || 'N/A'}</Text>
+    return (
+      <Text variant='info'>
+        {inputProps?.value ? inputProps?.value.terms.slice(-3).map(val => val.value).join(', ') : 'Unavailable'}
+      </Text>
+    )
   }
 
   return (
     <>
       {isOpen && <InputDialog {...inputProps} onClose={onClose} />}
       <Button size='sm' onClick={onOpen} rightIcon={<BiEdit />} variant='outline' whiteSpace='normal' height='100%' wordBreak='break-all'>
-        {inputProps?.value?.description || 'N/A'}
+        {inputProps?.value?.terms.slice(-3).map(val => val.value).join(', ') || 'N/A'}
       </Button>
     </>
   )

@@ -4,6 +4,8 @@ import {
   Text
 } from '@chakra-ui/react'
 
+import EditUserCurrentLocation from 'components/EditUser/EditUserCurrentLocation'
+
 export default function Current ({ user }) {
   return (
     <Flex
@@ -21,9 +23,7 @@ export default function Current ({ user }) {
       <Text variant='info-title'>
         Current Location
       </Text>
-      <Text variant='info'>
-        {user.currentLocation ? user.currentLocation.terms.slice(-3).map(val => val.value).join(', ') : 'Unavailable'}
-      </Text>
+      <EditUserCurrentLocation user={user} />
       {user.currentLocation && (
         <Box
           as='iframe'

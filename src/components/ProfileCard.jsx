@@ -3,6 +3,7 @@ import {
   Text,
   Image,
   Modal,
+  Button,
   ModalOverlay,
   ModalContent
 } from '@chakra-ui/react'
@@ -11,7 +12,7 @@ import { useQuery } from 'urql'
 
 import { useRecoilState, useRecoilValue } from 'recoil'
 
-import { networkMethodsAtom, activeNodeIDAtom } from 'utils/atoms.js'
+import { networkMethodsAtom, activeNodeIDAtom, isEditModeAtom } from 'utils/atoms.js'
 
 import { GET_USER } from 'graphql/queries/users'
 
@@ -24,6 +25,8 @@ import InnerWrapper from 'components/ProfileCard/InnerWrapper'
 import crown from 'images/adminCrown.png'
 
 export default function ProfileCard () {
+  const [isEditMode, setIsEditMode] = useRecoilState(isEditModeAtom)
+
   const networkMethods = useRecoilValue(networkMethodsAtom)
   const [activeNodeID, setActiveNodeID] = useRecoilState(activeNodeIDAtom)
 
@@ -46,6 +49,9 @@ export default function ProfileCard () {
         <ModalOverlay />
         <ModalContent background='transparent'>
           <OuterWrapper>
+            <Button size='sm' variant={isEditMode ? 'solid' : 'outline'} onClick={() => setIsEditMode(!isEditMode)} mr='4'>
+              Toggle Edit Mode
+            </Button>
             <InnerWrapper>
               <Box
                 w='30%'

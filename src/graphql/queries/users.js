@@ -109,6 +109,7 @@ export const GET_USER = gql`
   query GET_USER($filter: UserUniqueFilter!) {
     getUser (filter: $filter) {
       id
+      role
       username
       avatar
       email
