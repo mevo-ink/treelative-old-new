@@ -14,6 +14,7 @@ import { networkMethodsAtom, activeNodeIDAtom } from 'utils/atoms.js'
 
 import { GET_USER } from 'graphql/queries/users'
 
+import Slider from 'components/ProfileCard/Slider'
 import OuterWrapper from 'components/ProfileCard/OuterWrapper'
 import InnerWrapper from 'components/ProfileCard/InnerWrapper'
 
@@ -47,10 +48,10 @@ export default function ProfileCard () {
                 <Image
                   src={crown}
                   alt='crown'
-                  width='30%'
+                  w='30%'
                   objectFit='contain'
                   position='absolute'
-                  top='0.4rem'
+                  top='.4rem'
                   zIndex='1'
                 />
               )}
@@ -66,8 +67,8 @@ export default function ProfileCard () {
                 filter='drop-shadow(0px 6px 8px hsla(0, 0%, 0%, .25))'
               />
               <Text
-                w='55%'
-                mt='0.5rem'
+                w='50%'
+                m='.5rem 0rem'
                 fontSize='1.2rem'
                 lineHeight='1.3em'
                 fontWeight='600'
@@ -75,7 +76,7 @@ export default function ProfileCard () {
               >
                 {user.fullName}
               </Text>
-              {/* <Slider user={user} /> */}
+              <Slider user={user} />
             </InnerWrapper>
           </OuterWrapper>
         </ModalContent>
