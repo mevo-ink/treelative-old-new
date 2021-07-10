@@ -28,7 +28,6 @@ export default function Current ({ user }) {
         <Box
           as='iframe'
           src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_GOOGLE_LOCATION_API_KEY}&q=place_id:${user.currentLocation.place_id}&zoom=10`}
-          loading='lazy'
           title='current-location'
           w='85%'
           minH='20%'
