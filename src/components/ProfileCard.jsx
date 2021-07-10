@@ -1,4 +1,5 @@
 import {
+  Box,
   Text,
   Image,
   Modal,
@@ -15,6 +16,7 @@ import { networkMethodsAtom, activeNodeIDAtom } from 'utils/atoms.js'
 import { GET_USER } from 'graphql/queries/users'
 
 import Slider from 'components/ProfileCard/Slider'
+import Birth from 'components/ProfileCard/Slides/Birth'
 import OuterWrapper from 'components/ProfileCard/OuterWrapper'
 import InnerWrapper from 'components/ProfileCard/InnerWrapper'
 
@@ -44,31 +46,37 @@ export default function ProfileCard () {
         <ModalContent background='transparent'>
           <OuterWrapper>
             <InnerWrapper>
-              {user.role === 'ADMIN' && (
-                <Image
-                  src={crown}
-                  alt='crown'
-                  w='30%'
-                  objectFit='contain'
-                  position='absolute'
-                  top='.4rem'
-                  zIndex='1'
-                />
-              )}
-              <Image
-                src={user.avatar}
-                fallbackSrc={`https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
-                alt='avatar'
+              <Box
                 w='30%'
-                objectFit='contain'
-                mt='-3.3rem'
-                border={user.role === 'ADMIN' ? '5px solid #FFE503' : '5px solid #FFFFFF'}
-                borderRadius='50%'
-                filter='drop-shadow(0px 6px 8px hsla(0, 0%, 0%, .25))'
-              />
+                minH='auto'
+                mt='-2.8rem'
+                position='relative'
+              >
+                {user.role === 'ADMIN' && (
+                  <Image
+                    src={crown}
+                    alt='crown'
+                    w='100%'
+                    objectFit='contain'
+                    position='absolute'
+                    top='-2.5rem'
+                    zIndex='1'
+                  />
+                )}
+                <Image
+                  src={user.avatar}
+                  fallbackSrc={`https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
+                  alt='avatar'
+                  objectFit='contain'
+                  w='100%'
+                  border={user.role === 'ADMIN' ? '5px solid #FFE503' : '5px solid #FFFFFF'}
+                  borderRadius='50%'
+                  filter='drop-shadow(0px 6px 8px hsla(0, 0%, 0%, .25))'
+                />
+              </Box>
               <Text
                 w='50%'
-                m='.5rem 0rem'
+                m='1rem 0rem'
                 fontSize='1.2rem'
                 lineHeight='1.3em'
                 fontWeight='600'
@@ -76,7 +84,10 @@ export default function ProfileCard () {
               >
                 {user.fullName}
               </Text>
-              <Slider user={user} />
+              <Slider>
+                <Birth user={user} />
+                <Birth user={user} />
+              </Slider>
             </InnerWrapper>
           </OuterWrapper>
         </ModalContent>

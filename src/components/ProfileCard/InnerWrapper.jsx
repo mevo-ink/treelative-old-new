@@ -3,8 +3,8 @@ import { Flex } from '@chakra-ui/react'
 const InnerWrapper = ({ children }) => (
   <Flex
     w='85%'
-    minH='75%'
-    mt='3.5rem'
+    m='2rem 0'
+    mt='5.5rem'
     background='hsla(0, 0%, 100%, .6)'
     borderRadius='20px'
     display='flex'
