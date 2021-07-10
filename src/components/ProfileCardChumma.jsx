@@ -22,6 +22,8 @@ import Loading from 'components/_common/Loading'
 import Login from 'components/Login'
 import SliderChumma from 'components/ProfileCardChumma/SliderChumma'
 
+import CreateUser from 'components/CreateUser'
+
 export default function ProfileCardChumma () {
   const networkMethods = useRecoilValue(networkMethodsAtom)
   const [activeNodeID, setActiveNodeID] = useRecoilState(activeNodeIDAtom)
@@ -43,15 +45,20 @@ export default function ProfileCardChumma () {
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>
-          <Button size='sm' variant={isEditMode ? 'solid' : 'outline'} onClick={() => setIsEditMode(!isEditMode)}>
-            Toggle Edit Mode
-          </Button>
+          {result?.data?.getUser && (
+            <>
+              <Button size='sm' variant={isEditMode ? 'solid' : 'outline'} onClick={() => setIsEditMode(!isEditMode)} mr='4'>
+                Toggle Edit Mode
+              </Button>
+              <CreateUser />
+            </>
+          )}
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           {result.fetching && <Loading />}
           {result.error && <Login onSuccess={onLoginSuccess} />}
-          {result.data && <SliderChumma user={result.data.getUser} />}
+          {result.data?.getUser && <SliderChumma user={result.data.getUser} />}
         </ModalBody>
       </ModalContent>
     </Modal>

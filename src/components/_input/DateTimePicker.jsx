@@ -43,6 +43,7 @@ export default function DateTimePickerDialogTrigger (props) {
   const isEditMode = useRecoilValue(isEditModeAtom)
 
   const {
+    inline = false,
     reset,
     onChange,
     fontSize,
@@ -83,7 +84,7 @@ export default function DateTimePickerDialogTrigger (props) {
     }
   }
 
-  if (!isEditMode) {
+  if (!inline && !isEditMode) {
     return <DateTimeRenderer value={props.value} type={props.type} />
   }
 
