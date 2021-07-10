@@ -117,14 +117,12 @@ const theme = extendTheme({
       },
       variants: {
         'info-title': {
-          mb: '0px',
           fontWeight: '100',
           fontSize: '.5rem',
           lineHeight: '1.3em',
           userSelect: 'none'
         },
         info: {
-          m: '0px',
           w: '85%',
           textAlign: 'center',
           fontSize: '1rem',
