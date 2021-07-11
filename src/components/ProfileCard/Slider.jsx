@@ -109,12 +109,12 @@ export default function Slider ({ children = [] }) {
         {filteredChildren.map((_, idx) => (
           <Box
             key={idx + 10}
-            width='8px'
-            height='8px'
-            m='20px 2.5px'
+            w='.5rem'
+            h='.5rem'
+            m='1.5rem .2rem'
             borderRadius='50%'
-            background={idx === page ? '#26114D' : 'rgba(255, 255, 255, 0.50)'}
-            border={idx === page ? '1px solid rgba(255, 255, 255, 0.89)' : 'none'}
+            background={idx === page ? 'hsla(261, 64%, 18%, 1)' : 'hsla(0, 0%, 100%, .5)'}
+            border={idx === page ? '1px solid hsla(0, 0%, 100%, .9)' : 'none'}
           />
         ))}
       </Flex>
