@@ -10,6 +10,7 @@ const InnerWrapper = ({ children }) => (
     display='flex'
     flexDir='column'
     alignItems='center'
+    position='relative'
     boxShadow='0 0 0 100vw hsla(0, 0%, 0%, .25)'
   >
     {children}

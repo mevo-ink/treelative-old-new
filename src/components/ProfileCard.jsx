@@ -3,10 +3,12 @@ import {
   Text,
   Image,
   Modal,
-  Button,
+  IconButton,
   ModalOverlay,
   ModalContent
 } from '@chakra-ui/react'
+
+import { GrEdit } from 'react-icons/gr'
 
 import { useQuery } from 'urql'
 
@@ -49,10 +51,24 @@ export default function ProfileCard () {
         <ModalOverlay />
         <ModalContent background='transparent'>
           <OuterWrapper>
-            <Button size='sm' variant={isEditMode ? 'solid' : 'outline'} onClick={() => setIsEditMode(!isEditMode)} mr='4'>
-              Toggle Edit Mode
-            </Button>
             <InnerWrapper>
+              <IconButton
+                icon={<GrEdit />}
+                position='absolute'
+                left='.3rem'
+                top='.3rem'
+                borderRadius='20px'
+                background='none'
+                _hover={{
+                  background: 'hsla(0, 0%, 100%, .2)',
+                  boxShadow: '0px 3px 5px hsla(0, 0%, 0%, .2)'
+                }}
+                _active={{
+                  background: 'hsla(0, 0%, 100%, .2)',
+                  boxShadow: '0px 3px 5px hsla(0, 0%, 0%, .2)'
+                }}
+                onClick={() => setIsEditMode(!isEditMode)}
+              />
               <Box
                 w='30%'
                 minH='auto'
