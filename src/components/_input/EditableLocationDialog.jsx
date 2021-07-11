@@ -24,6 +24,20 @@ const MotionButton = motion(Button)
 export default function InputDialogTrigger (props) {
   const isEditMode = useRecoilValue(isEditModeAtom)
 
+  const [animate, setAnimate] = useState(false)
+
+  const variants = {
+    start: {
+      rotate: [0, -3, 3, 0],
+      transition: {
+        repeat: Infinity,
+        duration: Math.random() * 0.05 + 0.2
+      }
+    }
+  }
+  // eslint-disable-next-line
+  useEffect(() => { setAnimate(true) }, [])
+
   const {
     reset,
     textAlign,
@@ -47,13 +61,8 @@ export default function InputDialogTrigger (props) {
       <MotionButton
         onClick={onOpen}
         variant='editable-input'
-        animate={{
-          rotate: [0, -3, 3, 0],
-          transition: {
-            repeat: Infinity,
-            duration: Math.random() * 0.05 + 0.2
-          }
-        }}
+        variants={variants}
+        animate={animate && 'start'}
       >
         {inputProps?.value ? inputProps?.value.terms.slice(-3).map(val => val.value).join(', ') : 'Unavailable'}
       </MotionButton>

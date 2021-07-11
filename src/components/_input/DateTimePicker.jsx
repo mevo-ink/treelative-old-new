@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react'
+
 import { useRecoilValue } from 'recoil'
 import { isEditModeAtom } from 'utils/atoms.js'
 
@@ -45,6 +47,20 @@ const MotionButton = motion(Button)
 
 export default function DateTimePickerDialogTrigger (props) {
   const isEditMode = useRecoilValue(isEditModeAtom)
+
+  const [animate, setAnimate] = useState(false)
+
+  const variants = {
+    start: {
+      rotate: [0, -3, 3, 0],
+      transition: {
+        repeat: Infinity,
+        duration: Math.random() * 0.05 + 0.2
+      }
+    }
+  }
+  // eslint-disable-next-line
+  useEffect(() => { setAnimate(true) }, [])
 
   const dt = new Date(props.value)
   const dtDateOnly = new Date(dt.valueOf() + dt.getTimezoneOffset() * 60 * 1000)
@@ -105,13 +121,8 @@ export default function DateTimePickerDialogTrigger (props) {
       <MotionButton
         onClick={onOpen}
         variant='editable-input'
-        animate={{
-          rotate: [0, -3, 3, 0],
-          transition: {
-            repeat: Infinity,
-            duration: Math.random() * 0.05 + 0.2
-          }
-        }}
+        variants={variants}
+        animate={animate && 'start'}
       >
         {props.value ? format(dtDateOnly, 'PP').replace(/[, ]+/g, '/') : 'Unavailable'}
       </MotionButton>
