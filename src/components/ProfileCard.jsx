@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react'
 
 import { GrEdit } from 'react-icons/gr'
+import { MdDone } from 'react-icons/md'
 
 import { useQuery } from 'urql'
 
@@ -53,7 +54,7 @@ export default function ProfileCard () {
           <OuterWrapper>
             <InnerWrapper>
               <IconButton
-                icon={<GrEdit />}
+                icon={isEditMode ? <MdDone /> : <GrEdit />}
                 position='absolute'
                 left='.3rem'
                 top='.3rem'
