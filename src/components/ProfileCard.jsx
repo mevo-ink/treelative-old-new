@@ -7,7 +7,7 @@ import {
   ModalContent
 } from '@chakra-ui/react'
 
-import { GrEdit } from 'react-icons/gr'
+import { FiEdit } from 'react-icons/fi'
 import { MdDone } from 'react-icons/md'
 
 import { useQuery } from 'urql'
@@ -51,15 +51,16 @@ export default function ProfileCard () {
     return (
       <Modal isOpen onClose={onClose} isCentered>
         <ModalOverlay />
-        <ModalContent background='transparent'>
+        <ModalContent background='transparent' border='none'>
           <OuterWrapper>
             <InnerWrapper>
               <IconButton
-                icon={isEditMode ? <MdDone /> : <GrEdit />}
+                icon={isEditMode ? <MdDone /> : <FiEdit />}
                 position='absolute'
                 left='.3rem'
                 top='.3rem'
                 borderRadius='20px'
+                color='hsla(261, 64%, 18%, 1)'
                 background='hsla(0, 0%, 100%, .2)'
                 boxShadow='0px 3px 5px hsla(0, 0%, 0%, .2)'
                 _hover={{
@@ -93,9 +94,9 @@ export default function ProfileCard () {
                   alt='avatar'
                   objectFit='contain'
                   w='100%'
-                  border={user.role === 'ADMIN' ? '5px solid #FFE503' : '5px solid #FFFFFF'}
+                  border={user.role === 'ADMIN' ? '5px solid hsla(54, 100%, 51%, 1)' : '5px solid hsla(0, 0%, 100%, 1)'}
                   borderRadius='50%'
-                  filter='drop-shadow(0px 6px 8px hsla(0, 0%, 0%, .25))'
+                  boxShadow='0px 6px 8px hsla(0, 0%, 0%, .25)'
                 />
               </Box>
               <EditUserFullName user={user} />

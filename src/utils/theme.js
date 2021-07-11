@@ -2,7 +2,7 @@ import { extendTheme } from '@chakra-ui/react'
 
 const theme = extendTheme({
   config: {
-    initialColorMode: 'light',
+    initialColorMode: 'dark',
     useSystemColorMode: false
   },
   styles: {
@@ -92,7 +92,7 @@ const theme = extendTheme({
 
     Text: {
       baseStyle: {
-        color: '#26114D'
+        color: 'hsla(261, 64%, 18%, 1)'
       },
       variants: {
         'info-title': {
@@ -120,7 +120,7 @@ const theme = extendTheme({
           cursor: 'pointer',
           wordBreak: 'break-word',
           whiteSpace: 'normal',
-          color: '#26114D',
+          color: 'hsla(261, 64%, 18%, 1)',
           background: 'hsla(0, 0%, 100%, .2)',
           boxShadow: '0px 3px 5px hsla(0, 0%, 0%, .2)',
           borderRadius: '999px',
@@ -131,11 +131,11 @@ const theme = extendTheme({
     },
     Modal: {
       baseStyle: {
-        closeButton: {
-          color: 'blue.500'
-        },
         dialog: {
-          borderRadius: '20px'
+          color: 'white',
+          borderRadius: '20px',
+          border: 'hsla(0, 0%, 100%, 1) solid 2px',
+          background: 'hsla(225, 36%, 4%, 1)'
         }
       }
     }
