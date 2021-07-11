@@ -26,18 +26,6 @@ const theme = extendTheme({
     }
   },
   components: {
-    Button: {
-      defaultProps: {
-        colorScheme: 'blue'
-      },
-      variants: {
-        ghost: {
-          _hover: { bg: 'blue.800' },
-          _active: { bg: 'blue.800' }
-        }
-      }
-
-    },
     Progress: {
       defaultProps: {
         colorScheme: 'blue'
@@ -111,6 +99,7 @@ const theme = extendTheme({
         colorScheme: 'blue'
       }
     },
+
     Text: {
       baseStyle: {
         color: '#26114D'
@@ -127,6 +116,25 @@ const theme = extendTheme({
           textAlign: 'center',
           fontSize: '1rem',
           lineHeight: '1.2em'
+        }
+      }
+    },
+    Button: {
+      variants: {
+        'editable-input': {
+          h: 'auto',
+          maxW: '80%',
+          mt: '.5rem',
+          p: '.5em .8em',
+          fontWeight: '400',
+          cursor: 'pointer',
+          wordBreak: 'break-word',
+          whiteSpace: 'normal',
+          background: 'hsla(0, 0%, 100%, .2)',
+          boxShadow: '0px 3px 5px hsla(0, 0%, 0%, .2)',
+          borderRadius: '20px',
+          _hover: { bg: 'hsla(0, 0%, 50%, .2)' },
+          _active: { bg: 'hsla(0, 0%, 50%, .2)' }
         }
       }
     }

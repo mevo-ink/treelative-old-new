@@ -12,12 +12,14 @@ import {
   createStandaloneToast
 } from '@chakra-ui/react'
 
-import { BiEdit } from 'react-icons/bi'
+import { motion, AnimatePresence } from 'framer-motion'
 
 import FormDialog from 'components/_common/FormDialog'
 import GooglePlacesSelect from 'components/_select/GooglePlacesSelect'
 
 const toast = createStandaloneToast()
+
+const MotionButton = motion(Button)
 
 export default function InputDialogTrigger (props) {
   const isEditMode = useRecoilValue(isEditModeAtom)
@@ -40,12 +42,22 @@ export default function InputDialogTrigger (props) {
   }
 
   return (
-    <>
+    <AnimatePresence>
       {isOpen && <InputDialog {...inputProps} onClose={onClose} />}
-      <Button size='sm' onClick={onOpen} rightIcon={<BiEdit />} variant='outline' whiteSpace='normal' height='100%' wordBreak='break-all'>
+      <MotionButton
+        onClick={onOpen}
+        variant='editable-input'
+        animate={{
+          rotate: [-3, 3, 0],
+          transition: {
+            repeat: Infinity,
+            duration: Math.random() * 0.05 + 0.2
+          }
+        }}
+      >
         {inputProps?.value?.terms.slice(-3).map(val => val.value).join(', ') || 'N/A'}
-      </Button>
-    </>
+      </MotionButton>
+    </AnimatePresence>
   )
 }
 
@@ -71,6 +83,7 @@ function InputDialog (props) {
       const zoom = '14'
       setLocationURL(`https://www.google.com/maps/embed/v1/place?key=${key}&q=${q}&zoom=${zoom}`)
     }
+    // eslint-disable-next-line
   }, [location?.value?.description])
 
   const handleOnSubmit = (e) => {

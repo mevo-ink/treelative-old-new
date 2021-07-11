@@ -6,7 +6,7 @@ import { activeNodeIDAtom } from 'utils/atoms.js'
 
 import Graph from 'components/Graph'
 import ProfileCard from 'components/ProfileCard'
-import ProfileCardChumma from 'components/ProfileCardChumma'
+// import ProfileCardChumma from 'components/ProfileCardChumma'
 
 export default function App () {
   const activeNodeID = useRecoilValue(activeNodeIDAtom)
