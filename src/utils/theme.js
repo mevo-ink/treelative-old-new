@@ -123,8 +123,8 @@ const theme = extendTheme({
       variants: {
         'editable-input': {
           h: 'auto',
-          maxW: '80%',
-          mt: '.5rem',
+          maxW: '90%',
+          mt: '.3rem',
           p: '.5em .8em',
           fontWeight: '400',
           cursor: 'pointer',
@@ -132,7 +132,7 @@ const theme = extendTheme({
           whiteSpace: 'normal',
           background: 'hsla(0, 0%, 100%, .2)',
           boxShadow: '0px 3px 5px hsla(0, 0%, 0%, .2)',
-          borderRadius: '20px',
+          borderRadius: '999px',
           _hover: { bg: 'hsla(0, 0%, 50%, .2)' },
           _active: { bg: 'hsla(0, 0%, 50%, .2)' }
         }

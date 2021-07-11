@@ -55,7 +55,7 @@ export default function InputDialogTrigger (props) {
           }
         }}
       >
-        {inputProps?.value?.terms.slice(-3).map(val => val.value).join(', ') || 'N/A'}
+        {inputProps?.value ? inputProps?.value.terms.slice(-3).map(val => val.value).join(', ') : 'Unavailable'}
       </MotionButton>
     </AnimatePresence>
   )

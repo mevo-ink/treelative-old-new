@@ -2,6 +2,7 @@ import { useRecoilValue } from 'recoil'
 import { isEditModeAtom } from 'utils/atoms.js'
 
 import {
+  format,
   getYear,
   getMonth,
   eachYearOfInterval
@@ -25,7 +26,8 @@ import {
   createStandaloneToast
 } from '@chakra-ui/react'
 
-import { BiEdit } from 'react-icons/bi'
+import { motion, AnimatePresence } from 'framer-motion'
+
 import { GrFormPrevious, GrFormNext } from 'react-icons/gr'
 
 import ReactDatePicker from 'react-datepicker'
@@ -39,8 +41,13 @@ import 'react-datepicker/dist/react-datepicker.css'
 
 const toast = createStandaloneToast()
 
+const MotionButton = motion(Button)
+
 export default function DateTimePickerDialogTrigger (props) {
   const isEditMode = useRecoilValue(isEditModeAtom)
+
+  const dt = new Date(props.value)
+  const dtDateOnly = new Date(dt.valueOf() + dt.getTimezoneOffset() * 60 * 1000)
 
   const {
     inline = false,
@@ -85,16 +92,30 @@ export default function DateTimePickerDialogTrigger (props) {
   }
 
   if (!inline && !isEditMode) {
-    return <DateTimeRenderer value={props.value} type={props.type} />
+    return (
+      <Text variant='info'>
+        {props.value ? format(dtDateOnly, 'PP').replace(/[, ]+/g, '/') : 'Unavailable'}
+      </Text>
+    )
   }
 
   return (
-    <>
+    <AnimatePresence>
       {isOpen && <DateTimePickerDialog {...rest} onClose={handleClose} onSubmit={handleOnSubmit} />}
-      <Button size='sm' onClick={onOpen} rightIcon={<BiEdit />} variant='outline' whiteSpace='normal' height='100%' wordBreak='break-all'>
-        <DateTimeRenderer value={props.value} type={props.type} />
-      </Button>
-    </>
+      <MotionButton
+        onClick={onOpen}
+        variant='editable-input'
+        animate={{
+          rotate: [0, -3, 3, 0],
+          transition: {
+            repeat: Infinity,
+            duration: Math.random() * 0.05 + 0.2
+          }
+        }}
+      >
+        {props.value ? format(dtDateOnly, 'PP').replace(/[, ]+/g, '/') : 'Unavailable'}
+      </MotionButton>
+    </AnimatePresence>
   )
 }
 

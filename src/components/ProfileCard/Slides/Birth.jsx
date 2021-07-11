@@ -4,12 +4,9 @@ import {
   Text
 } from '@chakra-ui/react'
 
-import { format } from 'date-fns'
+import EditUserDateOfBirth from 'components/EditUser/EditUserDateOfBirth'
 
 export default function Birth ({ user }) {
-  const dt = new Date(user.dateOfBirth)
-  const dtDateOnly = new Date(dt.valueOf() + dt.getTimezoneOffset() * 60 * 1000)
-
   return (
     <Flex
       w='80%'
@@ -25,9 +22,7 @@ export default function Birth ({ user }) {
       <Text variant='info-title'>
         Date Of Birth
       </Text>
-      <Text variant='info'>
-        {user.dateOfBirth ? format(dtDateOnly, 'PP').replace(/[, ]+/g, '/') : 'Unavailable'}
-      </Text>
+      <EditUserDateOfBirth user={user} />
       <Text variant='info-title' mt='1rem'>
         Birth Location
       </Text>
