@@ -48,7 +48,7 @@ export default function InputDialogTrigger (props) {
         onClick={onOpen}
         variant='editable-input'
         animate={{
-          rotate: [-3, 3, 0],
+          rotate: [0, -3, 3, 0],
           transition: {
             repeat: Infinity,
             duration: Math.random() * 0.05 + 0.2
