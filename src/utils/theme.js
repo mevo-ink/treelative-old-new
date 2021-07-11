@@ -36,16 +36,6 @@ const theme = extendTheme({
         colorScheme: 'blue'
       }
     },
-    Modal: {
-      baseStyle: {
-        closeButton: {
-          color: 'blue.500'
-        },
-        dialog: {
-          borderRadius: 'xl'
-        }
-      }
-    },
     Drawer: {
       baseStyle: {
         closeButton: {
@@ -136,6 +126,16 @@ const theme = extendTheme({
           borderRadius: '999px',
           _hover: { bg: 'hsla(0, 0%, 50%, .2)' },
           _active: { bg: 'hsla(0, 0%, 50%, .2)' }
+        }
+      }
+    },
+    Modal: {
+      baseStyle: {
+        closeButton: {
+          color: 'blue.500'
+        },
+        dialog: {
+          borderRadius: '20px'
         }
       }
     }

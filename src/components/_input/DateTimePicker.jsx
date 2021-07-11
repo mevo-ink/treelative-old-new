@@ -140,7 +140,6 @@ function DateTimePickerDialog (props) {
     error,
     children,
     label,
-    subTitle = '',
     fontSize = 'xl',
     type = 'date',
     isClearable,
@@ -156,7 +155,6 @@ function DateTimePickerDialog (props) {
       <ModalContent pb={!children ? '2' : '6'}>
         <ModalHeader>
           {title || label}
-          <Text fontSize='xs'>{subTitle}</Text>
         </ModalHeader>
         <ModalCloseButton isDisabled={loading} />
         <ModalBody textAlign='center'>
