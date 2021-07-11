@@ -5,6 +5,7 @@ import {
 } from '@chakra-ui/react'
 
 import EditUserDateOfBirth from 'components/EditUser/EditUserDateOfBirth'
+import EditUserBirthLocation from 'components/EditUser/EditUserBirthLocation'
 
 export default function Birth ({ user }) {
   return (
@@ -26,9 +27,7 @@ export default function Birth ({ user }) {
       <Text variant='info-title' mt='1rem'>
         Birth Location
       </Text>
-      <Text variant='info'>
-        {user.birthLocation ? user.birthLocation.terms.slice(-3).map(({ value }) => value).join(', ') : 'Unavailable'}
-      </Text>
+      <EditUserBirthLocation user={user} />
       {user.birthLocation && (
         <Box
           as='iframe'
