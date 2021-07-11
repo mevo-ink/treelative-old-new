@@ -34,8 +34,8 @@ import CustomSelect from 'components/_select/CustomSelect'
 
 import Loading from 'components/_common/Loading'
 
-import 'react-datepicker/dist/react-datepicker.css'
 import './datetimePicker.css'
+import 'react-datepicker/dist/react-datepicker.css'
 
 const toast = createStandaloneToast()
 
