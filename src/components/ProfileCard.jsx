@@ -40,6 +40,7 @@ export default function ProfileCard () {
     setActiveNodeID(null)
     // unselect all nodes
     networkMethods.unselectAll()
+    setIsEditMode(false)
   }
 
   if (!activeNodeID) return null
