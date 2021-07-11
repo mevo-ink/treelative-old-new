@@ -15,15 +15,17 @@ import {
   createStandaloneToast
 } from '@chakra-ui/react'
 
-import { BiEdit } from 'react-icons/bi'
+import { motion, AnimatePresence } from 'framer-motion'
 
 import FormDialog from 'components/_common/FormDialog'
 
+import { object } from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { object } from 'yup'
 
 const toast = createStandaloneToast()
+
+const MotionButton = motion(Button)
 
 export default function InputDialogTrigger (props) {
   const isEditMode = useRecoilValue(isEditModeAtom)
@@ -36,16 +38,43 @@ export default function InputDialogTrigger (props) {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   if (!isEditMode) {
-    return <Text fontSize={inputProps.fontSize || 'sm'}>{inputProps.value || 'N/A'}</Text>
+    return (
+      <Text
+        w='50%'
+        m='1rem 0rem'
+        fontSize='1.2rem'
+        lineHeight='1.3em'
+        fontWeight='600'
+        textAlign='center'
+      >
+        {props.value}
+      </Text>
+    )
   }
 
   return (
-    <>
+    <AnimatePresence>
       {isOpen && <InputDialog {...inputProps} onClose={onClose} />}
-      <Button size='sm' onClick={onOpen} rightIcon={<BiEdit />} variant='outline' whiteSpace='normal' height='100%' wordBreak='break-all'>
-        {inputProps.value}
-      </Button>
-    </>
+      <MotionButton
+        onClick={onOpen}
+        w='50%'
+        m='1rem 0rem'
+        fontSize='1.2rem'
+        lineHeight='1.3em'
+        fontWeight='600'
+        textAlign='center'
+        variant='editable-input'
+        animate={{
+          rotate: [0, -3, 3, 0],
+          transition: {
+            repeat: Infinity,
+            duration: Math.random() * 0.05 + 0.2
+          }
+        }}
+      >
+        {props.value}
+      </MotionButton>
+    </AnimatePresence>
   )
 }
 
@@ -83,6 +112,7 @@ function InputDialog (props) {
     resolver: yupResolver(schemaValidation)
   })
 
+  // eslint-disable-next-line
   useEffect(() => { setTimeout(() => setFocus(name), 1) }, [])
 
   const handleOnSubmit = (form) => {

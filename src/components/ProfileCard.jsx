@@ -1,6 +1,5 @@
 import {
   Box,
-  Text,
   Image,
   Modal,
   IconButton,
@@ -24,6 +23,7 @@ import Birth from 'components/ProfileCard/Slides/Birth'
 import Current from 'components/ProfileCard/Slides/Current'
 import OuterWrapper from 'components/ProfileCard/OuterWrapper'
 import InnerWrapper from 'components/ProfileCard/InnerWrapper'
+import EditUserFullName from 'components/EditUser/EditUserFullName'
 
 import crown from 'images/adminCrown.png'
 
@@ -97,16 +97,7 @@ export default function ProfileCard () {
                   filter='drop-shadow(0px 6px 8px hsla(0, 0%, 0%, .25))'
                 />
               </Box>
-              <Text
-                w='50%'
-                m='1rem 0rem'
-                fontSize='1.2rem'
-                lineHeight='1.3em'
-                fontWeight='600'
-                textAlign='center'
-              >
-                {user.fullName}
-              </Text>
+              <EditUserFullName user={user} />
               <Slider>
                 <Birth user={user} />
                 <Current user={user} />

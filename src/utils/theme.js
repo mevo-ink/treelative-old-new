@@ -130,6 +130,7 @@ const theme = extendTheme({
           cursor: 'pointer',
           wordBreak: 'break-word',
           whiteSpace: 'normal',
+          color: '#26114D',
           background: 'hsla(0, 0%, 100%, .2)',
           boxShadow: '0px 3px 5px hsla(0, 0%, 0%, .2)',
           borderRadius: '999px',
