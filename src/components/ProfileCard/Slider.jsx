@@ -12,7 +12,8 @@ const MotionBox = motion(Box)
 const variants = {
   enter: (direction) => {
     return {
-      x: direction === 'left' ? 100 : -100,
+      zIndex: 0,
+      x: direction === 'left' ? 50 : -50,
       opacity: 0
     }
   },
@@ -24,7 +25,7 @@ const variants = {
   exit: (direction) => {
     return {
       zIndex: 0,
-      x: direction === 'right' ? 100 : -100,
+      x: direction === 'right' ? 50 : -50,
       opacity: 0
     }
   }
@@ -32,7 +33,7 @@ const variants = {
 
 const transition = {
   x: { type: 'spring', stiffness: 400, damping: 25 },
-  opacity: { duration: 0.2 }
+  opacity: { duration: 0.1 }
 }
 
 const swipeConfidenceThreshold = 10
@@ -89,7 +90,7 @@ export default function Slider ({ children = [] }) {
             transition={transition}
             drag='x'
             dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={0.2}
+            dragElastic={0.5}
             onDragEnd={onDragEnd}
             // additional props
             w='100%'
