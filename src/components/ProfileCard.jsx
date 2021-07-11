@@ -59,14 +59,13 @@ export default function ProfileCard () {
                 left='.3rem'
                 top='.3rem'
                 borderRadius='20px'
-                background='none'
+                background='hsla(0, 0%, 100%, .2)'
+                boxShadow='0px 3px 5px hsla(0, 0%, 0%, .2)'
                 _hover={{
-                  background: 'hsla(0, 0%, 100%, .2)',
-                  boxShadow: '0px 3px 5px hsla(0, 0%, 0%, .2)'
+                  background: 'hsla(0, 0%, 50%, .2)'
                 }}
                 _active={{
-                  background: 'hsla(0, 0%, 100%, .2)',
-                  boxShadow: '0px 3px 5px hsla(0, 0%, 0%, .2)'
+                  background: 'hsla(0, 0%, 50%, .2)'
                 }}
                 onClick={() => setIsEditMode(!isEditMode)}
               />
