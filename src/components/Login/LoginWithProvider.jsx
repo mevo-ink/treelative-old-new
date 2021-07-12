@@ -24,9 +24,10 @@ export default function LoginWithProvider ({ label, icon: Icon, provider, onSucc
     <IconButton
       isRound
       aria-label={label}
-      fontSize='24px'
+      fontSize='2rem'
+      bg='transparent'
       icon={<Icon />}
-      boxSize='42px'
+      _hover={{ bg: 'transparent' }}
       onClick={onLogin}
     />
   )

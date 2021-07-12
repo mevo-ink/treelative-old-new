@@ -44,6 +44,7 @@ export default forwardRef((props, ref) => {
       <InputRightElement mt={props.size === 'lg' ? '1' : '0'} mr='1'>
         <IconButton
           bg='transparent !important'
+          color='hsla(261, 64%, 18%, 1)'
           variant='ghost'
           aria-label={isOpen ? 'Mask password' : 'Reveal password'}
           icon={isOpen ? <HiEyeOff /> : <HiEye />}

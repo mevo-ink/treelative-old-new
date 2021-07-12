@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react'
 
-import useDevice from 'hooks/useDevice'
-
 import {
   Flex,
   Input,
@@ -11,26 +9,27 @@ import {
   FormControl,
   FormErrorMessage
 } from '@chakra-ui/react'
-
 import { FaGoogle, FaFacebook, FaTwitter } from 'react-icons/fa'
 
 import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
+
 import { object, string } from 'yup'
-
-import { useMutation } from 'urql'
-import { LOGIN, LOGIN_WITH_PROVIDER } from 'graphql/mutations/auth'
-
-import PasswordInput from 'components/_input/PasswordInput'
-import ErrorAlert from 'components/_common/ErrorAlert'
-import ErrorDialog from 'components/_common/ErrorDialog'
-import UnregisteredDialog from 'components/Login/UnregisteredDialog'
-
-import ForgotPassword from 'components/Login/ForgotPassword'
+import { yupResolver } from '@hookform/resolvers/yup'
 
 import { google, twitter, facebook } from 'utils/firebase'
 
+import { useMutation } from 'urql'
+
+import { LOGIN, LOGIN_WITH_PROVIDER } from 'graphql/mutations/auth'
+
+import ErrorAlert from 'components/_common/ErrorAlert'
+import ErrorDialog from 'components/_common/ErrorDialog'
+import PasswordInput from 'components/_input/PasswordInput'
+import ForgotPassword from 'components/Login/ForgotPassword'
 import LoginWithProvider from 'components/Login/LoginWithProvider'
+import UnregisteredDialog from 'components/Login/UnregisteredDialog'
+
+import useDevice from 'hooks/useDevice'
 
 const loginProviders = [
   { label: 'Login with Google', icon: FaGoogle, provider: google },
@@ -90,15 +89,19 @@ export default function Login ({ onSuccess }) {
       {isForgotPasswordOpen && <ForgotPassword onClose={() => setIsForgotPasswordOpen(false)} />}
       <Stack
         as='form'
-        p='8'
-        shadow='md'
-        rounded='lg'
-        spacing='12'
+        w='100%'
+        p='3em 2em'
+        spacing='2rem'
+        color='hsla(261, 64%, 18%, 1)'
         onSubmit={handleSubmit(onLoginWithPassword)}
       >
         <FormControl id='username' isRequired isInvalid={errors?.username}>
           <FormLabel>Username</FormLabel>
-          <Input {...register('username')} type='username' autoComplete='username' size='lg' />
+          <Input
+            {...register('username')}
+            type='username'
+            autoComplete='username'
+          />
           <FormErrorMessage>{errors?.username?.message}</FormErrorMessage>
         </FormControl>
         <FormControl id='password' isRequired isInvalid={errors?.password}>
@@ -106,24 +109,21 @@ export default function Login ({ onSuccess }) {
             <FormLabel>Password</FormLabel>
             <Button
               variant='link'
-              color='orange.500'
-              fontWeight='semibold'
-              fontSize='sm'
+              color='hsla(359, 88%, 55%, 1)'
+              fontSize='.8rem'
               onClick={() => setIsForgotPasswordOpen(true)}
               tabIndex='-1'
             >
               Forgot Password?
             </Button>
           </Flex>
-          <PasswordInput {...register('password')} size='lg' />
+          <PasswordInput {...register('password')} />
           <FormErrorMessage>{errors?.password?.message}</FormErrorMessage>
         </FormControl>
-        <Stack spacing='4' width='100%'>
-          {loginResult.error && <ErrorAlert>{loginResult.error.message}</ErrorAlert>}
-          <Button type='submit' size='md' fontSize='md' isLoading={loginResult.fetching}>
-            Sign in
-          </Button>
-        </Stack>
+        {loginResult.error && <ErrorAlert>{loginResult.error.message}</ErrorAlert>}
+        <Button type='submit' variant='submit' isLoading={loginResult.fetching}>
+          Sign in
+        </Button>
         <Stack direction='row' width='100%' justifyContent='space-evenly'>
           {loginProviders.map(loginProvider => (
             <LoginWithProvider
