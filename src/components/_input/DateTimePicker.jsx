@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react'
-
 import { useRecoilValue } from 'recoil'
 import { isEditModeAtom } from 'utils/atoms.js'
 
@@ -16,6 +14,7 @@ import {
   Stack,
   Alert,
   Button,
+  keyframes,
   ModalBody,
   AlertIcon,
   IconButton,
@@ -27,8 +26,6 @@ import {
   ModalCloseButton,
   createStandaloneToast
 } from '@chakra-ui/react'
-
-import { motion, AnimatePresence } from 'framer-motion'
 
 import { GrFormPrevious, GrFormNext } from 'react-icons/gr'
 
@@ -43,24 +40,14 @@ import 'react-datepicker/dist/react-datepicker.css'
 
 const toast = createStandaloneToast()
 
-const MotionButton = motion(Button)
-
 export default function DateTimePickerDialogTrigger (props) {
   const isEditMode = useRecoilValue(isEditModeAtom)
 
-  const [animate, setAnimate] = useState(false)
-
-  const variants = {
-    start: {
-      rotate: [0, -3, 3, 0],
-      transition: {
-        repeat: Infinity,
-        duration: Math.random() * 0.05 + 0.2
-      }
-    }
-  }
-  // eslint-disable-next-line
-  useEffect(() => { setAnimate(true) }, [])
+  const shake = keyframes`
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(-1deg); }
+    100% { transform: rotate(1deg); }
+  `
 
   const dt = new Date(props.value)
   const dtDateOnly = new Date(dt.valueOf() + dt.getTimezoneOffset() * 60 * 1000)
@@ -116,17 +103,16 @@ export default function DateTimePickerDialogTrigger (props) {
   }
 
   return (
-    <AnimatePresence>
+    <>
       {isOpen && <DateTimePickerDialog {...rest} onClose={handleClose} onSubmit={handleOnSubmit} />}
-      <MotionButton
+      <Button
         onClick={onOpen}
         variant='editable-input'
-        variants={variants}
-        animate={animate && 'start'}
+        animation={`${shake} infinite .15s linear`}
       >
         {props.value ? format(dtDateOnly, 'PP').replace(/[, ]+/g, '/') : 'Unavailable'}
-      </MotionButton>
-    </AnimatePresence>
+      </Button>
+    </>
   )
 }
 

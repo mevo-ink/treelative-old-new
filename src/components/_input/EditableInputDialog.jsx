@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 import { useRecoilValue } from 'recoil'
 import { isEditModeAtom } from 'utils/atoms.js'
@@ -8,14 +8,13 @@ import {
   Input,
   Button,
   Textarea,
+  keyframes,
   InputGroup,
   FormControl,
   useDisclosure,
   InputLeftAddon,
   createStandaloneToast
 } from '@chakra-ui/react'
-
-import { motion, AnimatePresence } from 'framer-motion'
 
 import FormDialog from 'components/_common/FormDialog'
 
@@ -25,24 +24,14 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 const toast = createStandaloneToast()
 
-const MotionButton = motion(Button)
-
 export default function InputDialogTrigger (props) {
   const isEditMode = useRecoilValue(isEditModeAtom)
 
-  const [animate, setAnimate] = useState(false)
-
-  const variants = {
-    start: {
-      rotate: [0, -3, 3, 0],
-      transition: {
-        repeat: Infinity,
-        duration: Math.random() * 0.05 + 0.2
-      }
-    }
-  }
-  // eslint-disable-next-line
-  useEffect(() => { setAnimate(true) }, [])
+  const shake = keyframes`
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(-1deg); }
+    100% { transform: rotate(1deg); }
+  `
 
   const {
     reset,
@@ -67,9 +56,9 @@ export default function InputDialogTrigger (props) {
   }
 
   return (
-    <AnimatePresence>
+    <>
       {isOpen && <InputDialog {...inputProps} onClose={onClose} />}
-      <MotionButton
+      <Button
         onClick={onOpen}
         w='50%'
         m='1rem 0rem'
@@ -78,12 +67,11 @@ export default function InputDialogTrigger (props) {
         fontWeight='600'
         textAlign='center'
         variant='editable-input'
-        variants={variants}
-        animate={animate && 'start'}
+        animation={`${shake} infinite .15s linear`}
       >
         {props.value}
-      </MotionButton>
-    </AnimatePresence>
+      </Button>
+    </>
   )
 }
 
