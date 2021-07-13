@@ -4,7 +4,7 @@ import {
   keyframes
 } from '@chakra-ui/react'
 
-export default function Loading () {
+export default function Loading ({ stopLoading }) {
   const dotOne = keyframes`
     20% {transform: scale(1)}
     45% {transform: translate(16px, 12px) scale(.45)}
@@ -53,6 +53,7 @@ export default function Loading () {
       position='absolute'
       bg='hsla(0, 0%, 0%, .5)'
       zIndex='1'
+      display={stopLoading && 'none'}
     >
       <Box
         w='200px'

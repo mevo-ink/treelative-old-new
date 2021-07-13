@@ -2,12 +2,13 @@ import { useEffect, useRef } from 'react'
 import { Box } from '@chakra-ui/react'
 
 import { useSetRecoilState } from 'recoil'
-import { networkMethodsAtom, activeNodeIDAtom } from 'utils/atoms.js'
+import { networkMethodsAtom, networkStabilizedAtom, activeNodeIDAtom } from 'utils/atoms.js'
 
 import { Network } from 'vis-network/standalone'
 
 export default function Graph ({ networkData }) {
   const setNetworkMethodsState = useSetRecoilState(networkMethodsAtom)
+  const setNetworkStabilizedState = useSetRecoilState(networkStabilizedAtom)
 
   // const [, setNetworkState] = useRecoilState(networkAtom)
   const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
@@ -24,6 +25,7 @@ export default function Graph ({ networkData }) {
     // const { x: nodeX, y: nodeY } = network.getPositions(['187e3fbf-347e-4e0d-9a82-b0b2cf2bc57f'])['187e3fbf-347e-4e0d-9a82-b0b2cf2bc57f']
     // zoom on Graph mount
     network.on('stabilized', () => {
+      setNetworkStabilizedState(true)
       // stabilized.set(true)
       // network.focus('187e3fbf-347e-4e0d-9a82-b0b2cf2bc57f')
       network.moveTo({

@@ -2,7 +2,7 @@ import { useQuery } from 'urql'
 import { GET_NETWORK_DATA } from 'graphql/queries/networkData'
 
 import { useRecoilValue } from 'recoil'
-import { activeNodeIDAtom } from 'utils/atoms.js'
+import { networkStabilizedAtom, activeNodeIDAtom } from 'utils/atoms.js'
 
 import Menu from 'components/Menu'
 import Graph from 'components/Graph'
@@ -12,6 +12,7 @@ import ProfileCard from 'components/ProfileCard'
 
 export default function App () {
   const activeNodeID = useRecoilValue(activeNodeIDAtom)
+  const graphStabilized = useRecoilValue(networkStabilizedAtom)
 
   const [result] = useQuery({ query: GET_NETWORK_DATA })
 
@@ -21,6 +22,7 @@ export default function App () {
 
   return (
     <>
+      <Loading stopLoading={graphStabilized} />
       {activeNodeID && <ProfileCard />}
       <Menu />
       <Graph networkData={result.data.getNetworkData} />
