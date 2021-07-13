@@ -6,8 +6,7 @@ import {
   Stack,
   Button,
   FormLabel,
-  FormControl,
-  FormErrorMessage
+  FormControl
 } from '@chakra-ui/react'
 import { FaGoogle, FaFacebook, FaTwitter } from 'react-icons/fa'
 
@@ -103,7 +102,7 @@ export default function Login ({ onSuccess }) {
             type='username'
             autoComplete='username'
           />
-          <FormErrorMessage>{errors?.username?.message}</FormErrorMessage>
+          <ErrorAlert>{errors?.username?.message}</ErrorAlert>
         </FormControl>
         <FormControl id='password' isRequired isInvalid={errors?.password}>
           <Flex justify='space-between'>
@@ -119,7 +118,7 @@ export default function Login ({ onSuccess }) {
             </Button>
           </Flex>
           <PasswordInput {...register('password')} />
-          <FormErrorMessage>{errors?.password?.message}</FormErrorMessage>
+          <ErrorAlert>{errors?.password?.message}</ErrorAlert>
         </FormControl>
         {loginResult.error && <ErrorAlert>{loginResult.error.message}</ErrorAlert>}
         <Button

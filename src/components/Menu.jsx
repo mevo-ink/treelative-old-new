@@ -64,7 +64,7 @@ export default function Menu () {
                   boxShadow='inset 0 0px 3px #000000'
                 />
               </Flex>
-              <Layouts />
+              <Layouts onClose={onClose} />
               <Insights />
             </Stack>
           </DrawerBody>

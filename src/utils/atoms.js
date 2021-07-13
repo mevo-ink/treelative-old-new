@@ -5,11 +5,6 @@ export const networkMethodsAtom = atom({
   default: {}
 })
 
-export const networkStabilizedAtom = atom({
-  key: 'stabilized',
-  default: false
-})
-
 export const activeNodeIDAtom = atom({
   key: 'activeNodeID',
   default: null
@@ -18,4 +13,9 @@ export const activeNodeIDAtom = atom({
 export const isEditModeAtom = atom({
   key: 'isEditMode',
   default: false
+})
+
+export const layoutAtom = atom({
+  key: 'layout',
+  default: 'network'
 })
