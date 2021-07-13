@@ -19,6 +19,7 @@ import { networkMethodsAtom, activeNodeIDAtom, isEditModeAtom } from 'utils/atom
 import { GET_USER } from 'graphql/queries/users'
 
 import Login from 'components/Login'
+import Loading from 'components/Loading'
 import Slider from 'components/ProfileCard/Slider'
 import Birth from 'components/ProfileCard/Slides/Birth'
 import Current from 'components/ProfileCard/Slides/Current'
@@ -48,10 +49,10 @@ export default function ProfileCard () {
     refetch({ requestPolicy: 'network-only' })
   }
 
-  if (!activeNodeID) return null
-  if (result.fetching) return <p>Loading</p>
+  if (result.fetching) return <Loading />
 
   const user = result.data?.getUser
+
   return (
     <Modal isOpen onClose={onClose} isCentered>
       <ModalOverlay />
@@ -59,7 +60,7 @@ export default function ProfileCard () {
         <OuterWrapper>
           <InnerWrapper>
             {result.error && <Login onSuccess={onLoginSuccess} />}
-            {result.data.getUser && (
+            {result.data?.getUser && (
               <>
                 <IconButton
                   icon={isEditMode ? <MdDone /> : <FiEdit />}

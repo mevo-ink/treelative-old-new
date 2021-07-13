@@ -56,6 +56,7 @@ export default function Login ({ onSuccess }) {
     resolver: yupResolver(schemaValidation)
   })
 
+  // eslint-disable-next-line
   useEffect(() => { isDesktop && setTimeout(() => setFocus('username')) }, [])
 
   const onLoginSuccess = (result) => {

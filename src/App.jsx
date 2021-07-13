@@ -5,6 +5,7 @@ import { useRecoilValue } from 'recoil'
 import { activeNodeIDAtom } from 'utils/atoms.js'
 
 import Graph from 'components/Graph'
+import Loading from 'components/Loading'
 import ProfileCard from 'components/ProfileCard'
 // import ProfileCardChumma from 'components/ProfileCardChumma'
 
@@ -15,7 +16,7 @@ export default function App () {
 
   if (result.error) return <p>ERROR</p>
 
-  if (result.fetching) return <p>LOADING...</p>
+  if (result.fetching) return <Loading />
 
   return (
     <>
