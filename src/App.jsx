@@ -4,6 +4,7 @@ import { GET_NETWORK_DATA } from 'graphql/queries/networkData'
 import { useRecoilValue } from 'recoil'
 import { activeNodeIDAtom } from 'utils/atoms.js'
 
+import Menu from 'components/Menu'
 import Graph from 'components/Graph'
 import Loading from 'components/Loading'
 import ProfileCard from 'components/ProfileCard'
@@ -21,6 +22,7 @@ export default function App () {
   return (
     <>
       {activeNodeID && <ProfileCard />}
+      <Menu />
       <Graph networkData={result.data.getNetworkData} />
     </>
   )
