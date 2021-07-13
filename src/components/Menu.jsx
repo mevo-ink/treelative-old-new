@@ -8,6 +8,10 @@ import {
 
 import { FaGripLines } from 'react-icons/fa'
 
+import Search from 'components/Menu/Search'
+import Layouts from 'components/Menu/Layouts'
+import Insights from 'components/Menu/Insights'
+
 export default function Menu () {
   const [showMenu, setShowMenu] = useState(true)
   return (
@@ -50,10 +54,10 @@ export default function Menu () {
         >
           =
         </IconButton>
-        <Box
-          h='200px'
-        >
-          Menu
+        <Box p='1em 1.5em'>
+          <Search />
+          <Layouts />
+          <Insights />
         </Box>
       </Box>
     </Flex>
