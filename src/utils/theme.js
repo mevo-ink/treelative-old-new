@@ -36,16 +36,6 @@ const theme = extendTheme({
         colorScheme: 'blue'
       }
     },
-    Drawer: {
-      baseStyle: {
-        closeButton: {
-          color: 'blue.500'
-        },
-        dialog: {
-          borderRadius: 'xl'
-        }
-      }
-    },
     Input: {
       variants: {
         outline: {
@@ -135,6 +125,14 @@ const theme = extendTheme({
           bg: 'hsla(220, 98%, 57%, 1)',
           _hover: { bg: 'hsla(220, 98%, 37%, 1)' },
           _active: { bg: 'hsla(220, 98%, 37%, 1)' }
+        },
+        'drawer-btn': {
+          w: '100%',
+          h: '30px',
+          bg: 'hsla(0, 0%, 100%, .95)',
+          position: 'absolute',
+          zIndex: '1',
+          top: '-27px'
         }
       }
     },
@@ -144,6 +142,15 @@ const theme = extendTheme({
           color: 'white',
           borderRadius: '20px',
           border: 'hsla(0, 0%, 100%, 1) solid 2px',
+          background: 'hsla(225, 36%, 4%, 1)'
+        }
+      }
+    },
+    Drawer: {
+      baseStyle: {
+        dialog: {
+          color: 'white',
+          borderRadius: '0',
           background: 'hsla(225, 36%, 4%, 1)'
         }
       }
