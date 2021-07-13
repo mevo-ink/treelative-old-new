@@ -60,7 +60,7 @@ export default function InputDialogTrigger (props) {
       {isOpen && <InputDialog {...inputProps} onClose={onClose} />}
       <Button
         onClick={onOpen}
-        w='50%'
+        w='60%'
         m='1rem 0rem'
         fontSize='1.2rem'
         lineHeight='1.3em'

@@ -120,7 +120,7 @@ function InputDialog (props) {
           value={location}
           onChange={setLocation}
         />
-        <AspectRatio ratio={16 / 9}>
+        <AspectRatio>
           <iframe
             title={title}
             src={locationURL}

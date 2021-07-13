@@ -60,9 +60,9 @@ export default function FormDialog (props) {
             <Button
               isFullWidth
               type='submit'
+              variant='submit'
               form={formID}
               isLoading={loading}
-              variant='solid'
               isDisabled={isDisabled}
             >
               {submitLabel}
