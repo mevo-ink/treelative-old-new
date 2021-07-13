@@ -132,9 +132,9 @@ const theme = extendTheme({
           fontWeight: '400',
           color: 'white',
           cursor: 'pointer',
-          bg: 'linear-gradient(-45deg, hsla(261, 64%, 18%, 1), hsla(359, 88%, 55%, 1))',
-          _hover: { bg: 'linear-gradient(-45deg, hsla(261, 50%, 18%, 1), hsla(359, 88%, 40%, 1))' },
-          _active: { bg: 'linear-gradient(-45deg, hsla(261, 50%, 18%, 1), hsla(359, 88%, 40%, 1))' }
+          bg: 'hsla(220, 98%, 57%, 1)',
+          _hover: { bg: 'hsla(220, 98%, 37%, 1)' },
+          _active: { bg: 'hsla(220, 98%, 37%, 1)' }
         }
       }
     },

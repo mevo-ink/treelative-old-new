@@ -3,17 +3,18 @@ import { useState } from 'react'
 import {
   Box,
   Flex,
+  Stack,
   IconButton
 } from '@chakra-ui/react'
-
 import { FaGripLines } from 'react-icons/fa'
+import { IoPersonAddSharp } from 'react-icons/io5'
 
 import Search from 'components/Menu/Search'
 import Layouts from 'components/Menu/Layouts'
 import Insights from 'components/Menu/Insights'
 
 export default function Menu () {
-  const [showMenu, setShowMenu] = useState(true)
+  const [showMenu, setShowMenu] = useState(false)
   return (
     <Flex
       w='100vw'
@@ -54,11 +55,22 @@ export default function Menu () {
         >
           =
         </IconButton>
-        <Box p='1em 1.5em'>
-          <Search />
+        <Stack
+          p='1em 1.5em'
+          spacing='2rem'
+        >
+          <Flex justifyContent='space-between'>
+            <Search />
+            <IconButton
+              isRound
+              icon={<IoPersonAddSharp />}
+              size='sm'
+              bg='hsla(220, 98%, 57%, 1)'
+            />
+          </Flex>
           <Layouts />
           <Insights />
-        </Box>
+        </Stack>
       </Box>
     </Flex>
   )
