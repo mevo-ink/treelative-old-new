@@ -122,7 +122,14 @@ export default function Login ({ onSuccess }) {
           <FormErrorMessage>{errors?.password?.message}</FormErrorMessage>
         </FormControl>
         {loginResult.error && <ErrorAlert>{loginResult.error.message}</ErrorAlert>}
-        <Button type='submit' variant='submit' isLoading={loginResult.fetching}>
+        <Button
+          type='submit'
+          variant='submit'
+          bg='linear-gradient(-45deg, hsla(261, 64%, 18%, 1), hsla(359, 88%, 55%, 1))'
+          _hover={{ bg: 'linear-gradient(-45deg, hsla(261, 50%, 18%, 1), hsla(359, 88%, 40%, 1))' }}
+          _active={{ bg: 'linear-gradient(-45deg, hsla(261, 50%, 18%, 1), hsla(359, 88%, 40%, 1))' }}
+          isLoading={loginResult.fetching}
+        >
           Sign in
         </Button>
         <Stack direction='row' width='100%' justifyContent='space-evenly'>

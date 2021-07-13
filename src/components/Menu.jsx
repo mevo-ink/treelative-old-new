@@ -28,6 +28,7 @@ export default function Menu () {
         ref={btnRef}
         icon={<FaGripLines color='hsla(225, 36%, 4%, 1)' />}
         variant='drawer-btn'
+        opacity='.5'
         borderRadius='20px 20px 0px 0px'
         bottom='0'
         top='unset'
