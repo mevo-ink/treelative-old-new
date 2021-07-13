@@ -56,7 +56,7 @@ export default function Menu () {
           =
         </IconButton>
         <Stack
-          p='1em 1.5em'
+          p='1em 2em'
           spacing='2rem'
         >
           <Flex justifyContent='space-between'>

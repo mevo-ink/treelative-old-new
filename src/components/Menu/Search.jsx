@@ -16,7 +16,7 @@ export default function Search () {
         <BsSearch />
       </InputLeftAddon>
       <Input
-        w='80%'
+        w='78%'
         h='100%'
         color='hsla(225, 36%, 4%, 1)'
         bg='hsla(0, 0%, 100%, .95)'
