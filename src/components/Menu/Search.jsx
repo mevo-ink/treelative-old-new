@@ -12,6 +12,8 @@ export default function Search () {
         h='100%'
         bg='hsla(220, 98%, 57%, 1)'
         borderRadius='999px'
+        boxShadow='inset 0 0px 3px #000000'
+        border='none'
       >
         <BsSearch />
       </InputLeftAddon>
@@ -20,6 +22,8 @@ export default function Search () {
         h='100%'
         color='hsla(225, 36%, 4%, 1)'
         bg='hsla(0, 0%, 100%, .95)'
+        boxShadow='inset 0 0px 3px #000000'
+        border='none'
         borderRadius='999px'
         placeholder='Search'
         _placeholder={{ color: 'hsla(225, 36%, 4%, 1)' }}

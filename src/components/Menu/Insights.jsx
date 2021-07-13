@@ -15,6 +15,7 @@ export default function Insights () {
         h='150px'
         bg='hsla(0, 0%, 100%, .95)'
         borderRadius='10px'
+        boxShadow='inset 0 0px 5px #000000'
       />
     </Box>
   )

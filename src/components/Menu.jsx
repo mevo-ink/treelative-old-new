@@ -50,7 +50,7 @@ export default function Menu () {
           />
           <DrawerBody>
             <Stack
-              p='1em .5em'
+              p='1.5em .5em'
               spacing='2rem'
             >
               <Flex justifyContent='space-between'>
@@ -60,6 +60,7 @@ export default function Menu () {
                   icon={<IoPersonAddSharp />}
                   size='sm'
                   bg='hsla(220, 98%, 57%, 1)'
+                  boxShadow='inset 0 0px 3px #000000'
                 />
               </Flex>
               <Layouts />
