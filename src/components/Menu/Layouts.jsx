@@ -24,17 +24,10 @@ export default function Layouts ({ onClose }) {
 
   return (
     <Box>
-      <Text
-        mb='.5rem'
-        color='hsla(0, 0%, 100%, .8)'
-      >
+      <Text mb='.5rem' color='hsla(0, 0%, 100%, .8)'>
         Layouts
       </Text>
-      <Box
-        w='100%'
-        h='75px'
-        borderRadius='10px'
-      >
+      <Box w='100%'>
         {iconsAndNames.map((iconAndName, idx) => (
           <Button
             key={idx}
@@ -43,6 +36,7 @@ export default function Layouts ({ onClose }) {
             p='0'
             mr='1rem'
             bg='hsla(0, 0%, 100%, .3)'
+            borderRadius='10px'
             onClick={() => handleLayoutChange(iconAndName.name)}
           >
             <Image

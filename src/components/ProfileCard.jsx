@@ -36,7 +36,7 @@ export default function ProfileCard () {
   const [activeNodeID, setActiveNodeID] = useRecoilState(activeNodeIDAtom)
 
   const [result, refetch] = useQuery({ query: GET_USER, variables: { filter: { id: activeNodeID } } })
-
+  console.log(result)
   const onClose = () => {
     // clear the activeNodeID in store
     setActiveNodeID(null)
