@@ -1,32 +1,29 @@
 import {
   Input,
   InputGroup,
-  InputLeftAddon
+  InputRightElement
 } from '@chakra-ui/react'
 import { BsSearch } from 'react-icons/bs'
 
 export default function Search () {
   return (
-    <InputGroup h='2rem'>
-      <InputLeftAddon
+    <InputGroup h='2rem' w='78%'>
+      <InputRightElement
         h='100%'
-        bg='hsla(220, 98%, 57%, 1)'
-        borderRadius='999px'
-        boxShadow='inset 0 0px 3px #000000'
         border='none'
+        color='hsl(220, 26%, 14%)'
       >
         <BsSearch />
-      </InputLeftAddon>
+      </InputRightElement>
       <Input
-        w='78%'
         h='100%'
-        color='hsla(225, 36%, 4%, 1)'
-        bg='hsla(0, 0%, 100%, .95)'
-        boxShadow='inset 0 0px 3px #000000'
+        pb='2px'
+        color='hsl(220, 26%, 14%)'
+        bg='hsla(0, 0%, 100%, .5)'
         border='none'
         borderRadius='999px'
         placeholder='Search'
-        _placeholder={{ color: 'hsla(225, 36%, 4%, 1)' }}
+        _placeholder={{ color: 'hsl(220, 26%, 14%)' }}
       />
     </InputGroup>
   )
