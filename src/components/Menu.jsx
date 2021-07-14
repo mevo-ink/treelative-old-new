@@ -24,16 +24,17 @@ export default function Menu () {
 
   return (
     <Box>
-      <IconButton
-        ref={btnRef}
-        icon={<FaGripLines color='hsla(225, 36%, 4%, 1)' />}
-        variant='drawer-btn'
-        opacity='.5'
-        borderRadius='20px 20px 0px 0px'
-        bottom='0'
-        top='unset'
-        onClick={onOpen}
-      />
+      {!isOpen && (
+        <IconButton
+          ref={btnRef}
+          icon={<FaGripLines color='hsla(0, 0%, 100%, 1)' />}
+          variant='drawer-btn'
+          // opacity='.5'
+          bottom='0'
+          top='unset'
+          onClick={onOpen}
+        />
+      )}
       <Drawer
         isOpen={isOpen}
         placement='bottom'
@@ -45,9 +46,8 @@ export default function Menu () {
           <IconButton
             ref={btnRef}
             onClick={onClose}
-            icon={<FaGripLines color='hsla(225, 36%, 4%, 1)' />}
+            icon={<FaGripLines color='hsla(0, 0%, 100%, 1)' />}
             variant='drawer-btn'
-            borderRadius='20px 20px 0px 0px'
           />
           <DrawerBody>
             <Stack

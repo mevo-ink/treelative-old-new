@@ -129,10 +129,19 @@ const theme = extendTheme({
         'drawer-btn': {
           w: '100%',
           h: '30px',
-          bg: 'hsla(0, 0%, 100%, .95)',
           position: 'absolute',
           zIndex: '1',
-          top: '-27px'
+          top: '-30px',
+          'border-radius': '20px 20px 0px 0px',
+          '@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none)': {
+            '-webkit-backdrop-filter': 'blur(5px)',
+            backdropFilter: 'blur(5px)',
+            bg: 'hsla(0, 0%, 100%, .1)'
+          },
+          /* slightly transparent fallback for Firefox (not supporting backdrop-filter) */
+          '@supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none))': {
+            bg: 'hsla(0, 0%, 100%, .2)'
+          }
         }
       }
     },
@@ -149,9 +158,17 @@ const theme = extendTheme({
     Drawer: {
       baseStyle: {
         dialog: {
-          color: 'white',
+          color: 'hsla(0, 0%, 100%, .8)',
           borderRadius: '0',
-          background: 'hsla(225, 36%, 4%, 1)'
+          '@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none)': {
+            '-webkit-backdrop-filter': 'blur(5px)',
+            backdropFilter: 'blur(5px)',
+            background: 'linear-gradient(115deg, hsla(0, 0%, 100%, .2), hsla(0, 0%, 100%, .05))'
+          },
+          /* slightly transparent fallback for Firefox (not supporting backdrop-filter) */
+          '@supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none))': {
+            backgroundColor: 'hsla(225, 36%, 4%, 1)'
+          }
         }
       }
     }
