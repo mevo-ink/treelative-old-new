@@ -18,6 +18,7 @@ import { BiCurrentLocation } from 'react-icons/bi'
 import Search from 'components/Menu/Search'
 import Layouts from 'components/Menu/Layouts'
 import Insights from 'components/Menu/Insights'
+import Copyright from 'components/Menu/Copyright'
 
 export default function Menu () {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -72,6 +73,7 @@ export default function Menu () {
               <Layouts onClose={onClose} />
               <Insights />
             </Stack>
+            <Copyright />
           </DrawerBody>
         </DrawerContent>
       </Drawer>
