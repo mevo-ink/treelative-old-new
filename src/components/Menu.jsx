@@ -13,6 +13,7 @@ import {
 } from '@chakra-ui/react'
 import { FaGripLines } from 'react-icons/fa'
 import { IoPersonAddSharp } from 'react-icons/io5'
+import { BiCurrentLocation } from 'react-icons/bi'
 
 import Search from 'components/Menu/Search'
 import Layouts from 'components/Menu/Layouts'
@@ -57,10 +58,15 @@ export default function Menu () {
                 <Search />
                 <IconButton
                   isRound
-                  icon={<IoPersonAddSharp />}
+                  icon={<IoPersonAddSharp color='hsla(0, 0%, 100%, 1)' />}
                   size='sm'
-                  bg='hsla(220, 98%, 57%, 1)'
-                  boxShadow='inset 0 0px 3px #000000'
+                  bg='hsla(220, 98%, 57%, .8)'
+                />
+                <IconButton
+                  isRound
+                  icon={<BiCurrentLocation color='hsla(0, 0%, 100%, 1)' />}
+                  size='sm'
+                  bg='hsla(220, 98%, 57%, .8)'
                 />
               </Flex>
               <Layouts onClose={onClose} />

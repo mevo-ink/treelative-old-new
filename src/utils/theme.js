@@ -154,8 +154,8 @@ const theme = extendTheme({
           color: 'hsla(0, 0%, 100%, .8)',
           borderRadius: '0',
           '@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none)': {
-            '-webkit-backdrop-filter': 'blur(5px)',
-            backdropFilter: 'blur(5px)',
+            '-webkit-backdrop-filter': 'blur(3px)',
+            backdropFilter: 'blur(3px)',
             background: 'linear-gradient(115deg, hsla(0, 0%, 100%, .2), hsla(0, 0%, 100%, .05))'
           },
           /* slightly transparent fallback for Firefox (not supporting backdrop-filter) */
