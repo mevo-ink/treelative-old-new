@@ -132,16 +132,9 @@ const theme = extendTheme({
           position: 'absolute',
           zIndex: '1',
           top: '-30px',
-          'border-radius': '20px 20px 0px 0px',
-          '@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none)': {
-            '-webkit-backdrop-filter': 'blur(5px)',
-            backdropFilter: 'blur(5px)',
-            bg: 'hsla(0, 0%, 100%, .1)'
-          },
-          /* slightly transparent fallback for Firefox (not supporting backdrop-filter) */
-          '@supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none))': {
-            bg: 'hsla(0, 0%, 100%, .2)'
-          }
+          bg: 'hsla(0, 0%, 100%, .2)',
+          backdropFilter: 'blur(5px)',
+          'border-radius': '20px 20px 0px 0px'
         }
       }
     },
