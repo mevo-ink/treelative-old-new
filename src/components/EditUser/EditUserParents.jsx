@@ -80,6 +80,7 @@ export default function EditUserParentsTrigger (props) {
             />
           </Button>
         ))}
+        {parents.length === 0 && <Text variant='info'>Unavailable</Text>}
         {isEditMode && (
           <IconButton
             icon={<MdAdd size='2rem' />}
