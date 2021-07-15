@@ -4,6 +4,7 @@ import {
 } from '@chakra-ui/react'
 
 import EditUserParents from 'components/EditUser/EditUserParents'
+import EditUserChildren from 'components/EditUser/EditUserChildren'
 
 export default function ParentChild ({ user }) {
   return (
@@ -25,6 +26,7 @@ export default function ParentChild ({ user }) {
       <Text variant='info-title' mt='1rem'>
         Children
       </Text>
+      <EditUserChildren user={user} />
     </Flex>
   )
 }

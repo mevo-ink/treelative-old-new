@@ -76,11 +76,12 @@ export default function EditUserParentsTrigger (props) {
               src={parent.avatar}
               alt='parent-avatar'
               objectFit='contain'
+              borderRadius='50%'
               fallbackSrc={`https://ui-avatars.com/api/?name=${parent.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
             />
           </Button>
         ))}
-        {parents.length === 0 && <Text variant='info'>Unavailable</Text>}
+        {parents.length === 0 && !isEditMode && <Text variant='info'>Unavailable</Text>}
         {isEditMode && (
           <IconButton
             icon={<MdAdd size='2rem' />}
