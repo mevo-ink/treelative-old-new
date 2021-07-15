@@ -22,6 +22,7 @@ import Login from 'components/Login'
 import Loading from 'components/Loading'
 import Slider from 'components/ProfileCard/Slider'
 import Birth from 'components/ProfileCard/Slides/Birth'
+import Death from 'components/ProfileCard/Slides/Death'
 import Current from 'components/ProfileCard/Slides/Current'
 import OuterWrapper from 'components/ProfileCard/OuterWrapper'
 import InnerWrapper from 'components/ProfileCard/InnerWrapper'
@@ -36,7 +37,7 @@ export default function ProfileCard () {
   const [activeNodeID, setActiveNodeID] = useRecoilState(activeNodeIDAtom)
 
   const [result, refetch] = useQuery({ query: GET_USER, variables: { filter: { id: activeNodeID } } })
-  console.log(result)
+
   const onClose = () => {
     // clear the activeNodeID in store
     setActiveNodeID(null)
@@ -109,6 +110,7 @@ export default function ProfileCard () {
                 </Box>
                 <EditUserFullName user={user} />
                 <Slider>
+                  {user.dateOfDeath && <Death user={user} />}
                   <Birth user={user} />
                   <Current user={user} />
                 </Slider>

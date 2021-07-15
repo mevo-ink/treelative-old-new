@@ -95,6 +95,15 @@ export const UPDATE_USER_CURRENT_LOCATION = gql`
   }
 `
 
+export const UPDATE_USER_DEATH_LOCATION = gql`
+  mutation UPDATE_USER_DEATH_LOCATION ($userID: String! $input: UpdateUserInput!) {
+    updateUser(userID: $userID input: $input) {
+      id
+      deathLocation
+    }
+  }
+`
+
 export const ADD_USER_PARENT = gql`
   mutation ADD_USER_PARENT ($userID: String! $parentID: String!) {
     addUserParent(userID: $userID parentID: $parentID){

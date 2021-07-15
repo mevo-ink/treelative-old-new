@@ -30,7 +30,7 @@ export default function Insights () {
             <Divider w='100%' />
           </Box>
         ))}
-        <Text color='hsla(0, 0%, 100%, 1)' textAlign='end' mt='.8rem'>More Coming Soon..</Text>
+        <Text textAlign='end' mt='.8rem'>More Coming Soon..</Text>
       </Box>
     </Box>
   )
