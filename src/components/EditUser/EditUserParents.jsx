@@ -48,14 +48,14 @@ export default function EditUserParentsTrigger (props) {
   return (
     <>
       {isOpen && <EditUserParentsDialog {...props} onClose={onClose} />}
-      <Flex w='85%' justifyContent='center'>
+      <Flex w='85%' flexWrap='wrap' justifyContent='center'>
         {parents.map(parent => (
           <Button
             key={parent.id}
-            w='3rem'
+            w='2rem'
             h='auto'
             p='0'
-            m='0 .5rem'
+            m='0 .2rem'
             cursor='pointer'
             mt='1rem'
             borderRadius='50%'
@@ -65,7 +65,7 @@ export default function EditUserParentsTrigger (props) {
                 as={BiTrash}
                 w='100%'
                 h='100%'
-                p='.8em 0'
+                p='.6em 0'
                 color='red'
                 position='absolute'
                 bg='hsla(0, 0%, 0%, .8)'
@@ -85,10 +85,10 @@ export default function EditUserParentsTrigger (props) {
         {isEditMode && (
           <IconButton
             icon={<MdAdd size='2rem' />}
-            w='3rem'
-            h='3rem'
+            w='2rem'
+            objectFit='contain'
             p='0'
-            m='0 .5rem'
+            m='0 .2rem'
             mt='1rem'
             cursor='pointer'
             borderRadius='50%'
