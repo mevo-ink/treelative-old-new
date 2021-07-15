@@ -24,7 +24,7 @@ export default function Layouts ({ onClose }) {
 
   return (
     <Box>
-      <Text mb='.5rem' color='hsla(0, 0%, 100%, .8)'>
+      <Text mb='.5rem' opacity='.8'>
         Layouts
       </Text>
       <Box w='100%'>

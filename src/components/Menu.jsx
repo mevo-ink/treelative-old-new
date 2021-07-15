@@ -29,7 +29,7 @@ export default function Menu () {
       {!isOpen && (
         <IconButton
           ref={btnRef}
-          icon={<FaGripLines color='hsla(0, 0%, 100%, 1)' />}
+          icon={<FaGripLines color='white' />}
           variant='drawer-btn'
           bottom='0'
           top='unset'
@@ -47,7 +47,7 @@ export default function Menu () {
           <IconButton
             ref={btnRef}
             onClick={onClose}
-            icon={<FaGripLines color='hsla(0, 0%, 100%, 1)' />}
+            icon={<FaGripLines color='white' />}
             variant='drawer-btn'
           />
           <DrawerBody>
@@ -59,13 +59,13 @@ export default function Menu () {
                 <Search />
                 <IconButton
                   isRound
-                  icon={<IoPersonAddSharp color='hsla(0, 0%, 100%, 1)' />}
+                  icon={<IoPersonAddSharp color='white' />}
                   size='sm'
                   bg='hsla(220, 98%, 57%, .8)'
                 />
                 <IconButton
                   isRound
-                  icon={<BiCurrentLocation color='hsla(0, 0%, 100%, 1)' />}
+                  icon={<BiCurrentLocation color='white' />}
                   size='sm'
                   bg='hsla(220, 98%, 57%, .8)'
                 />

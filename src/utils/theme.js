@@ -82,20 +82,22 @@ const theme = extendTheme({
 
     Text: {
       baseStyle: {
-        color: 'hsla(261, 64%, 18%, 1)'
+        color: 'hsla(0, 0%, 100%, 1)'
       },
       variants: {
         'info-title': {
           fontWeight: '100',
           fontSize: '.5rem',
           lineHeight: '1.3em',
-          userSelect: 'none'
+          userSelect: 'none',
+          color: 'hsla(261, 64%, 18%, 1)'
         },
         info: {
           w: '85%',
           textAlign: 'center',
           fontSize: '1rem',
-          lineHeight: '1.2em'
+          lineHeight: '1.2em',
+          color: 'hsla(261, 64%, 18%, 1)'
         }
       }
     },

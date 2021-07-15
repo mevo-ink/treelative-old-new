@@ -49,6 +49,7 @@ export default function InputDialogTrigger (props) {
         lineHeight='1.3em'
         fontWeight='600'
         textAlign='center'
+        color='hsla(261, 64%, 18%, 1)'
       >
         {props.value}
       </Text>

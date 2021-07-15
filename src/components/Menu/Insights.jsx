@@ -12,7 +12,7 @@ export default function Insights () {
   ]
   return (
     <Box>
-      <Text mb='.5rem' color='hsla(0, 0%, 100%, .8)'>
+      <Text mb='.5rem' opacity='.8'>
         Insights
       </Text>
       <Box
@@ -24,8 +24,8 @@ export default function Insights () {
         {data.map((insight, idx) => (
           <Box key={idx}>
             <Flex justifyContent='space-between' m='.2rem 0'>
-              <Text color='hsla(0, 0%, 100%, 1)'>{insight.title}</Text>
-              <Text color='hsla(0, 0%, 100%, 1)'>{insight.value}</Text>
+              <Text>{insight.title}</Text>
+              <Text>{insight.value}</Text>
             </Flex>
             <Divider w='100%' />
           </Box>
