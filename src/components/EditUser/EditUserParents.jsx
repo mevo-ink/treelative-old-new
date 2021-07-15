@@ -19,6 +19,7 @@ import {
   Alert,
   Image,
   Button,
+  keyframes,
   FormLabel,
   ModalBody,
   AlertIcon,
@@ -45,6 +46,12 @@ export default function EditUserParentsTrigger (props) {
 
   const { parents } = props.user
 
+  const shake = keyframes`
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(-2deg); }
+    100% { transform: rotate(2deg); }
+  `
+
   return (
     <>
       {isOpen && <EditUserParentsDialog {...props} onClose={onClose} />}
@@ -70,6 +77,8 @@ export default function EditUserParentsTrigger (props) {
                 position='absolute'
                 bg='hsla(0, 0%, 0%, .8)'
                 borderRadius='50%'
+                boxShadow='0px 3px 5px hsla(0, 0%, 0%, .3)'
+                animation={`${shake} infinite .15s linear`}
               />
             )}
             <Image
