@@ -76,6 +76,7 @@ export default function EditUserChildrenTrigger (props) {
                 bg='hsla(0, 0%, 0%, .8)'
                 boxShadow='0px 3px 5px hsla(0, 0%, 0%, .3)'
                 borderRadius='50%'
+                animation={`${shake} infinite .15s linear`}
               />
             )}
             <Image
