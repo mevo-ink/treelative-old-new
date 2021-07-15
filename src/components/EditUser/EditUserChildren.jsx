@@ -1,7 +1,7 @@
 import UserSelection from 'components/_common/UserSelection'
 
-import { useRecoilValue } from 'recoil'
-import { isEditModeAtom } from 'utils/atoms.js'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { isEditModeAtom, activeNodeIDAtom } from 'utils/atoms.js'
 
 import { useMutation } from 'urql'
 import { ADD_USER_CHILD, DELETE_USER_CHILD } from 'graphql/mutations/users'
@@ -38,6 +38,8 @@ import { BiTrash } from 'react-icons/bi'
 const toast = createStandaloneToast()
 
 export default function EditUserChildrenTrigger (props) {
+  const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
+
   const isEditMode = useRecoilValue(isEditModeAtom)
 
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -54,9 +56,9 @@ export default function EditUserChildrenTrigger (props) {
     <>
       {isOpen && <EditUserChildrenDialog {...props} onClose={onClose} />}
       <Flex w='85%' flexWrap='wrap' justifyContent='center'>
-        {children.map(parent => (
+        {children.map(children => (
           <Button
-            key={parent.id}
+            key={children.id}
             w='2rem'
             h='auto'
             p='0'
@@ -64,6 +66,7 @@ export default function EditUserChildrenTrigger (props) {
             cursor='pointer'
             mt='1rem'
             borderRadius='50%'
+            onClick={() => setActiveNodeID(children.id)}
           >
             {isEditMode && (
               <Icon
@@ -80,11 +83,11 @@ export default function EditUserChildrenTrigger (props) {
               />
             )}
             <Image
-              src={parent.avatar}
-              alt='parent-avatar'
+              src={children.avatar}
+              alt='children-avatar'
               objectFit='contain'
               borderRadius='50%'
-              fallbackSrc={`https://ui-avatars.com/api/?name=${parent.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
+              fallbackSrc={`https://ui-avatars.com/api/?name=${children.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
             />
           </Button>
         ))}

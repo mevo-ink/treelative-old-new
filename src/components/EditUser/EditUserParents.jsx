@@ -1,7 +1,7 @@
 import UserSelection from 'components/_common/UserSelection'
 
-import { useRecoilValue } from 'recoil'
-import { isEditModeAtom } from 'utils/atoms.js'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { isEditModeAtom, activeNodeIDAtom } from 'utils/atoms.js'
 
 import { useMutation } from 'urql'
 import { ADD_USER_PARENT, DELETE_USER_PARENT } from 'graphql/mutations/users'
@@ -40,6 +40,8 @@ import { BiTrash } from 'react-icons/bi'
 const toast = createStandaloneToast()
 
 export default function EditUserParentsTrigger (props) {
+  const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
+
   const isEditMode = useRecoilValue(isEditModeAtom)
 
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -66,6 +68,7 @@ export default function EditUserParentsTrigger (props) {
             cursor='pointer'
             mt='1rem'
             borderRadius='50%'
+            onClick={() => setActiveNodeID(parent.id)}
           >
             {isEditMode && (
               <Icon
