@@ -21,8 +21,7 @@ export default function Graph () {
     edges: {
       hidden: false,
       arrows: { middle: true },
-      chosen: false,
-      color: 'hsl(190, 84%, 44%)'
+      chosen: false
     },
     groups: {
       individual: {
@@ -36,14 +35,11 @@ export default function Graph () {
       },
       admin: {
         shape: 'circularImage',
-        borderWidth: 0,
-        size: 52,
-        font: { size: 0 },
+        borderWidth: 3,
         color: {
-          background: 'transparent',
-          border: 'transparent',
+          border: 'hsl(54, 100%, 51%)',
           highlight: {
-            border: 'transparent'
+            border: 'hsl(54, 100%, 51%)'
           }
         }
       },
