@@ -1,6 +1,6 @@
 import { Text, Box, Image, Button } from '@chakra-ui/react'
 
-import { useSetRecoilState } from 'recoil'
+import { useRecoilState } from 'recoil'
 import { layoutAtom } from 'utils/atoms.js'
 
 import age from 'images/ageView.png'
@@ -8,7 +8,7 @@ import map from 'images/mapView.png'
 import network from 'images/graphView.png'
 
 export default function Layouts ({ onClose }) {
-  const setLayout = useSetRecoilState(layoutAtom)
+  const [layout, setLayout] = useRecoilState(layoutAtom)
 
   const iconsAndNames = [
     { icon: network, name: 'network' },
@@ -37,6 +37,7 @@ export default function Layouts ({ onClose }) {
             mr='1rem'
             bg='hsla(0, 0%, 100%, .3)'
             borderRadius='10px'
+            border={layout === iconAndName.name && '1px solid white'}
             onClick={() => handleLayoutChange(iconAndName.name)}
           >
             <Image

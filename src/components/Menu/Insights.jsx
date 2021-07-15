@@ -15,7 +15,6 @@ export default function Insights () {
     { title: 'Couples', value: result.data.getNetworkData.nodes.filter(node => node.group === 'couple').length }
   ]
 
-  console.log(result.data.getNetworkData.nodes.filter(node => node.group !== 'couple'))
   return (
     <Box>
       <Text mb='.5rem' opacity='.8'>
