@@ -1,37 +1,40 @@
 import {
   Box,
   Flex,
-  Text,
-  Divider
+  Text
 } from '@chakra-ui/react'
 
+import { useQuery } from 'urql'
+import { GET_NETWORK_DATA } from 'graphql/queries/networkData'
+
 export default function Insights () {
+  const [result] = useQuery({ query: GET_NETWORK_DATA })
+
   const data = [
-    { title: 'Total Members', value: '93' },
-    { title: 'Total Couples', value: '37' }
+    { title: 'Members', value: result.data.getNetworkData.nodes.filter(node => node.group !== 'couple').length },
+    { title: 'Couples', value: result.data.getNetworkData.nodes.filter(node => node.group === 'couple').length }
   ]
+
+  console.log(result.data.getNetworkData.nodes.filter(node => node.group !== 'couple'))
   return (
     <Box>
       <Text mb='.5rem' opacity='.8'>
         Insights
       </Text>
-      <Box
-        w='100%'
-        p='1em 1.5em'
-        bg='hsla(0, 0%, 100%, .3)'
-        borderRadius='10px'
-      >
+      <Flex w='100%'>
         {data.map((insight, idx) => (
-          <Box key={idx}>
-            <Flex justifyContent='space-between' m='.2rem 0'>
-              <Text>{insight.title}</Text>
-              <Text>{insight.value}</Text>
-            </Flex>
-            <Divider w='100%' />
+          <Box
+            key={idx}
+            bg='hsla(0, 0%, 100%, .3)'
+            borderRadius='10px'
+            p='.5em'
+            mr='.5rem'
+          >
+            <Text fontSize='10px'>{insight.title}</Text>
+            <Text fontSize='25px' fontWeight='600' textAlign='center'>{insight.value}</Text>
           </Box>
         ))}
-        <Text textAlign='end' mt='.8rem'>More Coming Soon..</Text>
-      </Box>
+      </Flex>
     </Box>
   )
 }
