@@ -14,11 +14,11 @@ import {
   Text,
   Modal,
   Stack,
-  Wrap,
+  Flex,
+  Icon,
   Alert,
-  Avatar,
+  Image,
   Button,
-  WrapItem,
   FormLabel,
   ModalBody,
   AlertIcon,
@@ -33,7 +33,8 @@ import {
   createStandaloneToast
 } from '@chakra-ui/react'
 
-import { BiEdit, BiTrash } from 'react-icons/bi'
+import { MdAdd } from 'react-icons/md'
+import { BiTrash } from 'react-icons/bi'
 
 const toast = createStandaloneToast()
 
@@ -44,27 +45,58 @@ export default function EditUserParentsTrigger (props) {
 
   const { parents } = props.user
 
-  const parentsRender = (
-    <Wrap justify='center'>
-      {parents.map(parent => (
-        <WrapItem key={parent.id}>
-          <Avatar size='sm' name={parent.fullName} src={parent.avatar} />
-        </WrapItem>
-      ))}
-      {parents.length === 0 && <Text>N/A</Text>}
-    </Wrap>
-  )
-
-  if (!isEditMode) {
-    return parentsRender
-  }
-
   return (
     <>
       {isOpen && <EditUserParentsDialog {...props} onClose={onClose} />}
-      <Button isFullWidth onClick={onOpen} size='sm' rightIcon={<BiEdit />} variant='outline' whiteSpace='normal' height='100%' wordBreak='break-all'>
-        {parentsRender}
-      </Button>
+      <Flex w='85%' justifyContent='center'>
+        {parents.map(parent => (
+          <Button
+            key={parent.id}
+            w='3rem'
+            h='auto'
+            p='0'
+            m='0 .5rem'
+            cursor='pointer'
+            mt='1rem'
+            borderRadius='50%'
+          >
+            {isEditMode && (
+              <Icon
+                as={BiTrash}
+                w='100%'
+                h='100%'
+                p='.8em 0'
+                color='red'
+                position='absolute'
+                bg='hsla(0, 0%, 0%, .8)'
+                borderRadius='50%'
+              />
+            )}
+            <Image
+              src={parent.avatar}
+              alt='parent-avatar'
+              objectFit='contain'
+              fallbackSrc={`https://ui-avatars.com/api/?name=${parent.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
+            />
+          </Button>
+        ))}
+        {isEditMode && (
+          <IconButton
+            icon={<MdAdd size='2rem' />}
+            w='3rem'
+            h='3rem'
+            p='0'
+            m='0 .5rem'
+            mt='1rem'
+            cursor='pointer'
+            borderRadius='50%'
+            color='hsla(261, 64%, 18%, 1)'
+            background='hsla(0, 0%, 100%, .2)'
+            boxShadow='0px 3px 5px hsla(0, 0%, 0%, .2)'
+            onClick={onOpen}
+          />
+        )}
+      </Flex>
     </>
   )
 }

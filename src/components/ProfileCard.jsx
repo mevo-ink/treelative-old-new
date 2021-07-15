@@ -26,6 +26,7 @@ import Death from 'components/ProfileCard/Slides/Death'
 import Current from 'components/ProfileCard/Slides/Current'
 import OuterWrapper from 'components/ProfileCard/OuterWrapper'
 import InnerWrapper from 'components/ProfileCard/InnerWrapper'
+import ParentChild from 'components/ProfileCard/Slides/ParentChild'
 import EditUserFullName from 'components/EditUser/EditUserFullName'
 
 import crown from 'images/adminCrown.png'
@@ -113,6 +114,7 @@ export default function ProfileCard () {
                   {user.dateOfDeath && <Death user={user} />}
                   <Birth user={user} />
                   <Current user={user} />
+                  <ParentChild user={user} />
                 </Slider>
               </>
             )}
