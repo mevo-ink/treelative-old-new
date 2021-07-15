@@ -30,9 +30,15 @@ export default function Menu () {
         <IconButton
           ref={btnRef}
           icon={<FaGripLines color='white' />}
-          variant='drawer-btn'
+          w='100%'
+          h='30px'
+          position='absolute'
+          zIndex='1'
           bottom='0'
-          top='unset'
+          bg='hsla(0, 0%, 100%, .2)'
+          backdropFilter='blur(5px)'
+          borderTopLeftRadius='20px'
+          borderTopRightRadius='20px'
           onClick={onOpen}
         />
       )}
@@ -46,9 +52,10 @@ export default function Menu () {
         <DrawerContent>
           <IconButton
             ref={btnRef}
-            onClick={onClose}
             icon={<FaGripLines color='white' />}
-            variant='drawer-btn'
+            borderRadius='20px 20px 0 0'
+            bg='hsla(0, 0%, 100%, .2)'
+            onClick={onClose}
           />
           <DrawerBody>
             <Stack

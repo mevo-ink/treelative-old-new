@@ -127,17 +127,6 @@ const theme = extendTheme({
           bg: 'hsla(220, 98%, 57%, 1)',
           _hover: { bg: 'hsla(220, 98%, 37%, 1)' },
           _active: { bg: 'hsla(220, 98%, 37%, 1)' }
-        },
-        'drawer-btn': {
-          w: '100%',
-          h: '30px',
-          position: 'absolute',
-          zIndex: '1',
-          top: '-30px',
-          bg: 'hsla(0, 0%, 100%, .2)',
-          backdropFilter: 'blur(5px)',
-          borderTopLeftRadius: '20px',
-          borderTopRightRadius: '20px'
         }
       }
     },
@@ -155,7 +144,8 @@ const theme = extendTheme({
       baseStyle: {
         dialog: {
           color: 'hsla(0, 0%, 100%, .8)',
-          borderRadius: '0',
+          borderTopLeftRadius: '20px',
+          borderTopRightRadius: '20px',
           '@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none)': {
             WebkitBackdropFilter: 'blur(3px)',
             backdropFilter: 'blur(3px)',
