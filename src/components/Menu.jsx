@@ -1,5 +1,8 @@
 import { useRef } from 'react'
 
+import { useRecoilValue } from 'recoil'
+import { networkMethodsAtom } from 'utils/atoms.js'
+
 import {
   Box,
   Flex,
@@ -21,8 +24,15 @@ import Insights from 'components/Menu/Insights'
 import Copyright from 'components/Menu/Copyright'
 
 export default function Menu () {
+  const networkMethods = useRecoilValue(networkMethodsAtom)
+
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()
+
+  const handleFindMe = () => {
+    networkMethods.moveTo('3a63550e-60fc-4710-98f0-606163e25968')
+    onClose()
+  }
 
   return (
     <Box>
@@ -75,6 +85,7 @@ export default function Menu () {
                   icon={<BiCurrentLocation color='white' />}
                   size='sm'
                   bg='hsla(220, 98%, 57%, .8)'
+                  onClick={handleFindMe}
                 />
               </Flex>
               <Layouts onClose={onClose} />

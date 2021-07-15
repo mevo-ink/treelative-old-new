@@ -6,7 +6,7 @@ export default function useAuthUser () {
   const client = useClient()
 
   // fetch the cached authUser
-  const { data: { whoAmI } } = client.readQuery(WHO_AM_I) || {}
+  const { data: { whoAmI } = {} } = client.readQuery(WHO_AM_I) || {}
 
   return whoAmI || {}
 }

@@ -13,7 +13,6 @@ import { MdDone } from 'react-icons/md'
 import { useQuery } from 'urql'
 
 import { useRecoilState, useRecoilValue } from 'recoil'
-
 import { networkMethodsAtom, activeNodeIDAtom, isEditModeAtom } from 'utils/atoms.js'
 
 import { GET_USER } from 'graphql/queries/users'
