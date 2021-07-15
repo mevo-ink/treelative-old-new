@@ -12,6 +12,7 @@ import Loading from 'components/_common/Loading'
 import ErrorAlert from 'components/_common/ErrorAlert'
 
 import {
+  Box,
   Text,
   Flex,
   Icon,
@@ -57,39 +58,42 @@ export default function EditUserChildrenTrigger (props) {
       {isOpen && <EditUserChildrenDialog {...props} onClose={onClose} />}
       <Flex w='85%' flexWrap='wrap' justifyContent='center'>
         {children.map(children => (
-          <Button
-            key={children.id}
-            w='2rem'
-            h='auto'
-            p='0'
-            m='0 .2rem'
-            cursor='pointer'
-            mt='1rem'
-            borderRadius='50%'
-            onClick={() => setActiveNodeID(children.id)}
-          >
-            {isEditMode && (
-              <Icon
-                as={BiTrash}
-                w='100%'
-                h='100%'
-                p='.6em 0'
-                color='red'
-                position='absolute'
-                bg='hsla(0, 0%, 0%, .8)'
-                boxShadow='0px 3px 5px hsla(0, 0%, 0%, .3)'
-                borderRadius='50%'
-                animation={`${shake} infinite .15s linear`}
-              />
-            )}
-            <Image
-              src={children.avatar}
-              alt='children-avatar'
-              objectFit='contain'
+          <Box key={children.id}>
+            <Button
+              key={children.id}
+              w='2rem'
+              h='auto'
+              p='0'
+              m='0 .2rem'
+              cursor='pointer'
+              mt='1rem'
               borderRadius='50%'
-              fallbackSrc={`https://ui-avatars.com/api/?name=${children.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
-            />
-          </Button>
+              onClick={() => setActiveNodeID(children.id)}
+            >
+              {isEditMode && (
+                <Icon
+                  as={BiTrash}
+                  w='100%'
+                  h='100%'
+                  p='.6em 0'
+                  color='red'
+                  position='absolute'
+                  bg='hsla(0, 0%, 0%, .8)'
+                  boxShadow='0px 3px 5px hsla(0, 0%, 0%, .3)'
+                  borderRadius='50%'
+                  animation={`${shake} infinite .15s linear`}
+                />
+              )}
+              <Image
+                src={children.avatar}
+                alt='children-avatar'
+                objectFit='contain'
+                borderRadius='50%'
+                fallbackSrc={`https://ui-avatars.com/api/?name=${children.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
+              />
+            </Button>
+            <Text variant='info-title' mt='.2rem' textAlign='center'>{children.shortName}</Text>
+          </Box>
         ))}
         {children.length === 0 && !isEditMode && <Text variant='info'>Unavailable</Text>}
         {isEditMode && (

@@ -124,11 +124,13 @@ export const GET_USER = gql`
         id
         fullName
         avatar
+        shortName
       }
       children {
         id
         fullName
         avatar
+        shortName
       }
       couple {
         id
