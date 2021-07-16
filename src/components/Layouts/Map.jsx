@@ -5,7 +5,10 @@ import { GET_MAP_DATA } from 'graphql/queries/layouts'
 
 import Loading from 'components/Loading'
 
-import { Image } from '@chakra-ui/react'
+import {
+  Box,
+  Image
+} from '@chakra-ui/react'
 
 import { useSetRecoilState } from 'recoil'
 import { activeNodeIDAtom } from 'utils/atoms.js'
@@ -30,8 +33,7 @@ export default function Map () {
   }
 
   return (
-    // Important! Always set the container height explicitly
-    <div style={{ height: '100vh', width: '100%' }}>
+    <Box h='100vh'>
       <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_LOCATION_API_KEY }}
         defaultCenter={defaultProps.center}
@@ -53,6 +55,6 @@ export default function Map () {
           />
         ))}
       </GoogleMapReact>
-    </div>
+    </Box>
   )
 }

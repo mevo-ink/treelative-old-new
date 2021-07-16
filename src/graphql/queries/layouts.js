@@ -11,3 +11,9 @@ export const GET_MAP_DATA = gql`
     getMapData
   }
 `
+
+export const GET_AGE_DATA = gql`
+  query GET_AGE_DATA {
+    getAgeData
+  }
+`
