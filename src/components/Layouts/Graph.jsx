@@ -92,7 +92,7 @@ export default function Graph () {
     // zoom on Graph mount
     network.on('stabilized', () => {
       setIsStabilized(true)
-      const position = network.getPosition(authUserID)
+      const position = authUserID ? network.getPosition(authUserID) : null
       network.moveTo({
         position,
         scale: 0.7,
