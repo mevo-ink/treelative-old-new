@@ -9,7 +9,7 @@ import { Network } from 'vis-network/standalone'
 import Loading from 'components/Loading'
 
 import { useQuery } from 'urql'
-import { GET_NETWORK_DATA } from 'graphql/queries/networkData'
+import { GET_NETWORK_DATA } from 'graphql/queries/layouts'
 
 export default function Graph () {
   const options = {

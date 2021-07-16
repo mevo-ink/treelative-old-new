@@ -5,7 +5,7 @@ import {
 } from '@chakra-ui/react'
 
 import { useQuery } from 'urql'
-import { GET_NETWORK_DATA } from 'graphql/queries/networkData'
+import { GET_NETWORK_DATA } from 'graphql/queries/layouts'
 
 export default function Insights () {
   const [result] = useQuery({ query: GET_NETWORK_DATA })
