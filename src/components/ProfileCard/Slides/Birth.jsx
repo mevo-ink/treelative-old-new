@@ -29,7 +29,7 @@ export default function Birth ({ user }) {
         Birth Location
       </Text>
       <EditUserBirthLocation user={user} />
-      {user.birthLocation && <LocationRenderer placeID={user.birthLocation.suggested.place_id} />}
+      <LocationRenderer placeID={user.birthLocation?.suggested.place_id} />
     </Flex>
   )
 }
