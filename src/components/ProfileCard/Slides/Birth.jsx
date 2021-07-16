@@ -31,7 +31,7 @@ export default function Birth ({ user }) {
       {user.birthLocation && (
         <Box
           as='iframe'
-          src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_GOOGLE_LOCATION_API_KEY}&q=place_id:${user.birthLocation.place_id}&zoom=10`}
+          src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_GOOGLE_LOCATION_API_KEY}&q=place_id:${user.birthLocation.suggested.place_id}&zoom=10`}
           title='birth-location'
           w='85%'
           minH='20%'

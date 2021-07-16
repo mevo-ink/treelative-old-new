@@ -39,7 +39,7 @@ export default function InputDialogTrigger (props) {
   if (!isEditMode) {
     return (
       <Text variant='info'>
-        {inputProps?.value ? inputProps?.value.terms.slice(-3).map(val => val.value).join(', ') : 'Unavailable'}
+        {inputProps?.value ? inputProps?.value?.suggested?.terms?.slice(-3).map(val => val.value).join(', ') : 'Unavailable'}
       </Text>
     )
   }
@@ -52,7 +52,7 @@ export default function InputDialogTrigger (props) {
         variant='editable-input'
         animation={`${shake} infinite .15s linear`}
       >
-        {inputProps?.value ? inputProps?.value.terms.slice(-3).map(val => val.value).join(', ') : 'Unavailable'}
+        {inputProps?.value ? inputProps?.value?.suggested?.terms?.slice(-3).map(val => val.value).join(', ') : 'Unavailable'}
       </Button>
     </>
   )
@@ -69,7 +69,7 @@ function InputDialog (props) {
     notification = ''
   } = props
 
-  const [location, setLocation] = useState({ label: value?.description, value })
+  const [location, setLocation] = useState({ label: value?.suggested?.description, value })
   const [locationURL, setLocationURL] = useState('')
 
   useEffect(() => {
@@ -80,7 +80,7 @@ function InputDialog (props) {
       setLocationURL(`https://www.google.com/maps/embed/v1/place?key=${key}&q=${q}&zoom=${zoom}`)
     }
     // eslint-disable-next-line
-  }, [location?.value?.description])
+  }, [location?.value?.suggested?.description])
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
