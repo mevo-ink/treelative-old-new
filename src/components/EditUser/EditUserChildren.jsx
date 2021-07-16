@@ -92,7 +92,7 @@ export default function EditUserChildrenTrigger (props) {
                 fallbackSrc={`https://ui-avatars.com/api/?name=${children.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
               />
             </Button>
-            <Text variant='info-title' mt='.2rem' textAlign='center'>{children.shortName}</Text>
+            <Text variant='info-title' fontSize='.65rem' mt='.2rem' textAlign='center'>{children.shortName}</Text>
           </Box>
         ))}
         {children.length === 0 && !isEditMode && <Text variant='info'>Unavailable</Text>}
