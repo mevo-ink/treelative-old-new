@@ -20,7 +20,7 @@ export const layoutAtom = atom({
   default: 'network'
 })
 
-export const findMeAtom = atom({
-  key: 'findMe',
-  default: false
+export const mapMethodsAtom = atom({
+  key: 'map',
+  default: {}
 })

@@ -1,8 +1,8 @@
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilValue } from 'recoil'
 import {
   layoutAtom,
   networkMethodsAtom,
-  findMeAtom
+  mapMethodsAtom
 } from 'utils/atoms.js'
 
 import { IconButton } from '@chakra-ui/react'
@@ -17,12 +17,12 @@ export default function FindMe ({ onClose }) {
   const { id: authUserID } = parseJwt(window.localStorage.getItem('AUTH_SESSION_ID'))
 
   const networkMethods = useRecoilValue(networkMethodsAtom)
-  const setFindMe = useSetRecoilState(findMeAtom)
+  const mapMethods = useRecoilValue(mapMethodsAtom)
 
   const handleFindMe = () => {
     switch (layout) {
       case 'map':
-        setFindMe(true)
+        mapMethods.panTo(authUserID)
         break
       case 'age':
         console.log('TODO: CENTER AUTH USER ON AGE VIEW')

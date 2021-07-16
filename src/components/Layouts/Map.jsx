@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react'
-
 import GoogleMapReact from 'google-map-react'
 
 import { useQuery } from 'urql'
@@ -12,13 +10,13 @@ import {
   Image
 } from '@chakra-ui/react'
 
-import { useRecoilState, useSetRecoilState } from 'recoil'
-import { activeNodeIDAtom, findMeAtom } from 'utils/atoms.js'
+import { useSetRecoilState } from 'recoil'
+import { activeNodeIDAtom, mapMethodsAtom } from 'utils/atoms.js'
 
 import parseJwt from 'utils/parseJWT'
 
 export default function Map () {
-  const [findMe, setFindMe] = useRecoilState(findMeAtom)
+  const setMapMethods = useSetRecoilState(mapMethodsAtom)
 
   const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
 
@@ -28,16 +26,6 @@ export default function Map () {
 
   // center on auth user if location is available - else center on Sri Lanka
   const defaultCenter = authUserID && result.data?.getMapData ? result.data.getMapData.known.find(user => user.id === authUserID)?.position : { lat: 10.99835602, lng: 77.01502627 }
-
-  // store reference to the map api
-  const [map, setMap] = useState(defaultCenter)
-
-  useEffect(() => {
-    if (findMe) {
-      map.panTo(defaultCenter)
-      setFindMe(false)
-    }
-  }, [findMe])
 
   if (result.error) return <p>ERROR</p>
 
@@ -49,7 +37,12 @@ export default function Map () {
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_LOCATION_API_KEY }}
         defaultCenter={defaultCenter}
         defaultZoom={4}
-        onGoogleApiLoaded={({ map, maps }) => setMap(map)}
+        onGoogleApiLoaded={({ map }) => setMapMethods({
+          panTo: (userID) => {
+            const position = result.data.getMapData.known.find(user => user.id === userID)?.position
+            position && map.panTo(position)
+          }
+        })}
       >
         {result.data.getMapData.known.map(user => (
           <Image
