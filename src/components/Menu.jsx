@@ -1,7 +1,6 @@
 import { useRef } from 'react'
 
-import { useRecoilValue } from 'recoil'
-import { networkMethodsAtom } from 'utils/atoms.js'
+import parseJwt from 'utils/parseJWT'
 
 import {
   Box,
@@ -14,25 +13,20 @@ import {
   DrawerOverlay,
   DrawerContent
 } from '@chakra-ui/react'
-import { FaGripLines } from 'react-icons/fa'
-import { IoPersonAddSharp } from 'react-icons/io5'
-import { BiCurrentLocation } from 'react-icons/bi'
 
+import { FaGripLines } from 'react-icons/fa'
 import Search from 'components/Menu/Search'
+import CreateUser from 'components/Menu/CreateUser'
+import FindMe from 'components/Menu/FindMe'
 import Layouts from 'components/Menu/Layouts'
 import Insights from 'components/Menu/Insights'
 import Copyright from 'components/Menu/Copyright'
 
 export default function Menu () {
-  const networkMethods = useRecoilValue(networkMethodsAtom)
+  const { role } = parseJwt(window.localStorage.getItem('AUTH_SESSION_ID'))
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()
-
-  const handleFindMe = () => {
-    networkMethods.moveTo('3a63550e-60fc-4710-98f0-606163e25968')
-    onClose()
-  }
 
   return (
     <Box>
@@ -74,19 +68,8 @@ export default function Menu () {
             >
               <Flex justifyContent='space-between'>
                 <Search />
-                <IconButton
-                  isRound
-                  icon={<IoPersonAddSharp color='white' />}
-                  size='sm'
-                  bg='hsla(220, 98%, 57%, .8)'
-                />
-                <IconButton
-                  isRound
-                  icon={<BiCurrentLocation color='white' />}
-                  size='sm'
-                  bg='hsla(220, 98%, 57%, .8)'
-                  onClick={handleFindMe}
-                />
+                {role === 'ADMIN' && <CreateUser />}
+                <FindMe onClose={onClose} />
               </Flex>
               <Layouts onClose={onClose} />
               <Insights />

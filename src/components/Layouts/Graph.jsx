@@ -77,25 +77,21 @@ export default function Graph () {
         const position = network.getPosition(userID)
         network.moveTo({
           position,
+          scale: 1,
           animation: {
-            duration: 2000,
+            duration: 3000,
             easingFunction: 'easeInCubic'
           }
         })
       }
     })
-    // get the node coordinates
-    // const { x: nodeX, y: nodeY } = network.getPositions(['187e3fbf-347e-4e0d-9a82-b0b2cf2bc57f'])['187e3fbf-347e-4e0d-9a82-b0b2cf2bc57f']
     // zoom on Graph mount
     network.on('stabilized', () => {
       setIsStabilized(true)
-      // stabilized.set(true)
-      // network.focus('187e3fbf-347e-4e0d-9a82-b0b2cf2bc57f')
       network.moveTo({
-        // position: { x: nodeX, y: nodeY },
-        scale: 1,
+        scale: 0.7,
         animation: {
-          duration: 1000,
+          duration: 2000,
           easingFunction: 'easeInCubic'
         }
       })
