@@ -11,7 +11,11 @@ import Loading from 'components/Loading'
 import { useQuery } from 'urql'
 import { GET_NETWORK_DATA } from 'graphql/queries/layouts'
 
+import parseJwt from 'utils/parseJWT'
+
 export default function Graph () {
+  const { id: authUserID } = parseJwt(window.localStorage.getItem('AUTH_SESSION_ID'))
+
   const options = {
     nodes: {
       borderWidth: 2,
@@ -88,7 +92,9 @@ export default function Graph () {
     // zoom on Graph mount
     network.on('stabilized', () => {
       setIsStabilized(true)
+      const position = network.getPosition(authUserID)
       network.moveTo({
+        position,
         scale: 0.7,
         animation: {
           duration: 2000,

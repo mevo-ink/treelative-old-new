@@ -19,3 +19,8 @@ export const layoutAtom = atom({
   key: 'layout',
   default: 'network'
 })
+
+export const findMeAtom = atom({
+  key: 'findMe',
+  default: false
+})
