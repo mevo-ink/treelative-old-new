@@ -1,11 +1,12 @@
 import {
-  Box,
   Flex,
   Text
 } from '@chakra-ui/react'
 
 import EditUserDateOfBirth from 'components/EditUser/EditUserDateOfBirth'
 import EditUserBirthLocation from 'components/EditUser/EditUserBirthLocation'
+
+import LocationRenderer from 'components/_common/LocationRenderer'
 
 export default function Birth ({ user }) {
   return (
@@ -28,20 +29,7 @@ export default function Birth ({ user }) {
         Birth Location
       </Text>
       <EditUserBirthLocation user={user} />
-      {user.birthLocation && (
-        <Box
-          as='iframe'
-          src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_GOOGLE_LOCATION_API_KEY}&q=place_id:${user.birthLocation.suggested.place_id}&zoom=10`}
-          title='birth-location'
-          w='85%'
-          minH='20%'
-          mt='1rem'
-          border='none'
-          boxShadow='0px 3px 5px hsla(0, 0%, 0%, .25)'
-          borderRadius='20px'
-          cursor='pointer'
-        />
-      )}
+      {user.birthLocation && <LocationRenderer placeID={user.birthLocation.suggested.place_id} />}
     </Flex>
   )
 }
