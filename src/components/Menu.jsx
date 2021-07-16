@@ -67,7 +67,7 @@ export default function Menu () {
               spacing='2rem'
             >
               <Flex justifyContent='space-between'>
-                <Search />
+                <Search admin={role} />
                 {role === 'ADMIN' && <CreateUser />}
                 <FindMe onClose={onClose} />
               </Flex>
