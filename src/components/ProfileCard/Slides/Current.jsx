@@ -25,7 +25,7 @@ export default function Current ({ user }) {
         Current Location
       </Text>
       <EditUserCurrentLocation user={user} />
-      <LocationRenderer placeID={user.currentLocation?.suggested.place_id} />
+      <LocationRenderer location={user.currentLocation?.parsed} />
     </Flex>
   )
 }
