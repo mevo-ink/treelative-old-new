@@ -46,7 +46,7 @@ export default function InputDialogTrigger (props) {
 
   return (
     <>
-      {isOpen && <InputDialog {...inputProps} onClose={onClose} />}
+      {isOpen && <InputDialog {...inputProps} value={inputProps?.value?.suggested} onClose={onClose} />}
       <Button
         onClick={onOpen}
         variant='editable-input'
@@ -69,7 +69,7 @@ function InputDialog (props) {
     notification = ''
   } = props
 
-  const [location, setLocation] = useState({ label: value?.suggested?.description, value })
+  const [location, setLocation] = useState({ label: value?.description, value })
   const [locationURL, setLocationURL] = useState('')
 
   useEffect(() => {
