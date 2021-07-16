@@ -27,6 +27,7 @@ export default function Age () {
     <Flex h='100vh' overflowY='hidden' overflowX='scroll'>
       {Object.entries(result.data.getAgeData).map(([year, users]) =>
         <Flex key={year} direction='column' mx='2'>
+          <Text fontWeight='800' fontSize='xl' textAlign='center'>{users.length}</Text>
           <Text fontWeight='600'>{year}</Text>
           {users.map(user => (
             <Image
