@@ -8,15 +8,15 @@ import { useMutation } from 'urql'
 import {
   Input,
   Stack,
-  Button,
   FormLabel,
+  IconButton,
   FormControl,
   useDisclosure,
   FormErrorMessage,
   createStandaloneToast
 } from '@chakra-ui/react'
 
-import { FaPlus } from 'react-icons/fa'
+import { IoPersonAddSharp } from 'react-icons/io5'
 
 import FormDialog from 'components/_common/FormDialog'
 import DateTimePicker from 'components/_input/DateTimePicker'
@@ -54,6 +54,7 @@ export default function CreateUser () {
   })
   watch(['dateOfBirth', 'birthLocation', 'currentLocation'])
 
+  // eslint-disable-next-line
   useEffect(() => { isDesktop && isOpen && setTimeout(() => setFocus('fullName'), 1) }, [isOpen])
 
   const onSubmit = ({ birthLocation, currentLocation, email, ...rest }) => {
@@ -81,9 +82,13 @@ export default function CreateUser () {
 
   return (
     <>
-      <Button size='sm' leftIcon={<FaPlus />} onClick={onOpen}>
-        ADD USER
-      </Button>
+      <IconButton
+        isRound
+        icon={<IoPersonAddSharp color='white' />}
+        size='sm'
+        bg='hsla(220, 98%, 57%, .8)'
+        onClick={onOpen}
+      />
       {isOpen && (
         <FormDialog
           isCentered
