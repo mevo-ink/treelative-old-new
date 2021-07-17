@@ -5,14 +5,14 @@ import {
 } from '@chakra-ui/react'
 
 import { useQuery } from 'urql'
-import { GET_NETWORK_DATA } from 'graphql/queries/layouts'
+import { GET_INSIGHTS } from 'graphql/queries/insights'
 
 export default function Insights () {
-  const [result] = useQuery({ query: GET_NETWORK_DATA })
+  const [result] = useQuery({ query: GET_INSIGHTS })
 
   const data = [
-    { title: 'Members', value: result.data.getNetworkData.nodes.filter(node => node.group !== 'couple').length },
-    { title: 'Couples', value: result.data.getNetworkData.nodes.filter(node => node.group === 'couple').length }
+    { title: 'Members', value: result.data?.getInsights.users || 0 },
+    { title: 'Couples', value: result.data?.getInsights.couples || 0 }
   ]
 
   return (
@@ -28,6 +28,7 @@ export default function Insights () {
             borderRadius='10px'
             p='.5em'
             mr='.5rem'
+            w='4rem'
           >
             <Text fontSize='10px'>{insight.title}</Text>
             <Text fontSize='25px' fontWeight='600' textAlign='center'>{insight.value}</Text>
