@@ -70,6 +70,11 @@ export default function AddUserParents (props) {
     }
   }
 
+  const handleUserSelect = (userID) => {
+    setActiveNodeID(userID)
+    window.history.pushState({}, '', userID)
+  }
+
   return (
     <>
       {isOpen && <AddUserParentsModal user={props.user} onClose={onClose} />}
@@ -115,7 +120,7 @@ export default function AddUserParents (props) {
                   h='100%'
                   borderRadius='50%'
                   fallbackSrc={`https://ui-avatars.com/api/?name=${parent.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
-                  onClick={() => setActiveNodeID(parent.id)}
+                  onClick={() => handleUserSelect(parent.id)}
                 />
               </Button>
             </Box>

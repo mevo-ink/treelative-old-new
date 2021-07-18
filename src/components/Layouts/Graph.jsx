@@ -109,7 +109,10 @@ export default function Graph () {
     network.on('selectNode', ({ nodes }) => {
       const activeNode = result.data?.getNetworkData.nodes.find(node => nodes[0] === node.id)
       if (activeNode.group !== 'couple') {
-        setTimeout(() => setActiveNodeID(activeNode.id), 1)
+        setTimeout(() => {
+          window.history.pushState({}, '', activeNode.id)
+          setActiveNodeID(activeNode.id)
+        }, 1)
       }
     })
     // limit the zoom

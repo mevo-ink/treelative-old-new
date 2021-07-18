@@ -23,6 +23,11 @@ export default function Age () {
 
   // TODO: ACTUAL STYLING WITH HORIZONTAL SCROLLING AND TIMELINE
 
+  const handleUserSelect = (userID) => {
+    setActiveNodeID(userID)
+    window.history.pushState({}, '', userID)
+  }
+
   return (
     <Flex h='100vh' overflowY='hidden' overflowX='scroll'>
       {Object.entries(result.data.getAgeData).map(([year, users]) =>
@@ -38,7 +43,7 @@ export default function Age () {
               objectFit='contain'
               borderRadius='50%'
               fallbackSrc={`https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
-              onClick={() => setActiveNodeID(user.id)}
+              onClick={() => handleUserSelect(user.id)}
               my='1'
             />
           ))}
