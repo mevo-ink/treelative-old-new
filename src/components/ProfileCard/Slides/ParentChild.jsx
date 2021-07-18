@@ -24,10 +24,14 @@ export default function ParentChild ({ user }) {
       borderRadius='20px'
       p='1.5rem 0'
     >
-      <Text variant='info-title'>
-        Parents
-      </Text>
-      <EditUserParents user={user} />
+      {(user.parents.length !== 0 || isEditMode) && (
+        <>
+          <Text variant='info-title'>
+            Parents
+          </Text>
+          <EditUserParents user={user} />
+        </>
+      )}
       {(user.children.length !== 0 || isEditMode) && (
         <>
           <Text variant='info-title' mt='1rem'>
