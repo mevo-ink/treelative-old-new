@@ -114,7 +114,6 @@ export default function EditUserChildren (props) {
             <Text variant='info-title' fontSize='.65rem' mt='.2rem' textAlign='center'>{child.shortName}</Text>
           </Box>
         ))}
-        {props.user.children.length === 0 && !isEditMode && <Text variant='info'>Unavailable</Text>}
         {isEditMode && (
           <IconButton
             icon={<MdAdd size='2rem' />}

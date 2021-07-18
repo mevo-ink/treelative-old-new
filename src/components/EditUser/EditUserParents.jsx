@@ -76,8 +76,8 @@ export default function AddUserParents (props) {
         {props.user.parents.map(parent => (
           <Box key={parent.id}>
             <Box
-              w='2.5rem'
-              h='2.5rem'
+              w={props.user.children ? '3rem' : '2.5rem'}
+              h={props.user.children ? '3rem' : '2.5rem'}
               p='0'
               m='0 .2rem'
               cursor='pointer'
@@ -101,6 +101,8 @@ export default function AddUserParents (props) {
                 />
               )}
               <Button
+                w='100%'
+                h='100%'
                 p='0'
                 borderRadius='50%'
                 isDisabled={isEditMode}
@@ -108,6 +110,8 @@ export default function AddUserParents (props) {
                 <Image
                   src={parent.avatar}
                   alt='parent-avatar'
+                  w='100%'
+                  h='100%'
                   borderRadius='50%'
                   fallbackSrc={`https://ui-avatars.com/api/?name=${parent.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
                   onClick={() => setActiveNodeID(parent.id)}
