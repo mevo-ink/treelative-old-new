@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Box } from '@chakra-ui/react'
 
 import { useSetRecoilState } from 'recoil'
-import { networkMethodsAtom, activeNodeIDAtom } from 'utils/atoms.js'
+import { networkMethodsAtom, activeNodeIDAtom, refetchAtom } from 'utils/atoms.js'
 
 import { Network } from 'vis-network/standalone'
 

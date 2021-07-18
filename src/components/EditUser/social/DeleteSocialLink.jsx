@@ -10,7 +10,7 @@ import { DELETE_SOCIAL_LINK } from 'graphql/mutations/socialLinks'
 
 const toast = createStandaloneToast()
 
-export default function DeleteSocialLink ({ socialLink, refetch }) {
+export default function DeleteSocialLink ({ socialLink }) {
   const [{ fetching }, deleteSocialLink] = useMutation(DELETE_SOCIAL_LINK)
 
   const handleDelete = url => {
@@ -25,7 +25,6 @@ export default function DeleteSocialLink ({ socialLink, refetch }) {
             duration: 3000,
             isClosable: true
           })
-          refetch()
         }
         if (result.error) {
           toast({

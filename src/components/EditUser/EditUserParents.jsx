@@ -118,7 +118,7 @@ export default function EditUserParentsTrigger (props) {
   )
 }
 
-function EditUserParents ({ user, refetch, isRefetching }) {
+function EditUserParents ({ user, isRefetching }) {
   const [result, addUserParent] = useMutation(ADD_USER_PARENT)
 
   const [removeParentOneResult, removeUserParentOne] = useMutation(DELETE_USER_PARENT)
@@ -129,7 +129,6 @@ function EditUserParents ({ user, refetch, isRefetching }) {
     addUserParent(variables)
       .then(result => {
         if (result.data) {
-          refetch()
           toast({
             title: 'Successfully updated the parent',
             status: 'success',
@@ -146,7 +145,6 @@ function EditUserParents ({ user, refetch, isRefetching }) {
     removeUserParentOne(variables)
       .then(result => {
         if (result.data) {
-          refetch()
           toast({
             title: 'Successfully removed the parent',
             status: 'success',
@@ -163,7 +161,6 @@ function EditUserParents ({ user, refetch, isRefetching }) {
     removeUserParentTwo(variables)
       .then(result => {
         if (result.data) {
-          refetch()
           toast({
             title: 'Successfully removed the parent',
             status: 'success',

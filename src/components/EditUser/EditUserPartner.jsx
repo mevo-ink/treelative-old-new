@@ -56,7 +56,7 @@ export default function EditUserPartnerTrigger ({ user, refetch, isRefetching })
   )
 }
 
-function EditUserPartner ({ user, refetch, isRefetching }) {
+function EditUserPartner ({ user, isRefetching }) {
   const [result, addCouple] = useMutation(ADD_COUPLE)
 
   const handleOnChange = userPartner => {
@@ -64,7 +64,6 @@ function EditUserPartner ({ user, refetch, isRefetching }) {
     addCouple(variables)
       .then(result => {
         if (result.data) {
-          refetch()
           toast({
             title: 'Successfully updated the partner',
             status: 'success',
@@ -103,7 +102,7 @@ function EditUserPartner ({ user, refetch, isRefetching }) {
   )
 }
 
-export function EditUserPartnerDialog ({ user, refetch, isRefetching, onClose }) {
+export function EditUserPartnerDialog ({ user, isRefetching, onClose }) {
   const [result, deleteCouple] = useMutation(DELETE_COUPLE)
 
   const handleRemovePartner = () => {
@@ -132,7 +131,7 @@ export function EditUserPartnerDialog ({ user, refetch, isRefetching, onClose })
         </ModalHeader>
         <ModalCloseButton isDisabled={isRefetching} />
         <ModalBody pb='4'>
-          <EditUserPartner user={user} refetch={refetch} isRefetching={isRefetching} />
+          <EditUserPartner user={user} isRefetching={isRefetching} />
         </ModalBody>
         {user?.couple?.partner?.id && (
           <ModalFooter>

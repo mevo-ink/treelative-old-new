@@ -117,7 +117,7 @@ export default function EditUserChildrenTrigger (props) {
   )
 }
 
-function EditUserChildrenInline ({ user, refetch, isRefetching }) {
+function EditUserChildrenInline ({ user, isRefetching }) {
   const [result, addUserChild] = useMutation(ADD_USER_CHILD)
 
   const [removeUserChildResult, removeUserChild] = useMutation(DELETE_USER_CHILD)
@@ -141,7 +141,6 @@ function EditUserChildrenInline ({ user, refetch, isRefetching }) {
       addUserChild({ userID: user.id, childID: value })
         .then(result => {
           if (result.data) {
-            refetch()
             toast({
               title: 'Successfully added the child',
               status: 'success',
@@ -155,7 +154,6 @@ function EditUserChildrenInline ({ user, refetch, isRefetching }) {
       removeUserChild({ userID: user.id, childID: value })
         .then(result => {
           if (result.data) {
-            refetch()
             toast({
               title: 'Successfully removed the child',
               status: 'success',
