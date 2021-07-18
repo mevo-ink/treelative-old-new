@@ -40,7 +40,8 @@ export default function ProfileCard () {
   const [result, refetch] = useQuery({ query: GET_USER, variables: { filter: { id: activeNodeID } } })
 
   const onClose = () => {
-    // clear the activeNodeID in store
+    // clear the activeNodeID
+    window.history.pushState({}, '', '/')
     setActiveNodeID(null)
     // unselect all nodes
     networkMethods.unselectAll()

@@ -66,6 +66,11 @@ export default function EditUserChildren (props) {
     }
   }
 
+  const handleUserSelect = (userID) => {
+    setActiveNodeID(userID)
+    window.history.pushState({}, '', userID)
+  }
+
   return (
     <>
       {isOpen && <AddUserChildModal user={props.user} onClose={onClose} />}
@@ -107,7 +112,7 @@ export default function EditUserChildren (props) {
                   alt='child-avatar'
                   borderRadius='50%'
                   fallbackSrc={`https://ui-avatars.com/api/?name=${child.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
-                  onClick={() => setActiveNodeID(child.id)}
+                  onClick={() => handleUserSelect(child.id)}
                 />
               </Button>
             </Box>

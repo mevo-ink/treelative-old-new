@@ -113,6 +113,11 @@ export default function Map () {
 
   if (result.fetching) return <Loading />
 
+  const handleUserSelect = (userID) => {
+    setActiveNodeID(userID)
+    window.history.pushState({}, '', userID)
+  }
+
   return (
     <Box h='100vh'>
       <GoogleMapReact
@@ -139,7 +144,7 @@ export default function Map () {
             objectFit='contain'
             borderRadius='50%'
             fallbackSrc={`https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
-            onClick={() => setActiveNodeID(user.id)}
+            onClick={() => handleUserSelect(user.id)}
           />
         ))}
       </GoogleMapReact>
