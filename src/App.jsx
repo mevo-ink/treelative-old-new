@@ -30,3 +30,39 @@ export default function App () {
     </>
   )
 }
+
+// TODO:
+/*
+  CALENDAR styling
+  BUG: location update
+  Add absolute position marker on map Image
+  Add remove button for all editable fields
+  Connect social links edit to API
+  Connect phoneNumber edit to API
+  Connect email edit to API
+  Show default suggestion on edit user
+  Add confirmation dialog on delete
+  Replace add user to own profile icon for normal users
+  Show findMe to profile card
+  Add close button to profile card
+  Finish search bar
+    - On search results click, open the profile card
+  Investigate google maps overlay buttons
+  Complete Age view
+    - add functionality to center any user
+  Add birthday viw - kinda same layout as age view
+  Add birthday effect on profile mount - maybe not
+  Show add new user from children-parent edit dialog
+  Remove all optional fields from add new user
+  Add functionality FindMe on age view
+  Add functionality FindMe on birthday view
+  Style Error modal with contact us info
+  Add fallback modal to edit date of birth if unavailable when clicking findMe
+  Desktop: Add max width to Menu slider and profile card
+  Fix scrolling position on desktop mode - map vertical to horizontal
+  Check on focus style for FindMe button on disabled
+  Insights:
+   - Center label
+   - Show users count by country
+  Show why login
+*/
