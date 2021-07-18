@@ -1,6 +1,6 @@
 import {
-  Link,
-  Image
+  Box,
+  Link
 } from '@chakra-ui/react'
 
 import infoUnavailable from 'images/infoUnavailable.png'
@@ -15,11 +15,10 @@ export default function LocationRenderer ({ location }) {
 
   return (
     <Link isExternal href={location?.url} mt='1rem' w='80%'>
-      <Image
-        src={imageURL}
-        title='birth-location'
-        minH='30%'
-        border='none'
+      <Box
+        backgroundImage={`url(${imageURL})`}
+        w='100%'
+        h='100px'
         boxShadow='0px 3px 5px hsla(0, 0%, 0%, .25)'
         borderRadius='20px'
         cursor='pointer'
