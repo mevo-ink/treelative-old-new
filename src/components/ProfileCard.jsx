@@ -115,7 +115,7 @@ export default function ProfileCard () {
                   <Birth user={user} />
                   <Current user={user} />
                   <Socials user={user} />
-                  <ParentChild user={user} />
+                  {(user.parent && user.children) && <ParentChild user={user} />}
                 </Slider>
               </>
             )}
