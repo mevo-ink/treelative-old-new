@@ -158,7 +158,7 @@ function AddUserChildModal ({ user, onClose, isRefetching }) {
   return (
     <Modal isOpen isCentered onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent minH='24rem'>
         <ModalHeader>
           Add Child
         </ModalHeader>
