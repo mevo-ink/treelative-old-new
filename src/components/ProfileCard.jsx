@@ -26,10 +26,9 @@ import Socials from 'components/ProfileCard/Slides/Socials'
 import Current from 'components/ProfileCard/Slides/Current'
 import OuterWrapper from 'components/ProfileCard/OuterWrapper'
 import InnerWrapper from 'components/ProfileCard/InnerWrapper'
+import EditUserAvatar from 'components/EditUser/EditUserAvatar'
 import ParentChild from 'components/ProfileCard/Slides/ParentChild'
 import EditUserFullName from 'components/EditUser/EditUserFullName'
-
-import crown from 'images/adminCrown.png'
 
 export default function ProfileCard () {
   const [isEditMode, setIsEditMode] = useRecoilState(isEditModeAtom)
@@ -81,34 +80,7 @@ export default function ProfileCard () {
                   }}
                   onClick={() => setIsEditMode(!isEditMode)}
                 />
-                <Box
-                  w='30%'
-                  minH='auto'
-                  mt='-2.8rem'
-                  position='relative'
-                >
-                  {user.role === 'ADMIN' && (
-                    <Image
-                      src={crown}
-                      alt='crown'
-                      w='100%'
-                      objectFit='contain'
-                      position='absolute'
-                      top='-2.5rem'
-                      zIndex='1'
-                    />
-                  )}
-                  <Image
-                    src={user.avatar}
-                    fallbackSrc={`https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
-                    alt='avatar'
-                    objectFit='contain'
-                    w='100%'
-                    border={user.role === 'ADMIN' ? '5px solid hsla(54, 100%, 51%, 1)' : '5px solid hsla(0, 0%, 100%, 1)'}
-                    borderRadius='50%'
-                    boxShadow='0px 6px 8px hsla(0, 0%, 0%, .25)'
-                  />
-                </Box>
+                <EditUserAvatar user={user} />
                 <EditUserFullName user={user} />
                 <Slider>
                   {user.dateOfDeath && <Death user={user} />}

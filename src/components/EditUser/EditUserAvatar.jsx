@@ -1,20 +1,22 @@
 import { useState } from 'react'
 
-import { useRecoilValue } from 'recoil'
-import { isEditModeAtom } from 'utils/atoms.js'
-
-import { useMutation } from 'urql'
-import { UPDATE_USER_AVATAR } from 'graphql/mutations/users'
-
 import {
   Box,
   Image,
-  Stack,
-  Button,
   FormLabel,
-  FormControl,
+  keyframes,
+  IconButton,
   createStandaloneToast
 } from '@chakra-ui/react'
+import { HiCamera } from 'react-icons/hi'
+
+import { useMutation } from 'urql'
+import { useRecoilValue } from 'recoil'
+
+import { isEditModeAtom } from 'utils/atoms.js'
+import { UPDATE_USER_AVATAR } from 'graphql/mutations/users'
+
+import crown from 'images/adminCrown.png'
 
 const toast = createStandaloneToast()
 
@@ -26,6 +28,12 @@ export default function EditUserAvatar ({ user }) {
   const [, updateUserAvatar] = useMutation(UPDATE_USER_AVATAR)
 
   const [isLoading, setIsLoading] = useState(false)
+
+  const wiggle = keyframes`
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(-2deg); }
+    100% { transform: rotate(2deg); }
+  `
 
   const handleError = (error) => {
     toast({
@@ -91,47 +99,63 @@ export default function EditUserAvatar ({ user }) {
     }
   }
 
-  const AvatarImage = (
-    <Image
-      src={avatarURL}
-      fallbackSrc={`https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
-      boxSize='150px'
-      borderRadius='full'
-      alt={user.fullName}
-    />
-  )
-
-  if (!isEditMode) {
-    return AvatarImage
-  }
-
   return (
-    <Stack spacing='2' as={FormControl} alignItems='center'>
-      <input
-        type='file'
-        id='avatar'
-        style={{ display: 'none' }}
-        onChange={handleFileSelect}
-        accept='image/png, image/jpeg, image/jpg, image/gif'
+    <Box
+      w='30%'
+      minH='auto'
+      mt='-2.8rem'
+      position='relative'
+    >
+      {user.role === 'ADMIN' && (
+        <Image
+          src={crown}
+          alt='crown'
+          w='100%'
+          objectFit='contain'
+          position='absolute'
+          top='-2.5rem'
+          zIndex='2'
+        />
+      )}
+      {isEditMode && (
+        <>
+          <input
+            type='file'
+            id='avatar'
+            style={{ display: 'none' }}
+            onChange={handleFileSelect}
+            accept='image/png, image/jpeg, image/jpg, image/gif'
+          />
+          <FormLabel htmlFor='avatar'>
+            <IconButton
+              icon={<HiCamera size='40px' />}
+              as='span'
+              isLoading={isLoading}
+              w='100%'
+              h='100%'
+              color='hsla(0, 0%, 100%, 1)'
+              position='absolute'
+              zIndex='1'
+              bg='hsla(0, 0%, 0%, .8)'
+              borderRadius='50%'
+              boxShadow='0px 3px 5px hsla(0, 0%, 0%, .3)'
+              border={user.role === 'ADMIN' ? '5px solid hsla(54, 100%, 51%, 1)' : '5px solid hsla(0, 0%, 100%, 1)'}
+              animation={`${wiggle} infinite .15s linear`}
+              accept='image/png, image/jpeg, image/jpg, image/gif'
+            />
+          </FormLabel>
+        </>
+      )}
+      <Image
+        src={user.avatar}
+        fallbackSrc={`https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
+        alt='avatar'
+        objectFit='contain'
+        w='100%'
+        border={user.role === 'ADMIN' ? '5px solid hsla(54, 100%, 51%, 1)' : '5px solid hsla(0, 0%, 100%, 1)'}
+        borderRadius='50%'
+        boxShadow='0px 6px 8px hsla(0, 0%, 0%, .25)'
       />
-      <Box position='relative'>
-        {AvatarImage}
-        <FormLabel htmlFor='avatar' position='absolute' top='95px' left='25px'>
-          <Button
-            as='span'
-            size='sm'
-            cursor='pointer'
-            isLoading={isLoading}
-            minW='100px'
-            bg='#00000045'
-            _hover={{
-              bg: '#00000085'
-            }}
-          >
-            Replace
-          </Button>
-        </FormLabel>
-      </Box>
-    </Stack>
+    </Box>
   )
 }
