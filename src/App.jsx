@@ -65,4 +65,7 @@ export default function App () {
    - Center label
    - Show users count by country
   Show why login
+  Add google analytics
+  Add PWA
+  Optimize images
 */
