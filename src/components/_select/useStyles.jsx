@@ -5,7 +5,7 @@ export default function useStyles () {
   const controlBgColor = 'transparent'
   const controlColor = 'white'
 
-  const menuBgColor = 'transparent'
+  const menuBgColor = 'hsla(0, 0%, 0%, 0.8)'
   const menuColor = 'black'
 
   const optionFocusedBgColor = 'var(--chakra-colors-blue-600)'
@@ -42,7 +42,8 @@ export default function useStyles () {
     menu: (styles) => ({
       ...styles,
       backgroundColor: menuBgColor,
-      color: menuColor
+      color: menuColor,
+      borderRadius: '10px'
     }),
     option: (styles, { isFocused, data }) => ({
       ...styles,

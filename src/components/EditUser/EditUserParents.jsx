@@ -13,6 +13,7 @@ import {
   IconButton,
   ModalHeader,
   FormControl,
+  ModalFooter,
   ModalOverlay,
   ModalContent,
   useDisclosure,
@@ -166,7 +167,7 @@ function AddUserParentsModal ({ user, onClose, isRefetching }) {
   return (
     <Modal isOpen isCentered onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent minH='25rem'>
         <ModalHeader>
           Add Parent
         </ModalHeader>
@@ -190,14 +191,17 @@ function AddUserParentsModal ({ user, onClose, isRefetching }) {
             </FormControl>
             {(result.fetching || isRefetching) && <Loading />}
             {result.error && <ErrorAlert> {result.error.message} </ErrorAlert>}
-            <Alert status='warning' borderRadius='lg'>
-              <AlertIcon />
-              <AlertDescription>
-                {!user.parent && 'A parent\'s partner will automatically be added as the second parent'}
-              </AlertDescription>
-            </Alert>
+
           </Stack>
         </ModalBody>
+        <ModalFooter>
+          <Alert status='warning' borderRadius='lg'>
+            <AlertIcon />
+            <AlertDescription>
+              {!user.parent && 'A parent\'s partner will automatically be added as the second parent'}
+            </AlertDescription>
+          </Alert>
+        </ModalFooter>
       </ModalContent>
     </Modal>
   )
