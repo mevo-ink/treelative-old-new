@@ -54,7 +54,6 @@ export default function ProfileCard () {
 
   const user = result.data?.getUser
 
-  console.log(user)
   return (
     <Modal isOpen onClose={onClose} isCentered>
       <ModalOverlay />
@@ -88,7 +87,7 @@ export default function ProfileCard () {
                   <Birth user={user} />
                   <Current user={user} />
                   <Socials user={user} />
-                  {user.couple.partner && <Partner user={user} />}
+                  {user.couple?.partner && <Partner user={user} />}
                   {(user.parent || user.children) && <ParentChild user={user} />}
                 </Slider>
               </>

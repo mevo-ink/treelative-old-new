@@ -10,7 +10,7 @@ export default function LocationRenderer ({ location }) {
 
   if (location) {
     const { lat, lng } = location.geometry.location
-    imageURL = `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=15&size=200x130&key=${process.env.REACT_APP_GOOGLE_LOCATION_API_KEY}`
+    imageURL = `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=15&size=230x200&key=${process.env.REACT_APP_GOOGLE_LOCATION_API_KEY}`
   }
 
   return (
@@ -22,7 +22,7 @@ export default function LocationRenderer ({ location }) {
         borderRadius='20px'
         cursor='pointer'
         backgroundImage={`url(${imageURL})`}
-        backgroundSize='auto 100%'
+        backgroundSize='100% auto'
         backgroundPosition='center center'
       />
     </Link>
