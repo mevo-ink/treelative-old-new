@@ -27,7 +27,7 @@ const toast = createStandaloneToast()
 export default function InputDialogTrigger (props) {
   const isEditMode = useRecoilValue(isEditModeAtom)
 
-  const shake = keyframes`
+  const wiggle = keyframes`
     0% { transform: rotate(0deg); }
     50% { transform: rotate(-1deg); }
     100% { transform: rotate(1deg); }
@@ -68,7 +68,7 @@ export default function InputDialogTrigger (props) {
         fontWeight='600'
         textAlign='center'
         variant='editable-input'
-        animation={`${shake} infinite .15s linear`}
+        animation={`${wiggle} infinite .15s linear`}
       >
         {props.value}
       </Button>

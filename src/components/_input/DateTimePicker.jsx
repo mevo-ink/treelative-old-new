@@ -43,7 +43,7 @@ const toast = createStandaloneToast()
 export default function DateTimePickerDialogTrigger (props) {
   const isEditMode = useRecoilValue(isEditModeAtom)
 
-  const shake = keyframes`
+  const wiggle = keyframes`
     0% { transform: rotate(0deg); }
     50% { transform: rotate(-1deg); }
     100% { transform: rotate(1deg); }
@@ -108,7 +108,7 @@ export default function DateTimePickerDialogTrigger (props) {
       <Button
         onClick={onOpen}
         variant='editable-input'
-        animation={`${shake} infinite .15s linear`}
+        animation={`${wiggle} infinite .15s linear`}
       >
         {props.value ? format(dtDateOnly, 'PP').replace(/[, ]+/g, '/') : 'Unavailable'}
       </Button>

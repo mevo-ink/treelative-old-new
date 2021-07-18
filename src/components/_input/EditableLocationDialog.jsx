@@ -21,7 +21,7 @@ const toast = createStandaloneToast()
 export default function InputDialogTrigger (props) {
   const isEditMode = useRecoilValue(isEditModeAtom)
 
-  const shake = keyframes`
+  const wiggle = keyframes`
     0% { transform: rotate(0deg); }
     50% { transform: rotate(-1deg); }
     100% { transform: rotate(1deg); }
@@ -50,7 +50,7 @@ export default function InputDialogTrigger (props) {
       <Button
         onClick={onOpen}
         variant='editable-input'
-        animation={`${shake} infinite .15s linear`}
+        animation={`${wiggle} infinite .15s linear`}
       >
         {inputProps?.value ? inputProps?.value?.suggested?.terms?.slice(-3).map(val => val.value).join(', ') : 'Unavailable'}
       </Button>

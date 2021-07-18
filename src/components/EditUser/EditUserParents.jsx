@@ -1,27 +1,13 @@
-import UserSelection from 'components/_common/UserSelection'
-
-import { useRecoilValue, useSetRecoilState } from 'recoil'
-import { isEditModeAtom, activeNodeIDAtom } from 'utils/atoms.js'
-
-import { useMutation } from 'urql'
-import { ADD_USER_PARENT, DELETE_USER_PARENT } from 'graphql/mutations/users'
-import { LIST_USER_AVAILABLE_PARENTS } from 'graphql/queries/users'
-
-import Loading from 'components/_common/Loading'
-import ErrorAlert from 'components/_common/ErrorAlert'
-
 import {
   Box,
   Text,
   Modal,
   Stack,
   Flex,
-  Icon,
   Alert,
   Image,
   Button,
   keyframes,
-  FormLabel,
   ModalBody,
   AlertIcon,
   IconButton,
@@ -34,70 +20,105 @@ import {
   AlertDescription,
   createStandaloneToast
 } from '@chakra-ui/react'
-
 import { MdAdd } from 'react-icons/md'
 import { BiTrash } from 'react-icons/bi'
 
+import { useMutation } from 'urql'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+
+import { isEditModeAtom, activeNodeIDAtom } from 'utils/atoms.js'
+import { LIST_USER_AVAILABLE_PARENTS } from 'graphql/queries/users'
+import { ADD_USER_PARENT, DELETE_USER_PARENT } from 'graphql/mutations/users'
+
+import Loading from 'components/_common/Loading'
+import ErrorAlert from 'components/_common/ErrorAlert'
+import UserSelection from 'components/_common/UserSelection'
+
 const toast = createStandaloneToast()
 
-export default function EditUserParentsTrigger (props) {
+export default function AddUserParents (props) {
+  const [removeParentResult, removeUserParent] = useMutation(DELETE_USER_PARENT)
+
   const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
 
   const isEditMode = useRecoilValue(isEditModeAtom)
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const { parents } = props.user
-
-  const shake = keyframes`
+  const wiggle = keyframes`
     0% { transform: rotate(0deg); }
     50% { transform: rotate(-2deg); }
     100% { transform: rotate(2deg); }
   `
 
+  const handleRemoveParent = (parentID, shortName) => {
+    const variables = { userID: props.user.id, parentID }
+    if (window.confirm(`Are you sure want to remove ${shortName}?`)) {
+      removeUserParent(variables)
+        .then(result => {
+          if (result.data) {
+            toast({
+              title: 'Successfully removed the parent',
+              status: 'success',
+              position: 'top',
+              duration: 3000,
+              isClosable: true
+            })
+          }
+        })
+    }
+  }
+
   return (
     <>
-      {isOpen && <EditUserParentsDialog {...props} onClose={onClose} />}
+      {isOpen && <AddUserParentsModal user={props.user} onClose={onClose} />}
       <Flex w='85%' flexWrap='wrap' justifyContent='center'>
-        {parents.map(parent => (
+        {props.user.parents.map(parent => (
           <Box key={parent.id}>
-            <Button
-              w='2rem'
-              h='auto'
+            <Box
+              w='2.5rem'
+              h='2.5rem'
               p='0'
               m='0 .2rem'
               cursor='pointer'
               mt='1rem'
-              borderRadius='50%'
-              onClick={() => setActiveNodeID(parent.id)}
+              position='relative'
             >
               {isEditMode && (
-                <Icon
-                  as={BiTrash}
+                <IconButton
+                  icon={<BiTrash size='25px' />}
                   w='100%'
                   h='100%'
-                  p='.6em 0'
                   color='red'
                   position='absolute'
+                  zIndex='1'
                   bg='hsla(0, 0%, 0%, .8)'
                   borderRadius='50%'
                   boxShadow='0px 3px 5px hsla(0, 0%, 0%, .3)'
-                  animation={`${shake} infinite .15s linear`}
+                  animation={`${wiggle} infinite .15s linear`}
+                  onClick={() => handleRemoveParent(parent.id, parent.shortName)}
+                  isLoading={removeParentResult.fetching}
                 />
               )}
-              <Image
-                src={parent.avatar}
-                alt='parent-avatar'
-                objectFit='contain'
+              <Button
+                p='0'
                 borderRadius='50%'
-                fallbackSrc={`https://ui-avatars.com/api/?name=${parent.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
-              />
-            </Button>
+                isDisabled={isEditMode}
+              >
+                <Image
+                  src={parent.avatar}
+                  alt='parent-avatar'
+                  borderRadius='50%'
+                  fallbackSrc={`https://ui-avatars.com/api/?name=${parent.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
+                  onClick={() => setActiveNodeID(parent.id)}
+                />
+              </Button>
+            </Box>
             <Text variant='info-title' fontSize='.65rem' mt='.2rem' textAlign='center'>{parent.shortName}</Text>
           </Box>
         ))}
-        {parents.length === 0 && !isEditMode && <Text variant='info'>Unavailable</Text>}
-        {isEditMode && parents.length < 2 && (
+        {props.user.parents.length === 0 && !isEditMode && <Text variant='info'>Unavailable</Text>}
+        {isEditMode && props.user.parents.length < 2 && (
           <IconButton
             icon={<MdAdd size='2rem' />}
             w='2rem'
@@ -118,11 +139,8 @@ export default function EditUserParentsTrigger (props) {
   )
 }
 
-function EditUserParents ({ user, isRefetching }) {
+function AddUserParentsModal ({ user, onClose, isRefetching }) {
   const [result, addUserParent] = useMutation(ADD_USER_PARENT)
-
-  const [removeParentOneResult, removeUserParentOne] = useMutation(DELETE_USER_PARENT)
-  const [removeParentTwoResult, removeUserParentTwo] = useMutation(DELETE_USER_PARENT)
 
   const handleOnChange = userParent => {
     const variables = { userID: user.id, parentID: userParent.value }
@@ -130,133 +148,51 @@ function EditUserParents ({ user, isRefetching }) {
       .then(result => {
         if (result.data) {
           toast({
-            title: 'Successfully updated the parent',
+            title: 'Successfully added the parent',
             status: 'success',
             position: 'top',
             duration: 3000,
             isClosable: true
           })
+          onClose()
         }
       })
   }
-
-  const handleRemoveParentOne = parentID => {
-    const variables = { userID: user.id, parentID }
-    removeUserParentOne(variables)
-      .then(result => {
-        if (result.data) {
-          toast({
-            title: 'Successfully removed the parent',
-            status: 'success',
-            position: 'top',
-            duration: 3000,
-            isClosable: true
-          })
-        }
-      })
-  }
-
-  const handleRemoveParentTwo = parentID => {
-    const variables = { userID: user.id, parentID }
-    removeUserParentTwo(variables)
-      .then(result => {
-        if (result.data) {
-          toast({
-            title: 'Successfully removed the parent',
-            status: 'success',
-            position: 'top',
-            duration: 3000,
-            isClosable: true
-          })
-        }
-      })
-  }
-
-  const [parentOne, parentTwo] = user?.parents || []
 
   return (
-    <Stack spacing='8'>
-      <FormControl>
-        <FormLabel>Parent One</FormLabel>
-        <Stack direction='row' justifyContent='space-between' alignItems='center'>
-          <Stack flex='1'>
-            <UserSelection
-              query={LIST_USER_AVAILABLE_PARENTS}
-              variables={{ userID: user.id }}
-              isDisabled={result.fetching || isRefetching || removeParentOneResult.fetching}
-              key={`parentOne_key__${JSON.stringify(parentOne ? { label: parentOne.fullName, value: parentOne.id } : undefined)}`}
-              value={parentOne ? { label: parentOne.fullName, value: parentOne.id } : undefined}
-              onChange={handleOnChange}
-              placeholder='Search Parent One'
-              filterUsers={({ value }) => value !== user.id}
-            />
-          </Stack>
-          <IconButton
-            colorScheme='red'
-            variant='outline'
-            aria-label='Remove Parent One'
-            fontSize='20px'
-            icon={<BiTrash />}
-            onClick={() => handleRemoveParentOne(parentOne.id)}
-            isLoading={removeParentOneResult.fetching}
-            isDisabled={!parentOne}
-          />
-        </Stack>
-
-      </FormControl>
-      <FormControl>
-        <FormLabel>Parent Two</FormLabel>
-        <Stack direction='row' justifyContent='space-between' alignItems='center'>
-          <Stack flex='1'>
-            <UserSelection
-              menuPlacement='top'
-              query={LIST_USER_AVAILABLE_PARENTS}
-              variables={{ userID: user.id }}
-              isDisabled={!parentOne || result.fetching || isRefetching || removeParentTwoResult.fetching}
-              key={`parentTwo_key__${JSON.stringify(parentTwo ? { label: parentTwo.fullName, value: parentTwo.id } : undefined)}`}
-              value={parentTwo ? { label: parentTwo.fullName, value: parentTwo.id } : undefined}
-              onChange={handleOnChange}
-              placeholder='Search Parent Two'
-              filterUsers={({ value }) => value !== user.id}
-            />
-          </Stack>
-          <IconButton
-            colorScheme='red'
-            variant='outline'
-            aria-label='Remove Parent Two'
-            fontSize='20px'
-            icon={<BiTrash />}
-            onClick={() => handleRemoveParentTwo(parentTwo.id)}
-            isLoading={removeParentTwoResult.fetching}
-            isDisabled={!parentTwo}
-          />
-        </Stack>
-      </FormControl>
-      {(result.fetching || isRefetching) && <Loading />}
-      {result.error && <ErrorAlert> {result.error.message} </ErrorAlert>}
-      <Alert status='warning' borderRadius='lg'>
-        <AlertIcon />
-        <AlertDescription>
-          {!parentOne && 'A parent\'s partner will automatically be added as the second parent'}
-          {parentOne && 'Selecting a new parent will automatically add his/her partner as the second parent'}
-        </AlertDescription>
-      </Alert>
-    </Stack>
-  )
-}
-
-function EditUserParentsDialog ({ user, refetch, isRefetching, onClose }) {
-  return (
-    <Modal isOpen isCentered onClose={onClose} size='md' scrollBehavior='inside' closeOnOverlayClick={false}>
+    <Modal isOpen isCentered onClose={onClose}>
       <ModalOverlay />
-      <ModalContent pb='2' minH='400px'>
+      <ModalContent>
         <ModalHeader>
-          Edit Parents
-          <Text fontSize='xs'>{user.fullName}</Text>
+          Add Parent
         </ModalHeader>
-        <ModalCloseButton isDisabled={isRefetching} />
-        <ModalBody pb='4'>
-          <EditUserParents user={user} refetch={refetch} isRefetching={isRefetching} />
+        <ModalCloseButton isDisabled={result.fetching} />
+        <ModalBody as='form' p='1em 1.6em'>
+          <Stack spacing='8'>
+            <FormControl>
+              <Stack direction='row' justifyContent='space-between' alignItems='center'>
+                <Stack flex='1'>
+                  <UserSelection
+                    query={LIST_USER_AVAILABLE_PARENTS}
+                    variables={{ userID: user.id }}
+                    key={`parent_key__${JSON.stringify(user.parent ? { label: user.parent.fullName, value: user.parent.id } : undefined)}`}
+                    value={user.parent ? { label: user.parent.fullName, value: user.parent.id } : undefined}
+                    onChange={handleOnChange}
+                    placeholder='Search Parent'
+                    filterUsers={({ value }) => value !== user.id}
+                  />
+                </Stack>
+              </Stack>
+            </FormControl>
+            {(result.fetching || isRefetching) && <Loading />}
+            {result.error && <ErrorAlert> {result.error.message} </ErrorAlert>}
+            <Alert status='warning' borderRadius='lg'>
+              <AlertIcon />
+              <AlertDescription>
+                {!user.parent && 'A parent\'s partner will automatically be added as the second parent'}
+              </AlertDescription>
+            </Alert>
+          </Stack>
         </ModalBody>
       </ModalContent>
     </Modal>

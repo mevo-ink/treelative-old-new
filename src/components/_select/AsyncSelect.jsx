@@ -12,7 +12,6 @@ const CustomSelect = forwardRef((props, ref) => {
       cacheOptions
       ref={ref}
       styles={styles}
-      maxMenuHeight='200px'
       {...props}
     />
   )
