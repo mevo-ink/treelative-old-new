@@ -37,7 +37,7 @@ import UserSelection from 'components/_common/UserSelection'
 
 const toast = createStandaloneToast()
 
-export default function AddUserParents (props) {
+export default function EditUserParents (props) {
   const [removeParentResult, removeParent] = useMutation(DELETE_USER_PARENT)
 
   const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
@@ -77,7 +77,7 @@ export default function AddUserParents (props) {
 
   return (
     <>
-      {isOpen && <AddUserParentsModal user={props.user} onClose={onClose} />}
+      {isOpen && <EditUserParentsModal user={props.user} onClose={onClose} />}
       <Flex w='85%' flexWrap='wrap' justifyContent='center'>
         {props.user.parents.map(parent => (
           <Box key={parent.id}>
@@ -127,7 +127,6 @@ export default function AddUserParents (props) {
             <Text variant='info-title' fontSize='.65rem' mt='.2rem' textAlign='center'>{parent.shortName}</Text>
           </Box>
         ))}
-        {props.user.parents.length === 0 && !isEditMode && <Text variant='info'>Unavailable</Text>}
         {isEditMode && props.user.parents.length < 2 && (
           <IconButton
             icon={<MdAdd size='2rem' />}
@@ -149,7 +148,7 @@ export default function AddUserParents (props) {
   )
 }
 
-function AddUserParentsModal ({ user, onClose, isRefetching }) {
+function EditUserParentsModal ({ user, onClose, isRefetching }) {
   const [result, addUserParent] = useMutation(ADD_USER_PARENT)
 
   const handleOnChange = userParent => {
@@ -196,7 +195,6 @@ function AddUserParentsModal ({ user, onClose, isRefetching }) {
             </FormControl>
             {(result.fetching || isRefetching) && <Loading />}
             {result.error && <ErrorAlert> {result.error.message} </ErrorAlert>}
-
           </Stack>
         </ModalBody>
         <ModalFooter>

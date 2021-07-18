@@ -1,6 +1,4 @@
 import {
-  Box,
-  Image,
   Modal,
   IconButton,
   ModalOverlay,
@@ -24,6 +22,7 @@ import Birth from 'components/ProfileCard/Slides/Birth'
 import Death from 'components/ProfileCard/Slides/Death'
 import Socials from 'components/ProfileCard/Slides/Socials'
 import Current from 'components/ProfileCard/Slides/Current'
+import Partner from 'components/ProfileCard/Slides/Partner'
 import OuterWrapper from 'components/ProfileCard/OuterWrapper'
 import InnerWrapper from 'components/ProfileCard/InnerWrapper'
 import EditUserAvatar from 'components/EditUser/EditUserAvatar'
@@ -55,6 +54,7 @@ export default function ProfileCard () {
 
   const user = result.data?.getUser
 
+  console.log(user)
   return (
     <Modal isOpen onClose={onClose} isCentered>
       <ModalOverlay />
@@ -88,6 +88,7 @@ export default function ProfileCard () {
                   <Birth user={user} />
                   <Current user={user} />
                   <Socials user={user} />
+                  {user.couple.partner && <Partner user={user} />}
                   {(user.parent || user.children) && <ParentChild user={user} />}
                 </Slider>
               </>

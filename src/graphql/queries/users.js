@@ -140,6 +140,7 @@ export const GET_USER = gql`
           id
           fullName
           avatar
+          shortName
         }
       }
       socialLinks {
