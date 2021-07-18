@@ -10,10 +10,10 @@ import {
 } from '@chakra-ui/react'
 import { HiCamera } from 'react-icons/hi'
 
-import { useMutation } from 'urql'
 import { useRecoilValue } from 'recoil'
+import { networkMethodsAtom, isEditModeAtom } from 'utils/atoms.js'
 
-import { isEditModeAtom } from 'utils/atoms.js'
+import { useMutation } from 'urql'
 import { UPDATE_USER_AVATAR } from 'graphql/mutations/users'
 
 import crown from 'images/adminCrown.png'
@@ -21,6 +21,28 @@ import crown from 'images/adminCrown.png'
 const toast = createStandaloneToast()
 
 export default function EditUserAvatar ({ user }) {
+  const networkMethods = useRecoilValue(networkMethodsAtom)
+
+  const invalidateImageCache = (imageURL) => {
+    // invalidate cached image from browser
+    const headers = new window.Headers()
+    headers.append('pragma', 'no-cache')
+    headers.append('cache-control', 'no-cache')
+
+    const init = {
+      method: 'GET',
+      headers: headers,
+      mode: 'no-cors',
+      cache: 'no-cache'
+    }
+
+    window.fetch(new window.Request(user.avatar), init)
+      .then(() => {
+        // update network node with new image url
+        networkMethods.updateNode(user.id, 'image', imageURL)
+      })
+  }
+
   const isEditMode = useRecoilValue(isEditModeAtom)
 
   const [avatarURL, setAvatarURL] = useState(user.avatar)
@@ -67,6 +89,7 @@ export default function EditUserAvatar ({ user }) {
             .then((response) => {
               if (response.status === 200) {
                 handleSuccess()
+                invalidateImageCache(avatarURL + '?' + new Date().getTime())
                 setAvatarURL(avatarURL + '?' + new Date().getTime())
               } else {
                 response.json()
@@ -147,7 +170,7 @@ export default function EditUserAvatar ({ user }) {
         </>
       )}
       <Image
-        src={user.avatar}
+        src={avatarURL}
         fallbackSrc={`https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
         alt='avatar'
         objectFit='contain'

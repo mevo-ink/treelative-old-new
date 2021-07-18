@@ -76,6 +76,9 @@ export default function Graph () {
     // set network in store
     const network = new Network(graphRef.current, result.data?.getNetworkData, options)
     setNetworkMethods({
+      updateNode: (id, property, value) => {
+        network.body.data.nodes.update({ id, [property]: value })
+      },
       unselectAll: () => network.unselectAll(),
       moveTo: (userID) => {
         const position = network.getPosition(userID)

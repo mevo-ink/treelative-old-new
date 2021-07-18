@@ -1,6 +1,4 @@
 import {
-  Box,
-  Image,
   Modal,
   IconButton,
   ModalOverlay,
