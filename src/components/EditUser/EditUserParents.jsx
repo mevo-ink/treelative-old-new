@@ -37,7 +37,7 @@ import UserSelection from 'components/_common/UserSelection'
 const toast = createStandaloneToast()
 
 export default function AddUserParents (props) {
-  const [removeParentResult, removeUserParent] = useMutation(DELETE_USER_PARENT)
+  const [removeParentResult, removeParent] = useMutation(DELETE_USER_PARENT)
 
   const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
 
@@ -54,7 +54,7 @@ export default function AddUserParents (props) {
   const handleRemoveParent = (parentID, shortName) => {
     const variables = { userID: props.user.id, parentID }
     if (window.confirm(`Are you sure want to remove ${shortName}?`)) {
-      removeUserParent(variables)
+      removeParent(variables)
         .then(result => {
           if (result.data) {
             toast({

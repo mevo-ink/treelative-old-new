@@ -1,28 +1,13 @@
-import UserSelection from 'components/_common/UserSelection'
-
-import { useRecoilValue, useSetRecoilState } from 'recoil'
-import { isEditModeAtom, activeNodeIDAtom } from 'utils/atoms.js'
-
-import { useMutation } from 'urql'
-import { ADD_USER_CHILD, DELETE_USER_CHILD } from 'graphql/mutations/users'
-
-import { LIST_USER_AVAILABLE_CHILDREN } from 'graphql/queries/users'
-
-import Loading from 'components/_common/Loading'
-import ErrorAlert from 'components/_common/ErrorAlert'
-
 import {
   Box,
   Text,
-  Flex,
-  Icon,
   Modal,
   Stack,
+  Flex,
   Image,
   Button,
   keyframes,
   ModalBody,
-  FormLabel,
   IconButton,
   ModalHeader,
   FormControl,
@@ -32,20 +17,30 @@ import {
   ModalCloseButton,
   createStandaloneToast
 } from '@chakra-ui/react'
-
 import { MdAdd } from 'react-icons/md'
 import { BiTrash } from 'react-icons/bi'
 
+import { useMutation } from 'urql'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+
+import { isEditModeAtom, activeNodeIDAtom } from 'utils/atoms.js'
+import { LIST_USER_AVAILABLE_CHILDREN } from 'graphql/queries/users'
+import { ADD_USER_CHILD, DELETE_USER_CHILD } from 'graphql/mutations/users'
+
+import Loading from 'components/_common/Loading'
+import ErrorAlert from 'components/_common/ErrorAlert'
+import UserSelection from 'components/_common/UserSelection'
+
 const toast = createStandaloneToast()
 
-export default function EditUserChildrenTrigger (props) {
+export default function EditUserChildren (props) {
+  const [removeChildResult, removeUserChild] = useMutation(DELETE_USER_CHILD)
+
   const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
 
   const isEditMode = useRecoilValue(isEditModeAtom)
 
   const { isOpen, onOpen, onClose } = useDisclosure()
-
-  const { children } = props.user
 
   const wiggle = keyframes`
     0% { transform: rotate(0deg); }
@@ -53,49 +48,73 @@ export default function EditUserChildrenTrigger (props) {
     100% { transform: rotate(2deg); }
   `
 
+  const handleRemoveChild = (childID, shortName) => {
+    const variables = { userID: props.user.id, childID }
+    if (window.confirm(`Are you sure want to remove ${shortName}?`)) {
+      removeUserChild(variables)
+        .then(result => {
+          if (result.data) {
+            toast({
+              title: 'Successfully removed the child',
+              status: 'success',
+              position: 'top',
+              duration: 3000,
+              isClosable: true
+            })
+          }
+        })
+    }
+  }
+
   return (
     <>
-      {isOpen && <EditUserChildrenDialog {...props} onClose={onClose} />}
+      {isOpen && <AddUserChildModal user={props.user} onClose={onClose} />}
       <Flex w='85%' flexWrap='wrap' justifyContent='center'>
-        {children.map(children => (
-          <Box key={children.id}>
-            <Button
-              key={children.id}
-              w='2rem'
-              h='auto'
+        {props.user.children.map(child => (
+          <Box key={child.id}>
+            <Box
+              w='2.5rem'
+              h='2.5rem'
               p='0'
               m='0 .2rem'
               cursor='pointer'
               mt='1rem'
-              borderRadius='50%'
-              onClick={() => setActiveNodeID(children.id)}
+              position='relative'
             >
               {isEditMode && (
-                <Icon
-                  as={BiTrash}
+                <IconButton
+                  icon={<BiTrash size='25px' />}
                   w='100%'
                   h='100%'
-                  p='.6em 0'
                   color='red'
                   position='absolute'
+                  zIndex='1'
                   bg='hsla(0, 0%, 0%, .8)'
-                  boxShadow='0px 3px 5px hsla(0, 0%, 0%, .3)'
                   borderRadius='50%'
+                  boxShadow='0px 3px 5px hsla(0, 0%, 0%, .3)'
                   animation={`${wiggle} infinite .15s linear`}
+                  onClick={() => handleRemoveChild(child.id, child.shortName)}
+                  isLoading={removeChildResult.fetching}
                 />
               )}
-              <Image
-                src={children.avatar}
-                alt='children-avatar'
-                objectFit='contain'
+              <Button
+                p='0'
                 borderRadius='50%'
-                fallbackSrc={`https://ui-avatars.com/api/?name=${children.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
-              />
-            </Button>
-            <Text variant='info-title' fontSize='.65rem' mt='.2rem' textAlign='center'>{children.shortName}</Text>
+                isDisabled={isEditMode}
+              >
+                <Image
+                  src={child.avatar}
+                  alt='child-avatar'
+                  borderRadius='50%'
+                  fallbackSrc={`https://ui-avatars.com/api/?name=${child.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
+                  onClick={() => setActiveNodeID(child.id)}
+                />
+              </Button>
+            </Box>
+            <Text variant='info-title' fontSize='.65rem' mt='.2rem' textAlign='center'>{child.shortName}</Text>
           </Box>
         ))}
-        {children.length === 0 && !isEditMode && <Text variant='info'>Unavailable</Text>}
+        {props.user.children.length === 0 && !isEditMode && <Text variant='info'>Unavailable</Text>}
         {isEditMode && (
           <IconButton
             icon={<MdAdd size='2rem' />}
@@ -117,92 +136,54 @@ export default function EditUserChildrenTrigger (props) {
   )
 }
 
-function EditUserChildrenInline ({ user, isRefetching }) {
+function AddUserChildModal ({ user, onClose, isRefetching }) {
   const [result, addUserChild] = useMutation(ADD_USER_CHILD)
 
-  const [removeUserChildResult, removeUserChild] = useMutation(DELETE_USER_CHILD)
-
-  const handleOnChange = userChildren => {
-    const existingChildren = user.children.map(({ id }) => id)
-    let action, value
-    if (!userChildren) {
-      action = 'unlink'
-      value = existingChildren[0]
-    } else {
-      const updatedValues = userChildren.map(({ value }) => value)
-      const unlinkedValue = existingChildren
-        .filter(value => !updatedValues.includes(value))[0]
-      const linkedValue = updatedValues
-        .filter(value => !existingChildren.includes(value))[0]
-      action = unlinkedValue ? 'unlink' : 'link'
-      value = unlinkedValue || linkedValue
-    }
-    if (action === 'link') {
-      addUserChild({ userID: user.id, childID: value })
-        .then(result => {
-          if (result.data) {
-            toast({
-              title: 'Successfully added the child',
-              status: 'success',
-              position: 'top',
-              duration: 3000,
-              isClosable: true
-            })
-          }
-        })
-    } else {
-      removeUserChild({ userID: user.id, childID: value })
-        .then(result => {
-          if (result.data) {
-            toast({
-              title: 'Successfully removed the child',
-              status: 'success',
-              position: 'top',
-              duration: 3000,
-              isClosable: true
-            })
-          }
-        })
-    }
+  const handleOnChange = userChild => {
+    const variables = { userID: user.id, childID: userChild.value }
+    addUserChild(variables)
+      .then(result => {
+        if (result.data) {
+          toast({
+            title: 'Successfully added the child',
+            status: 'success',
+            position: 'top',
+            duration: 3000,
+            isClosable: true
+          })
+          onClose()
+        }
+      })
   }
 
   return (
-    <Stack spacing='8'>
-      <FormControl>
-        <FormLabel>Children</FormLabel>
-        <UserSelection
-          autoFocus
-          isMulti
-          isDisabled={result.fetching || isRefetching || removeUserChildResult.fetching}
-          isClearable={false}
-          query={LIST_USER_AVAILABLE_CHILDREN}
-          variables={{ userID: user.id }}
-          key={`children_key__${JSON.stringify(user?.children?.length > 0 ? user?.children.map(child => ({ label: child?.fullName, value: child?.id })) : undefined)}`}
-          value={user?.children ? user?.children.map(child => ({ label: child?.fullName, value: child?.id })) : undefined}
-          onChange={handleOnChange}
-          placeholder='Search Children'
-        />
-      </FormControl>
-      {(result.fetching || isRefetching) && <Loading />}
-      {result.error && <ErrorAlert> {result.error.message} </ErrorAlert>}
-      {removeUserChildResult.fetching && <Loading />}
-      {removeUserChildResult.error && <ErrorAlert> {removeUserChildResult.error.message} </ErrorAlert>}
-    </Stack>
-  )
-}
-
-export function EditUserChildrenDialog ({ user, refetch, isRefetching, onClose }) {
-  return (
-    <Modal isOpen isCentered onClose={onClose} size='md' closeOnOverlayClick={false}>
+    <Modal isOpen isCentered onClose={onClose}>
       <ModalOverlay />
-      <ModalContent pb='2' minH='500px'>
+      <ModalContent>
         <ModalHeader>
-          Edit Children
-          <Text fontSize='xs'>{user.fullName}</Text>
+          Add Child
         </ModalHeader>
-        <ModalCloseButton isDisabled={isRefetching} />
-        <ModalBody pb='4'>
-          <EditUserChildrenInline user={user} refetch={refetch} isRefetching={isRefetching} />
+        <ModalCloseButton isDisabled={result.fetching} />
+        <ModalBody as='form' p='1em 1.6em'>
+          <Stack spacing='8'>
+            <FormControl>
+              <Stack direction='row' justifyContent='space-between' alignItems='center'>
+                <Stack flex='1'>
+                  <UserSelection
+                    query={LIST_USER_AVAILABLE_CHILDREN}
+                    variables={{ userID: user.id }}
+                    key={`child_key__${JSON.stringify(user.children ? { label: user.children.fullName, value: user.children.id } : undefined)}`}
+                    value={user.child ? { label: user.children.fullName, value: user.children.id } : undefined}
+                    onChange={handleOnChange}
+                    placeholder='Search Child'
+                    filterUsers={({ value }) => value !== user.id}
+                  />
+                </Stack>
+              </Stack>
+            </FormControl>
+            {(result.fetching || isRefetching) && <Loading />}
+            {result.error && <ErrorAlert> {result.error.message} </ErrorAlert>}
+          </Stack>
         </ModalBody>
       </ModalContent>
     </Modal>
