@@ -1,4 +1,5 @@
 import {
+  Grid,
   Flex,
   Image,
   Button
@@ -31,9 +32,9 @@ export default function Socials ({ user }) {
       p='1.5rem 0'
     >
       {user.phoneNumber && <PhoneEmail icon={phone} value={user.phoneNumber} />}
-      <Flex
-        w='45%'
-        justifyContent='space-between'
+      <Grid
+        w='55%'
+        gridTemplateColumns='repeat(2, 1fr)'
         flexFlow='wrap'
       >
         {data.map((social, idx) => (
@@ -42,7 +43,7 @@ export default function Socials ({ user }) {
             p='0'
             onClick={() => window.open(social.url, '_blank').focus()}
             isDisabled={!social.url}
-            m='1.3rem 0'
+            m='1rem 0'
           >
             <Image
               src={social.icon}
@@ -52,7 +53,7 @@ export default function Socials ({ user }) {
             />
           </Button>
         ))}
-      </Flex>
+      </Grid>
       {user.email && <PhoneEmail icon={email} value={user.email} />}
     </Flex>
   )
