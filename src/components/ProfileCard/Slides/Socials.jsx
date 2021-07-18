@@ -33,7 +33,6 @@ export default function Socials ({ user }) {
       {user.phoneNumber && <PhoneEmail icon={phone} value={user.phoneNumber} />}
       <Flex
         w='45%'
-        h='100%'
         justifyContent='space-between'
         flexFlow='wrap'
       >
@@ -43,7 +42,7 @@ export default function Socials ({ user }) {
             p='0'
             onClick={() => window.open(social.url, '_blank').focus()}
             isDisabled={!social.url}
-            mt='1.5rem'
+            m='1.3rem 0'
           >
             <Image
               src={social.icon}
@@ -61,7 +60,7 @@ export default function Socials ({ user }) {
 
 const PhoneEmail = ({ icon, value }) => {
   return (
-    <Flex>
+    <Flex justifyContent='center'>
       <Image
         src={icon}
         h='100%'
@@ -71,7 +70,7 @@ const PhoneEmail = ({ icon, value }) => {
         boxShadow='0px 3px 5px hsla(0, 0%, 0%, .2)'
         borderLeftRadius='999px'
       />
-      <Button variant='editable-input' borderLeftRadius='unset' maxW='100%' mt='0'>
+      <Button variant='editable-input' maxW='100%' mt='0' fontSize='15px' borderLeftRadius='unset'>
         {value}
       </Button>
     </Flex>
