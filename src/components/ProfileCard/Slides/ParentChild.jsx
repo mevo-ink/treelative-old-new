@@ -3,10 +3,15 @@ import {
   Text
 } from '@chakra-ui/react'
 
+import { useRecoilValue } from 'recoil'
+
+import { isEditModeAtom } from 'utils/atoms.js'
+
 import EditUserParents from 'components/EditUser/EditUserParents'
 import EditUserChildren from 'components/EditUser/EditUserChildren'
 
 export default function ParentChild ({ user }) {
+  const isEditMode = useRecoilValue(isEditModeAtom)
   return (
     <Flex
       w='80%'
@@ -23,10 +28,14 @@ export default function ParentChild ({ user }) {
         Parents
       </Text>
       <EditUserParents user={user} />
-      <Text variant='info-title' mt='1rem'>
-        Children
-      </Text>
-      <EditUserChildren user={user} />
+      {(!user.children || isEditMode) && (
+        <>
+          <Text variant='info-title' mt='1rem'>
+            Children
+          </Text>
+          <EditUserChildren user={user} />
+        </>
+      )}
     </Flex>
   )
 }
