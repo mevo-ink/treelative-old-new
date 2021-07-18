@@ -22,6 +22,7 @@ import Loading from 'components/Loading'
 import Slider from 'components/ProfileCard/Slider'
 import Birth from 'components/ProfileCard/Slides/Birth'
 import Death from 'components/ProfileCard/Slides/Death'
+import Socials from 'components/ProfileCard/Slides/Socials'
 import Current from 'components/ProfileCard/Slides/Current'
 import OuterWrapper from 'components/ProfileCard/OuterWrapper'
 import InnerWrapper from 'components/ProfileCard/InnerWrapper'
@@ -113,6 +114,7 @@ export default function ProfileCard () {
                   {user.dateOfDeath && <Death user={user} />}
                   <Birth user={user} />
                   <Current user={user} />
+                  <Socials user={user} />
                   <ParentChild user={user} />
                 </Slider>
               </>
