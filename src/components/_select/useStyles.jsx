@@ -1,24 +1,24 @@
-export default function useStyles (isDarkTheme = false) {
-  const inputBgColor = !isDarkTheme ? 'white' : 'blue.800'
-  const inputColor = !isDarkTheme ? 'black' : 'white'
+export default function useStyles () {
+  const inputBgColor = 'transparent'
+  const inputColor = 'white'
 
-  const controlBgColor = !isDarkTheme ? 'white' : 'var(--chakra-colors-blue-900)'
-  const controlColor = !isDarkTheme ? 'black' : 'white'
+  const controlBgColor = 'transparent'
+  const controlColor = 'white'
 
-  const menuBgColor = !isDarkTheme ? 'white' : 'var(--chakra-colors-blue-900)'
+  const menuBgColor = 'transparent'
   const menuColor = 'black'
 
-  const optionFocusedBgColor = !isDarkTheme ? 'var(--chakra-colors-blue-100)' : 'var(--chakra-colors-blue-600)'
-  const optionFocusedColor = !isDarkTheme ? 'black' : 'white'
-  const optionNormalBgColor = !isDarkTheme ? 'white' : 'var(--chakra-colors-blue-800)'
-  const optionNormalColor = !isDarkTheme ? 'black' : 'white'
+  const optionFocusedBgColor = 'var(--chakra-colors-blue-600)'
+  const optionFocusedColor = 'white'
+  const optionNormalBgColor = 'transparent'
+  const optionNormalColor = 'white'
 
-  const multiValueBgColor = 'var(--chakra-colors-blue-500)'
+  const multiValueBgColor = 'var(--chakra-colors-blue-600)'
   const multiValueColor = 'white'
 
-  const singleValueColor = !isDarkTheme ? 'black' : 'white'
+  const singleValueColor = 'white'
 
-  const dropdownIndicatorColor = 'var(--chakra-colors-blue-500)'
+  const dropdownIndicatorColor = 'var(--chakra-colors-blue-600)'
 
   return {
     dropdownIndicator: (styles, { isFocused }) => ({
@@ -36,7 +36,7 @@ export default function useStyles (isDarkTheme = false) {
       color: controlColor,
       borderColor: 'var(--chakra-colors-blue-800)',
       ':hover': {
-        borderColor: 'var(--chakra-colors-blue-500)'
+        borderColor: 'var(--chakra-colors-blue-600)'
       }
     }),
     menu: (styles) => ({
@@ -70,7 +70,7 @@ export default function useStyles (isDarkTheme = false) {
       justifyContent: 'center',
       borderRadius: '6px',
       ':hover': {
-        backgroundColor: 'var(--chakra-colors-red-500)',
+        backgroundColor: 'var(--chakra-colors-red-600)',
         color: 'white'
       }
     }),
