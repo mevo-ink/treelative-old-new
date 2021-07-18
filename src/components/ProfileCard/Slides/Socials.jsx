@@ -70,7 +70,7 @@ const PhoneEmail = ({ icon, value }) => {
         boxShadow='0px 3px 5px hsla(0, 0%, 0%, .2)'
         borderLeftRadius='999px'
       />
-      <Button variant='editable-input' maxW='100%' mt='0' fontSize='15px' borderLeftRadius='unset'>
+      <Button variant='editable-input' maxW='200px' mt='0' fontSize='14px' borderLeftRadius='unset'>
         {value}
       </Button>
     </Flex>
