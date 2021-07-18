@@ -76,8 +76,8 @@ export default function AddUserParents (props) {
         {props.user.parents.map(parent => (
           <Box key={parent.id}>
             <Box
-              w={props.user.children ? '3rem' : '2.5rem'}
-              h={props.user.children ? '3rem' : '2.5rem'}
+              w={props.user.children.length !== 0 ? '2.5rem' : '3rem'}
+              h={props.user.children.length !== 0 ? '2.5rem' : '3rem'}
               p='0'
               m='0 .2rem'
               cursor='pointer'

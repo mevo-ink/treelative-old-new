@@ -28,7 +28,7 @@ export default function ParentChild ({ user }) {
         Parents
       </Text>
       <EditUserParents user={user} />
-      {(!user.children || isEditMode) && (
+      {(user.children.length !== 0 || isEditMode) && (
         <>
           <Text variant='info-title' mt='1rem'>
             Children
