@@ -33,15 +33,12 @@ export default function App () {
 // TODO:
 /*
   CALENDAR styling
-  BUG: dropdown select not working on mobile
   Add remove button for all editable fields
-  Show default suggestion on edit user
   Add confirmation dialog on delete
   Finish search bar
   - On search results click, open the profile card
   Investigate google maps overlay buttons
   Add birthday viw - kinda same layout as age view
-  Show add new user from children-parent edit dialog
   Add functionality FindMe on birthday view
   Style Error modal with contact us info --- NEED ACCESS TO OUR PROFILE CARDS FOR NOT AUTH USERS
   Add fallback modal to edit date of birth if unavailable when clicking findMe
@@ -51,9 +48,9 @@ export default function App () {
   - Show users count by country
   Add birthday effect on profile mount - maybe not
   Show why login
-  Add google analytics
   Add PWA
   Optimize images
+  REDRAW CANVAS on relation edits
 */
 // DONE:
 /*
@@ -70,4 +67,8 @@ export default function App () {
   Replace add user to own profile icon for normal users
   Complete Age view
   - add functionality to center any user
+  Add google analytics
+  Show add new user from children-parent edit dialog
+  Show default suggestion on edit user
+  BUG: dropdown select not working on mobile
 */
