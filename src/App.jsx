@@ -30,7 +30,10 @@ export default function App () {
     </>
   )
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9a3af021a8332ac28165062e75b8ea46665bce3e
 // TODO:
 /*
   CALENDAR styling
