@@ -40,6 +40,8 @@ export default function FindMe ({ onClose }) {
       icon={<BiCurrentLocation color='white' />}
       size='sm'
       bg='hsla(220, 100%, 60%, .8)'
+      _hover={!authUserID && 'hsla(220, 100%, 60%, .8)'}
+      _active={!authUserID && 'hsla(220, 100%, 60%, .8)'}
       onClick={handleFindMe}
       isDisabled={!authUserID}
     />

@@ -46,7 +46,6 @@ export default function App () {
   Complete Age view
   - add functionality to center any user
   Add birthday viw - kinda same layout as age view
-  Add birthday effect on profile mount - maybe not
   Show add new user from children-parent edit dialog
   Add functionality FindMe on age view
   Add functionality FindMe on birthday view
@@ -57,6 +56,7 @@ export default function App () {
   Insights:
   - Center label
   - Show users count by country
+  Add birthday effect on profile mount - maybe not
   Show why login
   Add google analytics
   Add PWA
