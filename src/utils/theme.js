@@ -124,9 +124,9 @@ const theme = extendTheme({
           fontWeight: '400',
           color: 'white',
           cursor: 'pointer',
-          bg: 'hsla(220, 98%, 57%, 1)',
-          _hover: { bg: 'hsla(220, 98%, 37%, 1)' },
-          _active: { bg: 'hsla(220, 98%, 37%, 1)' }
+          bg: 'hsla(220, 100%, 60%, 1)',
+          _hover: { bg: 'hsla(220, 100%, 40%, 1)' },
+          _active: { bg: 'hsla(220, 100%, 40%, 1)' }
         }
       }
     },

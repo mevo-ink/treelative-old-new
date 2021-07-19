@@ -39,7 +39,7 @@ export default function FindMe ({ onClose }) {
       isRound
       icon={<BiCurrentLocation color='white' />}
       size='sm'
-      bg='hsla(220, 98%, 57%, .8)'
+      bg='hsla(220, 100%, 60%, .8)'
       onClick={handleFindMe}
       isDisabled={!authUserID}
     />
