@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import {
   Box,
   Text,
@@ -34,6 +36,8 @@ import { ADD_USER_PARENT, DELETE_USER_PARENT } from 'graphql/mutations/users'
 import Loading from 'components/_common/Loading'
 import ErrorAlert from 'components/_common/ErrorAlert'
 import UserSelection from 'components/_common/UserSelection'
+
+import CreateUser from 'components/Menu/CreateUser'
 
 const toast = createStandaloneToast()
 
@@ -149,63 +153,93 @@ export default function EditUserParents (props) {
 }
 
 function EditUserParentsModal ({ user, onClose, isRefetching }) {
+  const [isAddNewOpen, setIsAddNewOpen] = useState('')
+
   const [result, addUserParent] = useMutation(ADD_USER_PARENT)
 
   const handleOnChange = userParent => {
-    const variables = { userID: user.id, parentID: userParent.value }
-    addUserParent(variables)
-      .then(result => {
-        if (result.data) {
-          toast({
-            title: 'Successfully added the parent',
-            status: 'success',
-            position: 'top',
-            duration: 3000,
-            isClosable: true
-          })
-          onClose()
-        }
-      })
+    if (userParent.__isNew__) {
+      // show create new user dialog
+      setIsAddNewOpen(userParent.value)
+    } else {
+      const variables = { userID: user.id, parentID: userParent.value }
+      addUserParent(variables)
+        .then(result => {
+          if (result.data) {
+            toast({
+              title: 'Successfully added the parent',
+              status: 'success',
+              position: 'top',
+              duration: 3000,
+              isClosable: true
+            })
+            onClose()
+          }
+        })
+    }
+  }
+
+  const handleCreateUserClose = (response) => {
+    setIsAddNewOpen('')
+    if (response) {
+      const variables = { userID: user.id, parentID: response.addUser.id }
+      addUserParent(variables)
+        .then(result => {
+          if (result.data) {
+            toast({
+              title: 'Successfully added the child',
+              status: 'success',
+              position: 'top',
+              duration: 3000,
+              isClosable: true
+            })
+            onClose()
+          }
+        })
+    }
   }
 
   return (
-    <Modal isOpen isCentered onClose={onClose}>
-      <ModalOverlay />
-      <ModalContent minH='25rem'>
-        <ModalHeader>
-          Add Parent
-        </ModalHeader>
-        <ModalCloseButton isDisabled={result.fetching} />
-        <ModalBody as='form' p='1em 1.6em'>
-          <Stack spacing='8'>
-            <FormControl>
-              <Stack direction='row' justifyContent='space-between' alignItems='center'>
-                <Stack flex='1'>
-                  <UserSelection
-                    query={LIST_USER_AVAILABLE_PARENTS}
-                    variables={{ userID: user.id }}
-                    key={`parent_key__${JSON.stringify(user.parent ? { label: user.parent.fullName, value: user.parent.id } : undefined)}`}
-                    value={user.parent ? { label: user.parent.fullName, value: user.parent.id } : undefined}
-                    onChange={handleOnChange}
-                    placeholder='Search Parent'
-                    filterUsers={({ value }) => value !== user.id}
-                  />
+    <>
+      {isAddNewOpen && <CreateUser initialValue={isAddNewOpen} onClose={handleCreateUserClose} />}
+      <Modal isOpen isCentered onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent minH='25rem'>
+          <ModalHeader>
+            Add Parent
+          </ModalHeader>
+          <ModalCloseButton isDisabled={result.fetching} />
+          <ModalBody as='form' p='1em 1.6em'>
+            <Stack spacing='8'>
+              <FormControl>
+                <Stack direction='row' justifyContent='space-between' alignItems='center'>
+                  <Stack flex='1'>
+                    <UserSelection
+                      query={LIST_USER_AVAILABLE_PARENTS}
+                      variables={{ userID: user.id }}
+                      key={`parent_key__${JSON.stringify(user.parent ? { label: user.parent.fullName, value: user.parent.id } : undefined)}`}
+                      value={user.parent ? { label: user.parent.fullName, value: user.parent.id } : undefined}
+                      onChange={handleOnChange}
+                      placeholder='Search Parent'
+                      filterUsers={({ value }) => value !== user.id}
+                    />
+                  </Stack>
                 </Stack>
-              </Stack>
-            </FormControl>
-            {(result.fetching || isRefetching) && <Loading />}
-            {result.error && <ErrorAlert> {result.error.message} </ErrorAlert>}
-          </Stack>
-        </ModalBody>
-        <ModalFooter>
-          <Alert status='warning' borderRadius='lg'>
-            <AlertIcon />
-            <AlertDescription>
-              {!user.parent && 'A parent\'s partner will automatically be added as the second parent'}
-            </AlertDescription>
-          </Alert>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+              </FormControl>
+              {(result.fetching || isRefetching) && <Loading />}
+              {result.error && <ErrorAlert> {result.error.message} </ErrorAlert>}
+            </Stack>
+          </ModalBody>
+          <ModalFooter>
+            <Alert status='warning' borderRadius='lg'>
+              <AlertIcon />
+              <AlertDescription>
+                {!user.parent && 'A parent\'s partner will automatically be added as the second parent'}
+              </AlertDescription>
+            </Alert>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
   )
 }

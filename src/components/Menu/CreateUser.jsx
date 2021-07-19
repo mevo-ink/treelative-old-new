@@ -25,41 +25,34 @@ import FormDialog from 'components/_common/FormDialog'
 const toast = createStandaloneToast()
 
 const schemaValidation = object().shape({
-  email: string().email(),
-  phoneNumber: string().matches(/^\+?\d{10,14}$/, { message: 'Invalid Phone Number', excludeEmptyString: true }),
   fullName: string().required(),
   shortName: string().required()
 })
 
-export default function CreateUser () {
+export default function CreateUser ({ initialValue = '', onClose: onParentClose }) {
   const { isDesktop } = useDevice()
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: initialValue })
 
-  const handleClose = () => {
+  const handleClose = (response) => {
     onClose()
     resetForm()
+    onParentClose && onParentClose(response)
   }
 
   const [internalError, setInternalError] = useState()
 
   const [{ error, fetching }, createUser] = useMutation(ADD_USER)
 
-  const { register, handleSubmit, formState: { errors }, reset: resetForm, setFocus, watch } = useForm({
+  const { register, handleSubmit, formState: { errors }, reset: resetForm, setFocus } = useForm({
+    defaultValues: { fullName: initialValue },
     resolver: yupResolver(schemaValidation)
   })
-  watch(['dateOfBirth', 'birthLocation', 'currentLocation'])
 
   // eslint-disable-next-line
-  useEffect(() => { isDesktop && isOpen && setTimeout(() => setFocus('fullName'), 1) }, [isOpen])
+  useEffect(() => { (isDesktop || initialValue) && isOpen && setTimeout(() => setFocus('fullName'), 1) }, [isOpen])
 
-  const onSubmit = ({ birthLocation, currentLocation, email, ...rest }) => {
-    const input = {
-      ...rest,
-      birthLocation: birthLocation?.value,
-      currentLocation: currentLocation?.value
-    }
-    if (email) input.email = email
+  const onSubmit = (input) => {
     createUser({ input })
       .then(async result => {
         if (result.data) {
@@ -70,7 +63,7 @@ export default function CreateUser () {
             duration: 5000,
             isClosable: true
           })
-          handleClose()
+          handleClose(result.data)
         }
       })
       .catch(setInternalError)
