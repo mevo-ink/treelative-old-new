@@ -13,8 +13,12 @@ import {
   DrawerOverlay,
   DrawerContent
 } from '@chakra-ui/react'
-
 import { FaGripLines } from 'react-icons/fa'
+
+import { useQuery } from 'urql'
+
+import { GET_AUTH_USER } from 'graphql/queries/users'
+
 import Search from 'components/Menu/Search'
 import CreateUser from 'components/Menu/CreateUser'
 import FindMe from 'components/Menu/FindMe'
@@ -23,7 +27,9 @@ import Insights from 'components/Menu/Insights'
 import Copyright from 'components/Menu/Copyright'
 
 export default function Menu () {
-  const { role } = parseJwt(window.localStorage.getItem('AUTH_SESSION_ID'))
+  const { id, role } = parseJwt(window.localStorage.getItem('AUTH_SESSION_ID'))
+
+  const [result] = useQuery({ query: GET_AUTH_USER, variables: { filter: { id: id } } })
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()
@@ -69,7 +75,7 @@ export default function Menu () {
               <Flex justifyContent='space-between'>
                 <Search admin={role} />
                 {role === 'ADMIN' && <CreateUser />}
-                <FindMe onClose={onClose} />
+                <FindMe onClose={onClose} authUser={result.data?.getUser} />
               </Flex>
               <Layouts onClose={onClose} />
               <Insights />

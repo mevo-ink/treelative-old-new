@@ -47,7 +47,6 @@ export default function App () {
   - add functionality to center any user
   Add birthday viw - kinda same layout as age view
   Show add new user from children-parent edit dialog
-  Add functionality FindMe on age view
   Add functionality FindMe on birthday view
   Style Error modal with contact us info
   Add fallback modal to edit date of birth if unavailable when clicking findMe
@@ -72,4 +71,5 @@ export default function App () {
   Remove all optional fields from add new user
   Fix scrolling position on desktop mode - map vertical to horizontal
   Check on focus style for FindMe button on disabled
+  Add functionality FindMe on age view
 */

@@ -35,11 +35,11 @@ export default function Age () {
       h='100vh'
       overflowY='hidden'
       overflowX='scroll'
-      sx={{ '&::-webkit-scrollbar': { display: 'none' }, 'scrollbar-width': 'none' }}
+      sx={{ '&::-webkit-scrollbar': { display: 'none' }, scrollbarWidth: 'none' }}
       onWheel={handleHorizontalScroll}
     >
       {Object.entries(result.data.getAgeData).map(([year, users]) =>
-        <Flex key={year} direction='column' mx='2'>
+        <Flex key={year} direction='column' mx='2' id={year}>
           <Text fontWeight='800' fontSize='xl' textAlign='center'>{users.length}</Text>
           <Text fontWeight='600'>{year}</Text>
           {users.map(user => (

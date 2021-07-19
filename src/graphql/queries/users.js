@@ -171,6 +171,16 @@ export const GET_USER_GENERAL = gql`
   }
 `
 
+export const GET_AUTH_USER = gql`
+  query GET_AUTH_USER ($filter: UserUniqueFilter!) {
+    getUser (filter: $filter) {
+      id
+      dateOfBirth
+      avatar
+    }
+  }
+`
+
 export const GET_USER_SOCIAL = gql`
   query GET_USER_SOCIAL ($filter: UserUniqueFilter!) {
     getUser (filter: $filter) {

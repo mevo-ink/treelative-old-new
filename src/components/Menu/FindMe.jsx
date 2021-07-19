@@ -1,20 +1,16 @@
+import { IconButton } from '@chakra-ui/react'
+import { BiCurrentLocation } from 'react-icons/bi'
+
 import { useRecoilValue } from 'recoil'
+
 import {
   layoutAtom,
   networkMethodsAtom,
   mapMethodsAtom
 } from 'utils/atoms.js'
 
-import { IconButton } from '@chakra-ui/react'
-
-import { BiCurrentLocation } from 'react-icons/bi'
-
-import parseJwt from 'utils/parseJWT'
-
-export default function FindMe ({ onClose }) {
+export default function FindMe ({ onClose, authUser }) {
   const layout = useRecoilValue(layoutAtom)
-
-  const { id: authUserID } = parseJwt(window.localStorage.getItem('AUTH_SESSION_ID'))
 
   const networkMethods = useRecoilValue(networkMethodsAtom)
   const mapMethods = useRecoilValue(mapMethodsAtom)
@@ -22,13 +18,15 @@ export default function FindMe ({ onClose }) {
   const handleFindMe = () => {
     switch (layout) {
       case 'map':
-        mapMethods.panTo(authUserID)
+        mapMethods.panTo(authUser.id)
         break
       case 'age':
-        console.log('TODO: CENTER AUTH USER ON AGE VIEW')
+        setTimeout(() => {
+          document.getElementById(authUser.dateOfBirth.slice(0, 4)).scrollIntoView({ inline: 'center', behavior: 'smooth' })
+        }, 150)
         break
       default:
-        networkMethods.moveTo(authUserID)
+        networkMethods.moveTo(authUser.id)
         break
     }
     onClose()
@@ -41,7 +39,7 @@ export default function FindMe ({ onClose }) {
       size='sm'
       bg='hsla(220, 100%, 60%, .8)'
       onClick={handleFindMe}
-      isDisabled={!authUserID}
+      isDisabled={!authUser}
       _hover
       _active
     />
