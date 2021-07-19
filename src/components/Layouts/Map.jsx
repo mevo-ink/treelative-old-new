@@ -124,7 +124,7 @@ export default function Map () {
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_LOCATION_API_KEY }}
         defaultCenter={defaultCenter}
         defaultZoom={4}
-        options={{ styles }}
+        options={{ styles, fullscreenControl: false, zoomControl: false }}
         onGoogleApiLoaded={({ map }) => setMapMethods({
           panTo: (userID) => {
             const position = result.data.getMapData.known.find(user => user.id === userID)?.position
@@ -135,7 +135,7 @@ export default function Map () {
         {result.data.getMapData.known.map(user => (
           <Image
             key={user.id}
-            boxSize='40px'
+            boxSize='30px'
             position='absolute'
             lat={user.position.lat}
             lng={user.position.lng}

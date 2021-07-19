@@ -6,7 +6,6 @@ import { activeNodeIDAtom } from 'utils/atoms.js'
 import Menu from 'components/Menu'
 import Layouts from 'components/Layouts'
 import ProfileCard from 'components/ProfileCard'
-// import ProfileCardChumma from 'components/ProfileCardChumma'
 
 export default function App () {
   const activeNodeID = useRecoilValue(activeNodeIDAtom)
@@ -37,7 +36,6 @@ export default function App () {
   Add confirmation dialog on delete
   Finish search bar
   - On search results click, open the profile card
-  Investigate google maps overlay buttons
   Add birthday viw - kinda same layout as age view
   Add functionality FindMe on birthday view
   Style Error modal with contact us info --- NEED ACCESS TO OUR PROFILE CARDS FOR NOT AUTH USERS
@@ -51,6 +49,7 @@ export default function App () {
   Add PWA
   Optimize images
   REDRAW CANVAS on relation edits
+  PERSIST layout changes
 */
 // DONE:
 /*
@@ -71,4 +70,6 @@ export default function App () {
   Show add new user from children-parent edit dialog
   Show default suggestion on edit user
   BUG: dropdown select not working on mobile
+  Investigate google maps overlay buttons
+
 */
