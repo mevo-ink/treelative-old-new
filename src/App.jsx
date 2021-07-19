@@ -49,7 +49,6 @@ export default function App () {
   Add PWA
   Optimize images
   REDRAW CANVAS on relation edits
-  PERSIST layout changes
 */
 // DONE:
 /*
@@ -71,5 +70,5 @@ export default function App () {
   Show default suggestion on edit user
   BUG: dropdown select not working on mobile
   Investigate google maps overlay buttons
-
+  PERSIST layout changes
 */
