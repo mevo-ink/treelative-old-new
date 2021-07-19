@@ -1,4 +1,4 @@
-import EditableInputDialog from 'components/_input/EditableInputDialog'
+import EditableInputWithIconDialog from 'components/_input/EditableInputWithIconDialog'
 
 import { string } from 'yup'
 
@@ -14,7 +14,7 @@ export default function EditUserEmail ({ user, ...props }) {
   }
 
   return (
-    <EditableInputDialog
+    <EditableInputWithIconDialog
       title='Edit Email'
       subTitle={user.fullName}
       name='email'

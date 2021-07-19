@@ -5,6 +5,9 @@ import {
   Button
 } from '@chakra-ui/react'
 
+import EditUserEmail from 'components/EditUser/EditUserEmail'
+import EditUserPhoneNumber from 'components/EditUser/EditUserPhoneNumber'
+
 import email from 'images/email.svg'
 import phone from 'images/phone.svg'
 import twitter from 'images/twitter.svg'
@@ -31,7 +34,7 @@ export default function Socials ({ user }) {
       borderRadius='20px'
       p='1.5rem 0'
     >
-      {user.phoneNumber && <PhoneEmail icon={phone} value={user.phoneNumber} />}
+      {user.phoneNumber && <EditUserPhoneNumber user={user} icon={phone} />}
       <Grid
         w='55%'
         gridTemplateColumns='repeat(2, 1fr)'
@@ -54,26 +57,7 @@ export default function Socials ({ user }) {
           </Button>
         ))}
       </Grid>
-      {user.email && <PhoneEmail icon={email} value={user.email} />}
-    </Flex>
-  )
-}
-
-const PhoneEmail = ({ icon, value }) => {
-  return (
-    <Flex justifyContent='center'>
-      <Image
-        src={icon}
-        h='100%'
-        objectFit='contain'
-        p='.4em'
-        background='hsla(0, 0%, 100%, .2)'
-        boxShadow='0px 3px 5px hsla(0, 0%, 0%, .2)'
-        borderLeftRadius='999px'
-      />
-      <Button variant='editable-input' maxW='200px' mt='0' fontSize='14px' borderLeftRadius='unset'>
-        {value}
-      </Button>
+      {user.email && <EditUserEmail user={user} icon={email} />}
     </Flex>
   )
 }
