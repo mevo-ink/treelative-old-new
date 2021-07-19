@@ -46,7 +46,7 @@ export default function App () {
   Add birthday viw - kinda same layout as age view
   Show add new user from children-parent edit dialog
   Add functionality FindMe on birthday view
-  Style Error modal with contact us info
+  Style Error modal with contact us info --- NEED ACCESS TO OUR PROFILE CARDS FOR NOT AUTH USERS
   Add fallback modal to edit date of birth if unavailable when clicking findMe
   Desktop: Add max width to Menu slider and profile card
   Insights:
