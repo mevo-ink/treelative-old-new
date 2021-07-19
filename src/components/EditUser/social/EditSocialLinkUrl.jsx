@@ -1,4 +1,4 @@
-import EditableInputDialog from 'components/_input/EditableInputDialog'
+import EditableInputTrigger from 'components/_input/EditableInputTrigger'
 
 import { string } from 'yup'
 
@@ -14,7 +14,7 @@ export default function EditSocialLinkUrl ({ socialLink, ...props }) {
   }
 
   return (
-    <EditableInputDialog
+    <EditableInputTrigger
       fontSize='xs'
       title='Edit Url'
       subTitle={socialLink.fullName}

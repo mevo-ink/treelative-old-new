@@ -1,4 +1,4 @@
-import EditableInputWithIconDialog from 'components/_input/EditableInputWithIconDialog'
+import EditableInputWithIconTrigger from 'components/_input/EditableInputWithIconTrigger'
 
 import { string } from 'yup'
 
@@ -14,7 +14,7 @@ export default function EditUserPhoneNumber ({ user, ...props }) {
   }
 
   return (
-    <EditableInputWithIconDialog
+    <EditableInputWithIconTrigger
       title='Edit Phone Number'
       subTitle={user.fullName}
       name='phoneNumber'

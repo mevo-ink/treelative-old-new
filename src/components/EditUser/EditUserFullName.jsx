@@ -1,6 +1,6 @@
 import React from 'react'
 
-import EditableInputDialog from 'components/_input/EditableInputDialog'
+import EditableInputTrigger from 'components/_input/EditableInputTrigger'
 
 import { string } from 'yup'
 
@@ -16,7 +16,7 @@ export default function EditUserFullName ({ user }) {
   }
 
   return (
-    <EditableInputDialog
+    <EditableInputTrigger
       title='Edit Full Name'
       subTitle={user.fullName}
       name='fullName'
