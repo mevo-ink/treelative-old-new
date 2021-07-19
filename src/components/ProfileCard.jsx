@@ -6,7 +6,7 @@ import {
 } from '@chakra-ui/react'
 
 import { FiEdit } from 'react-icons/fi'
-import { MdDone } from 'react-icons/md'
+import { MdDone, MdClose } from 'react-icons/md'
 
 import { useQuery } from 'urql'
 
@@ -58,6 +58,17 @@ export default function ProfileCard () {
     <Modal isOpen onClose={onClose} isCentered>
       <ModalOverlay />
       <ModalContent background='transparent' border='none'>
+        <IconButton
+          size='2rem'
+          icon={<MdClose size='1.5rem' />}
+          position='absolute'
+          zIndex='1'
+          right='1rem'
+          top='1rem'
+          borderRadius='5px'
+          bg='transparent'
+          onClick={onClose}
+        />
         <OuterWrapper>
           <InnerWrapper>
             {result.error && <Login onSuccess={onLoginSuccess} />}

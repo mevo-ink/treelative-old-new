@@ -31,6 +31,7 @@ export default function App () {
   )
 }
 
+// We should get usernames for socials, and we could connect it to a URL. To make EditUserSocial a bit easy.
 // TODO:
 /*
   CALENDAR styling
@@ -40,7 +41,6 @@ export default function App () {
   Add confirmation dialog on delete
   Replace add user to own profile icon for normal users
   Show findMe to profile card
-  Add close button to profile card
   Finish search bar
   - On search results click, open the profile card
   Investigate google maps overlay buttons
@@ -71,4 +71,5 @@ export default function App () {
   Connect phoneNumber edit to API
   Connect email edit to API
   Connect social links edit to API
+  Add close button to profile card
 */
