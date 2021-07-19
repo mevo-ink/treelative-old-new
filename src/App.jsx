@@ -48,7 +48,6 @@ export default function App () {
   Add birthday viw - kinda same layout as age view
   Add birthday effect on profile mount - maybe not
   Show add new user from children-parent edit dialog
-  Remove all optional fields from add new user
   Add functionality FindMe on age view
   Add functionality FindMe on birthday view
   Style Error modal with contact us info
@@ -72,4 +71,5 @@ export default function App () {
   Connect social links edit to API
   Add close button to profile card
   Show findMe to profile card
+  Remove all optional fields from add new user
 */

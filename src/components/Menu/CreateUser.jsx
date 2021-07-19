@@ -1,10 +1,5 @@
 import { useState, useEffect } from 'react'
 
-import useDevice from 'hooks/useDevice'
-
-import { ADD_USER } from 'graphql/mutations/users'
-import { useMutation } from 'urql'
-
 import {
   Input,
   Stack,
@@ -15,16 +10,17 @@ import {
   FormErrorMessage,
   createStandaloneToast
 } from '@chakra-ui/react'
-
 import { IoPersonAddSharp } from 'react-icons/io5'
 
-import FormDialog from 'components/_common/FormDialog'
-import DateTimePicker from 'components/_input/DateTimePicker'
-import GooglePlacesSelect from 'components/_select/GooglePlacesSelect'
-
+import { useMutation } from 'urql'
+import { object, string } from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { object, string } from 'yup'
+
+import { ADD_USER } from 'graphql/mutations/users'
+
+import useDevice from 'hooks/useDevice'
+import FormDialog from 'components/_common/FormDialog'
 
 const toast = createStandaloneToast()
 
@@ -49,7 +45,7 @@ export default function CreateUser () {
 
   const [{ error, fetching }, createUser] = useMutation(ADD_USER)
 
-  const { register, handleSubmit, formState: { errors }, reset: resetForm, setFocus, setValue, getValues, watch } = useForm({
+  const { register, handleSubmit, formState: { errors }, reset: resetForm, setFocus, watch } = useForm({
     resolver: yupResolver(schemaValidation)
   })
   watch(['dateOfBirth', 'birthLocation', 'currentLocation'])
@@ -101,61 +97,15 @@ export default function CreateUser () {
           onSubmit={handleSubmit(onSubmit)}
         >
           <Stack spacing='8'>
-            <Stack direction='row'>
-              <FormControl isRequired isInvalid={errors?.fullName}>
-                <FormLabel>Full Name</FormLabel>
-                <Input aria-label='full-name' {...register('fullName')} />
-                <FormErrorMessage>{errors?.fullName?.message}</FormErrorMessage>
-              </FormControl>
-              <FormControl isRequired isInvalid={errors?.shortName}>
-                <FormLabel>Short Name</FormLabel>
-                <Input aria-label='short-name' {...register('shortName')} />
-                <FormErrorMessage>{errors?.shortName?.message}</FormErrorMessage>
-              </FormControl>
-            </Stack>
-            <Stack direction='row'>
-              <FormControl isInvalid={errors?.email}>
-                <FormLabel>Email</FormLabel>
-                <Input aria-label='email' {...register('email')} type='email' />
-                <FormErrorMessage>{errors?.email?.message}</FormErrorMessage>
-              </FormControl>
-              <FormControl isInvalid={errors?.phoneNumber}>
-                <FormLabel>Phone Number</FormLabel>
-                <Input aria-label='phone-number' {...register('phoneNumber')} />
-                <FormErrorMessage>
-                  {errors?.phoneNumber?.message}
-                </FormErrorMessage>
-              </FormControl>
-            </Stack>
-            <Stack direction='row' justifyContent='space-around' alignItems='center' spacing='4'>
-              <FormControl maxW='200px'>
-                <FormLabel>Date of Birth</FormLabel>
-                <DateTimePicker
-                  inline
-                  type='date'
-                  label='Date of Birth'
-                  value={getValues('dateOfBirth')}
-                  onChange={dateOfBirth => setValue('dateOfBirth', dateOfBirth)}
-                  error={errors?.dateOfBirth}
-                  fontSize='md'
-                />
-              </FormControl>
-              <FormControl>
-                <FormLabel>Birth Location</FormLabel>
-                <GooglePlacesSelect
-                  menuPlacement='top'
-                  value={getValues('birthLocation')}
-                  onChange={birthLocation => setValue('birthLocation', birthLocation)}
-                />
-              </FormControl>
-            </Stack>
-            <FormControl>
-              <FormLabel>Current Location</FormLabel>
-              <GooglePlacesSelect
-                menuPlacement='top'
-                value={getValues('currentLocation')}
-                onChange={currentLocation => setValue('currentLocation', currentLocation)}
-              />
+            <FormControl isRequired isInvalid={errors?.fullName}>
+              <FormLabel>Full Name</FormLabel>
+              <Input aria-label='full-name' {...register('fullName')} />
+              <FormErrorMessage>{errors?.fullName?.message}</FormErrorMessage>
+            </FormControl>
+            <FormControl isRequired isInvalid={errors?.shortName}>
+              <FormLabel>Short Name</FormLabel>
+              <Input aria-label='short-name' {...register('shortName')} />
+              <FormErrorMessage>{errors?.shortName?.message}</FormErrorMessage>
             </FormControl>
           </Stack>
         </FormDialog>
