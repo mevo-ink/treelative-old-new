@@ -51,8 +51,8 @@ export default function ProfileCard () {
     // clear the activeNodeID
     window.history.pushState({}, '', '/')
     setActiveNodeID(null)
-    // unselect all nodes
-    networkMethods.unselectAll()
+    // unselect all nodes if on network layout
+    layout === 'network' && networkMethods.unselectAll()
     setIsEditMode(false)
   }
 
