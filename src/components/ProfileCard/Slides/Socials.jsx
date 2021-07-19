@@ -19,10 +19,10 @@ export default function Socials ({ user }) {
   const isEditMode = useRecoilValue(isEditModeAtom)
 
   const data = [
-    { ...user.socialLinks.filter(social => social.type === 'INSTAGRAM')[0], icon: instagram },
-    { ...user.socialLinks.filter(social => social.type === 'FACEBOOK')[0], icon: facebook },
-    { ...user.socialLinks.filter(social => social.type === 'TWITTER')[0], icon: twitter },
-    { ...user.socialLinks.filter(social => social.type === 'LINKEDIN')[0], icon: linkedIn }
+    { ...user.socialLinks.filter(social => social.type === 'INSTAGRAM')[0], icon: instagram, name: 'Instagram' },
+    { ...user.socialLinks.filter(social => social.type === 'FACEBOOK')[0], icon: facebook, name: 'Facebook' },
+    { ...user.socialLinks.filter(social => social.type === 'TWITTER')[0], icon: twitter, name: 'Twitter' },
+    { ...user.socialLinks.filter(social => social.type === 'LINKEDIN')[0], icon: linkedIn, name: 'LinkedIn' }
   ]
 
   return (

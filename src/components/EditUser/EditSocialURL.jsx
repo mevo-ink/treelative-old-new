@@ -16,7 +16,7 @@ export default function EditSocialLinkUrl ({ social, ...props }) {
   return (
     <EditableIconTrigger
       fontSize='xs'
-      title='Edit Url'
+      title={`Edit ${social.name} Url`}
       name='url'
       value={social.url || ''}
       onSubmit={handleSubmit}
