@@ -22,10 +22,15 @@ import {
 import { MdAdd } from 'react-icons/md'
 import { BiTrash } from 'react-icons/bi'
 
-import { useMutation } from 'urql'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
+import {
+  isEditModeAtom,
+  activeNodeIDAtom,
+  layoutAtom,
+  networkMethodsAtom
+} from 'utils/atoms.js'
 
-import { isEditModeAtom, activeNodeIDAtom } from 'utils/atoms.js'
+import { useMutation } from 'urql'
 import { LIST_USER_AVAILABLE_CHILDREN } from 'graphql/queries/users'
 import { ADD_USER_CHILD, DELETE_USER_CHILD } from 'graphql/mutations/users'
 
@@ -38,6 +43,9 @@ import CreateUser from 'components/Menu/CreateUser'
 const toast = createStandaloneToast()
 
 export default function EditUserChildren (props) {
+  const layout = useRecoilValue(layoutAtom)
+  const networkMethods = useRecoilValue(networkMethodsAtom)
+
   const [removeChildResult, removeUserChild] = useMutation(DELETE_USER_CHILD)
 
   const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
@@ -65,6 +73,7 @@ export default function EditUserChildren (props) {
               duration: 3000,
               isClosable: true
             })
+            layout === 'network' && networkMethods.refetch()
           }
         })
     }
@@ -145,6 +154,9 @@ export default function EditUserChildren (props) {
 }
 
 function AddUserChildModal ({ user, onClose, isRefetching }) {
+  const layout = useRecoilValue(layoutAtom)
+  const networkMethods = useRecoilValue(networkMethodsAtom)
+
   const [isAddNewOpen, setIsAddNewOpen] = useState('')
 
   const [result, addUserChild] = useMutation(ADD_USER_CHILD)
@@ -165,6 +177,7 @@ function AddUserChildModal ({ user, onClose, isRefetching }) {
               duration: 3000,
               isClosable: true
             })
+            layout === 'network' && networkMethods.refetch()
             onClose()
           }
         })
@@ -185,6 +198,7 @@ function AddUserChildModal ({ user, onClose, isRefetching }) {
               duration: 3000,
               isClosable: true
             })
+            layout === 'network' && networkMethods.refetch()
             onClose()
           }
         })

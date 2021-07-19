@@ -69,7 +69,7 @@ export default function Graph () {
   const setNetworkMethods = useSetRecoilState(networkMethodsAtom)
   const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
 
-  const [result] = useQuery({ query: GET_NETWORK_DATA })
+  const [result, refetch] = useQuery({ query: GET_NETWORK_DATA })
 
   useEffect(() => {
     if (!result.data?.getNetworkData) return
@@ -90,6 +90,9 @@ export default function Graph () {
             easingFunction: 'easeInCubic'
           }
         })
+      },
+      refetch: () => {
+        refetch({ requestPolicy: 'network-only' })
       }
     })
     // zoom on Graph mount

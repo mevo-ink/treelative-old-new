@@ -26,10 +26,15 @@ import {
 import { MdAdd } from 'react-icons/md'
 import { BiTrash } from 'react-icons/bi'
 
-import { useMutation } from 'urql'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
+import {
+  isEditModeAtom,
+  activeNodeIDAtom,
+  layoutAtom,
+  networkMethodsAtom
+} from 'utils/atoms.js'
 
-import { isEditModeAtom, activeNodeIDAtom } from 'utils/atoms.js'
+import { useMutation } from 'urql'
 import { LIST_USER_AVAILABLE_PARENTS } from 'graphql/queries/users'
 import { ADD_USER_PARENT, DELETE_USER_PARENT } from 'graphql/mutations/users'
 
@@ -42,6 +47,9 @@ import CreateUser from 'components/Menu/CreateUser'
 const toast = createStandaloneToast()
 
 export default function EditUserParents (props) {
+  const layout = useRecoilValue(layoutAtom)
+  const networkMethods = useRecoilValue(networkMethodsAtom)
+
   const [removeParentResult, removeParent] = useMutation(DELETE_USER_PARENT)
 
   const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
@@ -69,6 +77,7 @@ export default function EditUserParents (props) {
               duration: 3000,
               isClosable: true
             })
+            layout === 'network' && networkMethods.refetch()
           }
         })
     }
@@ -153,6 +162,9 @@ export default function EditUserParents (props) {
 }
 
 function EditUserParentsModal ({ user, onClose, isRefetching }) {
+  const layout = useRecoilValue(layoutAtom)
+  const networkMethods = useRecoilValue(networkMethodsAtom)
+
   const [isAddNewOpen, setIsAddNewOpen] = useState('')
 
   const [result, addUserParent] = useMutation(ADD_USER_PARENT)
@@ -173,6 +185,7 @@ function EditUserParentsModal ({ user, onClose, isRefetching }) {
               duration: 3000,
               isClosable: true
             })
+            layout === 'network' && networkMethods.refetch()
             onClose()
           }
         })
@@ -193,6 +206,7 @@ function EditUserParentsModal ({ user, onClose, isRefetching }) {
               duration: 3000,
               isClosable: true
             })
+            layout === 'network' && networkMethods.refetch()
             onClose()
           }
         })
@@ -204,7 +218,7 @@ function EditUserParentsModal ({ user, onClose, isRefetching }) {
       {isAddNewOpen && <CreateUser initialValue={isAddNewOpen} onClose={handleCreateUserClose} />}
       <Modal isOpen isCentered onClose={onClose}>
         <ModalOverlay />
-        <ModalContent minH='25rem'>
+        <ModalContent minH='30rem'>
           <ModalHeader>
             Add Parent
           </ModalHeader>
