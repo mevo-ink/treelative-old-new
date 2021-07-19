@@ -31,7 +31,6 @@ export default function App () {
   )
 }
 
-// We should get usernames for socials, and we could connect it to a URL. To make EditUserSocial a bit easy.
 // TODO:
 /*
   CALENDAR styling

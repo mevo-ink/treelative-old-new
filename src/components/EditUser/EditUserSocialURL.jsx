@@ -6,7 +6,15 @@ import { UPDATE_SOCIAL_LINK_URL } from 'graphql/mutations/socialLinks'
 export default function EditUserSocialURL ({ social, ...props }) {
   const [{ error, fetching }, updateSocialLinkUrl] = useMutation(UPDATE_SOCIAL_LINK_URL)
 
-  const handleSubmit = url => {
+  const data = [
+    { name: 'Instagram', baseURL: 'https://instagram.com/' },
+    { name: 'Facebook', baseURL: 'https://www.facebook.com/' },
+    { name: 'LinkedIn', baseURL: 'https://www.linkedin.com/in/' },
+    { name: 'Twitter', baseURL: 'https://twitter.com/' }
+  ]
+
+  const handleSubmit = username => {
+    const url = data.filter(url => url.name === social.name)[0].baseURL + username
     const variables = { socialLinkID: social.id, input: { url } }
     return updateSocialLinkUrl(variables)
   }
@@ -14,9 +22,9 @@ export default function EditUserSocialURL ({ social, ...props }) {
   return (
     <EditableIconTrigger
       fontSize='xs'
-      title={`Edit ${social.name} Url`}
+      title={`Edit ${social.name} Username`}
       name='url'
-      value={social.url || ''}
+      value={social.url ? social.url.substring(social.url.lastIndexOf('/') + 1) : ''}
       onSubmit={handleSubmit}
       loading={fetching}
       error={error}
