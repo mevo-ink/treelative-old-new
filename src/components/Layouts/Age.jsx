@@ -1,27 +1,28 @@
+import { useRef } from 'react'
+
+import { Flex, Text, Image } from '@chakra-ui/react'
+
 import { useQuery } from 'urql'
+import { useSetRecoilState } from 'recoil'
+
+import { activeNodeIDAtom } from 'utils/atoms.js'
 import { GET_AGE_DATA } from 'graphql/queries/layouts'
 
 import Loading from 'components/Loading'
-
-import {
-  Flex,
-  Text,
-  Image
-} from '@chakra-ui/react'
-
-import { useSetRecoilState } from 'recoil'
-import { activeNodeIDAtom } from 'utils/atoms.js'
 
 export default function Age () {
   const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
 
   const [result] = useQuery({ query: GET_AGE_DATA })
 
+  const scrollRef = useRef(null)
+  const handleHorizontalScroll = e => {
+    scrollRef.current.scrollTo({ top: 0, left: scrollRef.current.scrollLeft + e.deltaY })
+  }
+
   if (result.error) return <p>ERROR</p>
 
   if (result.fetching) return <Loading />
-
-  // TODO: ACTUAL STYLING WITH HORIZONTAL SCROLLING AND TIMELINE
 
   const handleUserSelect = (userID) => {
     setActiveNodeID(userID)
@@ -29,7 +30,14 @@ export default function Age () {
   }
 
   return (
-    <Flex h='100vh' overflowY='hidden' overflowX='scroll'>
+    <Flex
+      ref={scrollRef}
+      h='100vh'
+      overflowY='hidden'
+      overflowX='scroll'
+      sx={{ '&::-webkit-scrollbar': { display: 'none' }, 'scrollbar-width': 'none' }}
+      onWheel={handleHorizontalScroll}
+    >
       {Object.entries(result.data.getAgeData).map(([year, users]) =>
         <Flex key={year} direction='column' mx='2'>
           <Text fontWeight='800' fontSize='xl' textAlign='center'>{users.length}</Text>
