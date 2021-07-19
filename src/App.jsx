@@ -34,7 +34,7 @@ export default function App () {
 // TODO:
 /*
   CALENDAR styling
-  BUG: location update
+  BUG: dropdown select not working on mobile
   Add absolute position marker on map Image
   Add remove button for all editable fields
   Connect social links edit to API
