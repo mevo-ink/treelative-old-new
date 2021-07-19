@@ -19,11 +19,13 @@ export default function Socials ({ user }) {
   const isEditMode = useRecoilValue(isEditModeAtom)
 
   const data = [
-    { ...user.socialLinks.filter(social => social.type === 'INSTAGRAM')[0], icon: instagram, name: 'Instagram' },
-    { ...user.socialLinks.filter(social => social.type === 'FACEBOOK')[0], icon: facebook, name: 'Facebook' },
-    { ...user.socialLinks.filter(social => social.type === 'TWITTER')[0], icon: twitter, name: 'Twitter' },
-    { ...user.socialLinks.filter(social => social.type === 'LINKEDIN')[0], icon: linkedIn, name: 'LinkedIn' }
+    { ...user.socialLinks.find(social => social.type === 'INSTAGRAM'), icon: instagram, name: 'Instagram', baseURL: 'https://instagram.com/' },
+    { ...user.socialLinks.find(social => social.type === 'FACEBOOK'), icon: facebook, name: 'Facebook', baseURL: 'https://www.facebook.com/' },
+    { ...user.socialLinks.find(social => social.type === 'TWITTER'), icon: twitter, name: 'Twitter', baseURL: 'https://twitter.com/' },
+    { ...user.socialLinks.find(social => social.type === 'LINKEDIN'), icon: linkedIn, name: 'LinkedIn', baseURL: 'https://www.linkedin.com/in/' }
   ]
+
+  console.log(data)
 
   return (
     <Flex
@@ -39,7 +41,9 @@ export default function Socials ({ user }) {
     >
       {user.phoneNumber && <EditUserPhoneNumber user={user} icon={phone} />}
       <Grid w='55%' gridTemplateColumns='repeat(2, 1fr)' flexFlow='wrap'>
-        {data.map((social, idx) => (<EditUserSocialURL key={idx} social={social} isDisabled={!isEditMode} />))}
+        {data.map((social, idx) => (
+          <EditUserSocialURL key={idx} social={social} isDisabled={!isEditMode} />
+        ))}
       </Grid>
       {user.email && <EditUserEmail user={user} icon={email} />}
     </Flex>

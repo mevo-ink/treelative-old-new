@@ -12,6 +12,8 @@ const CustomSelect = forwardRef((props, ref) => {
       cacheOptions
       ref={ref}
       styles={styles}
+      defaultMenuIsOpen
+      autoFocus
       {...props}
     />
   )

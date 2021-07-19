@@ -19,7 +19,7 @@ export default function EditableIconTrigger (props) {
     100% { transform: rotate(1deg); }
   `
 
-  const { ...inputProps } = props
+  const { icon, url, ...inputProps } = props
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -33,15 +33,15 @@ export default function EditableIconTrigger (props) {
       {isOpen && <EditableInputModal {...inputProps} onClose={onClose} />}
       <Button
         p='0'
-        onClick={() => handleClick(props.social.url)}
-        isDisabled={!isEditMode && !props.social.url}
+        onClick={() => handleClick(url)}
+        isDisabled={!isEditMode && !url}
         m='1rem 0'
       >
         <Image
-          src={props.social.icon}
+          src={icon}
           w='40px'
           objectFit='contain'
-          filter={!props.social.url && 'grayscale(100%)'}
+          filter={!url && 'grayscale(100%)'}
           animation={isEditMode && `${wiggle} infinite .15s linear`}
         />
       </Button>

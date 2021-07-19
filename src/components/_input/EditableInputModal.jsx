@@ -1,11 +1,13 @@
 import { useEffect } from 'react'
 
 import {
+  Link,
   Input,
   Textarea,
   InputGroup,
   FormControl,
   InputLeftAddon,
+  FormHelperText,
   createStandaloneToast
 } from '@chakra-ui/react'
 
@@ -31,7 +33,8 @@ export default function EditableInputModal (props) {
     error,
     rows = 10,
     notification = '',
-    leftAddon
+    leftAddon,
+    prefix = ''
   } = props
 
   const InputElement = type === 'textarea' ? Textarea : Input
@@ -45,10 +48,12 @@ export default function EditableInputModal (props) {
     onClose()
   }
 
-  const { handleSubmit, formState: { errors }, register, reset, setFocus } = useForm({
+  const { handleSubmit, formState: { errors }, register, reset, setFocus, getValues, watch } = useForm({
     defaultValues: { [name]: value },
     resolver: yupResolver(schemaValidation)
   })
+
+  watch([name])
 
   // eslint-disable-next-line
   useEffect(() => { setTimeout(() => setFocus(name), 1) }, [])
@@ -94,6 +99,11 @@ export default function EditableInputModal (props) {
             rows={rows}
           />
         </InputGroup>
+        {prefix && (
+          <FormHelperText isExternal as={Link} href={`${prefix}${getValues(name)}`}>
+            {prefix}{getValues(name)}
+          </FormHelperText>
+        )}
       </FormControl>
     </FormDialog>
   )
