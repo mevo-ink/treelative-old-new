@@ -7,11 +7,18 @@ import {
 
 import { FiEdit } from 'react-icons/fi'
 import { MdDone, MdClose } from 'react-icons/md'
+import { BiCurrentLocation } from 'react-icons/bi'
 
 import { useQuery } from 'urql'
 
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { networkMethodsAtom, activeNodeIDAtom, isEditModeAtom } from 'utils/atoms.js'
+import {
+  layoutAtom,
+  isEditModeAtom,
+  mapMethodsAtom,
+  activeNodeIDAtom,
+  networkMethodsAtom
+} from 'utils/atoms.js'
 
 import { GET_USER } from 'graphql/queries/users'
 
@@ -31,11 +38,14 @@ import EditUserFullName from 'components/EditUser/EditUserFullName'
 
 export default function ProfileCard () {
   const [isEditMode, setIsEditMode] = useRecoilState(isEditModeAtom)
-
-  const networkMethods = useRecoilValue(networkMethodsAtom)
   const [activeNodeID, setActiveNodeID] = useRecoilState(activeNodeIDAtom)
 
+  const layout = useRecoilValue(layoutAtom)
+  const mapMethods = useRecoilValue(mapMethodsAtom)
+  const networkMethods = useRecoilValue(networkMethodsAtom)
+
   const [result, refetch] = useQuery({ query: GET_USER, variables: { filter: { id: activeNodeID } } })
+  const user = result.data?.getUser
 
   const onClose = () => {
     // clear the activeNodeID
@@ -46,13 +56,36 @@ export default function ProfileCard () {
     setIsEditMode(false)
   }
 
-  const onLoginSuccess = () => {
-    refetch({ requestPolicy: 'network-only' })
+  const onLoginSuccess = () => { refetch({ requestPolicy: 'network-only' }) }
+
+  const handleFindMe = () => {
+    switch (layout) {
+      case 'map':
+        mapMethods.panTo(user.id)
+        break
+      case 'age':
+        console.log('TODO: CENTER AUTH USER ON AGE VIEW')
+        break
+      default:
+        networkMethods.moveTo(user.id)
+        break
+    }
+    onClose()
+  }
+
+  const innerBtnStyles = {
+    position: 'absolute',
+    right: '.3rem',
+    top: '.3rem',
+    borderRadius: '20px',
+    color: 'hsla(261, 64%, 18%, 1)',
+    background: 'hsla(0, 0%, 100%, .2)',
+    boxShadow: '0px 3px 5px hsla(0, 0%, 0%, .2)',
+    _hover: { background: 'hsla(0, 0%, 50%, .2)' },
+    _active: { background: 'hsla(0, 0%, 50%, .2)' }
   }
 
   if (result.fetching) return <Loading />
-
-  const user = result.data?.getUser
 
   return (
     <Modal isOpen onClose={onClose} isCentered>
@@ -74,23 +107,8 @@ export default function ProfileCard () {
             {result.error && <Login onSuccess={onLoginSuccess} />}
             {result.data?.getUser && (
               <>
-                <IconButton
-                  icon={isEditMode ? <MdDone /> : <FiEdit />}
-                  position='absolute'
-                  left='.3rem'
-                  top='.3rem'
-                  borderRadius='20px'
-                  color='hsla(261, 64%, 18%, 1)'
-                  background='hsla(0, 0%, 100%, .2)'
-                  boxShadow='0px 3px 5px hsla(0, 0%, 0%, .2)'
-                  _hover={{
-                    background: 'hsla(0, 0%, 50%, .2)'
-                  }}
-                  _active={{
-                    background: 'hsla(0, 0%, 50%, .2)'
-                  }}
-                  onClick={() => setIsEditMode(!isEditMode)}
-                />
+                <IconButton icon={isEditMode ? <MdDone /> : <FiEdit />} {...innerBtnStyles} left='.3rem' onClick={() => setIsEditMode(!isEditMode)} />
+                <IconButton icon={<BiCurrentLocation size='1.3rem' />} {...innerBtnStyles} onClick={handleFindMe} />
                 <EditUserAvatar user={user} />
                 <EditUserFullName user={user} />
                 <Slider>

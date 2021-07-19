@@ -40,7 +40,6 @@ export default function App () {
   Show default suggestion on edit user
   Add confirmation dialog on delete
   Replace add user to own profile icon for normal users
-  Show findMe to profile card
   Finish search bar
   - On search results click, open the profile card
   Investigate google maps overlay buttons
@@ -72,4 +71,5 @@ export default function App () {
   Connect email edit to API
   Connect social links edit to API
   Add close button to profile card
+  Show findMe to profile card
 */
