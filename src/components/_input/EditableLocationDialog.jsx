@@ -80,7 +80,7 @@ function InputDialog (props) {
       setLocationURL(`https://www.google.com/maps/embed/v1/place?key=${key}&q=${q}&zoom=${zoom}`)
     }
     // eslint-disable-next-line
-  }, [location?.value?.suggested?.description])
+  }, [location?.value?.description])
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
