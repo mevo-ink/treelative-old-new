@@ -86,7 +86,7 @@ export default function CreateUser () {
         isRound
         icon={<IoPersonAddSharp color='white' />}
         size='sm'
-        bg='hsla(220, 98%, 57%, .8)'
+        bg='hsla(220, 100%, 60%, .8)'
         onClick={onOpen}
       />
       {isOpen && (
@@ -104,24 +104,24 @@ export default function CreateUser () {
             <Stack direction='row'>
               <FormControl isRequired isInvalid={errors?.fullName}>
                 <FormLabel>Full Name</FormLabel>
-                <Input {...register('fullName')} />
+                <Input aria-label='full-name' {...register('fullName')} />
                 <FormErrorMessage>{errors?.fullName?.message}</FormErrorMessage>
               </FormControl>
               <FormControl isRequired isInvalid={errors?.shortName}>
                 <FormLabel>Short Name</FormLabel>
-                <Input {...register('shortName')} />
+                <Input aria-label='short-name' {...register('shortName')} />
                 <FormErrorMessage>{errors?.shortName?.message}</FormErrorMessage>
               </FormControl>
             </Stack>
             <Stack direction='row'>
               <FormControl isInvalid={errors?.email}>
                 <FormLabel>Email</FormLabel>
-                <Input {...register('email')} type='email' />
+                <Input aria-label='email' {...register('email')} type='email' />
                 <FormErrorMessage>{errors?.email?.message}</FormErrorMessage>
               </FormControl>
               <FormControl isInvalid={errors?.phoneNumber}>
                 <FormLabel>Phone Number</FormLabel>
-                <Input {...register('phoneNumber')} />
+                <Input aria-label='phone-number' {...register('phoneNumber')} />
                 <FormErrorMessage>
                   {errors?.phoneNumber?.message}
                 </FormErrorMessage>
