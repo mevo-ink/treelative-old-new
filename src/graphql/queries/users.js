@@ -175,6 +175,7 @@ export const GET_AUTH_USER = gql`
   query GET_AUTH_USER ($filter: UserUniqueFilter!) {
     getUser (filter: $filter) {
       id
+      fullName
       dateOfBirth
       avatar
     }

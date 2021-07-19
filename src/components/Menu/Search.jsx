@@ -7,7 +7,7 @@ import { BsSearch } from 'react-icons/bs'
 
 export default function Search ({ admin }) {
   return (
-    <InputGroup h='2rem' w={admin ? '75%' : '85%'}>
+    <InputGroup h='2rem' w={admin ? '65%' : '85%'}>
       <InputRightElement
         h='100%'
         border='none'

@@ -39,7 +39,6 @@ export default function App () {
   Add remove button for all editable fields
   Show default suggestion on edit user
   Add confirmation dialog on delete
-  Replace add user to own profile icon for normal users
   Finish search bar
   - On search results click, open the profile card
   Investigate google maps overlay buttons
@@ -72,4 +71,5 @@ export default function App () {
   Fix scrolling position on desktop mode - map vertical to horizontal
   Check on focus style for FindMe button on disabled
   Add functionality FindMe on age view
+  Replace add user to own profile icon for normal users
 */
