@@ -41,8 +41,6 @@ export default function App () {
   Finish search bar
   - On search results click, open the profile card
   Investigate google maps overlay buttons
-  Complete Age view
-  - add functionality to center any user
   Add birthday viw - kinda same layout as age view
   Show add new user from children-parent edit dialog
   Add functionality FindMe on birthday view
@@ -71,4 +69,6 @@ export default function App () {
   Check on focus style for FindMe button on disabled
   Add functionality FindMe on age view
   Replace add user to own profile icon for normal users
+  Complete Age view
+  - add functionality to center any user
 */

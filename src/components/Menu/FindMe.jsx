@@ -22,7 +22,7 @@ export default function FindMe ({ onClose, authUser }) {
         break
       case 'age':
         setTimeout(() => {
-          document.getElementById(authUser.dateOfBirth.slice(0, 4)).scrollIntoView({ inline: 'center', behavior: 'smooth' })
+          document.getElementById(authUser.dateOfBirth.slice(0, 4)).scrollIntoView({ behavior: 'smooth', block: 'center' })
         }, 150)
         break
       default:

@@ -65,7 +65,7 @@ export default function ProfileCard () {
         break
       case 'age':
         setTimeout(() => {
-          document.getElementById(user.dateOfBirth.slice(0, 4)).scrollIntoView({ inline: 'center', behavior: 'smooth' })
+          document.getElementById(user.dateOfBirth.slice(0, 4)).scrollIntoView({ behavior: 'smooth', block: 'center' })
         }, 150)
         break
       default:
