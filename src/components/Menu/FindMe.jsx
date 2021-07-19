@@ -39,9 +39,6 @@ export default function FindMe ({ onClose, authUser }) {
       size='sm'
       bg='hsla(220, 100%, 60%, .8)'
       onClick={handleFindMe}
-      isDisabled={!authUser}
-      _hover
-      _active
     />
   )
 }

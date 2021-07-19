@@ -5,9 +5,9 @@ import {
 } from '@chakra-ui/react'
 import { BsSearch } from 'react-icons/bs'
 
-export default function Search ({ admin }) {
+export default function Search ({ role }) {
   return (
-    <InputGroup h='2rem' w={admin ? '65%' : '85%'}>
+    <InputGroup h='2rem' w={role === 'ADMIN' ? '65%' : role === 'USER' ? '75%' : '100%'}>
       <InputRightElement
         h='100%'
         border='none'

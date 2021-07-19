@@ -11,6 +11,7 @@ export default function Profile ({ onClose, authUser }) {
     onClose()
     setActiveNodeID(authUser.id)
   }
+
   return (
     <Button
       size='sm'

@@ -74,10 +74,10 @@ export default function Menu () {
               spacing='2rem'
             >
               <Flex justifyContent='space-between'>
-                <Search admin={role} />
+                <Search role={role} />
                 {role === 'ADMIN' && <CreateUser />}
                 {role && <Profile onClose={onClose} authUser={result.data?.getUser} />}
-                <FindMe onClose={onClose} authUser={result.data?.getUser} />
+                {role && <FindMe onClose={onClose} authUser={result.data?.getUser} />}
               </Flex>
               <Layouts onClose={onClose} />
               <Insights />
