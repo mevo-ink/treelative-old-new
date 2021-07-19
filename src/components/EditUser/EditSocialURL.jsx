@@ -1,30 +1,30 @@
-import EditableInputTrigger from 'components/_input/EditableInputTrigger'
+import EditableIconTrigger from 'components/_input/EditableIconTrigger'
 
 import { string } from 'yup'
 
 import { useMutation } from 'urql'
 import { UPDATE_SOCIAL_LINK_URL } from 'graphql/mutations/socialLinks'
 
-export default function EditSocialLinkUrl ({ socialLink, ...props }) {
+export default function EditSocialLinkUrl ({ social, ...props }) {
   const [{ error, fetching }, updateSocialLinkUrl] = useMutation(UPDATE_SOCIAL_LINK_URL)
 
   const handleSubmit = url => {
-    const variables = { socialLinkID: socialLink.id, input: { url } }
+    const variables = { socialLinkID: social.id, input: { url } }
     return updateSocialLinkUrl(variables)
   }
 
   return (
-    <EditableInputTrigger
+    <EditableIconTrigger
       fontSize='xs'
       title='Edit Url'
-      subTitle={socialLink.fullName}
       name='url'
-      value={socialLink.url || ''}
+      value={social.url || ''}
       onSubmit={handleSubmit}
       validation={string().url().required()}
       loading={fetching}
       error={error}
       notification='Successfully updated the url'
+      social={social}
       {...props}
     />
   )

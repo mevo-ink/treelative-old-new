@@ -1,11 +1,11 @@
-import {
-  Grid,
-  Flex,
-  Image,
-  Button
-} from '@chakra-ui/react'
+import { Grid, Flex } from '@chakra-ui/react'
+
+import { useRecoilValue } from 'recoil'
+
+import { isEditModeAtom } from 'utils/atoms.js'
 
 import EditUserEmail from 'components/EditUser/EditUserEmail'
+import EditSocialURL from 'components/EditUser/EditSocialURL'
 import EditUserPhoneNumber from 'components/EditUser/EditUserPhoneNumber'
 
 import email from 'images/email.svg'
@@ -16,12 +16,15 @@ import linkedIn from 'images/linkedIn.svg'
 import instagram from 'images/instagram.svg'
 
 export default function Socials ({ user }) {
+  const isEditMode = useRecoilValue(isEditModeAtom)
+
   const data = [
-    { icon: instagram, url: user.socialLinks.filter(social => social.type === 'INSTAGRAM')[0]?.url },
-    { icon: facebook, url: user.socialLinks.filter(social => social.type === 'FACEBOOK')[0]?.url },
-    { icon: twitter, url: user.socialLinks.filter(social => social.type === 'TWITTER')[0]?.url },
-    { icon: linkedIn, url: user.socialLinks.filter(social => social.type === 'LINKEDIN')[0]?.url }
+    { ...user.socialLinks.filter(social => social.type === 'INSTAGRAM')[0], icon: instagram },
+    { ...user.socialLinks.filter(social => social.type === 'FACEBOOK')[0], icon: facebook },
+    { ...user.socialLinks.filter(social => social.type === 'TWITTER')[0], icon: twitter },
+    { ...user.socialLinks.filter(social => social.type === 'LINKEDIN')[0], icon: linkedIn }
   ]
+
   return (
     <Flex
       w='80%'
@@ -35,27 +38,8 @@ export default function Socials ({ user }) {
       p='1.5rem 0'
     >
       {user.phoneNumber && <EditUserPhoneNumber user={user} icon={phone} />}
-      <Grid
-        w='55%'
-        gridTemplateColumns='repeat(2, 1fr)'
-        flexFlow='wrap'
-      >
-        {data.map((social, idx) => (
-          <Button
-            key={idx}
-            p='0'
-            onClick={() => window.open(social.url, '_blank').focus()}
-            isDisabled={!social.url}
-            m='1rem 0'
-          >
-            <Image
-              src={social.icon}
-              w='40px'
-              objectFit='contain'
-              filter={!social.url && 'grayscale(100%)'}
-            />
-          </Button>
-        ))}
+      <Grid w='55%' gridTemplateColumns='repeat(2, 1fr)' flexFlow='wrap'>
+        {data.map((social, idx) => (<EditSocialURL key={idx} social={social} isDisabled={!isEditMode} />))}
       </Grid>
       {user.email && <EditUserEmail user={user} icon={email} />}
     </Flex>

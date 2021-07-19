@@ -1,5 +1,4 @@
 import {
-  Flex,
   Image,
   Button,
   keyframes,
@@ -7,12 +6,11 @@ import {
 } from '@chakra-ui/react'
 
 import { useRecoilValue } from 'recoil'
-
 import { isEditModeAtom } from 'utils/atoms.js'
 
 import EditableInputModal from 'components/_input/EditableInputModal'
 
-export default function EditableInputWithIconTrigger (props) {
+export default function EditableIconTrigger (props) {
   const isEditMode = useRecoilValue(isEditModeAtom)
 
   const wiggle = keyframes`
@@ -25,35 +23,28 @@ export default function EditableInputWithIconTrigger (props) {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const handleClick = () => {
+  const handleClick = (social) => {
     if (isEditMode) onOpen()
-    else console.log('What Are We Going To Do OnClick?')
+    else window.open(social, '_blank').focus()
   }
 
   return (
     <>
       {isOpen && <EditableInputModal {...inputProps} onClose={onClose} />}
-      <Flex justifyContent='center' animation={isEditMode && `${wiggle} infinite .15s linear`}>
+      <Button
+        p='0'
+        onClick={() => handleClick(props.social.url)}
+        isDisabled={!isEditMode && !props.social.url}
+        m='1rem 0'
+      >
         <Image
-          src={props.icon}
-          h='100%'
+          src={props.social.icon}
+          w='40px'
           objectFit='contain'
-          p='.4em'
-          background='hsla(0, 0%, 100%, .2)'
-          boxShadow='0px 3px 5px hsla(0, 0%, 0%, .2)'
-          borderLeftRadius='999px'
+          filter={!props.social.url && 'grayscale(100%)'}
+          animation={isEditMode && `${wiggle} infinite .15s linear`}
         />
-        <Button
-          variant='editable-input'
-          maxW='200px'
-          mt='0'
-          fontSize='14px'
-          borderLeftRadius='unset'
-          onClick={handleClick}
-        >
-          {props.value}
-        </Button>
-      </Flex>
+      </Button>
     </>
   )
 }

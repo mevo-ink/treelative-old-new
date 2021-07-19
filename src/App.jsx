@@ -36,7 +36,6 @@ export default function App () {
   CALENDAR styling
   BUG: dropdown select not working on mobile
   Add remove button for all editable fields
-  Connect social links edit to API
   Show default suggestion on edit user
   Add confirmation dialog on delete
   Replace add user to own profile icon for normal users
@@ -71,4 +70,5 @@ export default function App () {
   Add absolute position marker on map Image
   Connect phoneNumber edit to API
   Connect email edit to API
+  Connect social links edit to API
 */
