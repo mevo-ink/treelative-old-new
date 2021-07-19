@@ -25,8 +25,6 @@ export default function Socials ({ user }) {
     { ...user.socialLinks.find(social => social.type === 'LINKEDIN'), icon: linkedIn, name: 'LinkedIn', baseURL: 'https://www.linkedin.com/in/' }
   ]
 
-  console.log(data)
-
   return (
     <Flex
       w='80%'

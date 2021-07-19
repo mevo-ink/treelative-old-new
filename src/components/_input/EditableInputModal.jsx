@@ -59,7 +59,8 @@ export default function EditableInputModal (props) {
   useEffect(() => { setTimeout(() => setFocus(name), 1) }, [])
 
   const handleOnSubmit = (form) => {
-    const submitData = type !== 'number' ? form[name].trim() : parseInt(form[name])
+    let submitData = type !== 'number' ? form[name].trim() : parseInt(form[name])
+    if (prefix) submitData = prefix + submitData
     onSubmit(submitData)
       .then(result => {
         if (result.data) {
