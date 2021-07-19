@@ -52,7 +52,6 @@ export default function App () {
   Style Error modal with contact us info
   Add fallback modal to edit date of birth if unavailable when clicking findMe
   Desktop: Add max width to Menu slider and profile card
-  Check on focus style for FindMe button on disabled
   Insights:
   - Center label
   - Show users count by country
@@ -72,4 +71,5 @@ export default function App () {
   Show findMe to profile card
   Remove all optional fields from add new user
   Fix scrolling position on desktop mode - map vertical to horizontal
+  Check on focus style for FindMe button on disabled
 */
