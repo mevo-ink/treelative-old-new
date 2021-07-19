@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import AsyncSelect from 'components/_select/AsyncSelect'
+import AsyncCreatableSelect from 'components/_select/AsyncCreatableSelect'
 
 import { useClient } from 'urql'
 
@@ -40,7 +40,7 @@ export default function UserSelection (props) {
   return (
     <Stack spacing='4'>
       {error && <ErrorAlert> {error.message} </ErrorAlert>}
-      <AsyncSelect
+      <AsyncCreatableSelect
         {...rest}
         defaultOptions
         placeholder={placeholder}

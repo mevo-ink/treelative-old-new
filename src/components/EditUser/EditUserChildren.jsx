@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import {
   Box,
   Text,
@@ -30,6 +32,8 @@ import { ADD_USER_CHILD, DELETE_USER_CHILD } from 'graphql/mutations/users'
 import Loading from 'components/_common/Loading'
 import ErrorAlert from 'components/_common/ErrorAlert'
 import UserSelection from 'components/_common/UserSelection'
+
+import CreateUser from 'components/Menu/CreateUser'
 
 const toast = createStandaloneToast()
 
@@ -141,55 +145,85 @@ export default function EditUserChildren (props) {
 }
 
 function AddUserChildModal ({ user, onClose, isRefetching }) {
+  const [isAddNewOpen, setIsAddNewOpen] = useState('')
+
   const [result, addUserChild] = useMutation(ADD_USER_CHILD)
 
   const handleOnChange = userChild => {
-    const variables = { userID: user.id, childID: userChild.value }
-    addUserChild(variables)
-      .then(result => {
-        if (result.data) {
-          toast({
-            title: 'Successfully added the child',
-            status: 'success',
-            position: 'top',
-            duration: 3000,
-            isClosable: true
-          })
-          onClose()
-        }
-      })
+    if (userChild.__isNew__) {
+      // show create new user dialog
+      setIsAddNewOpen(userChild.value)
+    } else {
+      const variables = { userID: user.id, childID: userChild.value }
+      addUserChild(variables)
+        .then(result => {
+          if (result.data) {
+            toast({
+              title: 'Successfully added the child',
+              status: 'success',
+              position: 'top',
+              duration: 3000,
+              isClosable: true
+            })
+            onClose()
+          }
+        })
+    }
+  }
+
+  const handleCreateUserClose = (response) => {
+    setIsAddNewOpen('')
+    if (response) {
+      const variables = { userID: user.id, childID: response.addUser.id }
+      addUserChild(variables)
+        .then(result => {
+          if (result.data) {
+            toast({
+              title: 'Successfully added the child',
+              status: 'success',
+              position: 'top',
+              duration: 3000,
+              isClosable: true
+            })
+            onClose()
+          }
+        })
+    }
   }
 
   return (
-    <Modal isOpen isCentered onClose={onClose}>
-      <ModalOverlay />
-      <ModalContent minH='24rem'>
-        <ModalHeader>
-          Add Child
-        </ModalHeader>
-        <ModalCloseButton isDisabled={result.fetching} />
-        <ModalBody as='form' p='1em 1.6em'>
-          <Stack spacing='8'>
-            <FormControl>
-              <Stack direction='row' justifyContent='space-between' alignItems='center'>
-                <Stack flex='1'>
-                  <UserSelection
-                    query={LIST_USER_AVAILABLE_CHILDREN}
-                    variables={{ userID: user.id }}
-                    key={`child_key__${JSON.stringify(user.children ? { label: user.children.fullName, value: user.children.id } : undefined)}`}
-                    value={user.child ? { label: user.children.fullName, value: user.children.id } : undefined}
-                    onChange={handleOnChange}
-                    placeholder='Search Child'
-                    filterUsers={({ value }) => value !== user.id}
-                  />
+    <>
+      {isAddNewOpen && <CreateUser initialValue={isAddNewOpen} onClose={handleCreateUserClose} />}
+      <Modal isOpen isCentered onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent minH='24rem'>
+          <ModalHeader>
+            Add Child
+          </ModalHeader>
+          <ModalCloseButton isDisabled={result.fetching} />
+          <ModalBody as='form' p='1em 1.6em'>
+            <Stack spacing='8'>
+              <FormControl>
+                <Stack direction='row' justifyContent='space-between' alignItems='center'>
+                  <Stack flex='1'>
+                    <UserSelection
+                      query={LIST_USER_AVAILABLE_CHILDREN}
+                      variables={{ userID: user.id }}
+                      key={`child_key__${JSON.stringify(user.children ? { label: user.children.fullName, value: user.children.id } : undefined)}`}
+                      value={user.child ? { label: user.children.fullName, value: user.children.id } : undefined}
+                      onChange={handleOnChange}
+                      placeholder='Search Child'
+                      filterUsers={({ value }) => value !== user.id}
+                    />
+                  </Stack>
                 </Stack>
-              </Stack>
-            </FormControl>
-            {(result.fetching || isRefetching) && <Loading />}
-            {result.error && <ErrorAlert> {result.error.message} </ErrorAlert>}
-          </Stack>
-        </ModalBody>
-      </ModalContent>
-    </Modal>
+              </FormControl>
+              {(result.fetching || isRefetching) && <Loading />}
+              {result.error && <ErrorAlert> {result.error.message} </ErrorAlert>}
+            </Stack>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+    </>
   )
 }
