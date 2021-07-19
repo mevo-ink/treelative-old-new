@@ -30,7 +30,11 @@ export default function App () {
     </>
   )
 }
+<<<<<<< HEAD
 // Arun
+=======
+// JANA
+>>>>>>> 2306307b02af1997d5a219cacb2814bc56553bdf
 // TODO:
 /*
   CALENDAR styling
