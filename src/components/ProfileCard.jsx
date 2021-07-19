@@ -64,7 +64,9 @@ export default function ProfileCard () {
         mapMethods.panTo(user.id)
         break
       case 'age':
-        console.log('TODO: CENTER AUTH USER ON AGE VIEW')
+        setTimeout(() => {
+          document.getElementById(user.dateOfBirth.slice(0, 4)).scrollIntoView({ inline: 'center', behavior: 'smooth' })
+        }, 150)
         break
       default:
         networkMethods.moveTo(user.id)
