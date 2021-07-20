@@ -68,6 +68,11 @@ export default function ProfileCard () {
           document.getElementById(user.dateOfBirth.slice(0, 4)).scrollIntoView({ behavior: 'smooth', block: 'center' })
         }, 150)
         break
+      case 'birthday':
+        setTimeout(() => {
+          document.getElementById(user.dateOfBirth.toLocaleDateString('default', { month: 'short', day: 'numeric' })).scrollIntoView({ behavior: 'smooth', block: 'center' })
+        }, 150)
+        break
       default:
         networkMethods.moveTo(user.id)
         break

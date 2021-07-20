@@ -25,6 +25,11 @@ export default function FindMe ({ onClose, authUser }) {
           document.getElementById(authUser.dateOfBirth.slice(0, 4)).scrollIntoView({ behavior: 'smooth', block: 'center' })
         }, 150)
         break
+      case 'birthday':
+        setTimeout(() => {
+          document.getElementById(new Date(authUser.dateOfBirth).toLocaleDateString('default', { month: 'short', day: 'numeric' })).scrollIntoView({ behavior: 'smooth', block: 'center' })
+        }, 150)
+        break
       default:
         networkMethods.moveTo(authUser.id)
         break
