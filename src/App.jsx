@@ -76,4 +76,5 @@ export default function App () {
   Add confirmation dialog on delete
   Fix couple - add/remove logic
   slides shifting by one slide, when editMode id toggled. (problem - Death Slide)
+  Add birthday view with dummy layout and connect with API
 */

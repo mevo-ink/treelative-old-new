@@ -17,3 +17,9 @@ export const GET_AGE_DATA = gql`
     getAgeData
   }
 `
+
+export const GET_BIRTHDAY_DATA = gql`
+  query GET_BIRTHDAY_DATA {
+    getBirthdayData
+  }
+`

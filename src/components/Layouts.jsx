@@ -6,6 +6,7 @@ import { layoutAtom, activeNodeIDAtom } from 'utils/atoms.js'
 import Graph from 'components/Layouts/Graph'
 import Map from 'components/Layouts/Map'
 import Age from 'components/Layouts/Age'
+import Birthday from 'components/Layouts/Birthday'
 
 export default function Layouts () {
   const layout = useRecoilValue(layoutAtom)
@@ -35,6 +36,8 @@ export default function Layouts () {
       return <Map />
     case 'age':
       return <Age />
+    case 'birthday':
+      return <Birthday />
     default:
       return <Graph />
   }
