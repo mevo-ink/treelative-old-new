@@ -14,6 +14,7 @@ export default function EditUserBirthLocation ({ user }) {
   return (
     <EditableLocationDialog
       title='Edit Birth Location'
+      name='birthLocation'
       subTitle={user.fullName}
       value={user.birthLocation || ''}
       onSubmit={handleSubmit}

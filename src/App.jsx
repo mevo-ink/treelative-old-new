@@ -32,7 +32,6 @@ export default function App () {
 // TODO:
 /*
   CALENDAR styling
-  Add remove button for all editable fields
   Add confirmation dialog on delete
   Finish search bar
   - On search results click, open the profile card
@@ -71,4 +70,5 @@ export default function App () {
   Investigate google maps overlay buttons
   PERSIST layout changes
   REDRAW CANVAS on relation edits
+  Add clear button for all editable fields
 */

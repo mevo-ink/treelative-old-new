@@ -16,6 +16,7 @@ export default function EditUserDateOfDeath ({ user }) {
       isClearable
       type='date'
       label='Edit Date of Death'
+      name='dateOfDeath'
       subTitle={user.fullName}
       value={user.dateOfDeath}
       onChange={handleSubmit}

@@ -15,6 +15,7 @@ export default function EditUserCurrentLocation ({ user }) {
     <EditableLocationDialog
       title='Edit Current Location'
       subTitle={user.fullName}
+      name='currentLocation'
       value={user.currentLocation || ''}
       onSubmit={handleSubmit}
       loading={fetching}

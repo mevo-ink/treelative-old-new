@@ -9,6 +9,7 @@ import { useRecoilValue } from 'recoil'
 import { isEditModeAtom } from 'utils/atoms.js'
 
 import EditableInputModal from 'components/_input/EditableInputModal'
+import ClearValueButton from 'components/_input/ClearValueButton'
 
 export default function EditableInputTrigger (props) {
   const isEditMode = useRecoilValue(isEditModeAtom)
@@ -56,6 +57,7 @@ export default function EditableInputTrigger (props) {
         variant='editable-input'
         animation={`${wiggle} infinite .15s linear`}
       >
+        <ClearValueButton inputProps={inputProps} />
         {props.value}
       </Button>
     </>

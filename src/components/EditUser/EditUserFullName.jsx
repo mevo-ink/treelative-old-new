@@ -17,6 +17,7 @@ export default function EditUserFullName ({ user }) {
 
   return (
     <EditableInputTrigger
+      type='text'
       title='Edit Full Name'
       subTitle={user.fullName}
       name='fullName'

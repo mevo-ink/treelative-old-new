@@ -15,10 +15,10 @@ export default function EditUserPhoneNumber ({ user, ...props }) {
 
   return (
     <EditableInputWithIconTrigger
+      type='text'
       title='Edit Phone Number'
       subTitle={user.fullName}
       name='phoneNumber'
-      type='tel'
       value={user.phoneNumber || ''}
       onSubmit={handleSubmit}
       validation={string().matches(/^\+?\d{10,14}$/, { message: 'Invalid Phone Number', excludeEmptyString: true })}

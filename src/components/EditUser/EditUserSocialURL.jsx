@@ -14,9 +14,10 @@ export default function EditUserSocialURL ({ social, ...props }) {
 
   return (
     <EditableIconTrigger
+      type='text'
       fontSize='xs'
       title={`Edit ${social.name} Username`}
-      name='url'
+      name={social.name}
       value={social.url ? social.url.substring(social.url.lastIndexOf('/') + 1) : ''}
       onSubmit={handleSubmit}
       loading={fetching}

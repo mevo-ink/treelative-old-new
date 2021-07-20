@@ -15,6 +15,7 @@ export default function EditUserEmail ({ user, ...props }) {
 
   return (
     <EditableInputWithIconTrigger
+      type='text'
       title='Edit Email'
       subTitle={user.fullName}
       name='email'

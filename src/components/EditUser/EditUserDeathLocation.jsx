@@ -15,6 +15,7 @@ export default function EditUserDeathLocation ({ user }) {
     <EditableLocationDialog
       title='Edit Death Location'
       subTitle={user.fullName}
+      name='deathLocation'
       value={user.deathLocation || ''}
       onSubmit={handleSubmit}
       loading={fetching}

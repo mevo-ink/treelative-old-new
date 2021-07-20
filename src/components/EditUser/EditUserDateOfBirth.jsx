@@ -15,6 +15,7 @@ export default function EditUserDateOfBirth ({ user }) {
     <DateTimePicker
       type='date'
       label='Edit Date of Birth'
+      name='dateOfBirth'
       subTitle={user.fullName}
       value={user.dateOfBirth}
       onChange={handleSubmit}

@@ -33,6 +33,8 @@ import ReactDatePicker from 'react-datepicker'
 import DateTimeRenderer from 'components/_common/DateTimeRenderer'
 import CustomSelect from 'components/_select/CustomSelect'
 
+import ClearValueButton from 'components/_input/ClearValueButton'
+
 import Loading from 'components/_common/Loading'
 
 import './datetimePicker.css'
@@ -110,6 +112,7 @@ export default function DateTimePickerDialogTrigger (props) {
         variant='editable-input'
         animation={`${wiggle} infinite .15s linear`}
       >
+        {isEditMode && <ClearValueButton inputProps={{ onSubmit: handleOnSubmit, name: rest.name, value: rest.value }} />}
         {props.value ? format(dtDateOnly, 'PP').replace(/[, ]+/g, '/') : 'Unavailable'}
       </Button>
     </>

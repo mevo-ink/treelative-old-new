@@ -11,6 +11,7 @@ import { useRecoilValue } from 'recoil'
 import { isEditModeAtom } from 'utils/atoms.js'
 
 import EditableInputModal from 'components/_input/EditableInputModal'
+import ClearValueButton from 'components/_input/ClearValueButton'
 
 export default function EditableInputWithIconTrigger (props) {
   const isEditMode = useRecoilValue(isEditModeAtom)
@@ -51,6 +52,7 @@ export default function EditableInputWithIconTrigger (props) {
           borderLeftRadius='unset'
           onClick={handleClick}
         >
+          {isEditMode && <ClearValueButton inputProps={inputProps} />}
           {props.value}
         </Button>
       </Flex>

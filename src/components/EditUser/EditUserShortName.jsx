@@ -15,6 +15,7 @@ export default function EditUserShortName ({ user }) {
 
   return (
     <EditableInputTrigger
+      type='text'
       title='Edit Short Name'
       subTitle={user.shortName}
       name='shortName'
