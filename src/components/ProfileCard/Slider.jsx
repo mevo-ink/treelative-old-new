@@ -1,4 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+
+import { useRecoilValue } from 'recoil'
+import { isEditModeAtom } from 'utils/atoms.js'
 
 import {
   Box,
@@ -39,9 +42,16 @@ const transition = {
 const swipeConfidenceThreshold = 10
 
 export default function Slider ({ children = [] }) {
+  const isEditMode = useRecoilValue(isEditModeAtom)
+
   const filteredChildren = children.filter(slide => slide)
 
   const [[page, direction], setPageDirection] = useState([0, 'right'])
+
+  useEffect(() => {
+    setPageDirection([page % filteredChildren.length, 'right'])
+    // eslint-disable-next-line
+  }, [isEditMode])
 
   const swipePower = (offset, velocity) => Math.abs(offset) * velocity
 

@@ -32,7 +32,6 @@ export default function App () {
 // TODO:
 /*
   profileCard URI for Age layout
-  slides shifting by one slide, when editMode id toggled. (problem - Death Slide)
   CALENDAR styling
   Finish search bar
   - On search results click, open the profile card
@@ -76,4 +75,5 @@ export default function App () {
   Fix social card - phoneNumber and email not editable if empty
   Add confirmation dialog on delete
   Fix couple - add/remove logic
+  slides shifting by one slide, when editMode id toggled. (problem - Death Slide)
 */
