@@ -7,7 +7,6 @@ import {
 
 import { FiEdit } from 'react-icons/fi'
 import { MdDone, MdClose } from 'react-icons/md'
-import { BiCurrentLocation } from 'react-icons/bi'
 
 import { useQuery } from 'urql'
 
@@ -15,7 +14,6 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 import {
   layoutAtom,
   isEditModeAtom,
-  mapMethodsAtom,
   activeNodeIDAtom,
   networkMethodsAtom
 } from 'utils/atoms.js'
@@ -36,12 +34,13 @@ import EditUserAvatar from 'components/EditUser/EditUserAvatar'
 import ParentChild from 'components/ProfileCard/Slides/ParentChild'
 import EditUserFullName from 'components/EditUser/EditUserFullName'
 
+import FindMe from 'components/Menu/FindMe'
+
 export default function ProfileCard () {
   const [isEditMode, setIsEditMode] = useRecoilState(isEditModeAtom)
   const [activeNodeID, setActiveNodeID] = useRecoilState(activeNodeIDAtom)
 
   const layout = useRecoilValue(layoutAtom)
-  const mapMethods = useRecoilValue(mapMethodsAtom)
   const networkMethods = useRecoilValue(networkMethodsAtom)
 
   const [result, refetch] = useQuery({ query: GET_USER, variables: { filter: { id: activeNodeID } } })
@@ -57,28 +56,6 @@ export default function ProfileCard () {
   }
 
   const onLoginSuccess = () => { refetch({ requestPolicy: 'network-only' }) }
-
-  const handleFindMe = () => {
-    switch (layout) {
-      case 'map':
-        mapMethods.panTo(user.id)
-        break
-      case 'age':
-        setTimeout(() => {
-          document.getElementById(user.dateOfBirth.slice(0, 4)).scrollIntoView({ behavior: 'smooth', block: 'center' })
-        }, 150)
-        break
-      case 'birthday':
-        setTimeout(() => {
-          document.getElementById(user.dateOfBirth.toLocaleDateString('default', { month: 'short', day: 'numeric' })).scrollIntoView({ behavior: 'smooth', block: 'center' })
-        }, 150)
-        break
-      default:
-        networkMethods.moveTo(user.id)
-        break
-    }
-    onClose()
-  }
 
   const innerBtnStyles = {
     position: 'absolute',
@@ -115,7 +92,7 @@ export default function ProfileCard () {
             {result.data?.getUser && (
               <>
                 <IconButton icon={isEditMode ? <MdDone /> : <FiEdit />} {...innerBtnStyles} left='.3rem' onClick={() => setIsEditMode(!isEditMode)} />
-                <IconButton icon={<BiCurrentLocation size='1.3rem' />} {...innerBtnStyles} onClick={handleFindMe} />
+                <FindMe onClose={onClose} user={result.data?.getUser} {...innerBtnStyles} />
                 <EditUserAvatar user={user} />
                 <EditUserFullName user={user} />
                 <Slider>

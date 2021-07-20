@@ -77,7 +77,7 @@ export default function Menu () {
                 <Search role={role} />
                 {role === 'ADMIN' && <CreateUser />}
                 {role && <Profile onClose={onClose} authUser={result.data?.getUser} />}
-                {role && <FindMe onClose={onClose} authUser={result.data?.getUser} />}
+                {role && <FindMe onClose={onClose} user={result.data?.getUser} size='sm' />}
               </Flex>
               <Layouts onClose={onClose} />
               <Insights />
