@@ -13,7 +13,7 @@ import {
 export default function ConfirmationDialog (props) {
   const {
     title = 'Delete',
-    description = 'Are you sure? You can\'t undo this action afterwards.',
+    description = 'Are you sure?\n You can\'t undo this action afterwards.',
     onConfirm,
     onCancel
   } = props

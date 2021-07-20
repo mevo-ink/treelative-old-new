@@ -31,6 +31,7 @@ export default function App () {
 }
 // TODO:
 /*
+  profileCard URI for Age layout
   slides shifting by one slide, when editMode id toggled. (problem - Death Slide)
   CALENDAR styling
   Finish search bar
