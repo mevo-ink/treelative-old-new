@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 
 import {
-  Button,
+  IconButton,
   AlertDialog,
   AlertDialogBody,
   AlertDialogFooter,
@@ -9,11 +9,12 @@ import {
   AlertDialogContent,
   AlertDialogOverlay
 } from '@chakra-ui/react'
+import { MdDone, MdClose } from 'react-icons/md'
 
-export default function ConfirmationDialog (props) {
+export default function ConfirmationModal (props) {
   const {
     title = 'Delete',
-    description = 'Are you sure?\n You can\'t undo this action afterwards.',
+    description = 'Are you sure? You can\'t undo this action.',
     onConfirm,
     onCancel
   } = props
@@ -37,13 +38,25 @@ export default function ConfirmationDialog (props) {
             {description}
           </AlertDialogBody>
 
-          <AlertDialogFooter>
-            <Button ref={cancelRef} onClick={onCancel}>
+          <AlertDialogFooter alignSelf='center'>
+            <IconButton
+              icon={<MdClose size='1.5rem' />}
+              isRound
+              bg='hsla(358, 75%, 50%, 1)'
+              ref={cancelRef}
+              onClick={onCancel}
+            >
               Cancel
-            </Button>
-            <Button colorScheme='red' onClick={onConfirm} ml={3}>
+            </IconButton>
+            <IconButton
+              icon={<MdDone size='1.5rem' />}
+              isRound
+              bg='hsla(120, 75%, 50%, 1)'
+              onClick={onConfirm}
+              ml={3}
+            >
               Confirm
-            </Button>
+            </IconButton>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialogOverlay>

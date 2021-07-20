@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import ConfirmationDialog from 'components/_common/ConfirmationDialog'
+import ConfirmationModal from 'components/_common/ConfirmationModal'
 
 import {
   keyframes,
@@ -35,7 +35,7 @@ export default function DeleteUserRelation ({ title, onRemove, isLoading }) {
   return (
     <>
       {isConfirm && (
-        <ConfirmationDialog title={title} onConfirm={confirmRemove} onCancel={cancelRemove} />
+        <ConfirmationModal title={title} onConfirm={confirmRemove} onCancel={cancelRemove} />
       )}
       <IconButton
         icon={<BiTrash size='25px' />}
