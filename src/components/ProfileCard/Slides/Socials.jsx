@@ -1,4 +1,4 @@
-import { Grid, Flex } from '@chakra-ui/react'
+import { Grid, Stack } from '@chakra-ui/react'
 
 import { useRecoilValue } from 'recoil'
 
@@ -26,7 +26,7 @@ export default function Socials ({ user }) {
   ]
 
   return (
-    <Flex
+    <Stack
       w='80%'
       h='100%'
       flexDirection='column'
@@ -37,13 +37,13 @@ export default function Socials ({ user }) {
       borderRadius='20px'
       p='1.5rem 0'
     >
-      {user.phoneNumber && <EditUserPhoneNumber user={user} icon={phone} />}
+      {(user.phoneNumber || isEditMode) && <EditUserPhoneNumber user={user} icon={phone} />}
       <Grid w='55%' gridTemplateColumns='repeat(2, 1fr)' flexFlow='wrap'>
         {data.map((social, idx) => (
           <EditUserSocialURL key={idx} social={social} isDisabled={!isEditMode} />
         ))}
       </Grid>
-      {user.email && <EditUserEmail user={user} icon={email} />}
-    </Flex>
+      {(user.email || isEditMode) && <EditUserEmail user={user} icon={email} />}
+    </Stack>
   )
 }

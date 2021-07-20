@@ -71,4 +71,5 @@ export default function App () {
   PERSIST layout changes
   REDRAW CANVAS on relation edits
   Add clear button for all editable fields
+  Fix social card - phoneNumber and email not editable if empty
 */
