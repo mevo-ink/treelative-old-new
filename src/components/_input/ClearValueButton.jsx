@@ -4,7 +4,7 @@ import { startCase } from 'lodash'
 
 import { IconButton } from '@chakra-ui/react'
 
-import { IoIosRemoveCircleOutline } from 'react-icons/io'
+import { IoClose } from 'react-icons/io5'
 
 import ConfirmationDialog from 'components/_common/ConfirmationDialog'
 
@@ -34,14 +34,17 @@ export default function ClearValueButton ({ inputProps }) {
       )}
       <IconButton
         isRound
-        size='sm'
-        position='absolute'
-        bg='transparent'
-        top='-1rem'
-        right='-0.5rem'
-        color='red'
+        size
+        icon={<IoClose color='hsla(355, 100%, 50%, .8)' />}
         aria-label='Clear Value'
-        icon={<IoIosRemoveCircleOutline size='2rem' />}
+        position='absolute'
+        top='-.3rem'
+        right='-.2rem'
+        cursor='pointer'
+        background='hsla(0, 0%, 100%, 1)'
+        boxShadow='0px 3px 5px hsla(0, 0%, 0%, .3)'
+        _hover={{ bg: 'hsla(0, 0%, 100%, .2)' }}
+        _active={{ bg: 'hsla(0, 0%, 100%, .2)' }}
         onClick={handleClear}
       />
     </>
