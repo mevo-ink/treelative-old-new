@@ -32,7 +32,6 @@ export default function App () {
 // TODO:
 /*
   CALENDAR styling
-  Add confirmation dialog on delete
   Finish search bar
   - On search results click, open the profile card
   Add birthday viw - kinda same layout as age view
@@ -47,6 +46,7 @@ export default function App () {
   Show why login
   Add PWA
   Optimize images
+  Add couple - marriage date and location edits
 */
 // DONE:
 /*
@@ -72,4 +72,6 @@ export default function App () {
   REDRAW CANVAS on relation edits
   Add clear button for all editable fields
   Fix social card - phoneNumber and email not editable if empty
+  Add confirmation dialog on delete
+  Fix couple - add/remove logic
 */
