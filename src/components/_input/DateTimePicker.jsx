@@ -60,14 +60,16 @@ export default function DateTimePickerDialogTrigger (props) {
     onChange,
     fontSize,
     notification = '',
+    defaultIsOpen = false,
     ...rest
   } = props
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen })
 
   const handleClose = () => {
     reset && reset()
     onClose()
+    defaultIsOpen && rest.onClose()
   }
 
   const handleOnSubmit = async (newValue) => {
@@ -96,7 +98,7 @@ export default function DateTimePickerDialogTrigger (props) {
     }
   }
 
-  if (!inline && !isEditMode) {
+  if (!inline && !isEditMode && !defaultIsOpen) {
     return (
       <Text variant='info'>
         {props.value ? format(dtDateOnly, 'PP').replace(/[, ]+/g, '/') : 'Unavailable'}
@@ -132,6 +134,7 @@ function DateTimePickerDialog (props) {
     fontSize = 'xl',
     type = 'date',
     isClearable,
+    alert = '',
     ...rest
   } = props
 
@@ -148,7 +151,8 @@ function DateTimePickerDialog (props) {
         <ModalCloseButton isDisabled={loading} />
         <ModalBody textAlign='center'>
           <Stack spacing='2'>
-            <DateTimeRenderer value={value} type={type} fontSize={fontSize} fontWeight='bold' />
+            {alert && <Alert status='warning' borderRadius='lg'> <AlertIcon /> {alert} </Alert>}
+            {value && <DateTimeRenderer value={value} type={type} fontSize={fontSize} fontWeight='bold' />}
             <ReactDatePicker
               inline
               selected={type === 'time' ? dt : dtDateOnly}

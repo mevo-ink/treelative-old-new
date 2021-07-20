@@ -107,7 +107,8 @@ export default function Map () {
   const { id: authUserID } = parseJwt(window.localStorage.getItem('AUTH_SESSION_ID'))
 
   // center on auth user if location is available - else center on Sri Lanka
-  const defaultCenter = authUserID && result.data?.getMapData ? result.data.getMapData.known.find(user => user.id === authUserID)?.position : { lat: 10.99835602, lng: 77.01502627 }
+  const sriLanka = { lat: 10.99835602, lng: 77.01502627 }
+  const defaultCenter = (authUserID && result.data?.getMapData && result.data.getMapData.known.find(user => user.id === authUserID)?.position) || sriLanka
 
   if (result.error) return <p>ERROR</p>
 
@@ -129,6 +130,7 @@ export default function Map () {
           panTo: (userID) => {
             const position = result.data.getMapData.known.find(user => user.id === userID)?.position
             position && map.panTo(position)
+            return position
           }
         })}
       >

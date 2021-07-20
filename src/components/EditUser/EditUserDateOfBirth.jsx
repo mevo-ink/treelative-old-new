@@ -3,7 +3,7 @@ import { UPDATE_USER_DATE_OF_BIRTH } from 'graphql/mutations/users'
 
 import DateTimePicker from 'components/_input/DateTimePicker'
 
-export default function EditUserDateOfBirth ({ user }) {
+export default function EditUserDateOfBirth ({ user, ...props }) {
   const [{ error, fetching }, updateUserDateOfBirth] = useMutation(UPDATE_USER_DATE_OF_BIRTH)
 
   const handleSubmit = dateOfBirth => {
@@ -22,6 +22,7 @@ export default function EditUserDateOfBirth ({ user }) {
       error={error}
       loading={fetching}
       notification='Successfully updated the date of birth'
+      {...props}
     />
   )
 }

@@ -36,9 +36,7 @@ export default function App () {
   Finish search bar
   - On search results click, open the profile card
   Add birthday viw - kinda same layout as age view
-  Add functionality FindMe on birthday view
   Style Error modal with contact us info --- NEED ACCESS TO OUR PROFILE CARDS FOR NOT AUTH USERS
-  Add fallback modal to edit date of birth if unavailable when clicking findMe
   Desktop: Add max width to Menu slider and profile card
   Insights:
   - Center label
@@ -77,4 +75,7 @@ export default function App () {
   Fix couple - add/remove logic
   slides shifting by one slide, when editMode id toggled. (problem - Death Slide)
   Add birthday view with dummy layout and connect with API
+  Add fallback modal to edit date of birth if unavailable when clicking findMe
+  Add fallback modal to edit location if unavailable when clicking findMe
+  Add functionality FindMe on birthday view
 */

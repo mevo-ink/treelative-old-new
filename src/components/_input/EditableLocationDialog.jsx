@@ -6,7 +6,9 @@ import { isEditModeAtom } from 'utils/atoms.js'
 import {
   Text,
   Stack,
+  Alert,
   Button,
+  AlertIcon,
   keyframes,
   AspectRatio,
   useDisclosure,
@@ -33,12 +35,19 @@ export default function InputDialogTrigger (props) {
     reset,
     textAlign,
     onClose: onParentClose,
+    defaultIsOpen = false,
     ...inputProps
   } = props
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen })
 
-  if (!isEditMode) {
+  const handleClose = () => {
+    reset && reset()
+    onClose()
+    defaultIsOpen && onParentClose()
+  }
+
+  if (!isEditMode && !defaultIsOpen) {
     return (
       <Text variant='info'>
         {inputProps?.value ? inputProps?.value?.suggested?.terms?.slice(-3).map(val => val.value).join(', ') : 'Unavailable'}
@@ -48,7 +57,7 @@ export default function InputDialogTrigger (props) {
 
   return (
     <>
-      {isOpen && <InputDialog {...inputProps} value={inputProps?.value?.suggested} onClose={onClose} />}
+      {isOpen && <InputDialog {...inputProps} value={inputProps?.value?.suggested} onClose={handleClose} />}
       <Button
         onClick={onOpen}
         variant='editable-input'
@@ -69,7 +78,8 @@ function InputDialog (props) {
     onSubmit = console.log,
     loading,
     error,
-    notification = ''
+    notification = '',
+    alert = ''
   } = props
 
   const [location, setLocation] = useState({ label: value?.description, value })
@@ -118,6 +128,7 @@ function InputDialog (props) {
       size='xl'
     >
       <Stack spacing='8' minH='300px'>
+        {alert && <Alert status='warning' borderRadius='lg'> <AlertIcon /> {alert} </Alert>}
         <GooglePlacesSelect
           autoFocus
           value={location}
