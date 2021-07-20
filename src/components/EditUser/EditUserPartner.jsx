@@ -4,20 +4,16 @@ import {
   Modal,
   Stack,
   Flex,
-  Alert,
   Image,
   Button,
   ModalBody,
-  AlertIcon,
   IconButton,
   ModalHeader,
   FormControl,
-  ModalFooter,
   ModalOverlay,
   ModalContent,
   useDisclosure,
   ModalCloseButton,
-  AlertDescription,
   createStandaloneToast
 } from '@chakra-ui/react'
 
@@ -48,7 +44,7 @@ export default function EditUserPartner (props) {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const handleRemovePartner = () => {
-    const variables = { coupleID: props.user.couple.partner.id }
+    const variables = { coupleID: props.user.couple.id }
     removePartner(variables)
       .then(result => {
         if (result.data) {
@@ -73,43 +69,47 @@ export default function EditUserPartner (props) {
     <>
       {isOpen && <EditUserPartnerModal user={props.user} onClose={onClose} />}
       <Flex w='85%' flexWrap='wrap' justifyContent='center'>
-        <Box>
-          <Box
-            w='3rem'
-            p='0'
-            m='0 .2rem'
-            cursor='pointer'
-            mt='1rem'
-            position='relative'
-          >
-            {isEditMode && (
-              <DeleteUserRelation
-                title='Remove Partner'
-                onRemove={() => handleRemovePartner(props.user.couple.partner.id, props.user.couple.partner.shortName)}
-                isLoading={removePartnerResult.fetching}
-              />
-            )}
-            <Button
-              w='100%'
-              h='100%'
+        {props.user.couple && (
+          <Box>
+            <Box
+              w='3rem'
               p='0'
-              borderRadius='50%'
-              isDisabled={isEditMode}
+              m='0 .2rem'
+              cursor='pointer'
+              mt='1rem'
+              position='relative'
             >
-              <Image
-                src={props.user.couple.partner.avatar}
-                alt='parent-avatar'
+              {isEditMode && (
+                <DeleteUserRelation
+                  title='Remove Partner'
+                  onRemove={handleRemovePartner}
+                  isLoading={removePartnerResult.fetching}
+                />
+              )}
+              <Button
                 w='100%'
                 h='100%'
+                p='0'
                 borderRadius='50%'
-                fallbackSrc={`https://ui-avatars.com/api/?name=${props.user.couple.partner.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
-                onClick={() => handleUserSelect(props.user.couple.partner.id)}
-              />
-            </Button>
+                isDisabled={isEditMode}
+              >
+                <Image
+                  src={props.user.couple.partner.avatar}
+                  alt='parent-avatar'
+                  w='100%'
+                  h='100%'
+                  borderRadius='50%'
+                  fallbackSrc={`https://ui-avatars.com/api/?name=${props.user.couple.partner.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
+                  onClick={() => handleUserSelect(props.user.couple.partner.id)}
+                />
+              </Button>
+            </Box>
+            <Text variant='info-title' fontSize='.65rem' mt='.2rem' textAlign='center'>
+              {props.user.couple.partner.shortName}
+            </Text>
           </Box>
-          <Text variant='info-title' fontSize='.65rem' mt='.2rem' textAlign='center'>{props.user.couple.partner.shortName}</Text>
-        </Box>
-        {isEditMode && props.user.couple.partner.length < 1 && (
+        )}
+        {isEditMode && !props.user.couple && (
           <IconButton
             icon={<MdAdd size='2rem' />}
             w='2rem'
@@ -145,6 +145,7 @@ export function EditUserPartnerModal ({ user, onClose, isRefetching }) {
             duration: 3000,
             isClosable: true
           })
+          onClose()
         }
       })
   }
@@ -179,14 +180,6 @@ export function EditUserPartnerModal ({ user, onClose, isRefetching }) {
             {result.error && <ErrorAlert> {result.error.message} </ErrorAlert>}
           </Stack>
         </ModalBody>
-        <ModalFooter>
-          <Alert status='warning' borderRadius='lg'>
-            <AlertIcon />
-            <AlertDescription>
-              {!user.parent && 'You will automatically be added as his/her Partner'}
-            </AlertDescription>
-          </Alert>
-        </ModalFooter>
       </ModalContent>
     </Modal>
   )

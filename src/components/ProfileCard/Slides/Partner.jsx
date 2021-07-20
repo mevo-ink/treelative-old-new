@@ -11,6 +11,7 @@ import EditUserPartner from 'components/EditUser/EditUserPartner'
 
 export default function ParentChild ({ user }) {
   const isEditMode = useRecoilValue(isEditModeAtom)
+
   return (
     <Flex
       w='80%'
@@ -23,7 +24,7 @@ export default function ParentChild ({ user }) {
       borderRadius='20px'
       p='1.5rem 0'
     >
-      {(user.parents.length !== 0 || isEditMode) && (
+      {(user.couple || isEditMode) && (
         <>
           <Text variant='info-title'>
             Couple

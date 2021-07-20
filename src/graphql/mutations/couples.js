@@ -6,9 +6,19 @@ export const ADD_COUPLE = gql`
       id
       userOne {
         id
+        couple {
+          partner {
+            id
+          }
+        }
       }
       userTwo {
         id
+        couple {
+          partner {
+            id
+          }
+        }
       }
     }
   }
