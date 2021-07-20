@@ -41,15 +41,26 @@ const transition = {
 
 const swipeConfidenceThreshold = 10
 
+const findNextPage = (slides, currentIndex, direction = 1) => {
+  let nextIndex = (currentIndex + (1 * direction)) % slides.length
+  if (nextIndex < 0) {
+    nextIndex = (slides.length + nextIndex) % slides.length
+  }
+  if (slides[nextIndex].props.isHidden) {
+    return findNextPage(slides, nextIndex, direction)
+  }
+  return nextIndex
+}
+
 export default function Slider ({ children = [] }) {
   const isEditMode = useRecoilValue(isEditModeAtom)
 
-  const filteredChildren = children.filter(slide => slide)
+  const initialPage = findNextPage(children, 0, 1)
 
-  const [[page, direction], setPageDirection] = useState([0, 'right'])
+  const [[page, direction], setPageDirection] = useState([initialPage, 'right'])
 
   useEffect(() => {
-    setPageDirection([page % filteredChildren.length, 'right'])
+    !isEditMode && children[page].props.isHidden && setPageDirection([findNextPage(children, page, 1), direction])
     // eslint-disable-next-line
   }, [isEditMode])
 
@@ -57,15 +68,8 @@ export default function Slider ({ children = [] }) {
 
   const onDragEnd = (_, { offset, velocity }) => {
     const swipe = swipePower(offset.x, velocity.x)
-    if (swipe < -swipeConfidenceThreshold) {
-      setPageDirection([(page + 1) % filteredChildren.length, 'left'])
-    } else if (swipe > swipeConfidenceThreshold) {
-      if (page - 1 < 0) {
-        setPageDirection([(filteredChildren.length + page - 1 % filteredChildren.length), 'right'])
-      } else {
-        setPageDirection([page - 1, 'right'])
-      }
-    }
+    const direction = swipe < -swipeConfidenceThreshold ? 'left' : 'right'
+    setPageDirection([findNextPage(children, page, 1), direction])
   }
 
   return (
@@ -110,14 +114,14 @@ export default function Slider ({ children = [] }) {
             position='absolute'
             borderRadius='20px'
           >
-            {filteredChildren[page]}
+            {children[page]}
           </MotionBox>
         </AnimatePresence>
       </Box>
       <Flex
         justifyContent='space-between'
       >
-        {filteredChildren.map((_, idx) => (
+        {children.map((child, idx) => (
           <Box
             key={idx + 10}
             w='.5rem'
@@ -126,6 +130,7 @@ export default function Slider ({ children = [] }) {
             borderRadius='50%'
             background={idx === page ? 'hsla(261, 64%, 18%, 1)' : 'hsla(0, 0%, 100%, .5)'}
             border={idx === page ? '1px solid hsla(0, 0%, 100%, .9)' : 'none'}
+            display={child.props.isHidden ? 'none' : ''}
           />
         ))}
       </Flex>
