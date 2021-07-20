@@ -7,7 +7,6 @@ import {
   Alert,
   Image,
   Button,
-  keyframes,
   ModalBody,
   AlertIcon,
   IconButton,
@@ -21,8 +20,8 @@ import {
   AlertDescription,
   createStandaloneToast
 } from '@chakra-ui/react'
+
 import { MdAdd } from 'react-icons/md'
-import { BiTrash } from 'react-icons/bi'
 
 import { useMutation } from 'urql'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
@@ -35,6 +34,8 @@ import Loading from 'components/_common/Loading'
 import ErrorAlert from 'components/_common/ErrorAlert'
 import UserSelection from 'components/_common/UserSelection'
 
+import DeleteUserRelation from 'components/EditUser/DeleteUserRelation'
+
 const toast = createStandaloneToast()
 
 export default function EditUserPartner (props) {
@@ -46,28 +47,21 @@ export default function EditUserPartner (props) {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const wiggle = keyframes`
-    0% { transform: rotate(0deg); }
-    50% { transform: rotate(-2deg); }
-    100% { transform: rotate(2deg); }
-  `
   const handleRemovePartner = () => {
     const variables = { coupleID: props.user.couple.partner.id }
-    if (window.confirm(`Are you sure want to remove ${props.user.couple.partner.shortName}?`)) {
-      removePartner(variables)
-        .then(result => {
-          if (result.data) {
-            toast({
-              title: 'Successfully removed the partner',
-              status: 'success',
-              position: 'top',
-              duration: 3000,
-              isClosable: true
-            })
-          }
-        })
-        .catch(err => console.log(err))
-    }
+    removePartner(variables)
+      .then(result => {
+        if (result.data) {
+          toast({
+            title: 'Successfully removed the partner',
+            status: 'success',
+            position: 'top',
+            duration: 3000,
+            isClosable: true
+          })
+        }
+      })
+      .catch(err => console.log(err))
   }
 
   const handleUserSelect = (userID) => {
@@ -89,18 +83,9 @@ export default function EditUserPartner (props) {
             position='relative'
           >
             {isEditMode && (
-              <IconButton
-                icon={<BiTrash size='25px' />}
-                w='100%'
-                h='100%'
-                color='red'
-                position='absolute'
-                zIndex='1'
-                bg='hsla(0, 0%, 0%, .8)'
-                borderRadius='50%'
-                boxShadow='0px 3px 5px hsla(0, 0%, 0%, .3)'
-                animation={`${wiggle} infinite .15s linear`}
-                onClick={() => handleRemovePartner(props.user.couple.partner.id, props.user.couple.partner.shortName)}
+              <DeleteUserRelation
+                title='Remove Partner'
+                onRemove={() => handleRemovePartner(props.user.couple.partner.id, props.user.couple.partner.shortName)}
                 isLoading={removePartnerResult.fetching}
               />
             )}

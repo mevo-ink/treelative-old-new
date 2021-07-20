@@ -9,7 +9,6 @@ import {
   Alert,
   Image,
   Button,
-  keyframes,
   ModalBody,
   AlertIcon,
   IconButton,
@@ -23,8 +22,8 @@ import {
   AlertDescription,
   createStandaloneToast
 } from '@chakra-ui/react'
+
 import { MdAdd } from 'react-icons/md'
-import { BiTrash } from 'react-icons/bi'
 
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import {
@@ -43,6 +42,7 @@ import ErrorAlert from 'components/_common/ErrorAlert'
 import UserSelection from 'components/_common/UserSelection'
 
 import CreateUser from 'components/Menu/CreateUser'
+import DeleteUserRelation from 'components/EditUser/DeleteUserRelation'
 
 const toast = createStandaloneToast()
 
@@ -58,29 +58,21 @@ export default function EditUserParents (props) {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const wiggle = keyframes`
-    0% { transform: rotate(0deg); }
-    50% { transform: rotate(-2deg); }
-    100% { transform: rotate(2deg); }
-  `
-
   const handleRemoveParent = (parentID, shortName) => {
     const variables = { userID: props.user.id, parentID }
-    if (window.confirm(`Are you sure want to remove ${shortName}?`)) {
-      removeParent(variables)
-        .then(result => {
-          if (result.data) {
-            toast({
-              title: 'Successfully removed the parent',
-              status: 'success',
-              position: 'top',
-              duration: 3000,
-              isClosable: true
-            })
-            layout === 'network' && networkMethods.refetch()
-          }
-        })
-    }
+    removeParent(variables)
+      .then(result => {
+        if (result.data) {
+          toast({
+            title: 'Successfully removed the parent',
+            status: 'success',
+            position: 'top',
+            duration: 3000,
+            isClosable: true
+          })
+          layout === 'network' && networkMethods.refetch()
+        }
+      })
   }
 
   const handleUserSelect = (userID) => {
@@ -104,18 +96,9 @@ export default function EditUserParents (props) {
               position='relative'
             >
               {isEditMode && (
-                <IconButton
-                  icon={<BiTrash size='25px' />}
-                  w='100%'
-                  h='100%'
-                  color='red'
-                  position='absolute'
-                  zIndex='1'
-                  bg='hsla(0, 0%, 0%, .8)'
-                  borderRadius='50%'
-                  boxShadow='0px 3px 5px hsla(0, 0%, 0%, .3)'
-                  animation={`${wiggle} infinite .15s linear`}
-                  onClick={() => handleRemoveParent(parent.id, parent.shortName)}
+                <DeleteUserRelation
+                  title='Remove Parent'
+                  onRemove={() => handleRemoveParent(parent.id, parent.shortName)}
                   isLoading={removeParentResult.fetching}
                 />
               )}
