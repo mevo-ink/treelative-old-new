@@ -114,12 +114,12 @@ export default function ProfileCard () {
                 <EditUserAvatar user={user} />
                 <EditUserFullName user={user} />
                 <Slider>
-                  {user.dateOfDeath && <Death user={user} />}
+                  {(user.dateOfDeath || isEditMode) && <Death user={user} />}
                   <Birth user={user} />
                   <Current user={user} />
                   <Socials user={user} />
-                  {user.couple?.partner && <Partner user={user} />}
-                  {(user.parent || user.children) && <ParentChild user={user} />}
+                  {(user.couple || isEditMode) && <Partner user={user} />}
+                  <ParentChild user={user} />
                 </Slider>
               </>
             )}
