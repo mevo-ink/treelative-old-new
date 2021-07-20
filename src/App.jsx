@@ -31,6 +31,7 @@ export default function App () {
 }
 // TODO:
 /*
+  slides shifting by one slide, when editMode id toggled. (problem - Death Slide)
   CALENDAR styling
   Finish search bar
   - On search results click, open the profile card
