@@ -41,22 +41,20 @@ export default function ConfirmationModal (props) {
           <AlertDialogFooter alignSelf='center'>
             <IconButton
               icon={<MdClose size='1.5rem' />}
+              aria-label='Cancel'
               isRound
               bg='hsla(358, 75%, 50%, 1)'
               ref={cancelRef}
               onClick={onCancel}
-            >
-              Cancel
-            </IconButton>
+            />
             <IconButton
               icon={<MdDone size='1.5rem' />}
+              aria-label='Confirm'
               isRound
               bg='hsla(120, 75%, 50%, 1)'
               onClick={onConfirm}
-              ml={3}
-            >
-              Confirm
-            </IconButton>
+              ml={6}
+            />
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialogOverlay>
