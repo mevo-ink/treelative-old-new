@@ -117,9 +117,9 @@ export default function ProfileCard () {
                   {(user.dateOfDeath || isEditMode) && <Death user={user} />}
                   <Birth user={user} />
                   <Current user={user} />
-                  <Socials user={user} />
                   {(user.couple || isEditMode) && <Partner user={user} />}
                   <ParentChild user={user} />
+                  <Socials user={user} />
                 </Slider>
               </>
             )}
