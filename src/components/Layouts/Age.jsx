@@ -45,8 +45,6 @@ export default function Age () {
     window.history.pushState({}, '', userID)
   }
 
-  console.log(result)
-
   return (
     <Flex
       h='100vh'
