@@ -24,17 +24,24 @@ export default function Birthday () {
   const [result, refetch] = useQuery({ query: GET_BIRTHDAY_DATA })
 
   useEffect(() => {
+    if (!result.data) return
     setLayoutMethods({
       refetch: () => {
         refetch({ requestPolicy: 'network-only' })
       }
-    }) // eslint-disable-next-line
+    })
+    const date = new Date()
+    while (!result.data?.getBirthdayData[date.toString().slice(4, 10)]) {
+      date.setDate(date.getDate() + 1)
+    }
+    document.getElementById(date.toString().slice(4, 10)).scrollIntoView({ behavior: 'smooth', block: 'center' })
+    // eslint-disable-next-line
   }, [result.data])
 
-  // const scrollRef = useRef(null)
-  // const handleHorizontalScroll = e => {
-  //   scrollRef.current.scrollTo({ top: 0, left: scrollRef.current.scrollLeft + e.deltaY })
-  // }
+  // useEffect(() => {
+  //   // setTimeout(() => { document.getElementById(date.toString().slice(4, 10)).scrollIntoView({ behavior: 'smooth', block: 'center' }) }, 2000)
+  //   // eslint-disable-next-line
+  // }, [])
 
   if (result.error) return <p>ERROR</p>
 
@@ -47,7 +54,7 @@ export default function Birthday () {
 
   return (
     <Flex
-      h='100vh'
+      h='calc(100 * var(--vh))'
       flexDirection='column'
       overflowY='scroll'
       overflowX='hidden'
@@ -65,12 +72,12 @@ export default function Birthday () {
             w='11px'
             h='11px'
             position='absolute'
-            left='3.54rem'
+            left='4.2rem'
             bg='hsla(0, 0%, 100%, .7)'
             borderRadius='50%'
           />
           <Text
-            w='5ch'
+            w='6ch'
             px='.5em'
             color='hsla(0, 0%, 100%, .9)'
             bg='hsla(343, 100%, 40%, 1)'

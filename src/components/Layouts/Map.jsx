@@ -126,7 +126,7 @@ export default function Map () {
   }
 
   return (
-    <Box h='100vh'>
+    <Box h='calc(100 * var(--vh))'>
       <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_LOCATION_API_KEY }}
         defaultCenter={defaultCenter}
