@@ -45,6 +45,8 @@ export default function Age () {
     window.history.pushState({}, '', userID)
   }
 
+  console.log(result)
+
   return (
     <Flex
       h='100vh'
@@ -90,13 +92,13 @@ export default function Age () {
             {users.map(user => (
               <Image
                 key={user.id}
-                src={user.image}
+                src={user.avatar}
+                fallbackSrc={user.brokenAvatar}
                 alt='children-avatar'
                 w='40px'
                 mx='.5rem'
                 objectFit='contain'
                 borderRadius='50%'
-                fallbackSrc={`https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
                 onClick={() => handleUserSelect(user.id)}
                 my='1'
               />
