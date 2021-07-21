@@ -77,7 +77,7 @@ export default function Age () {
             borderRadius='0 5px 5px 0'
             boxShadow='1px 3px 5px hsla(0, 0%, 0%, .5)'
           >
-            {year === 'Unknown' ? '0000' : year}
+            {year}
           </Text>
           <Divider orientation='vertical' mx='1rem' py='40px' />
           <Flex
