@@ -31,18 +31,17 @@ export default function App () {
 }
 // TODO:
 /*
-  profileCard URI for Age layout
   CALENDAR styling
   Finish search bar
   - On search results click, open the profile card
-  Add birthday viw - kinda same layout as age view
+  Style birthday viw - kinda same layout as age view
   Style Error modal with contact us info --- NEED ACCESS TO OUR PROFILE CARDS FOR NOT AUTH USERS
   Desktop: Add max width to Menu slider and profile card
   Insights:
   - Center label
-  - Show users count by country
-  Add birthday effect on profile mount - maybe not
-  Show why login
+  - Show users count by country - popup dialog with stats
+  Add birthday effect on profile card mount
+  Show why login - info message on login slide
   Add PWA
   Optimize images
   Add couple - marriage date and location edits
@@ -78,4 +77,5 @@ export default function App () {
   Add fallback modal to edit date of birth if unavailable when clicking findMe
   Add fallback modal to edit location if unavailable when clicking findMe
   Add functionality FindMe on birthday view
+  Handle refetching of data on layout related property change
 */
