@@ -31,3 +31,8 @@ export const mapMethodsAtom = atom({
   key: 'map',
   default: {}
 })
+
+export const layoutMethodsAtom = atom({
+  key: 'layoutMethods',
+  default: {}
+})

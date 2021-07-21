@@ -87,6 +87,7 @@ export default function DateTimePickerDialogTrigger (props) {
               })
             }
             onClose()
+            defaultIsOpen && rest.onClose(true)
           }
         })
         .catch(console.log)

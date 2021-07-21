@@ -11,7 +11,11 @@ import {
 } from '@chakra-ui/react'
 
 import { useSetRecoilState } from 'recoil'
-import { activeNodeIDAtom, mapMethodsAtom } from 'utils/atoms.js'
+import {
+  layoutMethodsAtom,
+  activeNodeIDAtom,
+  mapMethodsAtom
+} from 'utils/atoms.js'
 
 import parseJwt from 'utils/parseJWT'
 
@@ -98,11 +102,13 @@ const styles = [
 ]
 
 export default function Map () {
+  const setLayoutMethods = useSetRecoilState(layoutMethodsAtom)
+
   const setMapMethods = useSetRecoilState(mapMethodsAtom)
 
   const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
 
-  const [result] = useQuery({ query: GET_MAP_DATA })
+  const [result, refetch] = useQuery({ query: GET_MAP_DATA })
 
   const { id: authUserID } = parseJwt(window.localStorage.getItem('AUTH_SESSION_ID'))
 
@@ -126,13 +132,20 @@ export default function Map () {
         defaultCenter={defaultCenter}
         defaultZoom={4}
         options={{ styles, fullscreenControl: false, zoomControl: false }}
-        onGoogleApiLoaded={({ map }) => setMapMethods({
-          panTo: (userID) => {
-            const position = result.data.getMapData.known.find(user => user.id === userID)?.position
-            position && map.panTo(position)
-            return position
-          }
-        })}
+        onGoogleApiLoaded={({ map }) => {
+          setMapMethods({
+            panTo: (userID) => {
+              const position = result.data.getMapData.known.find(user => user.id === userID)?.position
+              position && map.panTo(position)
+              return position
+            }
+          })
+          setLayoutMethods({
+            refetch: () => {
+              refetch({ requestPolicy: 'network-only' })
+            }
+          })
+        }}
       >
         {result.data.getMapData.known.map(user => (
           <Image

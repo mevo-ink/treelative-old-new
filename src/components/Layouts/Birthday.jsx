@@ -1,17 +1,35 @@
-import { Box, Flex, Text, Image, Divider } from '@chakra-ui/react'
+import { useEffect } from 'react'
+
+import {
+  Box,
+  Flex,
+  Text,
+  Image,
+  Divider
+} from '@chakra-ui/react'
 
 import { useQuery } from 'urql'
 import { useSetRecoilState } from 'recoil'
 
-import { activeNodeIDAtom } from 'utils/atoms.js'
+import { activeNodeIDAtom, layoutMethodsAtom } from 'utils/atoms.js'
 import { GET_BIRTHDAY_DATA } from 'graphql/queries/layouts'
 
 import Loading from 'components/Loading'
 
 export default function Birthday () {
+  const setLayoutMethods = useSetRecoilState(layoutMethodsAtom)
+
   const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
 
-  const [result] = useQuery({ query: GET_BIRTHDAY_DATA })
+  const [result, refetch] = useQuery({ query: GET_BIRTHDAY_DATA })
+
+  useEffect(() => {
+    setLayoutMethods({
+      refetch: () => {
+        refetch({ requestPolicy: 'network-only' })
+      }
+    }) // eslint-disable-next-line
+  }, [result.data])
 
   // const scrollRef = useRef(null)
   // const handleHorizontalScroll = e => {

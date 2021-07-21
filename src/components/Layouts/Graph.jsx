@@ -2,7 +2,11 @@ import { useState, useEffect, useRef } from 'react'
 import { Box } from '@chakra-ui/react'
 
 import { useSetRecoilState } from 'recoil'
-import { networkMethodsAtom, activeNodeIDAtom } from 'utils/atoms.js'
+import {
+  layoutMethodsAtom,
+  networkMethodsAtom,
+  activeNodeIDAtom
+} from 'utils/atoms.js'
 
 import { Network } from 'vis-network/standalone'
 
@@ -66,6 +70,7 @@ export default function Graph () {
 
   const [isStabilized, setIsStabilized] = useState(false)
 
+  const setLayoutMethods = useSetRecoilState(layoutMethodsAtom)
   const setNetworkMethods = useSetRecoilState(networkMethodsAtom)
   const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
 
@@ -91,6 +96,11 @@ export default function Graph () {
           }
         })
       },
+      refetch: () => {
+        refetch({ requestPolicy: 'network-only' })
+      }
+    })
+    setLayoutMethods({
       refetch: () => {
         refetch({ requestPolicy: 'network-only' })
       }

@@ -41,10 +41,10 @@ export default function InputDialogTrigger (props) {
 
   const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen })
 
-  const handleClose = () => {
+  const handleClose = (success = false) => {
     reset && reset()
     onClose()
-    defaultIsOpen && onParentClose()
+    defaultIsOpen && onParentClose(success)
   }
 
   if (!isEditMode && !defaultIsOpen) {
@@ -109,7 +109,7 @@ function InputDialog (props) {
               isClosable: true
             })
           }
-          onClose()
+          onClose(true)
         }
       })
       .catch(console.log)

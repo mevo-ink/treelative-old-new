@@ -7,6 +7,7 @@ import { useRecoilValue } from 'recoil'
 
 import {
   layoutAtom,
+  layoutMethodsAtom,
   networkMethodsAtom,
   mapMethodsAtom
 } from 'utils/atoms.js'
@@ -16,6 +17,8 @@ import EditUserCurrentLocation from 'components/EditUser/EditUserCurrentLocation
 
 export default function FindMe ({ onClose, user, ...styles }) {
   const layout = useRecoilValue(layoutAtom)
+  const layoutMethods = useRecoilValue(layoutMethodsAtom)
+
   const networkMethods = useRecoilValue(networkMethodsAtom)
   const mapMethods = useRecoilValue(mapMethodsAtom)
 
@@ -60,13 +63,23 @@ export default function FindMe ({ onClose, user, ...styles }) {
     }
   }
 
+  const handleEditDateOfBirthClose = (response) => {
+    setIsEditDateOfBirthOpen(false)
+    response && layoutMethods.refetch()
+  }
+
+  const handleEditCurrentLocationClose = (response) => {
+    setIsEditCurrentLocationOpen(false)
+    response && layoutMethods.refetch()
+  }
+
   return (
     <>
       {isEditDateOfBirthOpen && (
         <EditUserDateOfBirth
           defaultIsOpen
           user={user}
-          onClose={() => setIsEditDateOfBirthOpen(false)}
+          onClose={handleEditDateOfBirthClose}
           alert='Date of birth is required to locate this user'
         />
       )}
@@ -74,7 +87,7 @@ export default function FindMe ({ onClose, user, ...styles }) {
         <EditUserCurrentLocation
           defaultIsOpen
           user={user}
-          onClose={() => setIsEditCurrentLocationOpen(false)}
+          onClose={handleEditCurrentLocationClose}
           alert='Current Location is required to locate yourself'
         />
       )}
