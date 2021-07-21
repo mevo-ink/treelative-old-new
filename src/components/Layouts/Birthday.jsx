@@ -31,17 +31,12 @@ export default function Birthday () {
       }
     })
     const date = new Date()
-    while (!result.data?.getBirthdayData[date.toString().slice(4, 10)]) {
+    while (!result.data?.getBirthdayData[date.toISOString().slice(5, 10)]) {
       date.setDate(date.getDate() + 1)
     }
-    document.getElementById(date.toString().slice(4, 10)).scrollIntoView({ behavior: 'smooth', block: 'center' })
+    document.getElementById(date.toISOString().slice(5, 10)).scrollIntoView({ behavior: 'smooth', block: 'center' })
     // eslint-disable-next-line
   }, [result.data])
-
-  // useEffect(() => {
-  //   // setTimeout(() => { document.getElementById(date.toString().slice(4, 10)).scrollIntoView({ behavior: 'smooth', block: 'center' }) }, 2000)
-  //   // eslint-disable-next-line
-  // }, [])
 
   if (result.error) return <p>ERROR</p>
 
