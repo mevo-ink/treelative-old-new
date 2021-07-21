@@ -45,6 +45,8 @@ export default function Menu () {
           maxW='375px'
           h='30px'
           position='absolute'
+          left='50%'
+          transform='translateX(-50%)'
           zIndex='1'
           bottom='0'
           bg='hsla(0, 0%, 100%, .2)'
@@ -62,7 +64,7 @@ export default function Menu () {
         finalFocusRef={btnRef}
       >
         <DrawerOverlay zIndex='0' />
-        <DrawerContent>
+        <DrawerContent mx='auto'>
           <IconButton
             ref={btnRef}
             icon={<FaGripLines color='white' />}

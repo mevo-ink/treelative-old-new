@@ -43,6 +43,9 @@ export default function App () {
   Add PWA
   Optimize images
   Add couple - marriage date and location edits
+  Add logic to show active node in birthday view with AGE
+  Remove Location marker for unknown location
+  Add privacy slide slide
 */
 // DONE:
 /*

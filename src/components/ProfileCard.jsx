@@ -100,7 +100,7 @@ export default function ProfileCard () {
                   <Birth user={user} />
                   <Current user={user} />
                   <Partner user={user} isHidden={(!user.dateOfDeath && !isEditMode)} />
-                  <ParentChild user={user} />
+                  <ParentChild user={user} isHidden={(user.parents.length === 0 && user.children.length === 0 && !isEditMode)} />
                   <Socials user={user} />
                 </Slider>
               </>

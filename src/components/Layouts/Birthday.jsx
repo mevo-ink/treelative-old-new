@@ -99,7 +99,7 @@ export default function Birthday () {
             {users.map(user => (
               <Image
                 key={user.id}
-                src={user.image}
+                src={user.avatar}
                 alt='children-avatar'
                 w='40px'
                 mx='.5rem'
