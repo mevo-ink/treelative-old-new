@@ -42,6 +42,7 @@ export default function Menu () {
           ref={btnRef}
           icon={<FaGripLines color='white' />}
           w='100%'
+          maxW='375px'
           h='30px'
           position='absolute'
           zIndex='1'
@@ -55,6 +56,7 @@ export default function Menu () {
       )}
       <Drawer
         isOpen={isOpen}
+        isCentered
         placement='bottom'
         onClose={onClose}
         finalFocusRef={btnRef}

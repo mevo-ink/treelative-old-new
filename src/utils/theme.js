@@ -133,6 +133,7 @@ const theme = extendTheme({
     Modal: {
       baseStyle: {
         dialog: {
+          width: '375px',
           color: 'white',
           borderRadius: '20px',
           border: 'hsla(0, 0%, 100%, 1) solid 2px',
@@ -143,6 +144,7 @@ const theme = extendTheme({
     Drawer: {
       baseStyle: {
         dialog: {
+          width: '375px',
           color: 'hsla(0, 0%, 100%, .8)',
           borderTopLeftRadius: '20px',
           borderTopRightRadius: '20px',

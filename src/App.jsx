@@ -36,7 +36,6 @@ export default function App () {
   - On search results click, open the profile card
   Style birthday viw - kinda same layout as age view
   Style Error modal with contact us info --- NEED ACCESS TO OUR PROFILE CARDS FOR NOT AUTH USERS
-  Desktop: Add max width to Menu slider and profile card
   Insights:
   - Center label
   - Show users count by country - popup dialog with stats
@@ -78,4 +77,5 @@ export default function App () {
   Add fallback modal to edit location if unavailable when clicking findMe
   Add functionality FindMe on birthday view
   Handle refetching of data on layout related property change
+  Desktop: Add max width to Menu slider and profile card
 */
