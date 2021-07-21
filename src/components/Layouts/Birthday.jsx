@@ -65,22 +65,23 @@ export default function Birthday () {
             w='11px'
             h='11px'
             position='absolute'
-            left='5.6rem'
+            left='3.54rem'
             bg='hsla(0, 0%, 100%, .7)'
             borderRadius='50%'
           />
           <Text
+            w='5ch'
             px='.5em'
-            w='5rem'
             color='hsla(0, 0%, 100%, .9)'
             bg='hsla(343, 100%, 40%, 1)'
             fontWeight='600'
             borderRadius='0 5px 5px 0'
+            textAlign='center'
             boxShadow='1px 3px 5px hsla(0, 0%, 0%, .5)'
           >
-            {dob === 'Unknown' ? '???' : dob}
+            {dob.slice(0, 3)} <br /> {dob.substring(3)}
           </Text>
-          <Divider orientation='vertical' mx='1rem' py='40px' />
+          <Divider orientation='vertical' mx='1rem' my='40px' />
           <Flex
             overflowX='scroll'
             sx={{

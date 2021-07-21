@@ -34,7 +34,6 @@ export default function App () {
   CALENDAR styling
   Finish search bar
   - On search results click, open the profile card
-  Style birthday viw - kinda same layout as age view
   Style Error modal with contact us info --- NEED ACCESS TO OUR PROFILE CARDS FOR NOT AUTH USERS
   Insights:
   - Center label
@@ -78,4 +77,5 @@ export default function App () {
   Add functionality FindMe on birthday view
   Handle refetching of data on layout related property change
   Desktop: Add max width to Menu slider and profile card
+  Style birthday viw - kinda same layout as age view
 */

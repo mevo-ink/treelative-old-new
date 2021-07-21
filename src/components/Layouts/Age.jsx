@@ -79,7 +79,7 @@ export default function Age () {
           >
             {year}
           </Text>
-          <Divider orientation='vertical' mx='1rem' py='40px' />
+          <Divider orientation='vertical' mx='1rem' my='40px' />
           <Flex
             overflowX='scroll'
             sx={{
