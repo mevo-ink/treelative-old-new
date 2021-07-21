@@ -51,7 +51,7 @@ export default function FindMe ({ onClose, user, ...styles }) {
           setIsEditDateOfBirthOpen(true)
         } else {
           setTimeout(() => {
-            document.getElementById(new Date(user.dateOfBirth).toLocaleDateString('default', { month: 'short', day: 'numeric' })).scrollIntoView({ behavior: 'smooth', block: 'center' })
+            document.getElementById(user.dateOfBirth.slice(5, 10)).scrollIntoView({ behavior: 'smooth', block: 'center' })
           }, 150)
           onClose()
         }
