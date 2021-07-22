@@ -31,6 +31,7 @@ export default function App () {
 }
 // TODO:
 /*
+  BUG: "previous" no working while Slides scroll. (probably after fixing slide skipping bug in edit-mode)
   CALENDAR styling
   Finish search bar
   - On search results click, open the profile card
@@ -44,7 +45,6 @@ export default function App () {
   Optimize images
   Add couple - marriage date and location edits
   Add logic to show active node in birthday view with AGE
-  Remove Location marker for unknown location
   Add privacy slide slide
 */
 // DONE:
@@ -81,4 +81,5 @@ export default function App () {
   Handle refetching of data on layout related property change
   Desktop: Add max width to Menu slider and profile card
   Style birthday viw - kinda same layout as age view
+  Remove Location marker for unknown location
 */
