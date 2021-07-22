@@ -31,7 +31,6 @@ export default function App () {
 }
 // TODO:
 /*
-  BUG: Unable to go to previous slide. (probably after fixing slide skipping bug in edit-mode)
   CALENDAR styling
   Style Error modal with contact us info --- NEED ACCESS TO OUR PROFILE CARDS FOR NOT AUTH USERS
   Insights:
@@ -83,4 +82,5 @@ export default function App () {
   - Center label
   Finish search bar
   - On search results click, open the profile card
+  BUG: Unable to go to previous slide. (probably after fixing slide skipping bug in edit-mode)
 */

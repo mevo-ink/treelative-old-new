@@ -12,26 +12,22 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const MotionBox = motion(Box)
 
+const enterExitAnimation = direction => {
+  return {
+    zIndex: 0,
+    x: direction * 50,
+    opacity: 0
+  }
+}
+
 const variants = {
-  enter: (direction) => {
-    return {
-      zIndex: 0,
-      x: direction === 'left' ? 50 : -50,
-      opacity: 0
-    }
-  },
+  enter: enterExitAnimation,
   center: {
     zIndex: 1,
     x: 0,
     opacity: 1
   },
-  exit: (direction) => {
-    return {
-      zIndex: 0,
-      x: direction === 'right' ? 50 : -50,
-      opacity: 0
-    }
-  }
+  exit: enterExitAnimation
 }
 
 const transition = {
@@ -57,7 +53,7 @@ export default function Slider ({ children = [] }) {
 
   const initialPage = findNextPage(children, 0, 1)
 
-  const [[page, direction], setPageDirection] = useState([initialPage, 'right'])
+  const [[page, direction], setPageDirection] = useState([initialPage, 1])
 
   useEffect(() => {
     !isEditMode && children[page].props.isHidden && setPageDirection([findNextPage(children, page, 1), direction])
@@ -68,8 +64,8 @@ export default function Slider ({ children = [] }) {
 
   const onDragEnd = (_, { offset, velocity }) => {
     const swipe = swipePower(offset.x, velocity.x)
-    const direction = swipe < -swipeConfidenceThreshold ? 'left' : 'right'
-    setPageDirection([findNextPage(children, page, 1), direction])
+    const direction = swipe < -swipeConfidenceThreshold ? 1 : -1
+    setPageDirection([findNextPage(children, page, direction), direction])
   }
 
   return (
@@ -103,7 +99,7 @@ export default function Slider ({ children = [] }) {
             exit='exit'
             transition={transition}
             drag='x'
-            dragConstraints={{ left: 0, right: 0 }}
+            dragConstraints={{ left: 0, 1: 0 }}
             dragElastic={0.5}
             onDragEnd={onDragEnd}
             // additional props
