@@ -49,14 +49,49 @@ export default function Birthday () {
 
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
+  const getElementsInArea = (docElm => {
+    let viewportHeight = docElm.clientHeight
+    return (e, opts) => {
+      const found = []
+      let i
+      if (e && e.type === 'resize') { viewportHeight = docElm.clientHeight }
+      for (i = opts.elements.length; i--;) {
+        const elm = opts.elements[i]
+        const pos = elm.getBoundingClientRect()
+        const topPerc = pos.top / viewportHeight * 100
+        const bottomPerc = pos.bottom / viewportHeight * 100
+        const middle = (topPerc + bottomPerc) / 2
+        const inViewport = middle > opts.zone[1] &&
+        middle < (100 - opts.zone[1])
+        elm.classList.toggle(opts.markedClass, inViewport)
+        if (inViewport) {
+          found.push(elm)
+          elm.style.border = '1px solid rgba(255, 255, 255, .2)'
+        }
+      }
+    }
+  })(document.documentElement)
+
+  window.addEventListener('resize', f)
+
+  function f (e) {
+    getElementsInArea(e, {
+      elements: document.getElementById('container').getElementsByTagName('div'),
+      markedClass: 'active-div',
+      zone: [45, 45] // percentage distance from top & bottom
+    })
+  }
+
   return (
     <Flex
-      h='calc(100 * var(--vh))'
+      id='container'
+      h='100vh'
       flexDirection='column'
       overflowY='scroll'
       overflowX='hidden'
       bg='hsla(0, 0%, 0%, .75)'
       sx={{ '&::-webkit-scrollbar': { display: 'none' }, scrollbarWidth: 'none' }}
+      onWheel={f}
     >
       {Object.entries(result.data.getBirthdayData).map(([dob, users]) =>
         <Flex
