@@ -31,7 +31,7 @@ export default function App () {
 }
 // TODO:
 /*
-  BUG: "previous" no working while Slides scroll. (probably after fixing slide skipping bug in edit-mode)
+  BUG: Unable to go to previous slide. (probably after fixing slide skipping bug in edit-mode)
   CALENDAR styling
   Finish search bar
   - On search results click, open the profile card
