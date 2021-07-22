@@ -27,7 +27,7 @@ import {
   createStandaloneToast
 } from '@chakra-ui/react'
 
-import { GrFormPrevious, GrFormNext } from 'react-icons/gr'
+import { MdNavigateNext } from 'react-icons/md'
 
 import ReactDatePicker from 'react-datepicker'
 import DateTimeRenderer from 'components/_common/DateTimeRenderer'
@@ -153,7 +153,6 @@ function DateTimePickerDialog (props) {
         <ModalBody textAlign='center'>
           <Stack spacing='2'>
             {alert && <Alert status='warning' borderRadius='lg'> <AlertIcon /> {alert} </Alert>}
-            {value && <DateTimeRenderer value={value} type={type} fontSize={fontSize} fontWeight='bold' />}
             <ReactDatePicker
               inline
               selected={type === 'time' ? dt : dtDateOnly}
@@ -166,6 +165,7 @@ function DateTimePickerDialog (props) {
               {...rest}
             />
             {loading && <Loading />}
+            {value && <DateTimeRenderer value={value} type={type} fontSize={fontSize} fontWeight='bold' />}
           </Stack>
         </ModalBody>
         <ModalFooter>
@@ -237,7 +237,8 @@ function CustomHeader (props) {
         size='sm'
         variant='outline'
         aria-label='Previous Month'
-        icon={<GrFormPrevious />}
+        icon={<MdNavigateNext />}
+        transform='rotate(180deg)'
         onClick={decreaseMonth}
         isDisabled={prevMonthButtonDisabled}
       />
@@ -245,7 +246,7 @@ function CustomHeader (props) {
         size='sm'
         variant='outline'
         aria-label='Next Month'
-        icon={<GrFormNext />}
+        icon={<MdNavigateNext />}
         onClick={increaseMonth}
         isDisabled={nextMonthButtonDisabled}
       />
