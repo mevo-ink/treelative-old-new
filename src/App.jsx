@@ -33,8 +33,6 @@ export default function App () {
 /*
   BUG: Unable to go to previous slide. (probably after fixing slide skipping bug in edit-mode)
   CALENDAR styling
-  Finish search bar
-  - On search results click, open the profile card
   Style Error modal with contact us info --- NEED ACCESS TO OUR PROFILE CARDS FOR NOT AUTH USERS
   Insights:
   - Show users count by country - popup dialog with stats
@@ -83,4 +81,6 @@ export default function App () {
   Remove Location marker for unknown location
   Insights:
   - Center label
+  Finish search bar
+  - On search results click, open the profile card
 */

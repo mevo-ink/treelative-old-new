@@ -64,7 +64,7 @@ export default function Menu () {
         finalFocusRef={btnRef}
       >
         <DrawerOverlay zIndex='0' />
-        <DrawerContent mx='auto'>
+        <DrawerContent mx='auto' maxH='25.5rem'>
           <IconButton
             ref={btnRef}
             icon={<FaGripLines color='white' />}
@@ -72,13 +72,10 @@ export default function Menu () {
             bg='hsla(0, 0%, 100%, .2)'
             onClick={onClose}
           />
-          <DrawerBody>
-            <Stack
-              p='1.5em .5em'
-              spacing='2rem'
-            >
+          <DrawerBody sx={{ '&::-webkit-scrollbar': { display: 'none' }, scrollbarWidth: 'none' }}>
+            <Stack p='1.5em .5em' spacing='2rem'>
               <Flex justifyContent='space-between'>
-                <Search role={role} />
+                <Search role={role} onClose={onClose} />
                 {role === 'ADMIN' && <CreateUser />}
                 {role && <Profile onClose={onClose} authUser={result.data?.getUser} />}
                 {role && <FindMe onClose={onClose} user={result.data?.getUser} size='sm' />}
