@@ -47,6 +47,8 @@ export default function Birthday () {
     window.history.pushState({}, '', userID)
   }
 
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
   return (
     <Flex
       h='calc(100 * var(--vh))'
@@ -81,7 +83,7 @@ export default function Birthday () {
             textAlign='center'
             boxShadow='1px 3px 5px hsla(0, 0%, 0%, .5)'
           >
-            {dob.slice(0, 3)} <br /> {dob.substring(3)}
+            {months[parseInt(dob.slice(0, 2) - 1, 10)]} <br /> {dob.substring(3)}
           </Text>
           <Divider orientation='vertical' mx='1rem' my='40px' />
           <Flex
