@@ -29,9 +29,10 @@ export default function Insights () {
             p='.5em'
             mr='.5rem'
             w='4rem'
+            textAlign='center'
           >
             <Text fontSize='10px'>{insight.title}</Text>
-            <Text fontSize='25px' fontWeight='600' textAlign='center'>{insight.value}</Text>
+            <Text fontSize='25px' fontWeight='600'>{insight.value}</Text>
           </Box>
         ))}
       </Flex>

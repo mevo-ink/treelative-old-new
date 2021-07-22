@@ -37,7 +37,6 @@ export default function App () {
   - On search results click, open the profile card
   Style Error modal with contact us info --- NEED ACCESS TO OUR PROFILE CARDS FOR NOT AUTH USERS
   Insights:
-  - Center label
   - Show users count by country - popup dialog with stats
   Add birthday effect on profile card mount
   Show why login - info message on login slide
@@ -82,4 +81,6 @@ export default function App () {
   Desktop: Add max width to Menu slider and profile card
   Style birthday viw - kinda same layout as age view
   Remove Location marker for unknown location
+  Insights:
+  - Center label
 */
