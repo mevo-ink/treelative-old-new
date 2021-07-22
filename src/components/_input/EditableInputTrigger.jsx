@@ -57,7 +57,11 @@ export default function EditableInputTrigger (props) {
         variant='editable-input'
         animation={`${wiggle} infinite .15s linear`}
       >
-        <ClearValueButton inputProps={inputProps} />
+        <ClearValueButton
+          title={inputProps.title}
+          onRemove={() => inputProps.onSubmit(inputProps.type === 'text' ? '' : null)}
+          isLoading={inputProps.loading}
+        />
         {props.value}
       </Button>
     </>

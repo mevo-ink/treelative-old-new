@@ -1,14 +1,12 @@
 import { useState } from 'react'
 
-import { startCase } from 'lodash'
-
 import { IconButton } from '@chakra-ui/react'
 
 import { IoClose } from 'react-icons/io5'
 
 import ConfirmationModal from 'components/_common/ConfirmationModal'
 
-export default function ClearValueButton ({ inputProps }) {
+export default function ClearValueButton ({ title, onRemove, isLoading }) {
   const [isConfirm, setIsConfirm] = useState(false)
 
   const handleClear = (event) => {
@@ -17,7 +15,7 @@ export default function ClearValueButton ({ inputProps }) {
   }
 
   const confirmClear = () => {
-    inputProps.onSubmit(inputProps.type === 'text' ? '' : null)
+    onRemove()
     setIsConfirm(false)
   }
 
@@ -25,12 +23,15 @@ export default function ClearValueButton ({ inputProps }) {
     setIsConfirm(false)
   }
 
-  if (!inputProps.value) return null
-
   return (
     <>
       {isConfirm && (
-        <ConfirmationModal title={`Clear ${startCase(inputProps.name)}`} onConfirm={confirmClear} onCancel={cancelClear} />
+        <ConfirmationModal
+          title={title}
+          onConfirm={confirmClear}
+          onCancel={cancelClear}
+          isLoading={isLoading}
+        />
       )}
       <IconButton
         isRound

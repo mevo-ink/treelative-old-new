@@ -16,7 +16,8 @@ export default function ConfirmationModal (props) {
     title = 'Delete',
     description = 'Are you sure? You can\'t undo this action.',
     onConfirm,
-    onCancel
+    onCancel,
+    isLoading
   } = props
 
   const cancelRef = useRef()
@@ -53,6 +54,7 @@ export default function ConfirmationModal (props) {
               isRound
               bg='hsla(120, 75%, 50%, 1)'
               onClick={onConfirm}
+              isLoading={isLoading}
               ml={6}
             />
           </AlertDialogFooter>

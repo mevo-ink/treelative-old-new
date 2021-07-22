@@ -38,6 +38,7 @@ import ErrorAlert from 'components/_common/ErrorAlert'
 import UserSelection from 'components/_common/UserSelection'
 
 import CreateUser from 'components/Menu/CreateUser'
+import ClearValueButton from 'components/_input/ClearValueButton'
 import DeleteUserRelation from 'components/EditUser/DeleteUserRelation'
 
 const toast = createStandaloneToast()
@@ -92,7 +93,8 @@ export default function EditUserChildren (props) {
               position='relative'
             >
               {isEditMode && (
-                <DeleteUserRelation
+
+                <ClearValueButton
                   title='Remove Child'
                   onRemove={() => handleRemoveChild(child.id, child.shortName)}
                   isLoading={removeChildResult.fetching}
