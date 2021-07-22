@@ -13,7 +13,7 @@ import SearchResult from 'components/Menu/SearchResult'
 export default function Search ({ role, onClose }) {
   const [searchInput, setSearchInput] = useState()
   return (
-    <Box w={role === 'ADMIN' ? '65%' : role === 'USER' ? '75%' : '100%'}>
+    <Box w='100%'>
       <InputGroup w='100%' h='2rem'>
         <InputRightElement
           h='100%'

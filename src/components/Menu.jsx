@@ -4,8 +4,8 @@ import parseJwt from 'utils/parseJWT'
 
 import {
   Box,
-  Flex,
   Stack,
+  HStack,
   Drawer,
   IconButton,
   DrawerBody,
@@ -74,12 +74,12 @@ export default function Menu () {
           />
           <DrawerBody sx={{ '&::-webkit-scrollbar': { display: 'none' }, scrollbarWidth: 'none' }}>
             <Stack p='1.5em .5em' spacing='2rem'>
-              <Flex justifyContent='space-between'>
-                <Search role={role} onClose={onClose} />
-                {role === 'ADMIN' && <CreateUser />}
-                {role && <Profile onClose={onClose} authUser={result.data?.getUser} />}
-                {role && <FindMe onClose={onClose} user={result.data?.getUser} size='sm' />}
-              </Flex>
+              <HStack justifyContent='space-between'>
+                <Search onClose={onClose} />
+                {result.data?.getUser && role === 'ADMIN' && <CreateUser />}
+                {result.data?.getUser && <Profile onClose={onClose} authUser={result.data?.getUser} />}
+                {result.data?.getUser && <FindMe onClose={onClose} user={result.data?.getUser} size='sm' />}
+              </HStack>
               <Layouts onClose={onClose} />
               <Insights />
             </Stack>
