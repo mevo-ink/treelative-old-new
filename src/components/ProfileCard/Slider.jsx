@@ -99,7 +99,6 @@ export default function Slider ({ children = [] }) {
             exit='exit'
             transition={transition}
             drag='x'
-            dragConstraints={{ left: 0, 1: 0 }}
             dragElastic={0.5}
             onDragEnd={onDragEnd}
             // additional props
