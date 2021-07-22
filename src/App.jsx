@@ -32,8 +32,9 @@ export default function App () {
 // TODO:
 /*
   Style Error modal with contact us info --- NEED ACCESS TO OUR PROFILE CARDS FOR NOT AUTH USERS
-  Insights:
-  - Show users count by country - popup dialog with stats
+  Insights - popup dialog with chart:
+  - Show users distribution by country
+  - Show users distribution by age
   Add birthday effect on profile card mount
   Show why login - info message on login slide
   Add PWA
