@@ -3,15 +3,9 @@ import {
   Text
 } from '@chakra-ui/react'
 
-import { useRecoilValue } from 'recoil'
-
-import { isEditModeAtom } from 'utils/atoms.js'
-
 import EditUserPartner from 'components/EditUser/EditUserPartner'
 
 export default function ParentChild ({ user }) {
-  const isEditMode = useRecoilValue(isEditModeAtom)
-
   return (
     <Flex
       w='80%'
@@ -24,14 +18,8 @@ export default function ParentChild ({ user }) {
       borderRadius='20px'
       p='1.5rem 0'
     >
-      {(user.couple || isEditMode) && (
-        <>
-          <Text variant='info-title'>
-            Couple
-          </Text>
-          <EditUserPartner user={user} />
-        </>
-      )}
+      <Text variant='info-title'> Couple </Text>
+      <EditUserPartner user={user} />
     </Flex>
   )
 }
