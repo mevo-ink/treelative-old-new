@@ -129,18 +129,33 @@ export default function Birthday () {
             }}
           >
             {users.map(user => (
-              <Image
-                key={user.id}
-                src={user.avatar}
-                alt='children-avatar'
-                w='40px'
-                mx='.5rem'
-                objectFit='contain'
-                borderRadius='50%'
-                fallbackSrc={`https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
-                onClick={() => handleUserSelect(user.id)}
-                my='1'
-              />
+              <Flex key={user.id} position='relative'>
+                <Image
+                  src={user.avatar}
+                  alt='children-avatar'
+                  w='40px'
+                  mx='.5rem'
+                  objectFit='contain'
+                  borderRadius='50%'
+                  fallbackSrc={`https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
+                  onClick={() => handleUserSelect(user.id)}
+                  my='1'
+                />
+                <Text
+                  w='20px'
+                  h='20px'
+                  display='grid'
+                  placeItems='center'
+                  position='absolute'
+                  right='0'
+                  fontSize='12px'
+                  bg='hsla(310, 100%, 40%, 1)'
+                  borderRadius='50%'
+                  boxShadow='0px 3px 5px hsla(0, 0%, 0%, .8)'
+                >
+                  {user.age}
+                </Text>
+              </Flex>
             ))}
           </Flex>
         </Flex>
