@@ -6,14 +6,15 @@ import {
   Button
 } from '@chakra-ui/react'
 
-// import { useSetRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 
-// import { activeNodeIDAtom } from 'utils/atoms.js'
+import { activeNodeIDAtom } from 'utils/atoms.js'
 
-export default function SearchResult ({ onClose }) {
-  // const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
-  const handleClick = () => {
-    // setActiveNodeID(id)
+export default function SearchResult ({ user, onClose }) {
+  console.log(user)
+  const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
+  const handleClick = (id) => {
+    setActiveNodeID(id)
     onClose()
   }
   return (

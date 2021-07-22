@@ -212,9 +212,9 @@ export const SEARCH_USERS = gql`
           { shortName: { contains: $search, mode: "insensitive" } }
           { email: { contains: $search, mode: "insensitive" } }
           { phoneNumber: { contains: $search, mode: "insensitive" } }
-          { currentLocation: { path: ["description"], string_contains: $search } }
-          { birthLocation: { path: ["description"], string_contains: $search } }
-          { deathLocation: { path: ["description"], string_contains: $search } }
+          { currentLocation: { path: ["suggested", "description"], string_contains: $search } }
+          { birthLocation: { path: ["suggested", "description"], string_contains: $search } }
+          { deathLocation: { path: ["suggested", "description"], string_contains: $search } }
         ]
       }
       orderBy: { fullName: asc }
