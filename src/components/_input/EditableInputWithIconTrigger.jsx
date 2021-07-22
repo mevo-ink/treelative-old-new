@@ -1,4 +1,5 @@
 import {
+  Icon,
   Flex,
   Image,
   Button,
@@ -9,6 +10,8 @@ import {
 import { useRecoilValue } from 'recoil'
 
 import { isEditModeAtom } from 'utils/atoms.js'
+
+import { MdAdd } from 'react-icons/md'
 
 import EditableInputModal from 'components/_input/EditableInputModal'
 import ClearValueButton from 'components/_input/ClearValueButton'
@@ -54,6 +57,7 @@ export default function EditableInputWithIconTrigger (props) {
         >
           {isEditMode && <ClearValueButton inputProps={inputProps} />}
           {props.value}
+          {!props.value && <Icon as={MdAdd} w='20px' h='20px' />}
         </Button>
       </Flex>
     </>
