@@ -74,7 +74,7 @@ export default function Menu () {
           />
           <DrawerBody sx={{ '&::-webkit-scrollbar': { display: 'none' }, scrollbarWidth: 'none' }}>
             <Stack p='1.5em .5em' spacing='2rem'>
-              <HStack justifyContent='space-between'>
+              <HStack justifyContent='space-between' alignItems='end'>
                 <Search onClose={onClose} />
                 {result.data?.getUser && role === 'ADMIN' && <CreateUser />}
                 {result.data?.getUser && <Profile onClose={onClose} authUser={result.data?.getUser} />}
