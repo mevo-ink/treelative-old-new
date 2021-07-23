@@ -30,7 +30,7 @@ import Loading from 'components/_common/Loading'
 import ErrorAlert from 'components/_common/ErrorAlert'
 import UserSelection from 'components/_common/UserSelection'
 
-import DeleteUserRelation from 'components/EditUser/DeleteUserRelation'
+// import DeleteUserRelation from 'components/EditUser/DeleteUserRelation'
 
 const toast = createStandaloneToast()
 
@@ -79,13 +79,13 @@ export default function EditUserPartner (props) {
               mt='1rem'
               position='relative'
             >
-              {isEditMode && (
+              {/* {isEditMode && (
                 <DeleteUserRelation
                   title='Remove Partner'
                   onRemove={handleRemovePartner}
                   isLoading={removePartnerResult.fetching}
                 />
-              )}
+              )} */}
               <Button
                 w='100%'
                 h='100%'
