@@ -37,7 +37,6 @@ import RemoveButton from 'components/_input/RemoveButton'
 
 import Loading from 'components/_common/Loading'
 
-import './datetimePicker.css'
 import 'react-datepicker/dist/react-datepicker.css'
 
 const toast = createStandaloneToast()
@@ -151,7 +150,28 @@ function DateTimePickerDialog (props) {
         </ModalHeader>
         <ModalCloseButton isDisabled={loading} />
         <ModalBody textAlign='center'>
-          <Stack spacing='2'>
+          <Stack
+            spacing='2'
+            sx={{
+              '.react-datepicker': {
+                background: 'hsl(231, 33%, 8%)',
+                border: '1px solid white',
+                padding: '20px 10px'
+              },
+              '.react-datepicker__header': {
+                background: 'transparent'
+              },
+              '.react-datepicker__day': {
+                color: 'white',
+                '&:hover': {
+                  background: 'hsla(0, 0%, 100%, 0.25)'
+                }
+              },
+              '.react-datepicker__day-name': {
+                color: 'white'
+              }
+            }}
+          >
             {alert && <Alert status='warning' borderRadius='lg'> <AlertIcon /> {alert} </Alert>}
             <ReactDatePicker
               inline

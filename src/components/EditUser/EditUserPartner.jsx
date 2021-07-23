@@ -12,7 +12,8 @@ export default function EditUserPartner ({ user }) {
     <EditableAvatarTrigger
       title='Add Partner'
       user={user}
-      relations={[user.couple.partner]}
+      limit={1}
+      relations={user.couple?.partner ? [user.couple?.partner] : []}
       removeRelation={removePartner}
       removeRelationResult={removePartnerResult}
       addRelation={addPartner}

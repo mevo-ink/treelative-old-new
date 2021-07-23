@@ -51,7 +51,7 @@ const findNextPage = (slides, currentIndex, direction = 1) => {
 export default function Slider ({ children = [] }) {
   const isEditMode = useRecoilValue(isEditModeAtom)
 
-  const initialPage = findNextPage(children, 0, 1)
+  const initialPage = children[0].props.isHidden ? findNextPage(children, 0, 1) : 0
 
   const [[page, direction], setPageDirection] = useState([initialPage, 1])
 

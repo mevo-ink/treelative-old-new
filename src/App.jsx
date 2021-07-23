@@ -31,7 +31,6 @@ export default function App () {
 }
 // TODO:
 /*
-  Make couples mutations similar to parents and child (userID & relationID) -- need to discuss :p
   Style Error modal with contact us info --- NEED ACCESS TO OUR PROFILE CARDS FOR NOT AUTH USERS
   Add birthday effect on profile card mount
   Add PWA
@@ -39,6 +38,13 @@ export default function App () {
   Add couple - marriage date and location edits
   Add logic to show active node in birthday view with AGE
   Add privacy slide slide
+  Don't close menu drawer
+  Add new property to user : isPublic in backend
+  Add sample insights with recharts
+  Convert google places search to backend
+  Fix button inside button for edit button
+  id dead - calculate proper Age
+  Show some indication on age view if DEAD
 */
 // DONE:
 /*

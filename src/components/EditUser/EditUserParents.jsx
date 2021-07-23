@@ -12,6 +12,7 @@ export default function EditUserParents ({ user }) {
     <EditableAvatarTrigger
       title='Add Parent'
       user={user}
+      limit={2}
       relations={user.parents}
       removeRelation={removeParent}
       removeRelationResult={removeParentResult}

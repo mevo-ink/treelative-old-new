@@ -24,9 +24,10 @@ export default function EditableAvatarTrigger (props) {
   const {
     user,
     title,
-    relations,
+    relations = [],
     removeRelation,
     removeRelationResult,
+    limit = 8,
     ...inputProps
   } = props
 
@@ -69,7 +70,7 @@ export default function EditableAvatarTrigger (props) {
     <>
       {isOpen && <EditableAvatarModal user={user} onClose={onClose} relations={relations} title={title} {...inputProps} />}
       <Flex w='85%' flexWrap='wrap' justifyContent='center'>
-        {relations.map(user => (
+        {relations.map(user => user && (
           <Box key={user.id} animation={isEditMode && `${wiggle} infinite .15s linear`}>
             <Box
               w='2.5rem'
@@ -107,7 +108,7 @@ export default function EditableAvatarTrigger (props) {
             <Text variant='info-title' fontSize='.65rem' mt='.2rem' textAlign='center'>{user.shortName}</Text>
           </Box>
         ))}
-        {isEditMode && (title === 'Add Parent' ? relations.length < 2 : title === 'Add Partner' ? relations.length < 1 : relations.length < 8) && (
+        {isEditMode && (relations.length < limit) && (
           <IconButton
             icon={<MdAdd size='2rem' />}
             w='2rem'
