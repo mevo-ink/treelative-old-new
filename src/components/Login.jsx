@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 
 import {
   Flex,
+  Text,
   Input,
   Stack,
   Button,
@@ -87,10 +88,22 @@ export default function Login ({ onSuccess }) {
   return (
     <>
       {isForgotPasswordOpen && <ForgotPassword onClose={() => setIsForgotPasswordOpen(false)} />}
+      <Text
+        fontSize='1.8rem'
+        fontWeight='600'
+        color='hsla(261, 64%, 18%, 1)'
+        pt='1.2em'
+        pb='.6em'
+        px='1em'
+        textAlign='center'
+      >
+        Please Login to Access Profile Card
+      </Text>
       <Stack
         as='form'
         w='100%'
-        p='3em 2em'
+        pb='3em'
+        px='2em'
         spacing='2rem'
         color='hsla(261, 64%, 18%, 1)'
         onSubmit={handleSubmit(onLoginWithPassword)}

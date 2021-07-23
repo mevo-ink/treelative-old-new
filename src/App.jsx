@@ -36,7 +36,6 @@ export default function App () {
   - Show users distribution by country
   - Show users distribution by age
   Add birthday effect on profile card mount
-  Show why login - info message on login slide
   Add PWA
   Optimize images
   Add couple - marriage date and location edits
@@ -84,4 +83,5 @@ export default function App () {
   - On search results click, open the profile card
   BUG: Unable to go to previous slide. (probably after fixing slide skipping bug in edit-mode)
   CALENDAR styling
+  Show why login - info message on login slide
 */
