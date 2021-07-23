@@ -91,7 +91,7 @@ export default function EditableAvatarModal (props) {
       {isAddNewOpen && <CreateUser initialValue={isAddNewOpen} onClose={handleCreateUserClose} />}
       <Modal isOpen isCentered onClose={onClose}>
         <ModalOverlay />
-        <ModalContent minH='27rem'>
+        <ModalContent minH={title === 'Add Parent' ? '27rem' : '23rem'}>
           <ModalHeader>
             {title}
           </ModalHeader>
