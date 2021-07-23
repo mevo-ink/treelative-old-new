@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react'
 
 import FormDialog from 'components/_common/FormDialog'
-import GooglePlacesSelect from 'components/_select/GooglePlacesSelect'
+import LocationSelection from 'components/_common/LocationSelection'
 
 import RemoveButton from 'components/_input/RemoveButton'
 
@@ -129,11 +129,15 @@ function InputDialog (props) {
     >
       <Stack spacing='8' minH='300px'>
         {alert && <Alert status='warning' borderRadius='lg'> <AlertIcon /> {alert} </Alert>}
-        <GooglePlacesSelect
-          autoFocus
+        <LocationSelection
           value={location}
           onChange={setLocation}
         />
+        {/* <GooglePlacesSelect
+          autoFocus
+          value={location}
+          onChange={setLocation}
+        /> */}
         <AspectRatio>
           <iframe
             title={title}
