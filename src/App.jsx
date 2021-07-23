@@ -33,9 +33,6 @@ export default function App () {
 /*
   Make couples mutations similar to parents and child (userID & relationID) -- need to discuss :p
   Style Error modal with contact us info --- NEED ACCESS TO OUR PROFILE CARDS FOR NOT AUTH USERS
-  Insights - popup dialog with chart:
-  - Show users distribution by country
-  - Show users distribution by age
   Add birthday effect on profile card mount
   Add PWA
   Optimize images
@@ -85,4 +82,7 @@ export default function App () {
   BUG: Unable to go to previous slide. (probably after fixing slide skipping bug in edit-mode)
   CALENDAR styling
   Show why login - info message on login slide
+  Insights - popup dialog with chart:
+  - Show users distribution by country
+  - Show users distribution by age
 */
