@@ -55,7 +55,7 @@ export default function EditableAvatarTrigger (props) {
       .then(result => {
         if (result.data) {
           toast({
-            title: 'Successfully removed',
+            title: 'Successfully Removed Relation',
             status: 'success',
             position: 'top',
             duration: 3000,

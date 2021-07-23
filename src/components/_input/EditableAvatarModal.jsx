@@ -50,7 +50,7 @@ export default function EditableAvatarModal (props) {
         .then(result => {
           if (result.data) {
             toast({
-              title: 'Successfully added',
+              title: 'Successfully Added Relation',
               status: 'success',
               position: 'top',
               duration: 3000,
@@ -72,7 +72,7 @@ export default function EditableAvatarModal (props) {
         .then(result => {
           if (result.data) {
             toast({
-              title: 'Successfully added',
+              title: 'Successfully Added Relation',
               status: 'success',
               position: 'top',
               duration: 3000,
