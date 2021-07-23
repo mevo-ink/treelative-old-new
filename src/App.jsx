@@ -41,9 +41,7 @@ export default function App () {
   Don't close menu drawer
   Add new property to user : isPublic in backend
   Add sample insights with recharts
-  Convert google places search to backend
   Fix button inside button for edit button
-  id dead - calculate proper Age
   Show some indication on age view if DEAD
 */
 // DONE:
@@ -91,4 +89,6 @@ export default function App () {
   Insights - popup dialog with chart:
   - Show users distribution by country
   - Show users distribution by age
+  Convert google places search to backend
+  id dead - calculate proper Age
 */
