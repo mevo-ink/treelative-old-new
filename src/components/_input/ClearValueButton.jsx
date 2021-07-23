@@ -39,6 +39,7 @@ export default function ClearValueButton ({ title, onRemove, isLoading }) {
         icon={<IoClose color='hsla(355, 100%, 50%, .8)' />}
         aria-label='Clear Value'
         position='absolute'
+        zIndex='1'
         top='-.3rem'
         right='-.2rem'
         cursor='pointer'
