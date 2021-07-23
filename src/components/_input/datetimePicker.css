@@ -1,6 +1,7 @@
 .react-datepicker {
-  background: transparent !important;
-  border: none !important;
+  background: hsl(231, 33%, 8%) !important;
+  border: 1px solid white !important;
+  padding: 20px 10px;
 }
 
 .react-datepicker__header {
