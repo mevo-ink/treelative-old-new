@@ -9,7 +9,7 @@ import { useRecoilValue } from 'recoil'
 import { isEditModeAtom } from 'utils/atoms.js'
 
 import EditableInputModal from 'components/_input/EditableInputModal'
-import ClearValueButton from 'components/_input/ClearValueButton'
+import RemoveButton from 'components/_input/RemoveButton'
 
 export default function EditableIconTrigger (props) {
   const isEditMode = useRecoilValue(isEditModeAtom)
@@ -38,7 +38,7 @@ export default function EditableIconTrigger (props) {
         isDisabled={!isEditMode && !url}
         m='1rem 0'
       >
-        {isEditMode && <ClearValueButton inputProps={inputProps} />}
+        {isEditMode && <RemoveButton inputProps={inputProps} />}
         <Image
           src={icon}
           w='40px'

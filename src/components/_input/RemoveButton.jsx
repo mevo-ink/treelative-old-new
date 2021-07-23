@@ -6,7 +6,7 @@ import { IoClose } from 'react-icons/io5'
 
 import ConfirmationModal from 'components/_common/ConfirmationModal'
 
-export default function ClearValueButton ({ title, onRemove, isLoading }) {
+export default function RemoveButton ({ title, onRemove, isLoading }) {
   const [isConfirm, setIsConfirm] = useState(false)
 
   const handleClear = (event) => {

@@ -18,7 +18,7 @@ import {
 import FormDialog from 'components/_common/FormDialog'
 import GooglePlacesSelect from 'components/_select/GooglePlacesSelect'
 
-import ClearValueButton from 'components/_input/ClearValueButton'
+import RemoveButton from 'components/_input/RemoveButton'
 
 const toast = createStandaloneToast()
 
@@ -63,7 +63,7 @@ export default function InputDialogTrigger (props) {
         variant='editable-input'
         animation={`${wiggle} infinite .15s linear`}
       >
-        {isEditMode && <ClearValueButton inputProps={inputProps} />}
+        {isEditMode && <RemoveButton inputProps={inputProps} />}
         {inputProps?.value ? inputProps?.value?.suggested?.terms?.slice(-3).map(val => val.value).join(', ') : 'Unavailable'}
       </Button>
     </>

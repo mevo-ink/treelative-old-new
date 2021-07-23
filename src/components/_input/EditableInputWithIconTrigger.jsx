@@ -14,7 +14,7 @@ import { isEditModeAtom } from 'utils/atoms.js'
 import { MdAdd } from 'react-icons/md'
 
 import EditableInputModal from 'components/_input/EditableInputModal'
-import ClearValueButton from 'components/_input/ClearValueButton'
+import RemoveButton from 'components/_input/RemoveButton'
 
 export default function EditableInputWithIconTrigger (props) {
   const isEditMode = useRecoilValue(isEditModeAtom)
@@ -55,7 +55,7 @@ export default function EditableInputWithIconTrigger (props) {
           borderLeftRadius='unset'
           onClick={handleClick}
         >
-          {isEditMode && <ClearValueButton inputProps={inputProps} />}
+          {isEditMode && <RemoveButton inputProps={inputProps} />}
           {props.value}
           {!props.value && <Icon as={MdAdd} w='20px' h='20px' />}
         </Button>

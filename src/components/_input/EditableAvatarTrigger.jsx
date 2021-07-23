@@ -15,7 +15,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { isEditModeAtom, activeNodeIDAtom, layoutAtom, networkMethodsAtom } from 'utils/atoms.js'
 
-import ClearValueButton from 'components/_input/ClearValueButton'
+import RemoveButton from 'components/_input/RemoveButton'
 import EditableAvatarModal from 'components/_input/EditableAvatarModal'
 
 const toast = createStandaloneToast()
@@ -81,7 +81,7 @@ export default function EditableAvatarTrigger (props) {
               position='relative'
             >
               {isEditMode && (
-                <ClearValueButton
+                <RemoveButton
                   title='Remove Relation'
                   onRemove={() => handleRemoveRelation(user.id, user.shortName)}
                   isLoading={removeRelationResult.fetching}
