@@ -91,7 +91,7 @@ export default function EditableAvatarModal (props) {
       {isAddNewOpen && <CreateUser initialValue={isAddNewOpen} onClose={handleCreateUserClose} />}
       <Modal isOpen isCentered onClose={onClose}>
         <ModalOverlay />
-        <ModalContent minH='30rem'>
+        <ModalContent minH='27rem'>
           <ModalHeader>
             {title}
           </ModalHeader>
@@ -117,14 +117,16 @@ export default function EditableAvatarModal (props) {
               {addRelationResult.error && <ErrorAlert> {addRelationResult.error.message} </ErrorAlert>}
             </Stack>
           </ModalBody>
-          <ModalFooter>
-            <Alert status='warning' borderRadius='lg'>
-              <AlertIcon />
-              <AlertDescription>
-                Parent's partner will automatically be added as your second parent
-              </AlertDescription>
-            </Alert>
-          </ModalFooter>
+          {title === 'Add Parent' && (
+            <ModalFooter>
+              <Alert status='warning' borderRadius='lg'>
+                <AlertIcon />
+                <AlertDescription>
+                  Parent's partner will automatically be added as your second parent
+                </AlertDescription>
+              </Alert>
+            </ModalFooter>
+          )}
         </ModalContent>
       </Modal>
     </>
