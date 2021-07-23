@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 import {
   Box,
@@ -15,14 +15,9 @@ import { SEARCH_USERS } from 'graphql/queries/users'
 import SearchResult from 'components/Menu/SearchResult'
 
 export default function Search ({ role, onClose }) {
-  const [searchInput, setSearchInput] = useState('')
+  const [searchInput, setSearchInput] = useState(null)
   const [result] = useQuery({ query: SEARCH_USERS, variables: { search: searchInput } })
 
-  console.log(result.data)
-  const users = result.data?.users
-  useEffect(() => {
-    console.log(result)
-  }, [result.data])
   return (
     <Box w='100%'>
       <InputGroup w='100%' h='2rem'>
@@ -45,7 +40,7 @@ export default function Search ({ role, onClose }) {
           onChange={(e) => setSearchInput(e.target.value)}
         />
       </InputGroup>
-      {/* {users.length !== 0 && <SearchResult users={users} onClose={onClose} />} */}
+      {result.data && <SearchResult users={result.data?.users} onClose={onClose} isFetching={result.fetching} />}
     </Box>
   )
 }
