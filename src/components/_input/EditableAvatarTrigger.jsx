@@ -51,7 +51,7 @@ export default function EditableAvatarTrigger (props) {
   }
 
   const handleRemoveRelation = (id) => {
-    removeRelation(id)
+    return removeRelation(id)
       .then(result => {
         if (result.data) {
           toast({
@@ -65,6 +65,7 @@ export default function EditableAvatarTrigger (props) {
         }
       })
   }
+
   return (
     <>
       {isOpen && <EditableAvatarModal user={user} onClose={onClose} relations={relations} title={title} {...inputProps} />}

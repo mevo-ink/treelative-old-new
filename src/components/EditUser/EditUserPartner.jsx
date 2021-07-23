@@ -8,15 +8,25 @@ export default function EditUserPartner ({ user }) {
   const [addPartnerResult, addPartner] = useMutation(ADD_USER_PARTNER)
   const [removePartnerResult, removePartner] = useMutation(DELETE_USER_PARTNER)
 
+  const handleRemovePartner = () => {
+    const variables = { coupleID: user.couple.id }
+    return removePartner(variables)
+  }
+
+  const handleAddPartner = (id) => {
+    const variables = { input: { userOneID: user.id, userTwoID: id } }
+    return addPartner(variables)
+  }
+
   return (
     <EditableAvatarTrigger
       title='Add Partner'
       user={user}
       limit={1}
       relations={user.couple?.partner ? [user.couple?.partner] : []}
-      removeRelation={removePartner}
+      removeRelation={handleRemovePartner}
       removeRelationResult={removePartnerResult}
-      addRelation={addPartner}
+      addRelation={handleAddPartner}
       addRelationResult={addPartnerResult}
       LIST_USER_AVAILABLE_RELATIONS={LIST_USER_AVAILABLE_PARTNERS}
     />

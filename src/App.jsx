@@ -43,6 +43,8 @@ export default function App () {
   Add sample insights with recharts
   Fix button inside button for edit button
   Show some indication on age view if DEAD
+  Disable - clicking on relation avatar on edit mode
+  Investigate cache bug
 */
 // DONE:
 /*

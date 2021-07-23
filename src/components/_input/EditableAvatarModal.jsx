@@ -43,23 +43,27 @@ export default function EditableAvatarModal (props) {
   const layout = useRecoilValue(layoutAtom)
   const networkMethods = useRecoilValue(networkMethodsAtom)
 
+  const handleAddRelation = (userID) => {
+    addRelation(userID)
+      .then(result => {
+        if (result.data) {
+          toast({
+            title: 'Successfully Added Relation',
+            status: 'success',
+            position: 'top',
+            duration: 3000,
+            isClosable: true
+          })
+          layout === 'network' && networkMethods.refetch()
+          onClose()
+        }
+      })
+  }
+
   const handleCreateUserClose = (response) => {
     setIsAddNewOpen('')
     if (response) {
-      addRelation(response.add.id)
-        .then(result => {
-          if (result.data) {
-            toast({
-              title: 'Successfully Added Relation',
-              status: 'success',
-              position: 'top',
-              duration: 3000,
-              isClosable: true
-            })
-            layout === 'network' && networkMethods.refetch()
-            onClose()
-          }
-        })
+      handleAddRelation(response.addUser.id)
     }
   }
 
@@ -68,20 +72,7 @@ export default function EditableAvatarModal (props) {
       // show create new user dialog
       setIsAddNewOpen(userRelation.value)
     } else {
-      addRelation(userRelation.value)
-        .then(result => {
-          if (result.data) {
-            toast({
-              title: 'Successfully Added Relation',
-              status: 'success',
-              position: 'top',
-              duration: 3000,
-              isClosable: true
-            })
-            layout === 'network' && networkMethods.refetch()
-            onClose()
-          }
-        })
+      handleAddRelation(userRelation.value)
     }
   }
   return (
@@ -102,10 +93,8 @@ export default function EditableAvatarModal (props) {
                     <UserSelection
                       query={LIST_USER_AVAILABLE_RELATIONS}
                       variables={{ userID: user.id }}
-                      key={`relation_key__${JSON.stringify(relations ? { label: relations.fullName, value: relations.id } : undefined)}`}
-                      value={`Select ${title}`}
                       onChange={handleOnChange}
-                      placeholder='Search Parent'
+                      placeholder='Search User'
                       filterUsers={({ value }) => value !== user.id}
                     />
                   </Stack>

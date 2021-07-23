@@ -16,7 +16,7 @@ export default function RemoveButton ({ title, onRemove, isLoading }) {
 
   const confirmClear = () => {
     onRemove()
-    setIsConfirm(false)
+      .then(() => setIsConfirm(false))
   }
 
   const cancelClear = () => {
