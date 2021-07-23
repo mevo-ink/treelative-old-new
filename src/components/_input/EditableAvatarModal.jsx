@@ -46,12 +46,11 @@ export default function EditableAvatarModal (props) {
   const handleCreateUserClose = (response) => {
     setIsAddNewOpen('')
     if (response) {
-      const variables = { userID: user.id, [title.toLowerCase().substring(4) + 'ID']: response.add.id }
-      addRelation(variables)
+      addRelation(response.add.id)
         .then(result => {
           if (result.data) {
             toast({
-              title: `Successfully added ${response.add.shortName}`,
+              title: 'Successfully added',
               status: 'success',
               position: 'top',
               duration: 3000,
@@ -69,12 +68,11 @@ export default function EditableAvatarModal (props) {
       // show create new user dialog
       setIsAddNewOpen(userRelation.value)
     } else {
-      const variables = { userID: user.id, [title.toLowerCase().substring(4) + 'ID']: userRelation.value }
-      addRelation(variables)
+      addRelation(userRelation.value)
         .then(result => {
           if (result.data) {
             toast({
-              title: 'Successfully added the parent',
+              title: 'Successfully added',
               status: 'success',
               position: 'top',
               duration: 3000,

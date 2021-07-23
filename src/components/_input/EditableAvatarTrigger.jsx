@@ -50,13 +50,12 @@ export default function EditableAvatarTrigger (props) {
     window.history.pushState({}, '', userID)
   }
 
-  const handleRemoveRelation = (id, shortName) => {
-    const variables = { userID: user.id, [title.toLowerCase().substring(4) + 'ID']: id }
-    removeRelation(variables)
+  const handleRemoveRelation = (id) => {
+    removeRelation(id)
       .then(result => {
         if (result.data) {
           toast({
-            title: `Successfully removed ${shortName}`,
+            title: 'Successfully removed',
             status: 'success',
             position: 'top',
             duration: 3000,
@@ -84,7 +83,7 @@ export default function EditableAvatarTrigger (props) {
               {isEditMode && (
                 <RemoveButton
                   title='Remove Relation'
-                  onRemove={() => handleRemoveRelation(user.id, user.shortName)}
+                  onRemove={() => handleRemoveRelation(user.id)}
                   isLoading={removeRelationResult.fetching}
                 />
               )}

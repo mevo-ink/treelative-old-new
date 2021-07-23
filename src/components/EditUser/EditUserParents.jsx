@@ -8,15 +8,25 @@ export default function EditUserParents ({ user }) {
   const [addParentResult, addParent] = useMutation(ADD_USER_PARENT)
   const [removeParentResult, removeParent] = useMutation(DELETE_USER_PARENT)
 
+  const handleRemoveParent = (id) => {
+    const variables = { userID: user.id, parentID: id }
+    return removeParent(variables)
+  }
+
+  const handleAddParent = (id) => {
+    const variables = { userID: user.id, parentID: id }
+    return addParent(variables)
+  }
+
   return (
     <EditableAvatarTrigger
       title='Add Parent'
       user={user}
       limit={2}
       relations={user.parents}
-      removeRelation={removeParent}
+      removeRelation={handleRemoveParent}
       removeRelationResult={removeParentResult}
-      addRelation={addParent}
+      addRelation={handleAddParent}
       addRelationResult={addParentResult}
       LIST_USER_AVAILABLE_RELATIONS={LIST_USER_AVAILABLE_PARENTS}
     />
