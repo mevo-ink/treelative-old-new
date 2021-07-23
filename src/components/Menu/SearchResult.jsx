@@ -58,7 +58,7 @@ export default function SearchResult ({ users, onClose, isFetching }) {
             </Text>
             <Flex mt='.3rem'>
               <Text mr='.3rem' fontSize='.5rem' fontWeight='100'> {user.dateOfBirth && handleDateOfBirth(user.dateOfBirth)} </Text>
-              <Text fontSize='.5rem' fontWeight='100'> Italy </Text>
+              <Text fontSize='.5rem' fontWeight='100'> {user.currentLocation && user.currentLocation.suggested.terms.slice(-1).map(val => val.value).join(', ')} </Text>
             </Flex>
           </Box>
         </Flex>
