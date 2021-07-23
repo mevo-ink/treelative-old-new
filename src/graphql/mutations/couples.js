@@ -1,7 +1,7 @@
 import { gql } from 'urql'
 
-export const ADD_COUPLE = gql`
-  mutation ADD_COUPLE ($input: AddCoupleInput!) {
+export const ADD_USER_PARTNER = gql`
+  mutation ADD_USER_PARTNER ($input: AddCoupleInput!) {
     addCouple(input: $input) {
       id
       userOne {
@@ -24,8 +24,8 @@ export const ADD_COUPLE = gql`
   }
 `
 
-export const DELETE_COUPLE = gql`
-  mutation DELETE_COUPLE ($coupleID: String!) {
+export const DELETE_USER_PARTNER = gql`
+  mutation DELETE_USER_PARTNER ($coupleID: String!) {
     deleteCouple(coupleID: $coupleID) {
       id
       userOne {

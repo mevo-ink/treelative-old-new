@@ -107,7 +107,7 @@ export default function EditableAvatarTrigger (props) {
             <Text variant='info-title' fontSize='.65rem' mt='.2rem' textAlign='center'>{user.shortName}</Text>
           </Box>
         ))}
-        {isEditMode && (title === 'Add Parent' ? relations.length < 2 : 8) && (
+        {isEditMode && (title === 'Add Parent' ? relations.length < 2 : title === 'Add Partner' ? relations.length < 1 : relations.length < 8) && (
           <IconButton
             icon={<MdAdd size='2rem' />}
             w='2rem'

@@ -18,7 +18,7 @@ export default function ParentChild ({ user }) {
       borderRadius='20px'
       p='1.5rem 0'
     >
-      <Text variant='info-title'> Couple </Text>
+      <Text variant='info-title'> Partner </Text>
       <EditUserPartner user={user} />
     </Flex>
   )

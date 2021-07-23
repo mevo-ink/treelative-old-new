@@ -31,6 +31,7 @@ export default function App () {
 }
 // TODO:
 /*
+  Make couples mutations similar to parents and child (userID & relationID) -- need to discuss :p
   Style Error modal with contact us info --- NEED ACCESS TO OUR PROFILE CARDS FOR NOT AUTH USERS
   Insights - popup dialog with chart:
   - Show users distribution by country
