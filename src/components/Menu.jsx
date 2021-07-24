@@ -47,7 +47,7 @@ export default function Menu () {
           position='absolute'
           left='50%'
           transform='translateX(-50%)'
-          zIndex='1'
+          zIndex='2'
           bottom='0'
           bg='hsla(0, 0%, 100%, .2)'
           backdropFilter='blur(5px)'

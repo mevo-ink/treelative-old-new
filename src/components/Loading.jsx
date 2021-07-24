@@ -52,7 +52,7 @@ export default function Loading () {
       h='100%'
       position='absolute'
       bg='hsla(0, 0%, 0%, .5)'
-      zIndex='1'
+      zIndex='50'
     >
       <Box
         w='200px'

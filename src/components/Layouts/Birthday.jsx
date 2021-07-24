@@ -5,13 +5,14 @@ import {
   Flex,
   Text,
   Image,
-  Divider
+  Divider,
+  keyframes
 } from '@chakra-ui/react'
 
 import { useQuery } from 'urql'
-import { useSetRecoilState } from 'recoil'
+import { useSetRecoilState, useRecoilState } from 'recoil'
 
-import { activeNodeIDAtom, layoutMethodsAtom } from 'utils/atoms.js'
+import { activeNodeIDAtom, layoutMethodsAtom, activeNodePulseIDAtom } from 'utils/atoms.js'
 import { GET_BIRTHDAY_DATA } from 'graphql/queries/layouts'
 
 import Loading from 'components/Loading'
@@ -22,6 +23,8 @@ export default function Birthday () {
   const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
 
   const [result, refetch] = useQuery({ query: GET_BIRTHDAY_DATA })
+
+  const [activeNodePulseID, setactiveNodePulseID] = useRecoilState(activeNodePulseIDAtom)
 
   useEffect(() => {
     if (!result.data) return
@@ -43,44 +46,51 @@ export default function Birthday () {
   if (result.fetching) return <Loading />
 
   const handleUserSelect = (userID) => {
+    setactiveNodePulseID(userID)
     setActiveNodeID(userID)
     window.history.pushState({}, '', userID)
   }
 
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
-  const getElementsInArea = (docElm => {
-    let viewportHeight = docElm.clientHeight
-    return (e, opts) => {
-      const found = []
-      let i
-      if (e && e.type === 'resize') { viewportHeight = docElm.clientHeight }
-      for (i = opts.elements.length; i--;) {
-        const elm = opts.elements[i]
-        const pos = elm.getBoundingClientRect()
-        const topPerc = pos.top / viewportHeight * 100
-        const bottomPerc = pos.bottom / viewportHeight * 100
-        const middle = (topPerc + bottomPerc) / 2
-        const inViewport = middle > opts.zone[1] &&
-        middle < (100 - opts.zone[1])
-        elm.classList.toggle(opts.markedClass, inViewport)
-        if (inViewport) {
-          found.push(elm)
-          elm.style.border = '1px solid rgba(255, 255, 255, .2)'
-        }
-      }
-    }
-  })(document.documentElement)
+  // const getElementsInArea = (docElm => {
+  //   let viewportHeight = docElm.clientHeight
+  //   return (e, opts) => {
+  //     const found = []
+  //     let i
+  //     if (e && e.type === 'resize') { viewportHeight = docElm.clientHeight }
+  //     for (i = opts.elements.length; i--;) {
+  //       const elm = opts.elements[i]
+  //       const pos = elm.getBoundingClientRect()
+  //       const topPerc = pos.top / viewportHeight * 100
+  //       const bottomPerc = pos.bottom / viewportHeight * 100
+  //       const middle = (topPerc + bottomPerc) / 2
+  //       const inViewport = middle > opts.zone[1] &&
+  //       middle < (100 - opts.zone[1])
+  //       elm.classList.toggle(opts.markedClass, inViewport)
+  //       if (inViewport) {
+  //         found.push(elm)
+  //         elm.style.border = '1px solid rgba(255, 255, 255, .2)'
+  //       }
+  //     }
+  //   }
+  // })(document.documentElement)
 
-  window.addEventListener('resize', f)
+  // window.addEventListener('resize', f)
 
-  function f (e) {
-    getElementsInArea(e, {
-      elements: document.getElementById('container').getElementsByTagName('div'),
-      markedClass: 'active-div',
-      zone: [45, 45] // percentage distance from top & bottom
-    })
-  }
+  // function f (e) {
+  //   getElementsInArea(e, {
+  //     elements: document.getElementById('container').getElementsByTagName('div'),
+  //     markedClass: 'active-div',
+  //     zone: [45, 45] // percentage distance from top & bottom
+  //   })
+  // }
+
+  const pulse = keyframes`
+    0% { transform: scale(0.1, 0.1); opacity: 0; }
+    50% { opacity: 1;)
+    100% { transform: scale(1.5, 1.5); opacity: 0;
+  `
 
   return (
     <Flex
@@ -91,7 +101,7 @@ export default function Birthday () {
       overflowX='hidden'
       bg='hsla(0, 0%, 0%, .75)'
       sx={{ '&::-webkit-scrollbar': { display: 'none' }, scrollbarWidth: 'none' }}
-      onWheel={f}
+      // onWheel={f}
     >
       {Object.entries(result.data.getBirthdayData).map(([dob, users]) =>
         <Flex
@@ -123,6 +133,7 @@ export default function Birthday () {
           <Divider orientation='vertical' mx='1rem' my='40px' />
           <Flex
             overflowX='scroll'
+            overflow='visible'
             sx={{
               '::-webkit-scrollbar': { height: '2px' },
               '::-webkit-scrollbar-thumb': { background: 'hsla(343, 100%, 40%, 1)' }
@@ -132,15 +143,37 @@ export default function Birthday () {
               <Flex key={user.id} position='relative'>
                 <Image
                   src={user.avatar}
+                  fallbackSrc={user.brokenAvatar}
                   alt='children-avatar'
                   w='40px'
+                  h='40px'
                   mx='.5rem'
                   objectFit='contain'
                   borderRadius='50%'
-                  fallbackSrc={`https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
-                  onClick={() => handleUserSelect(user.id)}
                   my='1'
+                  zIndex='1'
+                  onClick={() => handleUserSelect(user.id)}
                 />
+                {user.id === activeNodePulseID && (
+                  <Box
+                    borderRadius='50%'
+                    position='absolute'
+                    left='50%'
+                    top='50%'
+                    zIndex='0'
+                    transform='translate(-20px, -20px)'
+                    _after={{
+                      content: '""',
+                      borderRadius: '50%',
+                      w: '40px',
+                      h: '40px',
+                      position: 'absolute',
+                      animation: `${pulse} 1.5s infinite ease-out`,
+                      opacity: '0',
+                      boxShadow: '0 0 1px 10px hsla(100, 98%, 57%, 1)'
+                    }}
+                  />
+                )}
                 <Text
                   w='20px'
                   h='20px'
@@ -148,6 +181,7 @@ export default function Birthday () {
                   placeItems='center'
                   position='absolute'
                   right='0'
+                  zIndex='1'
                   fontSize='12px'
                   bg='hsla(310, 100%, 40%, 1)'
                   borderRadius='50%'

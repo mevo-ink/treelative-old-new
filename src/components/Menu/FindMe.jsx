@@ -3,12 +3,13 @@ import { useState } from 'react'
 import { IconButton } from '@chakra-ui/react'
 import { BiCurrentLocation } from 'react-icons/bi'
 
-import { useRecoilValue } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import {
   layoutAtom,
   layoutMethodsAtom,
   networkMethodsAtom,
+  activeNodePulseIDAtom,
   mapMethodsAtom
 } from 'utils/atoms.js'
 
@@ -21,6 +22,8 @@ export default function FindMe ({ onClose, user, ...styles }) {
 
   const networkMethods = useRecoilValue(networkMethodsAtom)
   const mapMethods = useRecoilValue(mapMethodsAtom)
+
+  const setactiveNodePulseID = useSetRecoilState(activeNodePulseIDAtom)
 
   const [isEditDateOfBirthOpen, setIsEditDateOfBirthOpen] = useState(false)
   const [isEditCurrentLocationOpen, setIsEditCurrentLocationOpen] = useState(false)
@@ -41,6 +44,7 @@ export default function FindMe ({ onClose, user, ...styles }) {
           setIsEditDateOfBirthOpen(true)
         } else {
           setTimeout(() => {
+            setactiveNodePulseID(user.id)
             document.getElementById(user.dateOfBirth.slice(0, 4)).scrollIntoView({ behavior: 'smooth', block: 'center' })
           }, 150)
           onClose()
@@ -51,6 +55,7 @@ export default function FindMe ({ onClose, user, ...styles }) {
           setIsEditDateOfBirthOpen(true)
         } else {
           setTimeout(() => {
+            setactiveNodePulseID(user.id)
             document.getElementById(user.dateOfBirth.slice(5, 10)).scrollIntoView({ behavior: 'smooth', block: 'center' })
           }, 150)
           onClose()

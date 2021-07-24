@@ -6,14 +6,15 @@ import {
   Icon,
   Text,
   Image,
-  Divider
+  Divider,
+  keyframes
 } from '@chakra-ui/react'
 import { FaSkullCrossbones } from 'react-icons/fa'
 
 import { useQuery } from 'urql'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 
-import { activeNodeIDAtom, layoutMethodsAtom } from 'utils/atoms.js'
+import { activeNodeIDAtom, activeNodePulseIDAtom, layoutMethodsAtom } from 'utils/atoms.js'
 import { GET_AGE_DATA } from 'graphql/queries/layouts'
 
 import Loading from 'components/Loading'
@@ -22,6 +23,8 @@ export default function Age () {
   const setLayoutMethods = useSetRecoilState(layoutMethodsAtom)
 
   const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
+
+  const [activeNodePulseID, setactiveNodePulseID] = useRecoilState(activeNodePulseIDAtom)
 
   const [result, refetch] = useQuery({ query: GET_AGE_DATA })
 
@@ -43,9 +46,16 @@ export default function Age () {
   if (result.fetching) return <Loading />
 
   const handleUserSelect = (userID) => {
+    setactiveNodePulseID(userID)
     setActiveNodeID(userID)
     window.history.pushState({}, '', userID)
   }
+
+  const pulse = keyframes`
+    0% { transform: scale(0.1, 0.1); opacity: 0; }
+    50% { opacity: 1;)
+    100% { transform: scale(1.5, 1.5); opacity: 0;
+  `
 
   return (
     <Flex
@@ -83,6 +93,7 @@ export default function Age () {
           </Text>
           <Divider orientation='vertical' mx='1rem' my='40px' />
           <Flex
+            overflow='visible'
             overflowX='scroll'
             sx={{
               '::-webkit-scrollbar': { height: '2px' },
@@ -96,12 +107,34 @@ export default function Age () {
                   fallbackSrc={user.brokenAvatar}
                   alt='children-avatar'
                   w='40px'
+                  h='40px'
                   mx='.5rem'
                   objectFit='contain'
                   borderRadius='50%'
-                  onClick={() => handleUserSelect(user.id)}
                   my='1'
+                  zIndex='1'
+                  onClick={() => handleUserSelect(user.id)}
                 />
+                {user.id === activeNodePulseID && (
+                  <Box
+                    borderRadius='50%'
+                    position='absolute'
+                    left='50%'
+                    top='50%'
+                    zIndex='0'
+                    transform='translate(-20px, -20px)'
+                    _after={{
+                      content: '""',
+                      borderRadius: '50%',
+                      w: '40px',
+                      h: '40px',
+                      position: 'absolute',
+                      animation: `${pulse} 1.5s infinite ease-out`,
+                      opacity: '0',
+                      boxShadow: '0 0 1px 10px hsla(100, 98%, 57%, 1)'
+                    }}
+                  />
+                )}
                 {user.dateOfDeath && (
                   <Icon
                     as={FaSkullCrossbones}
@@ -110,6 +143,7 @@ export default function Age () {
                     p='2px'
                     position='absolute'
                     right='0'
+                    zIndex='1'
                     color='hsla(0, 0%, 0%, 1)'
                     bg='hsla(0, 0%, 100%, 1)'
                     borderRadius='50%'

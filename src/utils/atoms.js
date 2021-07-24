@@ -10,6 +10,11 @@ export const activeNodeIDAtom = atom({
   default: null
 })
 
+export const activeNodePulseIDAtom = atom({
+  key: 'activeNodePulseID',
+  default: null
+})
+
 export const isEditModeAtom = atom({
   key: 'isEditMode',
   default: false

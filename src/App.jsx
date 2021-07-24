@@ -37,7 +37,6 @@ export default function App () {
   Style Error modal with contact us info --- NEED ACCESS TO OUR PROFILE CARDS FOR NOT AUTH USERS
   Add birthday effect on profile card mount
   Add PWA
-  Add logic to show active node in birthday view with AGE
   Add privacy slide slide
   Add new property to user : isPublic in backend
   Add content to insight modal
@@ -96,4 +95,5 @@ export default function App () {
   Add couple - marriage date and location edits
   Don't close menu drawer
   Optimize images
+  Add logic to show active node in birthday view with AGE
 */
