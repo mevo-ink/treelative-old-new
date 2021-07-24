@@ -1,4 +1,5 @@
 import {
+  Flex,
   Text,
   Button,
   keyframes,
@@ -46,24 +47,31 @@ export default function EditableInputTrigger (props) {
   return (
     <>
       {isOpen && <EditableInputModal {...inputProps} onClose={onClose} />}
-      <Button
-        onClick={onOpen}
+      <Flex
         w='60%'
-        m='1rem 0rem'
-        fontSize='1.2rem'
-        lineHeight='1.3em'
-        fontWeight='600'
-        textAlign='center'
-        variant='editable-input'
-        animation={`${wiggle} infinite .15s linear`}
+        my='1rem'
+        justifyContent='center'
+        animation={isEditMode && `${wiggle} infinite .15s linear`}
       >
-        <RemoveButton
-          title={inputProps.title}
-          onRemove={() => inputProps.onSubmit(inputProps.type === 'text' ? '' : null)}
-          isLoading={inputProps.loading}
-        />
-        {props.value}
-      </Button>
+        {isEditMode && (
+          <RemoveButton
+            title={inputProps.title}
+            onRemove={() => inputProps.onSubmit(inputProps.type === 'text' ? '' : null)}
+            isLoading={inputProps.loading}
+          />
+        )}
+        <Button
+          variant='editable-input'
+          w='100%'
+          maxW='unset'
+          fontSize='1.2rem'
+          textAlign='center'
+          fontWeight='600'
+          onClick={onOpen}
+        >
+          {props.value}
+        </Button>
+      </Flex>
     </>
   )
 }

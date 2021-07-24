@@ -1,4 +1,5 @@
 import {
+  Grid,
   Image,
   Button,
   keyframes,
@@ -32,21 +33,22 @@ export default function EditableIconTrigger (props) {
   return (
     <>
       {isOpen && <EditableInputModal {...inputProps} onClose={onClose} />}
-      <Button
-        p='0'
-        onClick={() => handleClick(url)}
-        isDisabled={!isEditMode && !url}
-        m='1rem 0'
-      >
+      <Grid m='.3rem 0' placeItems='center' animation={isEditMode && `${wiggle} infinite .15s linear`}>
         {isEditMode && <RemoveButton inputProps={inputProps} />}
-        <Image
-          src={icon}
-          w='40px'
-          objectFit='contain'
-          filter={!url && 'grayscale(100%)'}
-          animation={isEditMode && `${wiggle} infinite .15s linear`}
-        />
-      </Button>
+        <Button
+          p='0'
+          h='3.2rem'
+          onClick={() => handleClick(url)}
+          isDisabled={!isEditMode && !url}
+        >
+          <Image
+            src={icon}
+            w='40px'
+            objectFit='contain'
+            filter={!url && 'grayscale(100%)'}
+          />
+        </Button>
+      </Grid>
     </>
   )
 }

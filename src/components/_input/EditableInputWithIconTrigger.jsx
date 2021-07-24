@@ -47,6 +47,7 @@ export default function EditableInputWithIconTrigger (props) {
           boxShadow='0px 3px 5px hsla(0, 0%, 0%, .2)'
           borderLeftRadius='999px'
         />
+        {isEditMode && <RemoveButton inputProps={inputProps} />}
         <Button
           variant='editable-input'
           maxW='200px'
@@ -55,7 +56,6 @@ export default function EditableInputWithIconTrigger (props) {
           borderLeftRadius='unset'
           onClick={handleClick}
         >
-          {isEditMode && <RemoveButton inputProps={inputProps} />}
           {props.value}
           {!props.value && <Icon as={MdAdd} w='20px' h='20px' />}
         </Button>
