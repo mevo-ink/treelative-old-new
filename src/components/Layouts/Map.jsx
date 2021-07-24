@@ -187,7 +187,7 @@ export default function Map () {
                   position: 'absolute',
                   animation: `${pulse} 1.5s infinite ease-out`,
                   opacity: '0',
-                  boxShadow: '0 0 1px 10px hsla(100, 98%, 57%, 1)'
+                  boxShadow: '0 0 1px 5px hsla(100, 98%, 57%, 1)'
                 }}
               />
             )}

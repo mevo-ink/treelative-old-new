@@ -93,7 +93,6 @@ export default function Age () {
           </Text>
           <Divider orientation='vertical' mx='1rem' my='40px' />
           <Flex
-            overflow='visible'
             overflowX='scroll'
             sx={{
               '::-webkit-scrollbar': { height: '2px' },
@@ -131,7 +130,7 @@ export default function Age () {
                       position: 'absolute',
                       animation: `${pulse} 1.5s infinite ease-out`,
                       opacity: '0',
-                      boxShadow: '0 0 1px 10px hsla(100, 98%, 57%, 1)'
+                      boxShadow: '0 0 1px 5px hsla(100, 98%, 57%, 1)'
                     }}
                   />
                 )}

@@ -133,7 +133,6 @@ export default function Birthday () {
           <Divider orientation='vertical' mx='1rem' my='40px' />
           <Flex
             overflowX='scroll'
-            overflow='visible'
             sx={{
               '::-webkit-scrollbar': { height: '2px' },
               '::-webkit-scrollbar-thumb': { background: 'hsla(343, 100%, 40%, 1)' }
@@ -170,7 +169,7 @@ export default function Birthday () {
                       position: 'absolute',
                       animation: `${pulse} 1.5s infinite ease-out`,
                       opacity: '0',
-                      boxShadow: '0 0 1px 10px hsla(100, 98%, 57%, 1)'
+                      boxShadow: '0 0 1px 5px hsla(100, 98%, 57%, 1)'
                     }}
                   />
                 )}
