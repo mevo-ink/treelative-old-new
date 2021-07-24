@@ -31,9 +31,8 @@ export default function App () {
 }
 // TODO:
 /*
-  BUGs:
-    - remove date of marriage
-    - all edit location
+  BUG:
+    - delete and some edit are not working (i went to your last commit and checked.. not working)
   Style Error modal with contact us info --- NEED ACCESS TO OUR PROFILE CARDS FOR NOT AUTH USERS
   Add birthday effect on profile card mount
   Add PWA
