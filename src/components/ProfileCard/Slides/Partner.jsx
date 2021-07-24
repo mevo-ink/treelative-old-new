@@ -3,10 +3,16 @@ import {
   Text
 } from '@chakra-ui/react'
 
+import { useRecoilValue } from 'recoil'
+
+import { isEditModeAtom } from 'utils/atoms.js'
+
 import EditUserPartner from 'components/EditUser/EditUserPartner'
 import EditUserDateOfMarriage from 'components/EditUser/EditUserDateOfMarriage'
+import EditUserMarriageLocation from 'components/EditUser/EditUserMarriageLocation'
 
 export default function ParentChild ({ user }) {
+  const isEditMode = useRecoilValue(isEditModeAtom)
   return (
     <Flex
       w='80%'
@@ -21,8 +27,18 @@ export default function ParentChild ({ user }) {
     >
       <Text variant='info-title'> Partner </Text>
       <EditUserPartner user={user} />
-      <Text variant='info-title' mt='1rem'> Date Of Marriage </Text>
-      <EditUserDateOfMarriage user={user} />
+      {(user.couple.dateOfMarriage || isEditMode) && (
+        <>
+          <Text variant='info-title' mt='1rem'> Date Of Marriage </Text>
+          <EditUserDateOfMarriage user={user} />
+        </>
+      )}
+      {(user.couple.marriageLocation || isEditMode) && (
+        <>
+          <Text variant='info-title' mt='1rem'> Marriage Location </Text>
+          <EditUserMarriageLocation user={user} />
+        </>
+      )}
     </Flex>
   )
 }

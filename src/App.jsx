@@ -31,11 +31,13 @@ export default function App () {
 }
 // TODO:
 /*
+  BUGs:
+    - remove date of marriage
+    - all edit location
   Style Error modal with contact us info --- NEED ACCESS TO OUR PROFILE CARDS FOR NOT AUTH USERS
   Add birthday effect on profile card mount
   Add PWA
   Optimize images
-  Add couple - marriage date and location edits
   Add logic to show active node in birthday view with AGE
   Add privacy slide slide
   Don't close menu drawer
@@ -93,4 +95,5 @@ export default function App () {
   Fix button inside button for edit button
   Show some indication on age view if DEAD
   Disable - clicking on relation avatar on edit mode
+  Add couple - marriage date and location edits
 */
