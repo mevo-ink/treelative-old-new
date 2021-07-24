@@ -40,7 +40,7 @@ export default function App () {
   Add privacy slide slide
   Don't close menu drawer
   Add new property to user : isPublic in backend
-  Add sample insights with recharts
+  Add content to insight modal
   Investigate cache bug
 */
 // DONE:
