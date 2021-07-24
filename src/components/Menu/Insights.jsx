@@ -15,7 +15,7 @@ import { SiApollographql } from 'react-icons/si'
 import { useQuery } from 'urql'
 import { GET_INSIGHTS } from 'graphql/queries/insights'
 
-import InsightModal from 'components/Menu/InsightModal'
+import InsightModal from 'components/InsightModal'
 
 export default function Insights () {
   const [result] = useQuery({ query: GET_INSIGHTS })

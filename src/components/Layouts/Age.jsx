@@ -54,7 +54,7 @@ export default function Age () {
   const pulse = keyframes`
     0% { transform: scale(0.1, 0.1); opacity: 1; }
     50% { opacity: 1;)
-    100% { transform: scale(1.5, 1.5); opacity: 1;
+    100% { transform: scale(1.5, 1.5); opacity: 1; }
   `
 
   return (
