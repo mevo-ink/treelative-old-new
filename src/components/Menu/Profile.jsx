@@ -8,7 +8,6 @@ export default function Profile ({ onClose, authUser }) {
   const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
 
   const handleClick = () => {
-    onClose()
     setActiveNodeID(authUser.id)
   }
 

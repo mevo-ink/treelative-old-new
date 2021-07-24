@@ -40,7 +40,6 @@ export default function App () {
   Optimize images
   Add logic to show active node in birthday view with AGE
   Add privacy slide slide
-  Don't close menu drawer
   Add new property to user : isPublic in backend
   Add content to insight modal
   Investigate cache bug
@@ -96,4 +95,5 @@ export default function App () {
   Show some indication on age view if DEAD
   Disable - clicking on relation avatar on edit mode
   Add couple - marriage date and location edits
+  Don't close menu drawer
 */
