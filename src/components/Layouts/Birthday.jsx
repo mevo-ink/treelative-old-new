@@ -24,7 +24,7 @@ export default function Birthday () {
 
   const [result, refetch] = useQuery({ query: GET_BIRTHDAY_DATA })
 
-  const [activeNodePulseID, setactiveNodePulseID] = useRecoilState(activeNodePulseIDAtom)
+  const [activeNodePulseID, setActiveNodePulseID] = useRecoilState(activeNodePulseIDAtom)
 
   useEffect(() => {
     if (!result.data) return
@@ -46,7 +46,7 @@ export default function Birthday () {
   if (result.fetching) return <Loading />
 
   const handleUserSelect = (userID) => {
-    setactiveNodePulseID(userID)
+    setActiveNodePulseID(userID)
     setActiveNodeID(userID)
     window.history.pushState({}, '', userID)
   }

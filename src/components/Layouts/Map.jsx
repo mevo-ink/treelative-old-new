@@ -5,16 +5,14 @@ import { GET_MAP_DATA } from 'graphql/queries/layouts'
 
 import Loading from 'components/Loading'
 
-import {
-  Box,
-  Image
-} from '@chakra-ui/react'
+import { Box, Image, keyframes } from '@chakra-ui/react'
 
-import { useSetRecoilState } from 'recoil'
+import { useSetRecoilState, useRecoilState } from 'recoil'
 import {
   layoutMethodsAtom,
   activeNodeIDAtom,
-  mapMethodsAtom
+  mapMethodsAtom,
+  activeNodePulseIDAtom
 } from 'utils/atoms.js'
 
 import parseJwt from 'utils/parseJWT'
@@ -108,6 +106,8 @@ export default function Map () {
 
   const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
 
+  const [activeNodePulseID, setActiveNodePulseID] = useRecoilState(activeNodePulseIDAtom)
+
   const [result, refetch] = useQuery({ query: GET_MAP_DATA })
 
   const { id: authUserID } = parseJwt(window.localStorage.getItem('AUTH_SESSION_ID'))
@@ -121,9 +121,16 @@ export default function Map () {
   if (result.fetching) return <Loading />
 
   const handleUserSelect = (userID) => {
+    setActiveNodePulseID(userID)
     setActiveNodeID(userID)
     window.history.pushState({}, '', userID)
   }
+
+  const pulse = keyframes`
+    0% { transform: scale(0.1, 0.1); opacity: 0; }
+    50% { opacity: 1;)
+    100% { transform: scale(1.5, 1.5); opacity: 0;
+  `
 
   return (
     <Box h='calc(100 * var(--vh))'>
@@ -148,19 +155,43 @@ export default function Map () {
         }}
       >
         {result.data.getMapData.known.map(user => (
-          <Image
+          <Box
             key={user.id}
-            boxSize='30px'
-            position='absolute'
+            position='relative'
             lat={user.position.lat}
             lng={user.position.lng}
-            src={user.image}
-            alt='children-avatar'
-            objectFit='contain'
-            borderRadius='50%'
-            fallbackSrc={`https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
-            onClick={() => handleUserSelect(user.id)}
-          />
+          >
+            <Image
+              boxSize='30px'
+              src={user.image}
+              fallbackSrc={`https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
+              alt='children-avatar'
+              objectFit='contain'
+              borderRadius='50%'
+              position='absolute'
+              zIndex={user.id !== activeNodePulseID && '-2'}
+              onClick={() => handleUserSelect(user.id)}
+            />
+            {user.id === activeNodePulseID && (
+              <Box
+                borderRadius='50%'
+                position='absolute'
+                left='50%'
+                top='50%'
+                zIndex='-1'
+                _after={{
+                  content: '""',
+                  borderRadius: '50%',
+                  w: '30px',
+                  h: '30px',
+                  position: 'absolute',
+                  animation: `${pulse} 1.5s infinite ease-out`,
+                  opacity: '0',
+                  boxShadow: '0 0 1px 10px hsla(100, 98%, 57%, 1)'
+                }}
+              />
+            )}
+          </Box>
         ))}
       </GoogleMapReact>
     </Box>

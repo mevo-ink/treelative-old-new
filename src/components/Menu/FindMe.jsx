@@ -23,7 +23,7 @@ export default function FindMe ({ onClose, user, ...styles }) {
   const networkMethods = useRecoilValue(networkMethodsAtom)
   const mapMethods = useRecoilValue(mapMethodsAtom)
 
-  const setactiveNodePulseID = useSetRecoilState(activeNodePulseIDAtom)
+  const setActiveNodePulseID = useSetRecoilState(activeNodePulseIDAtom)
 
   const [isEditDateOfBirthOpen, setIsEditDateOfBirthOpen] = useState(false)
   const [isEditCurrentLocationOpen, setIsEditCurrentLocationOpen] = useState(false)
@@ -33,6 +33,7 @@ export default function FindMe ({ onClose, user, ...styles }) {
     switch (layout) {
       case 'map':
         position = mapMethods.panTo(user.id)
+        setActiveNodePulseID(user.id)
         if (!position) {
           setIsEditCurrentLocationOpen(true)
         } else {
@@ -44,7 +45,7 @@ export default function FindMe ({ onClose, user, ...styles }) {
           setIsEditDateOfBirthOpen(true)
         } else {
           setTimeout(() => {
-            setactiveNodePulseID(user.id)
+            setActiveNodePulseID(user.id)
             document.getElementById(user.dateOfBirth.slice(0, 4)).scrollIntoView({ behavior: 'smooth', block: 'center' })
           }, 150)
           onClose()
@@ -55,7 +56,7 @@ export default function FindMe ({ onClose, user, ...styles }) {
           setIsEditDateOfBirthOpen(true)
         } else {
           setTimeout(() => {
-            setactiveNodePulseID(user.id)
+            setActiveNodePulseID(user.id)
             document.getElementById(user.dateOfBirth.slice(5, 10)).scrollIntoView({ behavior: 'smooth', block: 'center' })
           }, 150)
           onClose()
