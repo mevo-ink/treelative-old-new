@@ -93,6 +93,8 @@ export default function EditableAvatarTrigger (props) {
                 h='100%'
                 p='0'
                 borderRadius='50%'
+                isDisabled={isEditMode}
+                _disabled={{ opacity: '1' }}
               >
                 <Image
                   src={user.avatar}

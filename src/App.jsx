@@ -41,7 +41,6 @@ export default function App () {
   Don't close menu drawer
   Add new property to user : isPublic in backend
   Add sample insights with recharts
-  Disable - clicking on relation avatar on edit mode
   Investigate cache bug
 */
 // DONE:
@@ -93,4 +92,5 @@ export default function App () {
   id dead - calculate proper Age
   Fix button inside button for edit button
   Show some indication on age view if DEAD
+  Disable - clicking on relation avatar on edit mode
 */
