@@ -20,7 +20,6 @@ export default function EditUserCurrentLocation ({ user, ...props }) {
       onSubmit={handleSubmit}
       loading={fetching}
       error={error}
-      notification='Successfully updated the current location'
       {...props}
     />
   )

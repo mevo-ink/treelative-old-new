@@ -24,7 +24,6 @@ export default function EditUserShortName ({ user }) {
       validation={string().required()}
       loading={fetching}
       error={error}
-      notification='Successshorty updated the short name'
     />
   )
 }

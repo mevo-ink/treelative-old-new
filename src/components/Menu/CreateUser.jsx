@@ -57,7 +57,7 @@ export default function CreateUser ({ initialValue = '', onClose: onParentClose 
       .then(async result => {
         if (result.data) {
           toast({
-            title: 'Successfully created the user',
+            title: 'Successfully User Created',
             status: 'success',
             position: 'top',
             duration: 5000,

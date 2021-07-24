@@ -58,7 +58,6 @@ export default function DateTimePickerDialogTrigger (props) {
     reset,
     onChange,
     fontSize,
-    notification = '',
     defaultIsOpen = false,
     ...rest
   } = props
@@ -76,15 +75,13 @@ export default function DateTimePickerDialogTrigger (props) {
       onChange(newValue)
         .then(result => {
           if (result.data) {
-            if (notification) {
-              toast({
-                title: notification,
-                status: 'success',
-                position: 'top',
-                duration: 3000,
-                isClosable: true
-              })
-            }
+            toast({
+              title: 'Successfully Date Updated',
+              status: 'success',
+              position: 'top',
+              duration: 3000,
+              isClosable: true
+            })
             onClose()
             defaultIsOpen && rest.onClose(true)
           }

@@ -21,7 +21,6 @@ export default function EditUserDateOfMarriage ({ user, ...props }) {
       onChange={handleSubmit}
       error={error}
       loading={fetching}
-      notification='Successfully Updated Date Of Marriage'
       {...props}
     />
   )

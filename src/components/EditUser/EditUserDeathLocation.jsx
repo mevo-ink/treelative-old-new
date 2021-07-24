@@ -20,7 +20,6 @@ export default function EditUserDeathLocation ({ user }) {
       onSubmit={handleSubmit}
       loading={fetching}
       error={error}
-      notification='Successfully updated the death location'
     />
   )
 }

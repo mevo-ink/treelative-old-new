@@ -22,7 +22,6 @@ export default function EditUserDateOfDeath ({ user }) {
       onChange={handleSubmit}
       error={error}
       loading={fetching}
-      notification='Successfully updated the date of death'
     />
   )
 }

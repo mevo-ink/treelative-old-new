@@ -19,7 +19,7 @@ export default function DeleteSocialLink ({ socialLink }) {
       .then(result => {
         if (result.data) {
           toast({
-            title: 'Successfully deleted the social link',
+            title: 'Successfully Removed Social',
             status: 'success',
             position: 'top',
             duration: 3000,

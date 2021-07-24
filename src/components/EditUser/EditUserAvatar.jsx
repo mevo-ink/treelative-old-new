@@ -70,7 +70,7 @@ export default function EditUserAvatar ({ user }) {
 
   const handleSuccess = () => {
     toast({
-      title: 'Successfully updated the avatar',
+      title: 'Successfully Avatar Updated',
       status: 'success',
       position: 'top',
       duration: 3000,

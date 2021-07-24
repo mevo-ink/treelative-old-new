@@ -32,7 +32,6 @@ export default function EditableAvatarModal (props) {
     user,
     title,
     onClose,
-    relations,
     addRelation,
     addRelationResult,
     LIST_USER_AVAILABLE_RELATIONS

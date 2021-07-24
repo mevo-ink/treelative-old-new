@@ -32,7 +32,6 @@ export default function EditableInputModal (props) {
     loading,
     error,
     rows = 10,
-    notification = '',
     leftAddon,
     prefix = ''
   } = props
@@ -64,15 +63,13 @@ export default function EditableInputModal (props) {
     onSubmit(submitData)
       .then(result => {
         if (result.data) {
-          if (notification) {
-            toast({
-              title: notification,
-              status: 'success',
-              position: 'top',
-              duration: 3000,
-              isClosable: true
-            })
-          }
+          toast({
+            title: 'Successfully Updated',
+            status: 'success',
+            position: 'top',
+            duration: 3000,
+            isClosable: true
+          })
           onClose()
         }
       })

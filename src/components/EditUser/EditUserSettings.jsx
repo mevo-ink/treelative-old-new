@@ -81,7 +81,7 @@ export default function EditUserSettings ({ user }) {
       .then(result => {
         if (result.data) {
           toast({
-            title: 'Successfully updated the settings',
+            title: 'Successfully Settings Updated',
             status: 'success',
             position: 'top',
             duration: 3000,

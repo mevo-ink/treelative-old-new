@@ -25,7 +25,6 @@ export default function EditCoupleMarriageLocation ({ couple }) {
         onSubmit={handleSubmit}
         loading={fetching}
         error={error}
-        notification='Successfully updated the marriage location'
       />
     </FormControl>
   )

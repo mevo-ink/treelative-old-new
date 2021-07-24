@@ -22,7 +22,6 @@ export default function EditUserSocialURL ({ social, ...props }) {
       onSubmit={handleSubmit}
       loading={fetching}
       error={error}
-      notification='Successfully updated the url'
       icon={social.icon}
       url={social.url}
       prefix={social.baseURL}

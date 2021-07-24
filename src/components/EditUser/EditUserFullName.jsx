@@ -26,7 +26,6 @@ export default function EditUserFullName ({ user }) {
       validation={string().required()}
       loading={fetching}
       error={error}
-      notification='Successfully updated the full name'
     />
   )
 }

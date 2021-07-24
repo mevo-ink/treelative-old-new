@@ -78,7 +78,6 @@ function InputDialog (props) {
     onSubmit = console.log,
     loading,
     error,
-    notification = '',
     alert = ''
   } = props
 
@@ -100,15 +99,13 @@ function InputDialog (props) {
     onSubmit(location.value)
       .then(result => {
         if (result.data) {
-          if (notification) {
-            toast({
-              title: notification,
-              status: 'success',
-              position: 'top',
-              duration: 3000,
-              isClosable: true
-            })
-          }
+          toast({
+            title: 'Successfully Location Updated',
+            status: 'success',
+            position: 'top',
+            duration: 3000,
+            isClosable: true
+          })
           onClose(true)
         }
       })

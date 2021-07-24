@@ -21,7 +21,6 @@ export default function EditUserDateOfBirth ({ user, ...props }) {
       onChange={handleSubmit}
       error={error}
       loading={fetching}
-      notification='Successfully updated the date of birth'
       {...props}
     />
   )

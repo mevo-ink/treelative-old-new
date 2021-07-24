@@ -20,7 +20,6 @@ export default function EditUserBirthLocation ({ user }) {
       onSubmit={handleSubmit}
       loading={fetching}
       error={error}
-      notification='Successfully updated the birth location'
     />
   )
 }
