@@ -3,10 +3,12 @@ import { useEffect } from 'react'
 import {
   Box,
   Flex,
+  Icon,
   Text,
   Image,
   Divider
 } from '@chakra-ui/react'
+import { FaSkullCrossbones } from 'react-icons/fa'
 
 import { useQuery } from 'urql'
 import { useSetRecoilState } from 'recoil'
@@ -88,18 +90,33 @@ export default function Age () {
             }}
           >
             {users.map(user => (
-              <Image
-                key={user.id}
-                src={user.avatar}
-                fallbackSrc={user.brokenAvatar}
-                alt='children-avatar'
-                w='40px'
-                mx='.5rem'
-                objectFit='contain'
-                borderRadius='50%'
-                onClick={() => handleUserSelect(user.id)}
-                my='1'
-              />
+              <Flex key={user.id} position='relative'>
+                <Image
+                  src={user.avatar}
+                  fallbackSrc={user.brokenAvatar}
+                  alt='children-avatar'
+                  w='40px'
+                  mx='.5rem'
+                  objectFit='contain'
+                  borderRadius='50%'
+                  onClick={() => handleUserSelect(user.id)}
+                  my='1'
+                />
+                {user.dateOfDeath && (
+                  <Icon
+                    as={FaSkullCrossbones}
+                    w='20px'
+                    h='20px'
+                    p='2px'
+                    position='absolute'
+                    right='0'
+                    color='hsla(0, 0%, 0%, 1)'
+                    bg='hsla(0, 0%, 100%, 1)'
+                    borderRadius='50%'
+                    boxShadow='0px 3px 5px hsla(0, 0%, 0%, .8)'
+                  />
+                )}
+              </Flex>
             ))}
           </Flex>
         </Flex>
