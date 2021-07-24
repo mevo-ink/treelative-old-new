@@ -14,9 +14,9 @@ import { SEARCH_USERS } from 'graphql/queries/users'
 
 import SearchResult from 'components/Menu/SearchResult'
 
-export default function Search ({ role, onClose }) {
-  const [searchInput, setSearchInput] = useState(null)
-  const [result] = useQuery({ query: SEARCH_USERS, variables: { search: searchInput } })
+export default function Search ({ onClose }) {
+  const [searchInput, setSearchInput] = useState('')
+  const [result] = useQuery({ query: SEARCH_USERS, variables: { search: searchInput }, pause: !searchInput })
 
   return (
     <Box w='100%'>
@@ -40,7 +40,7 @@ export default function Search ({ role, onClose }) {
           onChange={(e) => setSearchInput(e.target.value)}
         />
       </InputGroup>
-      {result.data && <SearchResult users={result.data?.users} onClose={onClose} isFetching={result.fetching} />}
+      {result.data && searchInput && <SearchResult users={result.data?.users} onClose={onClose} isFetching={result.fetching} />}
     </Box>
   )
 }

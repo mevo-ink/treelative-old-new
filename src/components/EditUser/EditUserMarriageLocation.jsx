@@ -16,7 +16,7 @@ export default function EditUserMarriageLocation ({ user, ...props }) {
       title='Edit Marriage Location'
       subTitle={user.fullName}
       name='marriageLocation'
-      value={user.couple.marriageLocation || ''}
+      value={user.couple?.marriageLocation || ''}
       onSubmit={handleSubmit}
       loading={fetching}
       error={error}

@@ -10,7 +10,7 @@ import { MdDone, MdClose } from 'react-icons/md'
 
 import { useQuery } from 'urql'
 
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import {
   layoutAtom,
   isEditModeAtom,
@@ -39,6 +39,7 @@ import FindMe from 'components/Menu/FindMe'
 export default function ProfileCard () {
   const [isEditMode, setIsEditMode] = useRecoilState(isEditModeAtom)
   const [activeNodeID, setActiveNodeID] = useRecoilState(activeNodeIDAtom)
+  const setActiveNodePulseID = useSetRecoilState(activeNodeIDAtom)
 
   const layout = useRecoilValue(layoutAtom)
   const networkMethods = useRecoilValue(networkMethodsAtom)
@@ -50,6 +51,7 @@ export default function ProfileCard () {
     // clear the activeNodeID
     window.history.pushState({}, '', '/')
     setActiveNodeID(null)
+    setActiveNodePulseID(null)
     // unselect all nodes if on network layout
     layout === 'network' && networkMethods.unselectAll()
     setIsEditMode(false)

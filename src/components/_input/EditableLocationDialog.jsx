@@ -58,12 +58,12 @@ export default function InputDialogTrigger (props) {
   return (
     <>
       {isOpen && <InputDialog {...inputProps} value={inputProps?.value?.suggested} onClose={handleClose} />}
+      {isEditMode && <RemoveButton inputProps={inputProps} />}
       <Button
         onClick={onOpen}
         variant='editable-input'
         animation={`${wiggle} infinite .15s linear`}
       >
-        {isEditMode && <RemoveButton inputProps={inputProps} />}
         {inputProps?.value ? inputProps?.value?.suggested?.terms?.slice(-3).map(val => val.value).join(', ') : 'Unavailable'}
       </Button>
     </>

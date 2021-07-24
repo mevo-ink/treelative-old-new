@@ -87,9 +87,9 @@ export default function Birthday () {
   // }
 
   const pulse = keyframes`
-    0% { transform: scale(0.1, 0.1); opacity: 0; }
+    0% { transform: scale(0.1, 0.1); opacity: 1; }
     50% { opacity: 1;)
-    100% { transform: scale(1.5, 1.5); opacity: 0;
+    100% { transform: scale(1.5, 1.5); opacity: 1; }
   `
 
   return (
@@ -169,7 +169,7 @@ export default function Birthday () {
                       position: 'absolute',
                       animation: `${pulse} 1.5s infinite ease-out`,
                       opacity: '0',
-                      boxShadow: '0 0 1px 5px hsla(100, 98%, 57%, 1)'
+                      boxShadow: '0 0 1px 8px hsla(100, 98%, 57%, 1)'
                     }}
                   />
                 )}

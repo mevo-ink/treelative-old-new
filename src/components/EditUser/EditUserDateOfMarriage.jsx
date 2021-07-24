@@ -17,7 +17,7 @@ export default function EditUserDateOfMarriage ({ user, ...props }) {
       label='Edit Date of Marriage'
       name='dateOfMarriage'
       subTitle={user.fullName}
-      value={user.couple.dateOfMarriage}
+      value={user.couple?.dateOfMarriage}
       onChange={handleSubmit}
       error={error}
       loading={fetching}

@@ -106,12 +106,12 @@ export default function DateTimePickerDialogTrigger (props) {
   return (
     <>
       {isOpen && <DateTimePickerDialog {...rest} onClose={handleClose} onSubmit={handleOnSubmit} />}
+      {isEditMode && <RemoveButton inputProps={{ onSubmit: handleOnSubmit, name: rest.name, value: rest.value }} />}
       <Button
         onClick={onOpen}
         variant='editable-input'
         animation={`${wiggle} infinite .15s linear`}
       >
-        {isEditMode && <RemoveButton inputProps={{ onSubmit: handleOnSubmit, name: rest.name, value: rest.value }} />}
         {props.value ? format(dtDateOnly, 'PP').replace(/[, ]+/g, '/') : 'Unavailable'}
       </Button>
     </>
