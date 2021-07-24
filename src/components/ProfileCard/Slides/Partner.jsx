@@ -4,6 +4,7 @@ import {
 } from '@chakra-ui/react'
 
 import EditUserPartner from 'components/EditUser/EditUserPartner'
+import EditUserDateOfMarriage from 'components/EditUser/EditUserDateOfMarriage'
 
 export default function ParentChild ({ user }) {
   return (
@@ -20,6 +21,8 @@ export default function ParentChild ({ user }) {
     >
       <Text variant='info-title'> Partner </Text>
       <EditUserPartner user={user} />
+      <Text variant='info-title' mt='1rem'> Date Of Marriage </Text>
+      <EditUserDateOfMarriage user={user} />
     </Flex>
   )
 }

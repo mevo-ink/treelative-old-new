@@ -46,8 +46,8 @@ export const DELETE_USER_PARTNER = gql`
   }
 `
 
-export const UPDATE_COUPLE_DATE_OF_MARRIAGE = gql`
-  mutation UPDATE_COUPLE_DATE_OF_MARRIAGE ($coupleID: String! $input: UpdateCoupleInput!) {
+export const UPDATE_USER_DATE_OF_MARRIAGE = gql`
+  mutation UPDATE_USER_DATE_OF_MARRIAGE ($coupleID: String! $input: UpdateCoupleInput!) {
     updateCouple(coupleID: $coupleID input: $input) {
       id
       userOne {

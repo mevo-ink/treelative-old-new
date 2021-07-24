@@ -21,13 +21,9 @@ export default function Birth ({ user }) {
       borderRadius='20px'
       p='1.5rem 0'
     >
-      <Text variant='info-title'>
-        Date Of Birth
-      </Text>
+      <Text variant='info-title'> Date Of Birth </Text>
       <EditUserDateOfBirth user={user} />
-      <Text variant='info-title' mt='1rem'>
-        Birth Location
-      </Text>
+      <Text variant='info-title' mt='1rem'> Birth Location </Text>
       <EditUserBirthLocation user={user} />
       <LocationRenderer location={user.birthLocation?.parsed} avatar={user.avatar} fullName={user.fullName} />
     </Flex>
