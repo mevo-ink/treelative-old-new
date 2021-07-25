@@ -14,7 +14,17 @@ import RemoveButton from 'components/_input/RemoveButton'
 import EditableLocationModal from 'components/_input/EditableLocationModal'
 
 export default function EditableLocationTrigger (props) {
+  const {
+    title,
+    value,
+    onSubmit,
+    isLoading,
+    ...inputProps
+  } = props
+
   const isEditMode = useRecoilValue(isEditModeAtom)
+
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   const wiggle = keyframes`
     0% { transform: rotate(0deg); }
@@ -22,26 +32,10 @@ export default function EditableLocationTrigger (props) {
     100% { transform: rotate(1deg); }
   `
 
-  const {
-    reset,
-    textAlign,
-    onClose: onParentClose,
-    defaultIsOpen = false,
-    ...inputProps
-  } = props
-
-  const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen })
-
-  const handleClose = (success = false) => {
-    reset && reset()
-    onClose()
-    defaultIsOpen && onParentClose(success)
-  }
-
-  if (!isEditMode && !defaultIsOpen) {
+  if (!isEditMode) {
     return (
       <Text variant='info'>
-        {inputProps?.value ? inputProps?.value?.suggested?.terms?.slice(-3).map(val => val.value).join(', ') : 'Unavailable'}
+        {value ? value?.suggested?.terms?.slice(-3).map(val => val.value).join(', ') : 'Unavailable'}
       </Text>
     )
   }
@@ -53,14 +47,20 @@ export default function EditableLocationTrigger (props) {
       animation={isEditMode && `${wiggle} infinite .15s linear`}
     >
       <Flex position='relative'>
-        {isOpen && <EditableLocationModal {...inputProps} value={inputProps?.value?.suggested} onClose={handleClose} />}
-        {isEditMode && <RemoveButton inputProps={inputProps} />}
+        {isOpen && <EditableLocationModal value={value?.suggested} onSubmit={onSubmit} onClose={onClose} {...inputProps} />}
+        {isEditMode && (
+          <RemoveButton
+            title={title}
+            onRemove={() => onSubmit(null)}
+            isLoading={isLoading}
+          />
+        )}
         <Button
           onClick={onOpen}
           variant='editable-input'
           animation={`${wiggle} infinite .15s linear`}
         >
-          {inputProps?.value ? inputProps?.value?.suggested?.terms?.slice(-3).map(val => val.value).join(', ') : 'Unavailable'}
+          {value ? value?.suggested?.terms?.slice(-3).map(val => val.value).join(', ') : 'Unavailable'}
         </Button>
       </Flex>
     </Flex>

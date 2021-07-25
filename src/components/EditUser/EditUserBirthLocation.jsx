@@ -1,25 +1,24 @@
-import EditableLocationTrigger from 'components/_input/EditableLocationTrigger'
-
 import { useMutation } from 'urql'
+
 import { UPDATE_USER_BIRTH_LOCATION } from 'graphql/mutations/users'
 
+import EditableLocationTrigger from 'components/_input/EditableLocationTrigger'
+
 export default function EditUserBirthLocation ({ user }) {
-  const [{ error, fetching }, updateUserBirthLocation] = useMutation(UPDATE_USER_BIRTH_LOCATION)
+  const [editBirthLocationResult, editBirthLocation] = useMutation(UPDATE_USER_BIRTH_LOCATION)
 
   const handleSubmit = birthLocation => {
     const variables = { userID: user.id, input: { birthLocation } }
-    return updateUserBirthLocation(variables)
+    return editBirthLocation(variables)
   }
 
   return (
     <EditableLocationTrigger
       title='Edit Birth Location'
-      name='birthLocation'
-      subTitle={user.fullName}
-      value={user.birthLocation || ''}
+      value={user?.birthLocation}
       onSubmit={handleSubmit}
-      loading={fetching}
-      error={error}
+      isLoading={editBirthLocationResult.fetching}
+      error={editBirthLocationResult.error}
     />
   )
 }

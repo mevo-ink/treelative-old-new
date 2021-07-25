@@ -15,13 +15,12 @@ const toast = createStandaloneToast()
 
 export default function EditableLocationModal (props) {
   const {
-    onClose,
-    value = '',
-    title = '',
-    onSubmit = console.log,
-    loading,
+    title,
+    value,
     error,
-    alert = ''
+    onClose,
+    onSubmit,
+    isLoading
   } = props
 
   const [location, setLocation] = useState({ label: value?.description, value })
@@ -62,13 +61,13 @@ export default function EditableLocationModal (props) {
       title={title}
       submitLabel='Submit'
       error={error}
-      loading={loading}
+      loading={isLoading}
       onClose={onClose}
       onSubmit={handleOnSubmit}
       size='xl'
     >
       <Stack spacing='8' minH='300px'>
-        {alert && <Alert status='warning' borderRadius='lg'> <AlertIcon /> {alert} </Alert>}
+        {error && <Alert status='warning' borderRadius='lg'> <AlertIcon /> {error} </Alert>}
         <LocationSelection
           value={location}
           onChange={setLocation}
