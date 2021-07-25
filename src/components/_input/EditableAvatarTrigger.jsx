@@ -94,16 +94,16 @@ export default function EditableAvatarTrigger (props) {
                 borderRadius='50%'
                 isDisabled={isEditMode}
                 _disabled={{ opacity: '1' }}
+                onClick={() => handleAvatarClick(user.id)}
               >
                 <Image
                   src={user.avatar}
+                  fallbackSrc={`https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
                   alt='user-avatar'
                   w='100%'
                   h='100%'
                   p='.3rem'
                   borderRadius='50%'
-                  fallbackSrc={`https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
-                  onClick={() => handleAvatarClick(user.id)}
                 />
               </Button>
             </Box>
