@@ -73,7 +73,7 @@ export default function DateTimePickerModal (props) {
               dropdownMode='select'
               renderCustomHeader={CustomHeader}
             />
-            {value && <DateTimeRenderer value={value} type='date' fontSize='.8rem' fontWeight='bold' />}
+            {value && <DateTimeRenderer value={value} />}
             {isLoading && <Loading />}
           </Stack>
         </ModalBody>
