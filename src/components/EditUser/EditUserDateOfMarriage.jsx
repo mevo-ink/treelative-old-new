@@ -3,25 +3,20 @@ import { UPDATE_USER_DATE_OF_MARRIAGE } from 'graphql/mutations/couples'
 
 import DateTimePickerTrigger from 'components/_input/DateTimePickerTrigger'
 
-export default function EditUserDateOfMarriage ({ user, ...props }) {
-  const [{ error, fetching }, updateUserDateOfMarriage] = useMutation(UPDATE_USER_DATE_OF_MARRIAGE)
+export default function EditUserDateOfMarriage ({ user }) {
+  const [editDateOfMarriageResult, editDateOfMarriage] = useMutation(UPDATE_USER_DATE_OF_MARRIAGE)
 
-  const handleSubmit = dateOfMarriage => {
+  const handleEditDateOfMarriage = dateOfMarriage => {
     const variables = { coupleID: user.couple.id, input: { dateOfMarriage } }
-    return updateUserDateOfMarriage(variables)
+    return editDateOfMarriage(variables)
   }
 
   return (
     <DateTimePickerTrigger
-      type='date'
-      label='Edit Date of Marriage'
-      name='dateOfMarriage'
-      subTitle={user.fullName}
+      title='Edit Date of Marriage'
       value={user.couple?.dateOfMarriage}
-      onChange={handleSubmit}
-      error={error}
-      loading={fetching}
-      {...props}
+      editDate={handleEditDateOfMarriage}
+      editDateResult={editDateOfMarriageResult}
     />
   )
 }

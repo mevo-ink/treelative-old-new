@@ -27,13 +27,13 @@ export default function ParentChild ({ user }) {
     >
       <Text variant='info-title'> Partner </Text>
       <EditUserPartner user={user} />
-      {(user.couple?.dateOfMarriage || isEditMode) && (
+      {(user.couple && (user.couple?.dateOfMarriage || isEditMode)) && (
         <>
           <Text variant='info-title' mt='1rem'> Date Of Marriage </Text>
           <EditUserDateOfMarriage user={user} />
         </>
       )}
-      {(user.couple?.marriageLocation || isEditMode) && (
+      {(user.couple && (user.couple?.marriageLocation || isEditMode)) && (
         <>
           <Text variant='info-title' mt='1rem'> Marriage Location </Text>
           <EditUserMarriageLocation user={user} />
