@@ -37,28 +37,30 @@ export default function EditableInputWithIconTrigger (props) {
   return (
     <>
       {isOpen && <EditableInputModal {...inputProps} onClose={onClose} />}
-      <Flex justifyContent='center' animation={isEditMode && `${wiggle} infinite .15s linear`}>
-        <Image
-          src={props.icon}
-          h='100%'
-          objectFit='contain'
-          p='.4em'
-          background='hsla(0, 0%, 100%, .2)'
-          boxShadow='0px 3px 5px hsla(0, 0%, 0%, .2)'
-          borderLeftRadius='999px'
-        />
-        {isEditMode && <RemoveButton inputProps={inputProps} />}
-        <Button
-          variant='editable-input'
-          maxW='200px'
-          mt='0'
-          fontSize='14px'
-          borderLeftRadius='unset'
-          onClick={handleClick}
-        >
-          {props.value}
-          {!props.value && <Icon as={MdAdd} w='20px' h='20px' />}
-        </Button>
+      <Flex w='90%' justifyContent='center' animation={isEditMode && `${wiggle} infinite .15s linear`}>
+        <Flex w='auto' p='.3rem' position='relative'>
+          <Image
+            src={props.icon}
+            h='100%'
+            objectFit='contain'
+            p='.4em'
+            background='hsla(0, 0%, 100%, .2)'
+            boxShadow='0px 3px 5px hsla(0, 0%, 0%, .2)'
+            borderLeftRadius='999px'
+          />
+          {isEditMode && <RemoveButton inputProps={inputProps} />}
+          <Button
+            variant='editable-input'
+            maxW='200px'
+            mt='0'
+            fontSize='14px'
+            borderLeftRadius='unset'
+            onClick={handleClick}
+          >
+            {props.value}
+            {!props.value && <Icon as={MdAdd} w='20px' h='20px' />}
+          </Button>
+        </Flex>
       </Flex>
     </>
   )

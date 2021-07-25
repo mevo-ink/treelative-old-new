@@ -105,7 +105,6 @@ const theme = extendTheme({
       variants: {
         'editable-input': {
           h: 'auto',
-          maxW: '90%',
           mt: '.3rem',
           p: '.5em .8em',
           fontWeight: '400',

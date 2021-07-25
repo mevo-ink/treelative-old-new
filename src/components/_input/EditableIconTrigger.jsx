@@ -33,7 +33,7 @@ export default function EditableIconTrigger (props) {
   return (
     <>
       {isOpen && <EditableInputModal {...inputProps} onClose={onClose} />}
-      <Grid m='.3rem 0' placeItems='center' animation={isEditMode && `${wiggle} infinite .15s linear`}>
+      <Grid m='.5rem' placeItems='center' animation={isEditMode && `${wiggle} infinite .15s linear`}>
         {isEditMode && <RemoveButton inputProps={inputProps} />}
         <Button
           p='0'

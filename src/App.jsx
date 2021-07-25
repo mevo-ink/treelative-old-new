@@ -103,4 +103,5 @@ export default function App () {
     - Partner slide not working
   Separate active indicator component
   Add clear button on search results
+  Refactor DatePicker Modal & Trigger
 */

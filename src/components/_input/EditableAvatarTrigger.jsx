@@ -73,12 +73,11 @@ export default function EditableAvatarTrigger (props) {
         {relations.map(user => user && (
           <Box key={user.id} animation={isEditMode && `${wiggle} infinite .15s linear`}>
             <Box
-              w='2.5rem'
-              h='2.5rem'
-              p='0'
-              m='0 .2rem'
-              cursor='pointer'
+              w='3.2rem'
+              h='3.2rem'
+              mx='.2rem'
               mt='1rem'
+              cursor='pointer'
               position='relative'
             >
               {isEditMode && (
@@ -101,6 +100,7 @@ export default function EditableAvatarTrigger (props) {
                   alt='user-avatar'
                   w='100%'
                   h='100%'
+                  p='.3rem'
                   borderRadius='50%'
                   fallbackSrc={`https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
                   onClick={() => handleAvatarClick(user.id)}

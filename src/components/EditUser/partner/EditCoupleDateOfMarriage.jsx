@@ -3,12 +3,7 @@ import React from 'react'
 import { useMutation } from 'urql'
 import { UPDATE_COUPLE_DATE_OF_MARRIAGE } from 'graphql/mutations/couples'
 
-import DateTimePicker from 'components/_input/DateTimePicker'
-
-import {
-  FormLabel,
-  FormControl
-} from '@chakra-ui/form-control'
+import DateTimePickerTrigger from 'components/_input/DateTimePickerTrigger'
 
 export default function EditCoupleDateOfMarriage ({ couple, inline = false }) {
   const [{ error, fetching }, updateCoupleDateOfMarriage] = useMutation(UPDATE_COUPLE_DATE_OF_MARRIAGE)
@@ -19,18 +14,15 @@ export default function EditCoupleDateOfMarriage ({ couple, inline = false }) {
   }
 
   return (
-    <FormControl>
-      <FormLabel>Date of Marriage</FormLabel>
-      <DateTimePicker
-        fontSize='md'
-        inline={inline}
-        type='date'
-        label='Edit Date of Marriage'
-        value={couple.dateOfMarriage}
-        onChange={handleSubmit}
-        error={error}
-        loading={fetching}
-      />
-    </FormControl>
+    <DateTimePickerTrigger
+      fontSize='md'
+      inline={inline}
+      type='date'
+      label='Edit Date of Marriage'
+      value={couple.dateOfMarriage}
+      onChange={handleSubmit}
+      error={error}
+      loading={fetching}
+    />
   )
 }

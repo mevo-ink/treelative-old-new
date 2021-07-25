@@ -1,7 +1,7 @@
 import { useMutation } from 'urql'
 import { UPDATE_USER_DATE_OF_DEATH } from 'graphql/mutations/users'
 
-import DateTimePicker from 'components/_input/DateTimePicker'
+import DateTimePickerTrigger from 'components/_input/DateTimePickerTrigger'
 
 export default function EditUserDateOfDeath ({ user }) {
   const [{ error, fetching }, updateUserDateOfDeath] = useMutation(UPDATE_USER_DATE_OF_DEATH)
@@ -12,7 +12,7 @@ export default function EditUserDateOfDeath ({ user }) {
   }
 
   return (
-    <DateTimePicker
+    <DateTimePickerTrigger
       isClearable
       type='date'
       label='Edit Date of Death'
