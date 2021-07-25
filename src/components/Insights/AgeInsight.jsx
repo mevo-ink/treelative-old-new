@@ -1,12 +1,12 @@
 import {
   BarChart,
   Bar,
-  Cell,
+  // Cell,
   XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
+  // YAxis,
+  // CartesianGrid,
+  // Tooltip,
+  // Legend,
   ResponsiveContainer
 } from 'recharts'
 

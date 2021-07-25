@@ -17,17 +17,22 @@ import EditableInputModal from 'components/_input/EditableInputModal'
 import RemoveButton from 'components/_input/RemoveButton'
 
 export default function EditableInputWithIconTrigger (props) {
+  const {
+    icon,
+    title,
+    onSubmit,
+    isLoading,
+    ...inputProps
+  } = props
   const isEditMode = useRecoilValue(isEditModeAtom)
+
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   const wiggle = keyframes`
     0% { transform: rotate(0deg); }
     50% { transform: rotate(-1deg); }
     100% { transform: rotate(1deg); }
   `
-
-  const { ...inputProps } = props
-
-  const { isOpen, onOpen, onClose } = useDisclosure()
 
   const handleClick = () => {
     if (isEditMode) onOpen()
@@ -36,11 +41,11 @@ export default function EditableInputWithIconTrigger (props) {
 
   return (
     <>
-      {isOpen && <EditableInputModal {...inputProps} onClose={onClose} />}
+      {isOpen && <EditableInputModal title={title} onSubmit={onSubmit} isLoading={isLoading} onClose={onClose} {...inputProps} />}
       <Flex w='90%' justifyContent='center' animation={isEditMode && `${wiggle} infinite .15s linear`}>
         <Flex p='.3rem' position='relative'>
           <Image
-            src={props.icon}
+            src={icon}
             h='100%'
             objectFit='contain'
             p='.4em'
@@ -48,7 +53,13 @@ export default function EditableInputWithIconTrigger (props) {
             boxShadow='0px 3px 5px hsla(0, 0%, 0%, .2)'
             borderLeftRadius='999px'
           />
-          {isEditMode && <RemoveButton inputProps={inputProps} />}
+          {isEditMode && (
+            <RemoveButton
+              title={'Remove' + title.substring(4)}
+              onRemove={onSubmit}
+              isLoading={isLoading}
+            />
+          )}
           <Button
             variant='editable-input'
             maxW='200px'

@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 import {
   Link,
   Input,
-  Textarea,
   InputGroup,
   FormControl,
   InputLeftAddon,
@@ -22,21 +21,18 @@ const toast = createStandaloneToast()
 export default function EditableInputModal (props) {
   const {
     onClose,
-    type = 'text',
-    name = 'inputFieldName',
-    value = '',
-    title = '',
-    placeholder = 'Type here ...',
-    onSubmit = console.log,
+    name,
+    value,
+    title,
+    placeholder = 'Type here..',
+    onSubmit,
     validation,
-    loading,
+    isLoading,
     error,
     rows = 10,
     leftAddon,
     prefix = ''
   } = props
-
-  const InputElement = type === 'textarea' ? Textarea : Input
 
   const schemaValidation = object().shape({
     [name]: validation
@@ -58,7 +54,7 @@ export default function EditableInputModal (props) {
   useEffect(() => { setTimeout(() => setFocus(name), 1) }, [])
 
   const handleOnSubmit = (form) => {
-    let submitData = type !== 'number' ? form[name].trim() : parseInt(form[name])
+    let submitData = form[name].trim()
     if (prefix) submitData = prefix + submitData
     onSubmit(submitData)
       .then(result => {
@@ -83,16 +79,16 @@ export default function EditableInputModal (props) {
       title={title}
       submitLabel='Submit'
       error={error || errors[name]}
-      loading={loading}
+      loading={isLoading}
       onClose={onCancel}
       onSubmit={handleSubmit(handleOnSubmit)}
     >
       <FormControl isInvalid={errors[name] || Boolean(error)}>
         <InputGroup>
           {leftAddon && <InputLeftAddon> {leftAddon} </InputLeftAddon>}
-          <InputElement
+          <Input
             {...register(name)}
-            type={type}
+            type='text'
             placeholder={placeholder}
             rows={rows}
           />
