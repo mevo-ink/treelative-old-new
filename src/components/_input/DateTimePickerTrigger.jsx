@@ -15,8 +15,6 @@ import { isEditModeAtom } from 'utils/atoms.js'
 import RemoveButton from 'components/_input/RemoveButton'
 import DateTimePickerModal from 'components/_input/DateTimePickerModal'
 
-import 'react-datepicker/dist/react-datepicker.css'
-
 const toast = createStandaloneToast()
 
 export default function DateTimePickerDialogTrigger (props) {
@@ -26,6 +24,7 @@ export default function DateTimePickerDialogTrigger (props) {
     editDate,
     editDateResult
   } = props
+
   const isEditMode = useRecoilValue(isEditModeAtom)
 
   const dt = new Date(value)
@@ -40,7 +39,7 @@ export default function DateTimePickerDialogTrigger (props) {
   `
 
   const handleEditDate = async (newValue) => {
-    editDate(newValue)
+    return editDate(newValue)
       .then(result => {
         if (result.data) {
           toast({
