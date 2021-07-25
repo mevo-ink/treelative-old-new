@@ -24,7 +24,10 @@ export default function EditableInputTrigger (props) {
   `
 
   const {
-    reset,
+    title,
+    value,
+    onSubmit,
+    isLoading,
     ...inputProps
   } = props
 
@@ -48,7 +51,7 @@ export default function EditableInputTrigger (props) {
 
   return (
     <>
-      {isOpen && <EditableInputModal {...inputProps} onClose={onClose} />}
+      {isOpen && <EditableInputModal onClose={onClose} title={title} value={value} onSubmit={onSubmit} isLoading={isLoading} {...inputProps} />}
       <Flex
         w='60%'
         my='1rem'
@@ -57,9 +60,9 @@ export default function EditableInputTrigger (props) {
       >
         {isEditMode && (
           <RemoveButton
-            title={inputProps.title}
-            onRemove={() => inputProps.onSubmit(inputProps.type === 'text' ? '' : null)}
-            isLoading={inputProps.loading}
+            title={title}
+            onRemove={onSubmit}
+            isLoading={isLoading}
           />
         )}
         <Button
@@ -71,8 +74,8 @@ export default function EditableInputTrigger (props) {
           fontWeight='600'
           onClick={onOpen}
         >
-          {props.value}
-          {!props.value && <Icon as={MdAdd} w='20px' h='20px' />}
+          {value}
+          {!value && <Icon as={MdAdd} w='20px' h='20px' />}
         </Button>
       </Flex>
     </>
