@@ -1,76 +1,19 @@
 import { useEffect, useState } from 'react'
 
-import { useRecoilValue } from 'recoil'
-import { isEditModeAtom } from 'utils/atoms.js'
-
 import {
-  Text,
   Stack,
   Alert,
-  Button,
   AlertIcon,
-  keyframes,
   AspectRatio,
-  useDisclosure,
   createStandaloneToast
 } from '@chakra-ui/react'
 
 import FormDialog from 'components/_common/FormDialog'
 import LocationSelection from 'components/_common/LocationSelection'
 
-import RemoveButton from 'components/_input/RemoveButton'
-
 const toast = createStandaloneToast()
 
-export default function InputDialogTrigger (props) {
-  const isEditMode = useRecoilValue(isEditModeAtom)
-
-  const wiggle = keyframes`
-    0% { transform: rotate(0deg); }
-    50% { transform: rotate(-1deg); }
-    100% { transform: rotate(1deg); }
-  `
-
-  const {
-    reset,
-    textAlign,
-    onClose: onParentClose,
-    defaultIsOpen = false,
-    ...inputProps
-  } = props
-
-  const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen })
-
-  const handleClose = (success = false) => {
-    reset && reset()
-    onClose()
-    defaultIsOpen && onParentClose(success)
-  }
-
-  if (!isEditMode && !defaultIsOpen) {
-    return (
-      <Text variant='info'>
-        {inputProps?.value ? inputProps?.value?.suggested?.terms?.slice(-3).map(val => val.value).join(', ') : 'Unavailable'}
-      </Text>
-    )
-  }
-
-  return (
-    <>
-      {isOpen && <InputDialog {...inputProps} value={inputProps?.value?.suggested} onClose={handleClose} />}
-      {isEditMode && <RemoveButton inputProps={inputProps} />}
-      <Button
-        onClick={onOpen}
-        variant='editable-input'
-        animation={`${wiggle} infinite .15s linear`}
-      >
-        {inputProps?.value ? inputProps?.value?.suggested?.terms?.slice(-3).map(val => val.value).join(', ') : 'Unavailable'}
-      </Button>
-    </>
-  )
-}
-
-function InputDialog (props) {
+export default function EditableLocationModal (props) {
   const {
     onClose,
     value = '',
@@ -130,11 +73,6 @@ function InputDialog (props) {
           value={location}
           onChange={setLocation}
         />
-        {/* <GooglePlacesSelect
-          autoFocus
-          value={location}
-          onChange={setLocation}
-        /> */}
         <AspectRatio>
           <iframe
             title={title}

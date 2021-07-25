@@ -33,7 +33,6 @@ export default function App () {
 /*
   BUG:
     - Profile card update - post action - check if in network mode
-  Refactor location Modal and Trigger
   Double check all titles of confirmation delete modal
   Style Error modal with contact us info --- NEED ACCESS TO OUR PROFILE CARDS FOR NOT AUTH USERS
   Add birthday effect on profile card mount
@@ -104,4 +103,5 @@ export default function App () {
   Separate active indicator component
   Add clear button on search results
   Refactor DatePicker Modal & Trigger
+  Refactor location Modal and Trigger
 */

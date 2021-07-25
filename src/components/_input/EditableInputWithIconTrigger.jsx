@@ -38,7 +38,7 @@ export default function EditableInputWithIconTrigger (props) {
     <>
       {isOpen && <EditableInputModal {...inputProps} onClose={onClose} />}
       <Flex w='90%' justifyContent='center' animation={isEditMode && `${wiggle} infinite .15s linear`}>
-        <Flex w='auto' p='.3rem' position='relative'>
+        <Flex p='.3rem' position='relative'>
           <Image
             src={props.icon}
             h='100%'

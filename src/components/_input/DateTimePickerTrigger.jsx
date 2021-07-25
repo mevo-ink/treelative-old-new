@@ -83,7 +83,7 @@ export default function DateTimePickerDialogTrigger (props) {
   return (
     <Flex w='90%' justifyContent='center' animation={`${wiggle} infinite .15s linear`}>
       {isOpen && <DateTimePickerModal {...rest} onClose={handleClose} onSubmit={handleOnSubmit} />}
-      <Flex w='auto' justifyContent='center' position='relative'>
+      <Flex justifyContent='center' position='relative'>
         {isEditMode && <RemoveButton inputProps={{ onSubmit: handleOnSubmit, name: rest.name, value: rest.value }} />}
         <Button
           onClick={onOpen}

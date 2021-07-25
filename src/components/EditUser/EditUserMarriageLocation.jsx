@@ -1,4 +1,4 @@
-import EditableLocationDialog from 'components/_input/EditableLocationDialog'
+import EditableLocationTrigger from 'components/_input/EditableLocationTrigger'
 
 import { useMutation } from 'urql'
 import { UPDATE_USER_MARRIAGE_LOCATION } from 'graphql/mutations/couples'
@@ -12,7 +12,7 @@ export default function EditUserMarriageLocation ({ user, ...props }) {
   }
 
   return (
-    <EditableLocationDialog
+    <EditableLocationTrigger
       title='Edit Marriage Location'
       subTitle={user.fullName}
       name='marriageLocation'

@@ -1,4 +1,4 @@
-import EditableLocationDialog from 'components/_input/EditableLocationDialog'
+import EditableLocationTrigger from 'components/_input/EditableLocationTrigger'
 
 import { useMutation } from 'urql'
 import { UPDATE_USER_CURRENT_LOCATION } from 'graphql/mutations/users'
@@ -12,7 +12,7 @@ export default function EditUserCurrentLocation ({ user, ...props }) {
   }
 
   return (
-    <EditableLocationDialog
+    <EditableLocationTrigger
       title='Edit Current Location'
       subTitle={user.fullName}
       name='currentLocation'

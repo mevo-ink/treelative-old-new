@@ -1,4 +1,4 @@
-import EditableLocationDialog from 'components/_input/EditableLocationDialog'
+import EditableLocationTrigger from 'components/_input/EditableLocationTrigger'
 
 import { useMutation } from 'urql'
 import { UPDATE_USER_BIRTH_LOCATION } from 'graphql/mutations/users'
@@ -12,7 +12,7 @@ export default function EditUserBirthLocation ({ user }) {
   }
 
   return (
-    <EditableLocationDialog
+    <EditableLocationTrigger
       title='Edit Birth Location'
       name='birthLocation'
       subTitle={user.fullName}
