@@ -1,19 +1,20 @@
-import GoogleMapReact from 'google-map-react'
+import { Box, Image } from '@chakra-ui/react'
 
 import { useQuery } from 'urql'
-import { GET_MAP_DATA } from 'graphql/queries/layouts'
-
-import Loading from 'components/Loading'
-
-import { Box, Image, keyframes } from '@chakra-ui/react'
-
 import { useSetRecoilState, useRecoilState } from 'recoil'
+
+import { GET_MAP_DATA } from 'graphql/queries/layouts'
 import {
   layoutMethodsAtom,
   activeNodeIDAtom,
   mapMethodsAtom,
   activeNodePulseIDAtom
 } from 'utils/atoms.js'
+
+import GoogleMapReact from 'google-map-react'
+
+import Loading from 'components/Loading'
+import ActivePulse from 'components/Layouts/ActivePulse'
 
 import parseJwt from 'utils/parseJWT'
 
@@ -126,12 +127,6 @@ export default function Map () {
     window.history.pushState({}, '', userID)
   }
 
-  const pulse = keyframes`
-    0% { transform: scale(0.1, 0.1); opacity: 1; }
-    50% { opacity: 1;)
-    100% { transform: scale(1.5, 1.5); opacity: 1; }
-  `
-
   return (
     <Box h='calc(100 * var(--vh))'>
       <GoogleMapReact
@@ -172,25 +167,7 @@ export default function Map () {
               zIndex={user.id !== activeNodePulseID && '-2'}
               onClick={() => handleUserSelect(user.id)}
             />
-            {user.id === activeNodePulseID && (
-              <Box
-                borderRadius='50%'
-                position='absolute'
-                left='50%'
-                top='50%'
-                zIndex='-1'
-                _after={{
-                  content: '""',
-                  borderRadius: '50%',
-                  w: '30px',
-                  h: '30px',
-                  position: 'absolute',
-                  animation: `${pulse} 1.5s infinite ease-out`,
-                  opacity: '0',
-                  boxShadow: '0 0 1px 8px hsla(100, 98%, 57%, 1)'
-                }}
-              />
-            )}
+            {user.id === activeNodePulseID && <ActivePulse />}
           </Box>
         ))}
       </GoogleMapReact>

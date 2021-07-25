@@ -35,7 +35,6 @@ export default function App () {
     - Refactor location Modal and Trigger
     - Profile card update - post action - check if in network mode
   Double check all titles of confirmation delete modal
-  Separate active indicator component
   Add clear button on search results
   Style Error modal with contact us info --- NEED ACCESS TO OUR PROFILE CARDS FOR NOT AUTH USERS
   Add birthday effect on profile card mount
@@ -103,4 +102,5 @@ export default function App () {
     - delete and some edit are not working (i went to your last commit and checked.. not working)
     - No way to close search results expect closing the whole menu
     - Partner slide not working
+  Separate active indicator component
 */
