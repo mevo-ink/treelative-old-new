@@ -13,17 +13,24 @@ import EditableInputModal from 'components/_input/EditableInputModal'
 import RemoveButton from 'components/_input/RemoveButton'
 
 export default function EditableIconTrigger (props) {
+  const {
+    url,
+    icon,
+    title,
+    onSubmit,
+    isLoading,
+    ...inputProps
+  } = props
+
   const isEditMode = useRecoilValue(isEditModeAtom)
+
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   const wiggle = keyframes`
     0% { transform: rotate(0deg); }
     50% { transform: rotate(-1deg); }
     100% { transform: rotate(1deg); }
   `
-
-  const { icon, url, ...inputProps } = props
-
-  const { isOpen, onOpen, onClose } = useDisclosure()
 
   const handleClick = (social) => {
     if (isEditMode) onOpen()
@@ -32,9 +39,15 @@ export default function EditableIconTrigger (props) {
 
   return (
     <>
-      {isOpen && <EditableInputModal {...inputProps} onClose={onClose} />}
+      {isOpen && <EditableInputModal title={title} onSubmit={onSubmit} isLoading={isLoading} onClose={onClose} {...inputProps} />}
       <Grid m='.5rem' placeItems='center' animation={isEditMode && `${wiggle} infinite .15s linear`}>
-        {isEditMode && <RemoveButton inputProps={inputProps} />}
+        {isEditMode && (
+          <RemoveButton
+            title={'Remove' + title.substring(4)}
+            onRemove={() => onSubmit('')}
+            isLoading={isLoading}
+          />
+        )}
         <Button
           p='0'
           h='3.2rem'

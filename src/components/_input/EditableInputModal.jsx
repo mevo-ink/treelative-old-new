@@ -3,9 +3,7 @@ import { useEffect } from 'react'
 import {
   Link,
   Input,
-  InputGroup,
   FormControl,
-  InputLeftAddon,
   FormHelperText,
   createStandaloneToast
 } from '@chakra-ui/react'
@@ -29,8 +27,6 @@ export default function EditableInputModal (props) {
     validation,
     isLoading,
     error,
-    rows = 10,
-    leftAddon,
     prefix = ''
   } = props
 
@@ -84,15 +80,11 @@ export default function EditableInputModal (props) {
       onSubmit={handleSubmit(handleOnSubmit)}
     >
       <FormControl isInvalid={errors[name] || Boolean(error)}>
-        <InputGroup>
-          {leftAddon && <InputLeftAddon> {leftAddon} </InputLeftAddon>}
-          <Input
-            {...register(name)}
-            type='text'
-            placeholder={placeholder}
-            rows={rows}
-          />
-        </InputGroup>
+        <Input
+          {...register(name)}
+          type='text'
+          placeholder={placeholder}
+        />
         {prefix && (
           <FormHelperText isExternal as={Link} href={`${prefix}${getValues(name)}`}>
             {prefix}{getValues(name)}

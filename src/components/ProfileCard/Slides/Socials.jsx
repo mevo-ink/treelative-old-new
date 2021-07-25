@@ -40,7 +40,7 @@ export default function Socials ({ user }) {
       {(user.phoneNumber || isEditMode) && <EditUserPhoneNumber user={user} icon={phone} />}
       <Grid w='55%' gridTemplateColumns='repeat(2, 1fr)' flexFlow='wrap'>
         {data.map((social, idx) => (
-          <EditUserSocialURL key={idx} social={social} isDisabled={!isEditMode} />
+          <EditUserSocialURL key={idx} social={social} />
         ))}
       </Grid>
       {(user.email || isEditMode) && <EditUserEmail user={user} icon={email} />}
