@@ -1,12 +1,8 @@
 import {
   Modal,
   Stack,
-  Alert,
-  Button,
   ModalBody,
-  AlertIcon,
   IconButton,
-  ModalFooter,
   ModalHeader,
   ModalOverlay,
   ModalContent,
@@ -26,32 +22,24 @@ import 'react-datepicker/dist/react-datepicker.css'
 
 export default function DateTimePickerModal (props) {
   const {
+    value,
     title,
     onClose,
-    loading,
-    value,
     onSubmit,
-    error,
-    children,
-    label,
-    fontSize = 'xl',
-    type = 'date',
-    isClearable,
-    alert = '',
-    ...rest
+    isLoading
   } = props
 
   const dt = new Date(value || new Date().toISOString())
   const dtDateOnly = value ? new Date(dt.valueOf() + dt.getTimezoneOffset() * 60 * 1000) : dt
 
   return (
-    <Modal isOpen isCentered onClose={onClose} scrollBehavior='inside' size={type === 'date' ? 'sm' : 'lg'}>
+    <Modal isOpen isCentered onClose={onClose} scrollBehavior='inside'>
       <ModalOverlay />
-      <ModalContent pb={!children ? '2' : '6'}>
+      <ModalContent>
         <ModalHeader>
-          {title || label}
+          {title}
         </ModalHeader>
-        <ModalCloseButton isDisabled={loading} />
+        <ModalCloseButton />
         <ModalBody textAlign='center'>
           <Stack
             spacing='2'
@@ -75,37 +63,20 @@ export default function DateTimePickerModal (props) {
               }
             }}
           >
-            {alert && <Alert status='warning' borderRadius='lg'> <AlertIcon /> {alert} </Alert>}
             <ReactDatePicker
               inline
-              selected={type === 'time' ? dt : dtDateOnly}
+              selected={dtDateOnly}
               onChange={onSubmit}
-              showTimeSelect={type === 'time'}
+              showTimeSelect={false}
               showYearDropdown
               showMonthDropdown
               dropdownMode='select'
               renderCustomHeader={CustomHeader}
-              {...rest}
             />
-            {loading && <Loading />}
-            {value && <DateTimeRenderer value={value} type={type} fontSize={fontSize} fontWeight='bold' />}
+            {value && <DateTimeRenderer value={value} type='date' fontSize='.8rem' fontWeight='bold' />}
+            {isLoading && <Loading />}
           </Stack>
         </ModalBody>
-        <ModalFooter>
-          <Stack spacing='4' width='100%' alignItems='center'>
-            {error && <Alert status='error'> <AlertIcon /> {error.message} </Alert>}
-            {children}
-            {isClearable && value && (
-              <Button
-                colorScheme='orange'
-                variant='outline'
-                onClick={() => onSubmit(null)}
-              >
-                Remove Date
-              </Button>
-            )}
-          </Stack>
-        </ModalFooter>
       </ModalContent>
     </Modal>
   )
