@@ -1,10 +1,12 @@
 import {
+  Icon,
   Flex,
   Text,
   Button,
   keyframes,
   useDisclosure
 } from '@chakra-ui/react'
+import { MdAdd } from 'react-icons/md'
 
 import { useRecoilValue } from 'recoil'
 import { isEditModeAtom } from 'utils/atoms.js'
@@ -70,6 +72,7 @@ export default function EditableInputTrigger (props) {
           onClick={onOpen}
         >
           {props.value}
+          {!props.value && <Icon as={MdAdd} w='20px' h='20px' />}
         </Button>
       </Flex>
     </>
