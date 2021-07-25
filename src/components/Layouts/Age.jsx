@@ -102,9 +102,9 @@ export default function Age () {
                   w='40px'
                   h='40px'
                   mx='.5rem'
+                  my='3'
                   objectFit='contain'
                   borderRadius='50%'
-                  my='1'
                   zIndex='1'
                   onClick={() => handleUserSelect(user.id)}
                 />
@@ -116,7 +116,8 @@ export default function Age () {
                     h='20px'
                     p='2px'
                     position='absolute'
-                    right='0'
+                    top='5px'
+                    right='5px'
                     zIndex='1'
                     color='hsla(0, 0%, 0%, 1)'
                     bg='hsla(0, 0%, 100%, 1)'

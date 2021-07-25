@@ -141,9 +141,9 @@ export default function Birthday () {
                   w='40px'
                   h='40px'
                   mx='.5rem'
+                  my='3'
                   objectFit='contain'
                   borderRadius='50%'
-                  my='1'
                   zIndex='1'
                   onClick={() => handleUserSelect(user.id)}
                 />
@@ -154,7 +154,8 @@ export default function Birthday () {
                   display='grid'
                   placeItems='center'
                   position='absolute'
-                  right='0'
+                  top='5px'
+                  right='5px'
                   zIndex='1'
                   fontSize='12px'
                   bg='hsla(310, 100%, 40%, 1)'

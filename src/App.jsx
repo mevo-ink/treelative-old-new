@@ -32,10 +32,9 @@ export default function App () {
 // TODO:
 /*
   BUG:
-    - Refactor location Modal and Trigger
     - Profile card update - post action - check if in network mode
+  Refactor location Modal and Trigger
   Double check all titles of confirmation delete modal
-  Add clear button on search results
   Style Error modal with contact us info --- NEED ACCESS TO OUR PROFILE CARDS FOR NOT AUTH USERS
   Add birthday effect on profile card mount
   Add PWA
@@ -103,4 +102,5 @@ export default function App () {
     - No way to close search results expect closing the whole menu
     - Partner slide not working
   Separate active indicator component
+  Add clear button on search results
 */

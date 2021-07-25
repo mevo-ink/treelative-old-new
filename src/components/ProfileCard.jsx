@@ -15,6 +15,7 @@ import {
   layoutAtom,
   isEditModeAtom,
   activeNodeIDAtom,
+  activeNodePulseIDAtom,
   networkMethodsAtom
 } from 'utils/atoms.js'
 
@@ -39,7 +40,8 @@ import FindMe from 'components/Menu/FindMe'
 export default function ProfileCard () {
   const [isEditMode, setIsEditMode] = useRecoilState(isEditModeAtom)
   const [activeNodeID, setActiveNodeID] = useRecoilState(activeNodeIDAtom)
-  const setActiveNodePulseID = useSetRecoilState(activeNodeIDAtom)
+
+  const setActiveNodePulseID = useSetRecoilState(activeNodePulseIDAtom)
 
   const layout = useRecoilValue(layoutAtom)
   const networkMethods = useRecoilValue(networkMethodsAtom)
