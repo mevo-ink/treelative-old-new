@@ -82,8 +82,8 @@ export default function EditableAvatarTrigger (props) {
             >
               {isEditMode && (
                 <RemoveButton
-                  title='Remove Relation'
-                  onRemove={() => handleRemoveRelation(user.id)}
+                  title={'Remove' + title.substring(3)}
+                  onRemove={handleRemoveRelation}
                   isLoading={removeRelationResult.fetching}
                 />
               )}
