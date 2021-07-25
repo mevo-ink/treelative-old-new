@@ -32,9 +32,6 @@ export default function App () {
 // TODO:
 /*
   BUG:
-    - delete and some edit are not working (i went to your last commit and checked.. not working)
-    - No way to close search results expect closing the whole menu
-    - Partner slide not working
     - Refactor location Modal and Trigger
     - Profile card update - post action - check if in network mode
   Double check all titles of confirmation delete modal
@@ -102,4 +99,8 @@ export default function App () {
   Don't close menu drawer
   Optimize images
   Add logic to show active node in birthday view with AGE
+  BUGs:
+    - delete and some edit are not working (i went to your last commit and checked.. not working)
+    - No way to close search results expect closing the whole menu
+    - Partner slide not working
 */

@@ -51,6 +51,7 @@ export default function Menu () {
           bottom='0'
           bg='hsla(0, 0%, 100%, .2)'
           backdropFilter='blur(5px)'
+          borderRadius='0'
           borderTopLeftRadius='20px'
           borderTopRightRadius='20px'
           onClick={onOpen}
