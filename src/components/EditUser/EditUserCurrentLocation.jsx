@@ -1,12 +1,13 @@
-import EditableLocationTrigger from 'components/_input/EditableLocationTrigger'
-
 import { useMutation } from 'urql'
+
 import { UPDATE_USER_CURRENT_LOCATION } from 'graphql/mutations/users'
 
-export default function EditUserCurrentLocation ({ user, ...props }) {
-  const [{ error, fetching }, updateUserCurrentLocation] = useMutation(UPDATE_USER_CURRENT_LOCATION)
+import EditableLocationTrigger from 'components/_input/EditableLocationTrigger'
 
-  const handleSubmit = currentLocation => {
+export default function EditUserCurrentLocation ({ user }) {
+  const [editCurrentLocationResult, updateUserCurrentLocation] = useMutation(UPDATE_USER_CURRENT_LOCATION)
+
+  const handleEditCurrentLocation = currentLocation => {
     const variables = { userID: user.id, input: { currentLocation } }
     return updateUserCurrentLocation(variables)
   }
@@ -14,13 +15,10 @@ export default function EditUserCurrentLocation ({ user, ...props }) {
   return (
     <EditableLocationTrigger
       title='Edit Current Location'
-      subTitle={user.fullName}
-      name='currentLocation'
-      value={user.currentLocation || ''}
-      onSubmit={handleSubmit}
-      loading={fetching}
-      error={error}
-      {...props}
+      value={user?.currentLocation}
+      onSubmit={handleEditCurrentLocation}
+      isLoading={editCurrentLocationResult.fetching}
+      error={editCurrentLocationResult.error}
     />
   )
 }

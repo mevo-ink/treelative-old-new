@@ -1,25 +1,24 @@
-import EditableLocationTrigger from 'components/_input/EditableLocationTrigger'
-
 import { useMutation } from 'urql'
+
 import { UPDATE_USER_DEATH_LOCATION } from 'graphql/mutations/users'
 
-export default function EditUserDeathLocation ({ user }) {
-  const [{ error, fetching }, updateUserDeathLocation] = useMutation(UPDATE_USER_DEATH_LOCATION)
+import EditableLocationTrigger from 'components/_input/EditableLocationTrigger'
 
-  const handleSubmit = deathLocation => {
+export default function EditUserDeathLocation ({ user }) {
+  const [editDeathLocationResult, editDeathLocation] = useMutation(UPDATE_USER_DEATH_LOCATION)
+
+  const handleEditDeathLocation = deathLocation => {
     const variables = { userID: user.id, input: { deathLocation } }
-    return updateUserDeathLocation(variables)
+    return editDeathLocation(variables)
   }
 
   return (
     <EditableLocationTrigger
       title='Edit Death Location'
-      subTitle={user.fullName}
-      name='deathLocation'
-      value={user.deathLocation || ''}
-      onSubmit={handleSubmit}
-      loading={fetching}
-      error={error}
+      value={user?.deathLocation}
+      onSubmit={handleEditDeathLocation}
+      isLoading={editDeathLocationResult.fetching}
+      error={editDeathLocationResult.error}
     />
   )
 }
