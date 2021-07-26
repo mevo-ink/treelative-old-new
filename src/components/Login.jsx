@@ -95,9 +95,8 @@ export default function Login ({ onSuccess }) {
         pt='1.2em'
         pb='.6em'
         px='1em'
-        textAlign='center'
       >
-        Please Login to Access Profile Card
+        Login
       </Text>
       <Stack
         as='form'
@@ -122,8 +121,9 @@ export default function Login ({ onSuccess }) {
             <FormLabel>Password</FormLabel>
             <Button
               variant='link'
-              color='hsla(359, 88%, 55%, 1)'
+              color='hsla(359, 88%, 50%, 1)'
               fontSize='.8rem'
+              fontWeight='100'
               onClick={() => setIsForgotPasswordOpen(true)}
               tabIndex='-1'
             >
