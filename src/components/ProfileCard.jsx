@@ -63,7 +63,6 @@ export default function ProfileCard () {
 
   const innerBtnStyles = {
     position: 'absolute',
-    right: '.3rem',
     top: '.3rem',
     borderRadius: '20px',
     color: 'hsla(261, 64%, 18%, 1)',
@@ -96,7 +95,7 @@ export default function ProfileCard () {
             {result.data?.getUser && (
               <>
                 <IconButton icon={isEditMode ? <MdDone /> : <FiEdit />} {...innerBtnStyles} left='.3rem' onClick={() => setIsEditMode(!isEditMode)} />
-                <FindMe onClose={onClose} user={result.data?.getUser} {...innerBtnStyles} />
+                <FindMe onClose={onClose} user={result.data?.getUser} {...innerBtnStyles} right='.3rem' />
                 <EditUserAvatar user={user} />
                 <EditUserFullName user={user} />
                 <Slider>
