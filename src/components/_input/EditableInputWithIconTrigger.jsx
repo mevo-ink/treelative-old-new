@@ -42,8 +42,8 @@ export default function EditableInputWithIconTrigger (props) {
   return (
     <>
       {isOpen && <EditableInputModal title={title} onSubmit={onSubmit} isLoading={isLoading} onClose={onClose} {...inputProps} />}
-      <Flex w='90%' justifyContent='center' animation={isEditMode && `${wiggle} infinite .15s linear`}>
-        <Flex p='.3rem' position='relative'>
+      <Flex w='100%' justifyContent='center' animation={isEditMode && `${wiggle} infinite .15s linear`}>
+        <Flex w='auto' maxW='90%' p='.3rem' justify='center' position='relative'>
           <Image
             src={icon}
             h='100%'
@@ -62,7 +62,6 @@ export default function EditableInputWithIconTrigger (props) {
           )}
           <Button
             variant='editable-input'
-            maxW='200px'
             mt='0'
             fontSize='14px'
             borderLeftRadius='unset'
