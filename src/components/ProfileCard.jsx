@@ -33,6 +33,7 @@ import Partner from 'components/ProfileCard/Slides/Partner'
 import OuterWrapper from 'components/ProfileCard/OuterWrapper'
 import InnerWrapper from 'components/ProfileCard/InnerWrapper'
 import EditUserAvatar from 'components/EditUser/EditUserAvatar'
+import Notification from 'components/ProfileCard/Slides/Notification'
 import ParentChild from 'components/ProfileCard/Slides/ParentChild'
 import EditUserFullName from 'components/EditUser/EditUserFullName'
 
@@ -107,6 +108,7 @@ export default function ProfileCard () {
                   <ParentChild user={user} isHidden={(user.parents.length === 0 && user.children.length === 0 && !isEditMode)} />
                   <Socials user={user} />
                   <Privacy user={user} isHidden={!isEditMode} />
+                  <Notification user={user} isHidden={!isEditMode} />
                 </Slider>
               </>
             )}

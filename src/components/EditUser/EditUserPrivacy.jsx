@@ -88,12 +88,13 @@ export default function EditUserPrivacy ({ user }) {
       <FormControl>
         <Text variant='info-title' mb='.3rem' textAlign='center'>Privacy</Text>
         {PRIVACY_FIELDS.map(field => (
-          <Stack key={field} direction='row'>
+          <Stack key={field} mb='.8rem' direction='row'>
             <Text htmlFor={field} variant='info' textAlign='start'>
               {startCase(field)}
             </Text>
             <IconButton
               size='sm'
+              h='20px'
               color={settings.privacy[field] ? 'red' : 'green'}
               variant='ghost'
               aria-label='Toggle Field'

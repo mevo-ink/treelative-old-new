@@ -4,13 +4,9 @@ import {
   Flex,
   Text,
   Stack,
-  FormLabel,
   IconButton,
-  FormControl,
-  FormHelperText,
-  createStandaloneToast
+  FormControl
 } from '@chakra-ui/react'
-import { FiEye, FiEyeOff } from 'react-icons/fi'
 import { BiMessage, BiMessageX } from 'react-icons/bi'
 
 import { startCase } from 'lodash'
@@ -21,18 +17,6 @@ import { UPDATE_USER_SETTINGS } from 'graphql/mutations/users'
 
 import Loading from 'components/_common/Loading'
 import ErrorAlert from 'components/_common/ErrorAlert'
-
-const toast = createStandaloneToast()
-
-const PRIVACY_FIELDS = [
-  'email',
-  'phoneNumber',
-  'birthLocation',
-  'currentLocation',
-  'deathLocation',
-  'dateOfBirth',
-  'dateOfDeath'
-]
 
 const NOTIFICATION_FIELDS = [
   'email',
@@ -55,41 +39,6 @@ export default function EditUserPrivacy ({ user }) {
   if (result.fetching) return <Loading />
 
   if (result.error) return <ErrorAlert> {result.error.message} </ErrorAlert>
-
-  const onTogglePrivacy = (field) => {
-    let newPrivacy = { ...settings }
-    if (newPrivacy.privacy[field]) {
-      newPrivacy = {
-        ...newPrivacy,
-        privacy: {
-          ...newPrivacy.privacy,
-          [field]: false
-        }
-      }
-    } else {
-      newPrivacy = {
-        ...newPrivacy,
-        privacy: {
-          ...newPrivacy.privacy,
-          [field]: true
-        }
-      }
-    }
-    setPrivacy(newPrivacy)
-    const variables = { userID: user.id, input: { settings: newPrivacy } }
-    editPrivacy(variables)
-      .then(result => {
-        if (result.data) {
-          toast({
-            title: 'Successfully Privacy Updated',
-            status: 'success',
-            position: 'top',
-            duration: 1500,
-            isClosable: true
-          })
-        }
-      })
-  }
 
   const onToggleNotification = (field) => {
     let newPrivacy = { ...settings }
@@ -118,44 +67,26 @@ export default function EditUserPrivacy ({ user }) {
   return (
     <Flex justifyContent='center' alignItems='center'>
       <FormControl>
-        <Text variant='info-title' mb='.3rem' textAlign='center'>Privacy</Text>
-        {PRIVACY_FIELDS.map(field => (
-          <Stack key={field} direction='row'>
-            <Text htmlFor={field} variant='info' textAlign='start'>
-              {startCase(field)}
-            </Text>
-            <IconButton
-              size='sm'
-              color={settings.privacy[field] ? 'red' : 'green'}
-              variant='ghost'
-              aria-label='Toggle Field'
-              fontSize='20px'
-              icon={settings.privacy[field] ? <FiEyeOff /> : <FiEye />}
-              isLoading={editPrivacyResult.fetching}
-              onClick={() => onTogglePrivacy(field)}
-            />
-          </Stack>
-        ))}
-      </FormControl>
-      {/* <FormControl>
-        <FormLabel>Receive Notification</FormLabel>
+        <Text variant='info-title' mb='.3rem' textAlign='center'>Notification</Text>
         {NOTIFICATION_FIELDS.map(field => (
-          <Stack key={field} direction='row'>
+          <Stack key={field} mb='.8rem' direction='row'>
             <Text htmlFor={field} variant='info' textAlign='start'>
               {startCase(field)}
             </Text>
             <IconButton
               size='sm'
-              colorScheme={settings.notification[field] ? 'red' : 'green'}
+              h='20px'
+              color={settings.notification[field] ? 'red' : 'green'}
               variant='ghost'
               aria-label='Toggle Field'
               fontSize='20px'
               icon={settings.notification[field] ? <BiMessageX /> : <BiMessage />}
+              isLoading={editPrivacyResult.fetching}
               onClick={() => onToggleNotification(field)}
             />
           </Stack>
         ))}
-      </FormControl> */}
+      </FormControl>
     </Flex>
   )
 }
