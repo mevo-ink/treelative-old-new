@@ -27,6 +27,7 @@ import Slider from 'components/ProfileCard/Slider'
 import Birth from 'components/ProfileCard/Slides/Birth'
 import Death from 'components/ProfileCard/Slides/Death'
 import Socials from 'components/ProfileCard/Slides/Socials'
+import Privacy from 'components/ProfileCard/Slides/Privacy'
 import Current from 'components/ProfileCard/Slides/Current'
 import Partner from 'components/ProfileCard/Slides/Partner'
 import OuterWrapper from 'components/ProfileCard/OuterWrapper'
@@ -105,6 +106,7 @@ export default function ProfileCard () {
                   <Partner user={user} isHidden={(!user.couple && !isEditMode)} />
                   <ParentChild user={user} isHidden={(user.parents.length === 0 && user.children.length === 0 && !isEditMode)} />
                   <Socials user={user} />
+                  <Privacy user={user} isHidden={!isEditMode} />
                 </Slider>
               </>
             )}
