@@ -1,29 +1,27 @@
-import EditableInputTrigger from 'components/_input/EditableInputTrigger'
-
 import { string } from 'yup'
-
 import { useMutation } from 'urql'
+
 import { UPDATE_USER_SHORT_NAME } from 'graphql/mutations/users'
 
-export default function EditUserShortName ({ user }) {
-  const [{ error, fetching }, updateUserShortName] = useMutation(UPDATE_USER_SHORT_NAME)
+import EditableInputTrigger from 'components/_input/EditableInputTrigger'
 
-  const handleSubmit = shortName => {
+export default function EditUserShortName ({ user }) {
+  const [editShortNameResult, editShortName] = useMutation(UPDATE_USER_SHORT_NAME)
+
+  const handleEditShortName = shortName => {
     const variables = { userID: user.id, input: { shortName } }
-    return updateUserShortName(variables)
+    return editShortName(variables)
   }
 
   return (
     <EditableInputTrigger
-      type='text'
       title='Edit Short Name'
-      subTitle={user.shortName}
       name='shortName'
-      value={user.shortName || ''}
-      onSubmit={handleSubmit}
+      value={user?.shortName}
       validation={string().required()}
-      loading={fetching}
-      error={error}
+      onSubmit={handleEditShortName}
+      isLoading={editShortNameResult.fetching}
+      error={editShortNameResult.error}
     />
   )
 }

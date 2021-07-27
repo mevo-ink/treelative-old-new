@@ -24,6 +24,7 @@ export default function EditableInputTrigger (props) {
   `
 
   const {
+    name,
     title,
     value,
     onSubmit,
@@ -51,10 +52,10 @@ export default function EditableInputTrigger (props) {
 
   return (
     <>
-      {isOpen && <EditableInputModal onClose={onClose} title={title} value={value} onSubmit={onSubmit} isLoading={isLoading} {...inputProps} />}
+      {isOpen && <EditableInputModal onClose={onClose} title={title} name={name} value={value} onSubmit={onSubmit} isLoading={isLoading} {...inputProps} />}
       <Flex
         w='60%'
-        my='1rem'
+        my={name === 'fullName' && '1rem'}
         justifyContent='center'
         animation={isEditMode && `${wiggle} infinite .15s linear`}
       >
