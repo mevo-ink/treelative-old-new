@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
 import {
-  Flex,
+  Box,
   Text,
   Stack,
   IconButton,
@@ -65,11 +65,10 @@ export default function EditUserPrivacy ({ user }) {
   }
 
   return (
-    <Flex justifyContent='center' alignItems='center'>
+    <Box>
       <FormControl>
-        <Text variant='info-title' mb='.3rem' textAlign='center'>Notification</Text>
         {NOTIFICATION_FIELDS.map(field => (
-          <Stack key={field} mb='.8rem' direction='row'>
+          <Stack key={field} my='.5rem' direction='row'>
             <Text htmlFor={field} variant='info' textAlign='start'>
               {startCase(field)}
             </Text>
@@ -87,6 +86,6 @@ export default function EditUserPrivacy ({ user }) {
           </Stack>
         ))}
       </FormControl>
-    </Flex>
+    </Box>
   )
 }
