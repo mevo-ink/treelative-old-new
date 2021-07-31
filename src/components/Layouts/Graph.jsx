@@ -21,6 +21,9 @@ export default function Graph () {
   const { id: authUserID } = parseJwt(window.localStorage.getItem('AUTH_SESSION_ID'))
 
   const options = {
+    layout: {
+      improvedLayout: false
+    },
     nodes: {
       borderWidth: 2,
       size: 25,
@@ -132,7 +135,7 @@ export default function Graph () {
       }
     })
     // limit the zoom
-    const MIN_ZOOM = 0.3
+    const MIN_ZOOM = 0.1
     const MAX_ZOOM = 2.0
     let lastZoomPosition = { x: 0, y: 0 }
     network.on('zoom', () => {

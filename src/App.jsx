@@ -40,7 +40,11 @@ export default function App () {
   Add privacy slide slide
   Add new property to user : isPublic in backend
   Add content to insight modal
-  Investigate cache bug
+  Investigate cache bug on updating partner on slides
+  Fix cache issue on menu bar after login
+  SCHEMA CHANGE
+  Return actual data for age distribution insights
+  Return actual data for country distribution insights
 */
 // DONE:
 /*

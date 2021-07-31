@@ -48,7 +48,7 @@ export default function ProfileCard () {
   const layout = useRecoilValue(layoutAtom)
   const networkMethods = useRecoilValue(networkMethodsAtom)
 
-  const [result, refetch] = useQuery({ query: GET_USER, variables: { filter: { id: activeNodeID } } })
+  const [result, refetch] = useQuery({ query: GET_USER, variables: { filter: { id: activeNodeID } }, requestPolicy: 'network-only' })
   const user = result.data?.getUser
 
   const onClose = () => {
