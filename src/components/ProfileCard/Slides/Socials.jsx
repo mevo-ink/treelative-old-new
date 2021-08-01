@@ -5,7 +5,7 @@ import { useRecoilValue } from 'recoil'
 import { isEditModeAtom } from 'utils/atoms.js'
 
 import EditUserEmail from 'components/EditUser/EditUserEmail'
-import EditUserSocialURL from 'components/EditUser/EditUserSocialURL'
+import EditUserSocial from 'components/EditUser/EditUserSocial'
 import EditUserPhoneNumber from 'components/EditUser/EditUserPhoneNumber'
 
 import email from 'images/email.svg'
@@ -19,10 +19,10 @@ export default function Socials ({ user }) {
   const isEditMode = useRecoilValue(isEditModeAtom)
 
   const data = [
-    { ...user.socialLinks.find(social => social.type === 'INSTAGRAM'), icon: instagram, name: 'Instagram', baseURL: 'https://instagram.com/' },
-    { ...user.socialLinks.find(social => social.type === 'FACEBOOK'), icon: facebook, name: 'Facebook', baseURL: 'https://www.facebook.com/' },
-    { ...user.socialLinks.find(social => social.type === 'TWITTER'), icon: twitter, name: 'Twitter', baseURL: 'https://twitter.com/' },
-    { ...user.socialLinks.find(social => social.type === 'LINKEDIN'), icon: linkedIn, name: 'LinkedIn', baseURL: 'https://www.linkedin.com/in/' }
+    { username: user.social?.instagram, icon: instagram, name: 'Instagram', baseURL: 'https://instagram.com/' },
+    { username: user.social?.facebook, icon: facebook, name: 'Facebook', baseURL: 'https://www.facebook.com/' },
+    { username: user.social?.twitter, icon: twitter, name: 'Twitter', baseURL: 'https://twitter.com/' },
+    { username: user.social?.linkedIn, icon: linkedIn, name: 'LinkedIn', baseURL: 'https://www.linkedin.com/in/' }
   ]
 
   return (
@@ -40,7 +40,7 @@ export default function Socials ({ user }) {
       {(user.phoneNumber || isEditMode) && <EditUserPhoneNumber user={user} icon={phone} />}
       <Grid w='55%' gridTemplateColumns='repeat(2, 1fr)' flexFlow='wrap'>
         {data.map((social, idx) => (
-          <EditUserSocialURL key={idx} social={social} />
+          <EditUserSocial key={idx} social={social} />
         ))}
       </Grid>
       {(user.email || isEditMode) && <EditUserEmail user={user} icon={email} />}

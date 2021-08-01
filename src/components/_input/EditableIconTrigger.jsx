@@ -14,9 +14,9 @@ import RemoveButton from 'components/_input/RemoveButton'
 
 export default function EditableIconTrigger (props) {
   const {
-    url,
     icon,
     title,
+    username,
     onSubmit,
     isLoading,
     ...inputProps
@@ -51,14 +51,14 @@ export default function EditableIconTrigger (props) {
         <Button
           p='0'
           h='3.2rem'
-          onClick={() => handleClick(url)}
-          isDisabled={!isEditMode && !url}
+          onClick={() => handleClick(username)}
+          isDisabled={!isEditMode && !username}
         >
           <Image
             src={icon}
             w='40px'
             objectFit='contain'
-            filter={!url && 'grayscale(100%)'}
+            filter={!username && 'grayscale(100%)'}
           />
         </Button>
       </Grid>
