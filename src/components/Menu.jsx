@@ -30,7 +30,7 @@ import CreateUser from 'components/Menu/CreateUser'
 export default function Menu () {
   const { id, role } = parseJwt(window.localStorage.getItem('AUTH_SESSION_ID'))
 
-  const [result] = useQuery({ query: GET_AUTH_USER, variables: { filter: { id: id } } })
+  const [result] = useQuery({ query: GET_AUTH_USER, variables: { id: id }, pause: !id })
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()

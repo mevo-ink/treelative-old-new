@@ -170,8 +170,8 @@ export const GET_USER_GENERAL = gql`
 `
 
 export const GET_AUTH_USER = gql`
-  query GET_AUTH_USER ($filter: UserUniqueFilter!) {
-    getUser (filter: $filter) {
+  query GET_AUTH_USER ($id: String!) {
+    getUser (id: $id) {
       id
       fullName
       dateOfBirth
