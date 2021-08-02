@@ -23,9 +23,9 @@ export const UPDATE_USER_USERNAME = gql`
   }
 `
 
-export const UPDATE_USER_SHORT_NAME = gql`
-  mutation UPDATE_USER_SHORT_NAME ($userID: String! $input: UpdateUserInput!) {
-    updateUser(userID: $userID input: $input) {
+export const UPDATE_SHORT_NAME = gql`
+  mutation UPDATE_SHORT_NAME ($userID: String! $input: UpdateUserGeneralInput!) {
+    updateUserGeneral(userID: $userID input: $input) {
       id
       shortName
     }
