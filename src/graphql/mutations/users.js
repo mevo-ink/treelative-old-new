@@ -32,9 +32,9 @@ export const UPDATE_USER_SHORT_NAME = gql`
   }
 `
 
-export const UPDATE_USER_FULL_NAME = gql`
-  mutation UPDATE_USER_FULL_NAME ($userID: String! $input: UpdateUserInput!) {
-    updateUser(userID: $userID input: $input) {
+export const UPDATE_FULL_NAME = gql`
+  mutation UPDATE_FULL_NAME ($userID: String! $input: UpdateUserGeneralInput!) {
+    updateUserGeneral(userID: $userID input: $input) {
       id
       fullName
     }

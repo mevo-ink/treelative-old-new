@@ -33,7 +33,6 @@ export default function EditableIconTrigger (props) {
   `
 
   const handleClick = (social) => {
-    console.log(social)
     if (isEditMode) onOpen()
     else window.open(social, '_blank').focus()
   }
