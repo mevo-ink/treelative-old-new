@@ -95,8 +95,8 @@ export const UPDATE_CURRENT_LOCATION = gql`
   }
 `
 
-export const ADD_USER_PARENT = gql`
-  mutation ADD_USER_PARENT ($userID: String! $parentID: String!) {
+export const ADD_PARENT = gql`
+  mutation ADD_PARENT ($userID: String! $parentID: String!) {
     addUserParent(userID: $userID parentID: $parentID){
       id
       parents {
