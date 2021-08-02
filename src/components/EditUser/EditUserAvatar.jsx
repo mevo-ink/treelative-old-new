@@ -14,7 +14,7 @@ import { useRecoilValue } from 'recoil'
 import { networkMethodsAtom, isEditModeAtom } from 'utils/atoms.js'
 
 import { useMutation } from 'urql'
-import { UPDATE_USER_AVATAR } from 'graphql/mutations/users'
+import { UPDATE_AVATAR } from 'graphql/mutations/users'
 
 import crown from 'images/adminCrown.png'
 
@@ -47,7 +47,7 @@ export default function EditUserAvatar ({ user }) {
 
   const [avatarURL, setAvatarURL] = useState(user.avatar)
 
-  const [, updateUserAvatar] = useMutation(UPDATE_USER_AVATAR)
+  const [, updateUserAvatar] = useMutation(UPDATE_AVATAR)
 
   const [isLoading, setIsLoading] = useState(false)
 

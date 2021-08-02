@@ -8,8 +8,8 @@ export const ADD_USER = gql`
   }
 `
 
-export const UPDATE_USER_AVATAR = gql`
-  mutation UPDATE_USER_AVATAR ($userID: String!) {
+export const UPDATE_AVATAR = gql`
+  mutation UPDATE_AVATAR ($userID: String!) {
     updateUserAvatar(userID: $userID)
   }
 `
