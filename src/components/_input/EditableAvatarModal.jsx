@@ -34,7 +34,7 @@ export default function EditableAvatarModal (props) {
     onClose,
     addRelation,
     addRelationResult,
-    LIST_USER_AVAILABLE_RELATIONS
+    LIST_AVAILABLE_RELATIONS
   } = props
 
   const [isAddNewOpen, setIsAddNewOpen] = useState('')
@@ -90,7 +90,7 @@ export default function EditableAvatarModal (props) {
                 <Stack direction='row' justifyContent='space-between' alignItems='center'>
                   <Stack flex='1'>
                     <UserSelection
-                      query={LIST_USER_AVAILABLE_RELATIONS}
+                      query={LIST_AVAILABLE_RELATIONS}
                       variables={{ userID: user.id }}
                       onChange={handleOnChange}
                       placeholder='Search User'
