@@ -1,7 +1,5 @@
 import { useRef } from 'react'
 
-import parseJwt from 'utils/parseJWT'
-
 import {
   Box,
   Stack,
@@ -17,7 +15,7 @@ import { FaGripLines } from 'react-icons/fa'
 
 import { useQuery } from 'urql'
 
-import { GET_AUTH_USER } from 'graphql/queries/users'
+import { WHO_AM_I } from 'graphql/queries/auth'
 
 import Search from 'components/Menu/Search'
 import FindMe from 'components/Menu/FindMe'
@@ -28,9 +26,7 @@ import Copyright from 'components/Menu/Copyright'
 import CreateUser from 'components/Menu/CreateUser'
 
 export default function Menu () {
-  const { id, role } = parseJwt(window.localStorage.getItem('AUTH_SESSION_ID'))
-
-  const [result] = useQuery({ query: GET_AUTH_USER, variables: { id: id }, pause: !id })
+  const [result] = useQuery({ query: WHO_AM_I })
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()
@@ -77,9 +73,9 @@ export default function Menu () {
             <Stack p='1.5em .5em' spacing='2rem'>
               <HStack justifyContent='space-between' alignItems='end'>
                 <Search onClose={onClose} />
-                {result.data?.getUser && role === 'ADMIN' && <CreateUser />}
-                {result.data?.getUser && <Profile onClose={onClose} authUser={result.data?.getUser} />}
-                {result.data?.getUser && <FindMe onClose={onClose} user={result.data?.getUser} size='sm' />}
+                {result.data?.whoAmI.isAdmin && <CreateUser />}
+                {result.data?.whoAmI && <Profile onClose={onClose} authUser={result.data?.whoAmI} />}
+                {result.data?.whoAmI && <FindMe onClose={onClose} user={result.data?.whoAmI} size='sm' />}
               </HStack>
               <Layouts onClose={onClose} />
               <Insights />
