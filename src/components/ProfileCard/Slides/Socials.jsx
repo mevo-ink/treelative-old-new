@@ -19,10 +19,10 @@ export default function Socials ({ user }) {
   const isEditMode = useRecoilValue(isEditModeAtom)
 
   const data = [
-    { username: user.social?.instagram, icon: instagram, name: 'Instagram', baseURL: 'https://instagram.com/' },
-    { username: user.social?.facebook, icon: facebook, name: 'Facebook', baseURL: 'https://www.facebook.com/' },
-    { username: user.social?.twitter, icon: twitter, name: 'Twitter', baseURL: 'https://twitter.com/' },
-    { username: user.social?.linkedIn, icon: linkedIn, name: 'LinkedIn', baseURL: 'https://www.linkedin.com/in/' }
+    { url: user.social?.instagram, icon: instagram, name: 'Instagram', baseURL: 'https://instagram.com/' },
+    { url: user.social?.facebook, icon: facebook, name: 'Facebook', baseURL: 'https://facebook.com/' },
+    { url: user.social?.twitter, icon: twitter, name: 'Twitter', baseURL: 'https://twitter.com/' },
+    { url: user.social?.linkedIn, icon: linkedIn, name: 'LinkedIn', baseURL: 'https://linkedin.com/in/' }
   ]
 
   return (
@@ -40,7 +40,7 @@ export default function Socials ({ user }) {
       {(user.phoneNumber || isEditMode) && <EditUserPhoneNumber user={user} icon={phone} />}
       <Grid w='55%' gridTemplateColumns='repeat(2, 1fr)' flexFlow='wrap'>
         {data.map((social, idx) => (
-          <EditUserSocial key={idx} social={social} />
+          <EditUserSocial key={idx} social={social} userID={user.id} />
         ))}
       </Grid>
       {(user.email || isEditMode) && <EditUserEmail user={user} icon={email} />}

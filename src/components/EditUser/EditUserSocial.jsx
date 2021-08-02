@@ -1,14 +1,14 @@
+import { useMutation } from 'urql'
+
+import { UPDATE_SOCIAL } from 'graphql/mutations/social'
+
 import EditableIconTrigger from 'components/_input/EditableIconTrigger'
 
-import { useMutation } from 'urql'
-import { UPDATE_SOCIAL_LINK_URL } from 'graphql/mutations/socialLinks'
-
-export default function EditUserSocial ({ social }) {
-  const [editSocialResult, editSocial] = useMutation(UPDATE_SOCIAL_LINK_URL)
+export default function EditUserSocial ({ social, userID }) {
+  const [editSocialResult, editSocial] = useMutation(UPDATE_SOCIAL)
 
   const handleEditSocial = url => {
-    // const url = data.filter(url => url.name === social.name)[0].baseURL + username
-    const variables = { socialLinkID: social.id, input: { url } }
+    const variables = { userID: userID, input: { [social.name.toLowerCase()]: url } }
     return editSocial(variables)
   }
 
@@ -17,11 +17,11 @@ export default function EditUserSocial ({ social }) {
       title={`Edit ${social.name} Username`}
       name={social.name}
       icon={social.icon}
-      value={social?.username}
+      value={social?.url && social.url.substring(social.url.lastIndexOf('/') + 1)}
       onSubmit={handleEditSocial}
       isLoading={editSocialResult.fetching}
       error={editSocialResult.error}
-      username={social.username}
+      url={social.url}
       prefix={social.baseURL}
     />
   )

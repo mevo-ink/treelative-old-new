@@ -16,7 +16,7 @@ export default function EditableIconTrigger (props) {
   const {
     icon,
     title,
-    username,
+    url,
     onSubmit,
     isLoading,
     ...inputProps
@@ -33,6 +33,7 @@ export default function EditableIconTrigger (props) {
   `
 
   const handleClick = (social) => {
+    console.log(social)
     if (isEditMode) onOpen()
     else window.open(social, '_blank').focus()
   }
@@ -44,21 +45,21 @@ export default function EditableIconTrigger (props) {
         {isEditMode && (
           <RemoveButton
             title={'Remove' + title.substring(4)}
-            onRemove={() => onSubmit('')}
+            onRemove={() => onSubmit()}
             isLoading={isLoading}
           />
         )}
         <Button
           p='0'
           h='3.2rem'
-          onClick={() => handleClick(username)}
-          isDisabled={!isEditMode && !username}
+          onClick={() => handleClick(url)}
+          isDisabled={!isEditMode && !url}
         >
           <Image
             src={icon}
             w='40px'
             objectFit='contain'
-            filter={!username && 'grayscale(100%)'}
+            filter={!url && 'grayscale(100%)'}
           />
         </Button>
       </Grid>

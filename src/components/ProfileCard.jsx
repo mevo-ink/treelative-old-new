@@ -49,7 +49,6 @@ export default function ProfileCard () {
   const networkMethods = useRecoilValue(networkMethodsAtom)
 
   const [result, refetch] = useQuery({ query: GET_USER, variables: { id: activeNodeID }, requestPolicy: 'network-only' })
-  console.log(result)
   const user = result.data?.getUser
 
   const onClose = () => {
