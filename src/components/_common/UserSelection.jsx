@@ -24,7 +24,7 @@ export default function UserSelection (props) {
 
   const loadUsers = async search => {
     try {
-      const result = await client.query(query, { ...variables, query: search }).toPromise()
+      const result = await client.query(query, { ...variables, search }).toPromise()
       if (result.data) {
         return result?.data?.users.map(transformUsers).filter(filterUsers)
       } else {

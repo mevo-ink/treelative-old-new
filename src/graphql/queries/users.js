@@ -88,17 +88,17 @@ export const LIST_USER_AVAILABLE_PARTNERS = gql`
 `
 
 export const LIST_AVAILABLE_PARENTS = gql`
-  query LIST_AVAILABLE_PARENTS ($userID: String! $query: String!) {
-    users: suggestParents(userID: $userID, query: $query) {
+  query LIST_AVAILABLE_PARENTS ($userID: String! $search: String!) {
+    users: suggestParents(userID: $userID, query: $search) {
       id
       fullName
     }
   }
 `
 
-export const LIST_USER_AVAILABLE_CHILDREN = gql`
-  query LIST_USER_AVAILABLE_CHILDREN ($userID: String! $search: String!) {
-    users: getUserAvailableChildren (userID: $userID where: { fullName: { contains: $search mode: "insensitive" } } orderBy: { fullName: asc } take: 5) {
+export const LIST_AVAILABLE_CHILDREN = gql`
+  query LIST_AVAILABLE_CHILDREN ($userID: String! $search: String!) {
+    users: suggestChildren(userID: $userID, query: $search) {
       id
       fullName
     }

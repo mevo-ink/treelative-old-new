@@ -1,11 +1,11 @@
 import { useMutation } from 'urql'
-import { LIST_USER_AVAILABLE_CHILDREN } from 'graphql/queries/users'
-import { ADD_USER_CHILD, DELETE_USER_CHILD } from 'graphql/mutations/users'
+import { LIST_AVAILABLE_CHILDREN } from 'graphql/queries/users'
+import { ADD_CHILD, DELETE_USER_CHILD } from 'graphql/mutations/users'
 
 import EditableAvatarTrigger from 'components/_input/EditableAvatarTrigger'
 
 export default function EditUserChildren ({ user }) {
-  const [addChildResult, addChild] = useMutation(ADD_USER_CHILD)
+  const [addChildResult, addChild] = useMutation(ADD_CHILD)
   const [removeChildResult, removeChild] = useMutation(DELETE_USER_CHILD)
 
   const handleRemoveChild = (id) => {
@@ -27,7 +27,7 @@ export default function EditUserChildren ({ user }) {
       removeRelationResult={removeChildResult}
       addRelation={handleAddChild}
       addRelationResult={addChildResult}
-      LIST_USER_AVAILABLE_RELATIONS={LIST_USER_AVAILABLE_CHILDREN}
+      LIST_AVAILABLE_RELATIONS={LIST_AVAILABLE_CHILDREN}
     />
   )
 }

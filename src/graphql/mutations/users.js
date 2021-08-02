@@ -117,8 +117,8 @@ export const REMOVE_PARENT = gql`
   }
 `
 
-export const ADD_USER_CHILD = gql`
-  mutation ADD_USER_CHILD ($userID: String! $childID: String!) {
+export const ADD_CHILD = gql`
+  mutation ADD_CHILD ($userID: String! $childID: String!) {
     addUserChild(userID: $userID childID: $childID){
       id
       children {
