@@ -1,13 +1,13 @@
 import React from 'react'
 
-import EditableInputTrigger from 'components/_input/EditableInputTrigger'
-
 import { string } from 'yup'
-
 import { useMutation } from 'urql'
+
 import { UPDATE_FULL_NAME } from 'graphql/mutations/users'
 
-export default function EditUserFullName ({ user }) {
+import InputTrigger from 'components/_trigger/InputTrigger'
+
+export default function FullName ({ user }) {
   const [editFullNameResult, editFullName] = useMutation(UPDATE_FULL_NAME)
 
   const handleEditFullName = fullName => {
@@ -16,7 +16,7 @@ export default function EditUserFullName ({ user }) {
   }
 
   return (
-    <EditableInputTrigger
+    <InputTrigger
       title='Edit Full Name'
       name='fullName'
       value={user?.fullName}

@@ -24,7 +24,7 @@ import { LOGIN, LOGIN_WITH_PROVIDER } from 'graphql/mutations/auth'
 
 import ErrorAlert from 'components/_common/ErrorAlert'
 import ErrorDialog from 'components/_common/ErrorDialog'
-import PasswordInput from 'components/_input/PasswordInput'
+import PasswordInput from 'components/_common/PasswordInput'
 import ForgotPassword from 'components/Login/ForgotPassword'
 import LoginWithProvider from 'components/Login/LoginWithProvider'
 import UnregisteredDialog from 'components/Login/UnregisteredDialog'

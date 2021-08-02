@@ -3,7 +3,7 @@ import {
   Text
 } from '@chakra-ui/react'
 
-import EditUserCurrentLocation from 'components/EditUser/EditUserCurrentLocation'
+import EditUserCurrentLocation from 'components/EditUser/CurrentLocation'
 
 import LocationRenderer from 'components/_common/LocationRenderer'
 

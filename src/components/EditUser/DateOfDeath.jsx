@@ -1,9 +1,10 @@
 import { useMutation } from 'urql'
+
 import { UPDATE_DATE_OF_DEATH } from 'graphql/mutations/users'
 
-import DateTimePickerTrigger from 'components/_input/DateTimePickerTrigger'
+import DateTrigger from 'components/_trigger/DateTrigger'
 
-export default function EditUserDateOfDeath ({ user }) {
+export default function DateOfDeath ({ user }) {
   const [editDateOfDeathResult, editDateOfDeath] = useMutation(UPDATE_DATE_OF_DEATH)
 
   const handleEditDateOfDeath = dateOfDeath => {
@@ -12,7 +13,7 @@ export default function EditUserDateOfDeath ({ user }) {
   }
 
   return (
-    <DateTimePickerTrigger
+    <DateTrigger
       title='Edit Date of Death'
       value={user.dateOfDeath}
       editDate={handleEditDateOfDeath}

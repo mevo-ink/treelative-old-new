@@ -4,7 +4,7 @@ import {
   Image
 } from '@chakra-ui/react'
 
-import EditUserDateOfDeath from 'components/EditUser/EditUserDateOfDeath'
+import EditUserDateOfDeath from 'components/EditUser/DateOfDeath'
 
 import tombstone from 'images/tombstone.svg'
 

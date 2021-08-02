@@ -3,9 +3,9 @@ import { useMutation } from 'urql'
 
 import { UPDATE_SHORT_NAME } from 'graphql/mutations/users'
 
-import EditableInputTrigger from 'components/_input/EditableInputTrigger'
+import InputTrigger from 'components/_trigger/InputTrigger'
 
-export default function EditUserShortName ({ user }) {
+export default function ShortName ({ user }) {
   const [editShortNameResult, editShortName] = useMutation(UPDATE_SHORT_NAME)
 
   const handleEditShortName = shortName => {
@@ -14,7 +14,7 @@ export default function EditUserShortName ({ user }) {
   }
 
   return (
-    <EditableInputTrigger
+    <InputTrigger
       title='Edit Short Name'
       name='shortName'
       value={user?.shortName}

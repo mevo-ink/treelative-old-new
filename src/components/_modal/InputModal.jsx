@@ -16,7 +16,7 @@ import FormDialog from 'components/_common/FormDialog'
 
 const toast = createStandaloneToast()
 
-export default function EditableInputModal (props) {
+export default function InputModal (props) {
   const {
     onClose,
     name,

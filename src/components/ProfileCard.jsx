@@ -31,10 +31,10 @@ import Current from 'components/ProfileCard/Slides/Current'
 import Partner from 'components/ProfileCard/Slides/Partner'
 import OuterWrapper from 'components/ProfileCard/OuterWrapper'
 import InnerWrapper from 'components/ProfileCard/InnerWrapper'
-import EditUserAvatar from 'components/EditUser/EditUserAvatar'
+import EditUserAvatar from 'components/EditUser/Avatar'
 import Notification from 'components/ProfileCard/Slides/Notification'
 import ParentChild from 'components/ProfileCard/Slides/ParentChild'
-import EditUserFullName from 'components/EditUser/EditUserFullName'
+import EditUserFullName from 'components/EditUser/FullName'
 
 import FindMe from 'components/Menu/FindMe'
 

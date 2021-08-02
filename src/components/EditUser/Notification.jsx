@@ -23,7 +23,7 @@ const NOTIFICATION_FIELDS = [
   'sms'
 ]
 
-export default function EditUserPrivacy ({ user }) {
+export default function Privacy ({ user }) {
   const [editPrivacyResult, editPrivacy] = useMutation(UPDATE_USER_SETTINGS)
 
   const [result] = useQuery({ query: GET_USER_SETTINGS, variables: { filter: { id: user.id } } })

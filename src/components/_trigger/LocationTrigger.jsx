@@ -10,10 +10,10 @@ import { useRecoilValue } from 'recoil'
 
 import { isEditModeAtom } from 'utils/atoms.js'
 
-import RemoveButton from 'components/_input/RemoveButton'
-import EditableLocationModal from 'components/_input/EditableLocationModal'
+import RemoveButton from 'components/_common/RemoveButton'
+import LocationModal from 'components/_modal/LocationModal'
 
-export default function EditableLocationTrigger (props) {
+export default function LocationTrigger (props) {
   const {
     title,
     value,
@@ -47,7 +47,7 @@ export default function EditableLocationTrigger (props) {
       animation={isEditMode && `${wiggle} infinite .15s linear`}
     >
       <Flex position='relative'>
-        {isOpen && <EditableLocationModal value={value?.suggested} onSubmit={onSubmit} onClose={onClose} {...inputProps} />}
+        {isOpen && <LocationModal value={value?.suggested} onSubmit={onSubmit} onClose={onClose} {...inputProps} />}
         {isEditMode && (
           <RemoveButton
             title={title}

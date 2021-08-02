@@ -20,7 +20,7 @@ import crown from 'images/adminCrown.png'
 
 const toast = createStandaloneToast()
 
-export default function EditUserAvatar ({ user }) {
+export default function Avatar ({ user }) {
   const networkMethods = useRecoilValue(networkMethodsAtom)
 
   const invalidateImageCache = (imageURL) => {

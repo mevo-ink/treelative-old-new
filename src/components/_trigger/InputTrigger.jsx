@@ -11,10 +11,10 @@ import { MdAdd } from 'react-icons/md'
 import { useRecoilValue } from 'recoil'
 import { isEditModeAtom } from 'utils/atoms.js'
 
-import EditableInputModal from 'components/_input/EditableInputModal'
-import RemoveButton from 'components/_input/RemoveButton'
+import InputModal from 'components/_modal/InputModal'
+import RemoveButton from 'components/_common/RemoveButton'
 
-export default function EditableInputTrigger (props) {
+export default function InputTrigger (props) {
   const isEditMode = useRecoilValue(isEditModeAtom)
 
   const wiggle = keyframes`
@@ -52,7 +52,7 @@ export default function EditableInputTrigger (props) {
 
   return (
     <>
-      {isOpen && <EditableInputModal onClose={onClose} title={title} name={name} value={value} onSubmit={onSubmit} isLoading={isLoading} {...inputProps} />}
+      {isOpen && <InputModal onClose={onClose} title={title} name={name} value={value} onSubmit={onSubmit} isLoading={isLoading} {...inputProps} />}
       <Flex
         w='60%'
         my={name === 'fullName' && '1rem'}

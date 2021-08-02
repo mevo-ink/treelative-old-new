@@ -1,11 +1,11 @@
-import EditableInputWithIconTrigger from 'components/_input/EditableInputWithIconTrigger'
-
 import { string } from 'yup'
-
 import { useMutation } from 'urql'
+
 import { UPDATE_EMAIL } from 'graphql/mutations/users'
 
-export default function EditUserEmail ({ user, icon }) {
+import InputWithIconTrigger from 'components/_trigger/InputWithIconTrigger'
+
+export default function Email ({ user, icon }) {
   const [editEmailResult, editEmail] = useMutation(UPDATE_EMAIL)
 
   const handleEditEmail = email => {
@@ -14,7 +14,7 @@ export default function EditUserEmail ({ user, icon }) {
   }
 
   return (
-    <EditableInputWithIconTrigger
+    <InputWithIconTrigger
       title='Edit Email'
       name='email'
       icon={icon}

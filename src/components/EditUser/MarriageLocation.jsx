@@ -2,9 +2,9 @@ import { useMutation } from 'urql'
 
 import { UPDATE_MARRIAGE_LOCATION } from 'graphql/mutations/users'
 
-import EditableLocationTrigger from 'components/_input/EditableLocationTrigger'
+import LocationTrigger from 'components/_trigger/LocationTrigger'
 
-export default function EditUserMarriageLocation ({ user }) {
+export default function MarriageLocation ({ user }) {
   const [editMarriageLocationResult, editMarriageLocation] = useMutation(UPDATE_MARRIAGE_LOCATION)
 
   const handleEditMarriageLocation = marriageLocation => {
@@ -13,7 +13,7 @@ export default function EditUserMarriageLocation ({ user }) {
   }
 
   return (
-    <EditableLocationTrigger
+    <LocationTrigger
       title='Edit Marriage Location'
       value={user?.marriageLocation}
       onSubmit={handleEditMarriageLocation}

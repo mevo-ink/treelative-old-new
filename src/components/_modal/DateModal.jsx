@@ -20,7 +20,7 @@ import DateTimeRenderer from 'components/_common/DateTimeRenderer'
 
 import 'react-datepicker/dist/react-datepicker.css'
 
-export default function DateTimePickerModal (props) {
+export default function DateModal (props) {
   const {
     value,
     title,

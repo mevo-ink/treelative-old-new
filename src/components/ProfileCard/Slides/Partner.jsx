@@ -7,9 +7,9 @@ import { useRecoilValue } from 'recoil'
 
 import { isEditModeAtom } from 'utils/atoms.js'
 
-import EditUserPartner from 'components/EditUser/EditUserPartner'
-import EditUserDateOfMarriage from 'components/EditUser/EditUserDateOfMarriage'
-import EditUserMarriageLocation from 'components/EditUser/EditUserMarriageLocation'
+import EditUserPartner from 'components/EditUser/Partner'
+import EditUserDateOfMarriage from 'components/EditUser/DateOfMarriage'
+import EditUserMarriageLocation from 'components/EditUser/MarriageLocation'
 
 export default function ParentChild ({ user }) {
   const isEditMode = useRecoilValue(isEditModeAtom)

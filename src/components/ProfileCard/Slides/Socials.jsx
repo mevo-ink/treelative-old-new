@@ -4,9 +4,9 @@ import { useRecoilValue } from 'recoil'
 
 import { isEditModeAtom } from 'utils/atoms.js'
 
-import EditUserEmail from 'components/EditUser/EditUserEmail'
-import EditUserSocial from 'components/EditUser/EditUserSocial'
-import EditUserPhoneNumber from 'components/EditUser/EditUserPhoneNumber'
+import EditUserEmail from 'components/EditUser/Email'
+import EditUserSocial from 'components/EditUser/Social'
+import EditUserPhoneNumber from 'components/EditUser/PhoneNumber'
 
 import email from 'images/email.svg'
 import phone from 'images/phone.svg'

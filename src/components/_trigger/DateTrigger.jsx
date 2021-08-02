@@ -12,8 +12,8 @@ import { useRecoilValue } from 'recoil'
 
 import { isEditModeAtom } from 'utils/atoms.js'
 
-import RemoveButton from 'components/_input/RemoveButton'
-import DateTimePickerModal from 'components/_input/DateTimePickerModal'
+import RemoveButton from 'components/_common/RemoveButton'
+import DateModal from 'components/_modal/DateModal'
 
 const toast = createStandaloneToast()
 
@@ -65,7 +65,7 @@ export default function DateTimePickerDialogTrigger (props) {
 
   return (
     <Flex w='90%' justifyContent='center' animation={`${wiggle} infinite .15s linear`}>
-      {isOpen && <DateTimePickerModal title={title} value={value} onClose={onClose} onSubmit={handleEditDate} isLoading={editDateResult?.fetching} />}
+      {isOpen && <DateModal title={title} value={value} onClose={onClose} onSubmit={handleEditDate} isLoading={editDateResult?.fetching} />}
       <Flex justifyContent='center' position='relative'>
         {isEditMode && <RemoveButton title='Remove Date' onRemove={handleEditDate} isLoading={editDateResult?.fetching} />}
         <Button onClick={onOpen} variant='editable-input'>

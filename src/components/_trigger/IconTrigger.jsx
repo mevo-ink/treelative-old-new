@@ -9,10 +9,10 @@ import {
 import { useRecoilValue } from 'recoil'
 import { isEditModeAtom } from 'utils/atoms.js'
 
-import EditableInputModal from 'components/_input/EditableInputModal'
-import RemoveButton from 'components/_input/RemoveButton'
+import InputModal from 'components/_modal/InputModal'
+import RemoveButton from 'components/_common/RemoveButton'
 
-export default function EditableIconTrigger (props) {
+export default function IconTrigger (props) {
   const {
     icon,
     title,
@@ -39,7 +39,7 @@ export default function EditableIconTrigger (props) {
 
   return (
     <>
-      {isOpen && <EditableInputModal title={title} onSubmit={onSubmit} isLoading={isLoading} onClose={onClose} {...inputProps} />}
+      {isOpen && <InputModal title={title} onSubmit={onSubmit} isLoading={isLoading} onClose={onClose} {...inputProps} />}
       <Grid m='.5rem' placeItems='center' animation={isEditMode && `${wiggle} infinite .15s linear`}>
         {isEditMode && (
           <RemoveButton

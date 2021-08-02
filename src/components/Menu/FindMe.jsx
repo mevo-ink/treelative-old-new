@@ -13,8 +13,8 @@ import {
   mapMethodsAtom
 } from 'utils/atoms.js'
 
-import EditUserDateOfBirth from 'components/EditUser/EditUserDateOfBirth'
-import EditUserCurrentLocation from 'components/EditUser/EditUserCurrentLocation'
+import EditUserDateOfBirth from 'components/EditUser/DateOfBirth'
+import EditUserCurrentLocation from 'components/EditUser/CurrentLocation'
 
 export default function FindMe ({ onClose, user, ...styles }) {
   const layout = useRecoilValue(layoutAtom)

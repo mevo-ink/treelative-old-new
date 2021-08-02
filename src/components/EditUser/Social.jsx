@@ -2,9 +2,9 @@ import { useMutation } from 'urql'
 
 import { UPDATE_SOCIAL } from 'graphql/mutations/social'
 
-import EditableIconTrigger from 'components/_input/EditableIconTrigger'
+import IconTrigger from 'components/_trigger/IconTrigger'
 
-export default function EditUserSocial ({ social, userID }) {
+export default function Social ({ social, userID }) {
   const [editSocialResult, editSocial] = useMutation(UPDATE_SOCIAL)
 
   const handleEditSocial = url => {
@@ -13,7 +13,7 @@ export default function EditUserSocial ({ social, userID }) {
   }
 
   return (
-    <EditableIconTrigger
+    <IconTrigger
       title={`Edit ${social.name} Username`}
       name={social.name}
       icon={social.icon}

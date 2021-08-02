@@ -3,8 +3,8 @@ import {
   Text
 } from '@chakra-ui/react'
 
-import EditUserShortName from 'components/EditUser/EditUserShortName'
-import EditUserNotification from 'components/EditUser/EditUserNotification'
+import EditUserShortName from 'components/EditUser/ShortName'
+import EditUserNotification from 'components/EditUser/Notification'
 
 export default function Notification ({ user }) {
   return (

@@ -27,7 +27,7 @@ import UserSelection from 'components/_common/UserSelection'
 
 const toast = createStandaloneToast()
 
-export default function EditableAvatarModal (props) {
+export default function RelationModal (props) {
   const {
     user,
     title,

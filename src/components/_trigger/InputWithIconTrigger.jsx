@@ -13,10 +13,10 @@ import { isEditModeAtom } from 'utils/atoms.js'
 
 import { MdAdd } from 'react-icons/md'
 
-import EditableInputModal from 'components/_input/EditableInputModal'
-import RemoveButton from 'components/_input/RemoveButton'
+import InputModal from 'components/_modal/InputModal'
+import RemoveButton from 'components/_common/RemoveButton'
 
-export default function EditableInputWithIconTrigger (props) {
+export default function InputWithIconTrigger (props) {
   const {
     icon,
     title,
@@ -41,7 +41,7 @@ export default function EditableInputWithIconTrigger (props) {
 
   return (
     <>
-      {isOpen && <EditableInputModal title={title} onSubmit={onSubmit} isLoading={isLoading} onClose={onClose} {...inputProps} />}
+      {isOpen && <InputModal title={title} onSubmit={onSubmit} isLoading={isLoading} onClose={onClose} {...inputProps} />}
       <Flex w='100%' justifyContent='center' animation={isEditMode && `${wiggle} infinite .15s linear`}>
         <Flex w='auto' maxW='90%' p='.3rem' justify='center' position='relative'>
           <Image

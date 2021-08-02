@@ -3,8 +3,8 @@ import {
   Text
 } from '@chakra-ui/react'
 
-import EditUserDateOfBirth from 'components/EditUser/EditUserDateOfBirth'
-import EditUserBirthLocation from 'components/EditUser/EditUserBirthLocation'
+import EditUserDateOfBirth from 'components/EditUser/DateOfBirth'
+import EditUserBirthLocation from 'components/EditUser/BirthLocation'
 
 import LocationRenderer from 'components/_common/LocationRenderer'
 

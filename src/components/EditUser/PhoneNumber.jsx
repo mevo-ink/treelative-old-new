@@ -1,11 +1,11 @@
-import EditableInputWithIconTrigger from 'components/_input/EditableInputWithIconTrigger'
-
 import { string } from 'yup'
-
 import { useMutation } from 'urql'
+
 import { UPDATE_PHONE_NUMBER } from 'graphql/mutations/users'
 
-export default function EditUserPhoneNumber ({ user, icon }) {
+import InputWithIconTrigger from 'components/_trigger/InputWithIconTrigger'
+
+export default function PhoneNumber ({ user, icon }) {
   const [editPhoneNumberResult, editPhoneNumber] = useMutation(UPDATE_PHONE_NUMBER)
 
   const handleEditPhoneNumber = phoneNumber => {
@@ -14,7 +14,7 @@ export default function EditUserPhoneNumber ({ user, icon }) {
   }
 
   return (
-    <EditableInputWithIconTrigger
+    <InputWithIconTrigger
       title='Edit Phone Number'
       name='phoneNumber'
       icon={icon}

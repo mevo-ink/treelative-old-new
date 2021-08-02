@@ -15,12 +15,12 @@ import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { isEditModeAtom, activeNodeIDAtom, layoutAtom, networkMethodsAtom } from 'utils/atoms.js'
 
-import RemoveButton from 'components/_input/RemoveButton'
-import EditableAvatarModal from 'components/_input/EditableAvatarModal'
+import RemoveButton from 'components/_common/RemoveButton'
+import RelationModal from 'components/_modal/RelationModal'
 
 const toast = createStandaloneToast()
 
-export default function EditableAvatarTrigger (props) {
+export default function AvatarTrigger (props) {
   const {
     user,
     title,
@@ -68,7 +68,7 @@ export default function EditableAvatarTrigger (props) {
 
   return (
     <>
-      {isOpen && <EditableAvatarModal user={user} onClose={onClose} relations={relations} title={title} {...inputProps} />}
+      {isOpen && <RelationModal user={user} onClose={onClose} relations={relations} title={title} {...inputProps} />}
       <Flex w='85%' flexWrap='wrap' justifyContent='center'>
         {relations.map(user => user && (
           <Box key={user.id} animation={isEditMode && `${wiggle} infinite .15s linear`}>

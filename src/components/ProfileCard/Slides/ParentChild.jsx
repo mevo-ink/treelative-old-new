@@ -7,8 +7,8 @@ import { useRecoilValue } from 'recoil'
 
 import { isEditModeAtom } from 'utils/atoms.js'
 
-import EditUserParents from 'components/EditUser/EditUserParents'
-import EditUserChildren from 'components/EditUser/EditUserChildren'
+import EditUserParents from 'components/EditUser/Parents'
+import EditUserChildren from 'components/EditUser/Children'
 
 export default function ParentChild ({ user }) {
   const isEditMode = useRecoilValue(isEditModeAtom)

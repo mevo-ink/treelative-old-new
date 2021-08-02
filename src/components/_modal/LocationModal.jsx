@@ -13,7 +13,7 @@ import LocationSelection from 'components/_common/LocationSelection'
 
 const toast = createStandaloneToast()
 
-export default function EditableLocationModal (props) {
+export default function LocationModal (props) {
   const {
     title,
     value,

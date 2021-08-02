@@ -1,10 +1,11 @@
 import { useMutation } from 'urql'
+
 import { LIST_AVAILABLE_PARTNERS } from 'graphql/queries/users'
 import { ADD_PARTNER, REMOVE_PARTNER } from 'graphql/mutations/users'
 
-import EditableAvatarTrigger from 'components/_input/EditableAvatarTrigger'
+import AvatarTrigger from 'components/_trigger/AvatarTrigger'
 
-export default function EditUserPartner ({ user }) {
+export default function Partner ({ user }) {
   const [addPartnerResult, addPartner] = useMutation(ADD_PARTNER)
   const [removePartnerResult, removePartner] = useMutation(REMOVE_PARTNER)
 
@@ -19,7 +20,7 @@ export default function EditUserPartner ({ user }) {
   }
 
   return (
-    <EditableAvatarTrigger
+    <AvatarTrigger
       title='Add Partner'
       user={user}
       limit={2}
