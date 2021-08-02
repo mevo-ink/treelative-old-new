@@ -106,9 +106,9 @@ export const ADD_PARENT = gql`
   }
 `
 
-export const DELETE_USER_PARENT = gql`
-  mutation DELETE_USER_PARENT ($userID: String! $parentID: String!) {
-    deleteUserParent(userID: $userID parentID: $parentID){
+export const REMOVE_PARENT = gql`
+  mutation REMOVE_PARENT ($userID: String! $parentID: String!) {
+    removeUserParent(userID: $userID parentID: $parentID){
       id
       parents {
         id

@@ -1,12 +1,12 @@
 import { useMutation } from 'urql'
 import { LIST_AVAILABLE_PARENTS } from 'graphql/queries/users'
-import { ADD_PARENT, DELETE_USER_PARENT } from 'graphql/mutations/users'
+import { ADD_PARENT, REMOVE_PARENT } from 'graphql/mutations/users'
 
 import EditableAvatarTrigger from 'components/_input/EditableAvatarTrigger'
 
 export default function EditUserParents ({ user }) {
   const [addParentResult, addParent] = useMutation(ADD_PARENT)
-  const [removeParentResult, removeParent] = useMutation(DELETE_USER_PARENT)
+  const [removeParentResult, removeParent] = useMutation(REMOVE_PARENT)
 
   const handleRemoveParent = (id) => {
     const variables = { userID: user.id, parentID: id }
