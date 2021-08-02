@@ -86,9 +86,9 @@ export const UPDATE_BIRTH_LOCATION = gql`
   }
 `
 
-export const UPDATE_USER_CURRENT_LOCATION = gql`
-  mutation UPDATE_USER_CURRENT_LOCATION ($userID: String! $input: UpdateUserInput!) {
-    updateUser(userID: $userID input: $input) {
+export const UPDATE_CURRENT_LOCATION = gql`
+  mutation UPDATE_CURRENT_LOCATION ($userID: String! $input: UpdateUserGeneralInput!) {
+    updateUserGeneral(userID: $userID input: $input) {
       id
       currentLocation
     }
