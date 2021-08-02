@@ -5,7 +5,6 @@ import {
 } from '@chakra-ui/react'
 
 import EditUserDateOfDeath from 'components/EditUser/EditUserDateOfDeath'
-import EditUserDeathLocation from 'components/EditUser/EditUserDeathLocation'
 
 import tombstone from 'images/tombstone.svg'
 
@@ -34,10 +33,6 @@ export default function Death ({ user }) {
         mt='1rem'
         cursor='pointer'
       />
-      <Text variant='info-title' mt='1rem'>
-        Death Location
-      </Text>
-      <EditUserDeathLocation user={user} />
     </Flex>
   )
 }
