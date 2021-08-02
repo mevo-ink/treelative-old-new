@@ -3,10 +3,10 @@ import EditableInputWithIconTrigger from 'components/_input/EditableInputWithIco
 import { string } from 'yup'
 
 import { useMutation } from 'urql'
-import { UPDATE_USER_EMAIL } from 'graphql/mutations/users'
+import { UPDATE_EMAIL } from 'graphql/mutations/users'
 
 export default function EditUserEmail ({ user, icon }) {
-  const [editEmailResult, editEmail] = useMutation(UPDATE_USER_EMAIL)
+  const [editEmailResult, editEmail] = useMutation(UPDATE_EMAIL)
 
   const handleEditEmail = email => {
     const variables = { userID: user.id, input: { email } }

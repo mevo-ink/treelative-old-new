@@ -41,9 +41,9 @@ export const UPDATE_FULL_NAME = gql`
   }
 `
 
-export const UPDATE_USER_EMAIL = gql`
-  mutation UPDATE_USER_EMAIL ($userID: String! $input: UpdateUserInput!) {
-    updateUser(userID: $userID input: $input) {
+export const UPDATE_EMAIL = gql`
+  mutation UPDATE_EMAIL ($userID: String! $input: UpdateUserGeneralInput!) {
+    updateUserGeneral(userID: $userID input: $input) {
       id
       email
     }
