@@ -1,8 +1,8 @@
 import { gql } from 'urql'
 
-export const ADD_USER = gql`
-  mutation ADD_USER ($input: AddUserInput!) {
-    addUser(input: $input) {
+export const CREATE_USER = gql`
+  mutation CREATE_USER ($input: CreateUserInput!) {
+    createUser(input: $input) {
       id
     }
   }

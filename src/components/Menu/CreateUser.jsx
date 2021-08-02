@@ -17,7 +17,7 @@ import { object, string } from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { ADD_USER } from 'graphql/mutations/users'
+import { CREATE_USER } from 'graphql/mutations/users'
 
 import useDevice from 'hooks/useDevice'
 import FormDialog from 'components/_common/FormDialog'
@@ -42,7 +42,7 @@ export default function CreateUser ({ initialValue = '', onClose: onParentClose 
 
   const [internalError, setInternalError] = useState()
 
-  const [{ error, fetching }, createUser] = useMutation(ADD_USER)
+  const [{ error, fetching }, createUser] = useMutation(CREATE_USER)
 
   const { register, handleSubmit, formState: { errors }, reset: resetForm, setFocus } = useForm({
     defaultValues: { fullName: initialValue },
