@@ -150,6 +150,17 @@ export const ADD_PARTNER = gql`
   }
 `
 
+export const REMOVE_PARTNER = gql`
+  mutation REMOVE_PARTNER ($userID: String! $partnerID: String!) {
+    removeUserPartner(userID: $userID partnerID: $partnerID){
+      id
+      partner {
+        id
+      }
+    }
+  }
+`
+
 export const UPDATE_DATE_OF_MARRIAGE = gql`
   mutation UPDATE_DATE_OF_MARRIAGE ($userID: String! $input: UpdateUserGeneralInput!) {
     updateUserGeneral(userID: $userID input: $input) {

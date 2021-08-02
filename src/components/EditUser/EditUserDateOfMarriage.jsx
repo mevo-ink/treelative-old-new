@@ -7,7 +7,7 @@ export default function EditUserDateOfMarriage ({ user }) {
   const [editDateOfMarriageResult, editDateOfMarriage] = useMutation(UPDATE_DATE_OF_MARRIAGE)
 
   const handleEditDateOfMarriage = dateOfMarriage => {
-    const variables = { coupleID: user.couple.id, input: { dateOfMarriage } }
+    const variables = { userID: user.id, input: { dateOfMarriage } }
     return editDateOfMarriage(variables)
   }
 

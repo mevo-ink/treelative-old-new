@@ -103,7 +103,7 @@ export default function ProfileCard () {
                   <Death user={user} isHidden={(!user.dateOfDeath && !isEditMode)} />
                   <Birth user={user} />
                   <Current user={user} />
-                  <Partner user={user} isHidden={(!user.couple && !isEditMode)} />
+                  <Partner user={user} isHidden={(!user.partner && !isEditMode)} />
                   <ParentChild user={user} isHidden={(user.parents.length === 0 && user.children.length === 0 && !isEditMode)} />
                   <Socials user={user} />
                   <Notification user={user} isHidden={!isEditMode} />

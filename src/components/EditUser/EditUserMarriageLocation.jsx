@@ -7,8 +7,10 @@ import EditableLocationTrigger from 'components/_input/EditableLocationTrigger'
 export default function EditUserMarriageLocation ({ user }) {
   const [editMarriageLocationResult, editMarriageLocation] = useMutation(UPDATE_MARRIAGE_LOCATION)
 
+  console.log(editMarriageLocationResult)
+
   const handleEditMarriageLocation = marriageLocation => {
-    const variables = { coupleID: user.couple.id, input: { marriageLocation } }
+    const variables = { userID: user.id, input: { marriageLocation } }
     return editMarriageLocation(variables)
   }
 
