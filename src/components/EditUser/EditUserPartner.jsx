@@ -1,11 +1,12 @@
 import { useMutation } from 'urql'
-import { LIST_USER_AVAILABLE_PARTNERS } from 'graphql/queries/users'
-import { ADD_USER_PARTNER, DELETE_USER_PARTNER } from 'graphql/mutations/couples'
+import { LIST_AVAILABLE_PARTNERS } from 'graphql/queries/users'
+import { ADD_PARTNER } from 'graphql/mutations/users'
+import { DELETE_USER_PARTNER } from 'graphql/mutations/couples'
 
 import EditableAvatarTrigger from 'components/_input/EditableAvatarTrigger'
 
 export default function EditUserPartner ({ user }) {
-  const [addPartnerResult, addPartner] = useMutation(ADD_USER_PARTNER)
+  const [addPartnerResult, addPartner] = useMutation(ADD_PARTNER)
   const [removePartnerResult, removePartner] = useMutation(DELETE_USER_PARTNER)
 
   const handleRemovePartner = () => {
@@ -14,7 +15,7 @@ export default function EditUserPartner ({ user }) {
   }
 
   const handleAddPartner = (id) => {
-    const variables = { input: { userOneID: user.id, userTwoID: id } }
+    const variables = { userID: user.id, partnerID: id }
     return addPartner(variables)
   }
 
@@ -28,7 +29,7 @@ export default function EditUserPartner ({ user }) {
       removeRelationResult={removePartnerResult}
       addRelation={handleAddPartner}
       addRelationResult={addPartnerResult}
-      LIST_USER_AVAILABLE_RELATIONS={LIST_USER_AVAILABLE_PARTNERS}
+      LIST_AVAILABLE_RELATIONS={LIST_AVAILABLE_PARTNERS}
     />
   )
 }

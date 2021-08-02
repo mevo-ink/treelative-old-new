@@ -78,9 +78,9 @@ export const LIST_USERS = gql`
   }
 `
 
-export const LIST_USER_AVAILABLE_PARTNERS = gql`
-  query LIST_USER_AVAILABLE_PARTNERS ($userID: String! $search: String!) {
-    users: getUserAvailablePartners (userID: $userID where: { fullName: { contains: $search mode: "insensitive" } } orderBy: { fullName: asc } take: 5) {
+export const LIST_AVAILABLE_PARTNERS = gql`
+  query LIST_AVAILABLE_PARTNERS ($userID: String! $search: String!) {
+    users: suggestPartners(userID: $userID, query: $search) {
       id
       fullName
     }
