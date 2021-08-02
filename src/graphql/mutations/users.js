@@ -50,9 +50,9 @@ export const UPDATE_EMAIL = gql`
   }
 `
 
-export const UPDATE_USER_PHONE_NUMBER = gql`
-  mutation UPDATE_USER_PHONE_NUMBER ($userID: String! $input: UpdateUserInput!) {
-    updateUser(userID: $userID input: $input) {
+export const UPDATE_PHONE_NUMBER = gql`
+  mutation UPDATE_PHONE_NUMBER ($userID: String! $input: UpdateUserGeneralInput!) {
+    updateUserGeneral(userID: $userID input: $input) {
       id
       phoneNumber
     }
