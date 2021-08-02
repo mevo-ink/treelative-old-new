@@ -1,10 +1,10 @@
 import { useMutation } from 'urql'
-import { UPDATE_USER_DATE_OF_BIRTH } from 'graphql/mutations/users'
+import { UPDATE_DATE_OF_BIRTH } from 'graphql/mutations/users'
 
 import DateTimePickerTrigger from 'components/_input/DateTimePickerTrigger'
 
 export default function EditUserDateOfBirth ({ user }) {
-  const [editDateOfBirthResult, editDateOfBirth] = useMutation(UPDATE_USER_DATE_OF_BIRTH)
+  const [editDateOfBirthResult, editDateOfBirth] = useMutation(UPDATE_DATE_OF_BIRTH)
 
   const handleEditDateOfBirth = dateOfBirth => {
     const variables = { userID: user.id, input: { dateOfBirth } }

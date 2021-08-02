@@ -59,9 +59,9 @@ export const UPDATE_USER_PHONE_NUMBER = gql`
   }
 `
 
-export const UPDATE_USER_DATE_OF_BIRTH = gql`
-  mutation UPDATE_USER_DATE_OF_BIRTH ($userID: String! $input: UpdateUserInput!) {
-    updateUser(userID: $userID input: $input) {
+export const UPDATE_DATE_OF_BIRTH = gql`
+  mutation UPDATE_DATE_OF_BIRTH ($userID: String! $input: UpdateUserGeneralInput!) {
+    updateUserGeneral(userID: $userID input: $input) {
       id
       dateOfBirth
     }

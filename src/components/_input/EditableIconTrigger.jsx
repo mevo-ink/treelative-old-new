@@ -45,7 +45,7 @@ export default function EditableIconTrigger (props) {
         {isEditMode && (
           <RemoveButton
             title={'Remove' + title.substring(4)}
-            onRemove={() => onSubmit()}
+            onRemove={onSubmit}
             isLoading={isLoading}
           />
         )}
