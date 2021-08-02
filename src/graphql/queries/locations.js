@@ -1,7 +1,7 @@
 import { gql } from 'urql'
 
-export const LIST_LOCATION_SUGGESTIONS = gql`
-  query LIST_LOCATION_SUGGESTIONS ($search: String) {
-    locations: getLocationSuggestions (search: $search)
+export const LIST_SUGGEST_LOCATIONS = gql`
+  query LIST_SUGGEST_LOCATIONS ($search: String) {
+    locations: suggestLocations(query: $search)
   }
 `

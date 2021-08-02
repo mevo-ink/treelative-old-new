@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import AsyncSelect from 'components/_select/AsyncSelect'
 
 import { useClient } from 'urql'
-import { LIST_LOCATION_SUGGESTIONS } from 'graphql/queries/locations'
+import { LIST_SUGGEST_LOCATIONS } from 'graphql/queries/locations'
 
 import { Stack } from '@chakra-ui/react'
 import ErrorAlert from 'components/_common/ErrorAlert'
@@ -22,7 +22,7 @@ export default function LocationSelection (props) {
 
   const loadLocations = async search => {
     try {
-      const result = await client.query(LIST_LOCATION_SUGGESTIONS, { search }).toPromise()
+      const result = await client.query(LIST_SUGGEST_LOCATIONS, { search }).toPromise()
       if (result.data) {
         return result?.data?.locations.map(transformLocations)
       } else {
