@@ -67,7 +67,7 @@ export default function Login ({ onSuccess }) {
   }
 
   const onLoginWithPassword = (input) => {
-    login(input)
+    login({ input })
       .then(onLoginSuccess)
       .catch(setInternalError)
   }
