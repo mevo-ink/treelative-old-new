@@ -10,11 +10,11 @@ import {
 } from '@chakra-ui/react'
 import { HiCamera } from 'react-icons/hi'
 
-import { useRecoilValue } from 'recoil'
-import { networkMethodsAtom, isEditModeAtom } from 'utils/atoms.js'
-
 import { useMutation } from 'urql'
+import { useRecoilValue } from 'recoil'
+
 import { UPDATE_AVATAR } from 'graphql/mutations/users'
+import { networkMethodsAtom, isEditModeAtom } from 'utils/atoms.js'
 
 import crown from 'images/adminCrown.png'
 

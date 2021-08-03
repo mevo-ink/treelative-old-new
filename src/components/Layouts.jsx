@@ -1,11 +1,12 @@
 import { useEffect } from 'react'
 
 import { useRecoilValue, useSetRecoilState } from 'recoil'
+
 import { layoutAtom, activeNodeIDAtom } from 'utils/atoms.js'
 
-import Graph from 'components/Layouts/Graph'
 import Map from 'components/Layouts/Map'
 import Age from 'components/Layouts/Age'
+import Graph from 'components/Layouts/Graph'
 import Birthday from 'components/Layouts/Birthday'
 
 export default function Layouts () {

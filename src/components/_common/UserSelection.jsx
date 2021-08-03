@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 
-import AsyncCreatableSelect from 'components/_select/AsyncCreatableSelect'
-
 import { useClient } from 'urql'
 
 import { Stack } from '@chakra-ui/react'
+
 import ErrorAlert from 'components/_common/ErrorAlert'
+import AsyncCreatableSelect from 'components/_select/AsyncCreatableSelect'
 
 export default function UserSelection (props) {
   const client = useClient()

@@ -14,24 +14,6 @@ export const UPDATE_AVATAR = gql`
   }
 `
 
-export const UPDATE_USER_USERNAME = gql`
-  mutation UPDATE_USER_USERNAME ($userID: String! $input: UpdateUserInput!) {
-    updateUser(userID: $userID input: $input) {
-      id
-      username
-    }
-  }
-`
-
-export const UPDATE_SHORT_NAME = gql`
-  mutation UPDATE_SHORT_NAME ($userID: String! $input: UpdateUserGeneralInput!) {
-    updateUserGeneral(userID: $userID input: $input) {
-      id
-      shortName
-    }
-  }
-`
-
 export const UPDATE_FULL_NAME = gql`
   mutation UPDATE_FULL_NAME ($userID: String! $input: UpdateUserGeneralInput!) {
     updateUserGeneral(userID: $userID input: $input) {
@@ -41,38 +23,11 @@ export const UPDATE_FULL_NAME = gql`
   }
 `
 
-export const UPDATE_EMAIL = gql`
-  mutation UPDATE_EMAIL ($userID: String! $input: UpdateUserGeneralInput!) {
-    updateUserGeneral(userID: $userID input: $input) {
-      id
-      email
-    }
-  }
-`
-
-export const UPDATE_PHONE_NUMBER = gql`
-  mutation UPDATE_PHONE_NUMBER ($userID: String! $input: UpdateUserGeneralInput!) {
-    updateUserGeneral(userID: $userID input: $input) {
-      id
-      phoneNumber
-    }
-  }
-`
-
 export const UPDATE_DATE_OF_BIRTH = gql`
   mutation UPDATE_DATE_OF_BIRTH ($userID: String! $input: UpdateUserGeneralInput!) {
     updateUserGeneral(userID: $userID input: $input) {
       id
       dateOfBirth
-    }
-  }
-`
-
-export const UPDATE_DATE_OF_DEATH = gql`
-  mutation UPDATE_DATE_OF_DEATH ($userID: String! $input: UpdateUserGeneralInput!) {
-    updateUserGeneral(userID: $userID input: $input) {
-      id
-      dateOfDeath
     }
   }
 `
@@ -95,86 +50,29 @@ export const UPDATE_CURRENT_LOCATION = gql`
   }
 `
 
-export const ADD_PARENT = gql`
-  mutation ADD_PARENT ($userID: String! $parentID: String!) {
-    addUserParent(userID: $userID parentID: $parentID){
-      id
-      parents {
-        id
-      }
-    }
-  }
-`
-
-export const REMOVE_PARENT = gql`
-  mutation REMOVE_PARENT ($userID: String! $parentID: String!) {
-    removeUserParent(userID: $userID parentID: $parentID){
-      id
-      parents {
-        id
-      }
-    }
-  }
-`
-
-export const ADD_CHILD = gql`
-  mutation ADD_CHILD ($userID: String! $childID: String!) {
-    addUserChild(userID: $userID childID: $childID){
-      id
-      children {
-        id
-      }
-    }
-  }
-`
-
-export const REMOVE_CHILD = gql`
-  mutation REMOVE_CHILD ($userID: String! $childID: String!) {
-    removeUserChild(userID: $userID childID: $childID){
-      id
-      children {
-        id
-      }
-    }
-  }
-`
-
-export const ADD_PARTNER = gql`
-  mutation ADD_PARTNER ($userID: String! $partnerID: String!) {
-    addUserPartner(userID: $userID partnerID: $partnerID){
-      id
-      partner {
-        id
-      }
-    }
-  }
-`
-
-export const REMOVE_PARTNER = gql`
-  mutation REMOVE_PARTNER ($userID: String! $partnerID: String!) {
-    removeUserPartner(userID: $userID partnerID: $partnerID){
-      id
-      partner {
-        id
-      }
-    }
-  }
-`
-
-export const UPDATE_DATE_OF_MARRIAGE = gql`
-  mutation UPDATE_DATE_OF_MARRIAGE ($userID: String! $input: UpdateUserGeneralInput!) {
+export const UPDATE_DATE_OF_DEATH = gql`
+  mutation UPDATE_DATE_OF_DEATH ($userID: String! $input: UpdateUserGeneralInput!) {
     updateUserGeneral(userID: $userID input: $input) {
       id
-      dateOfMarriage
+      dateOfDeath
     }
   }
 `
 
-export const UPDATE_MARRIAGE_LOCATION = gql`
-  mutation UPDATE_MARRIAGE_LOCATION ($userID: String! $input: UpdateUserGeneralInput!) {
+export const UPDATE_SHORT_NAME = gql`
+  mutation UPDATE_SHORT_NAME ($userID: String! $input: UpdateUserGeneralInput!) {
     updateUserGeneral(userID: $userID input: $input) {
       id
-      marriageLocation
+      shortName
+    }
+  }
+`
+
+export const UPDATE_USER_USERNAME = gql`
+  mutation UPDATE_USER_USERNAME ($userID: String! $input: UpdateUserInput!) {
+    updateUser(userID: $userID input: $input) {
+      id
+      username
     }
   }
 `

@@ -13,6 +13,7 @@ import { BiWorld } from 'react-icons/bi'
 import { SiApollographql } from 'react-icons/si'
 
 import { useQuery } from 'urql'
+
 import { GET_MEMBERS, GET_COUPLES } from 'graphql/queries/insights'
 
 import InsightModal from 'components/InsightModal'

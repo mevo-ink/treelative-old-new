@@ -1,10 +1,6 @@
-import {
-  Flex,
-  Text
-} from '@chakra-ui/react'
+import { Flex, Text } from '@chakra-ui/react'
 
-import EditUserCurrentLocation from 'components/EditUser/CurrentLocation'
-
+import CurrentLocation from 'components/EditUser/CurrentLocation'
 import LocationRenderer from 'components/_common/LocationRenderer'
 
 export default function Current ({ user }) {
@@ -24,7 +20,7 @@ export default function Current ({ user }) {
       <Text variant='info-title'>
         Current Location
       </Text>
-      <EditUserCurrentLocation user={user} />
+      <CurrentLocation user={user} />
       <LocationRenderer location={user.currentLocation?.parsed} avatar={user.avatar} fullName={user.fullName} />
     </Flex>
   )

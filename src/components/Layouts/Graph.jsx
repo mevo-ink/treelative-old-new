@@ -1,21 +1,16 @@
 import { useState, useEffect, useRef } from 'react'
+
 import { Box } from '@chakra-ui/react'
 
+import { useQuery } from 'urql'
 import { useSetRecoilState } from 'recoil'
-import {
-  layoutMethodsAtom,
-  networkMethodsAtom,
-  activeNodeIDAtom
-} from 'utils/atoms.js'
-
 import { Network } from 'vis-network/standalone'
 
-import Loading from 'components/Loading'
-
-import { useQuery } from 'urql'
 import { GET_NETWORK_DATA } from 'graphql/queries/layouts'
+import { layoutMethodsAtom, networkMethodsAtom, activeNodeIDAtom } from 'utils/atoms.js'
 
 import parseJwt from 'utils/parseJWT'
+import Loading from 'components/Loading'
 
 export default function Graph () {
   const { id: authUserID } = parseJwt(window.localStorage.getItem('AUTH_SESSION_ID'))

@@ -6,12 +6,11 @@ import {
   keyframes,
   useDisclosure
 } from '@chakra-ui/react'
+import { MdAdd } from 'react-icons/md'
 
 import { useRecoilValue } from 'recoil'
 
 import { isEditModeAtom } from 'utils/atoms.js'
-
-import { MdAdd } from 'react-icons/md'
 
 import InputModal from 'components/_modal/InputModal'
 import RemoveButton from 'components/_common/RemoveButton'

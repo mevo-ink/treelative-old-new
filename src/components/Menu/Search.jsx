@@ -9,15 +9,15 @@ import {
 import { BsSearch } from 'react-icons/bs'
 import { IoMdClose } from 'react-icons/io'
 
-import { useQuery } from 'urql'
+// import { useQuery } from 'urql'
 
-import { SEARCH_USERS } from 'graphql/queries/users'
+// import { SEARCH_USERS } from 'graphql/queries/users'
 
-import SearchResult from 'components/Menu/SearchResult'
+// import SearchResult from 'components/Menu/SearchResult'
 
 export default function Search ({ onClose }) {
   const [searchInput, setSearchInput] = useState('')
-  const [result] = useQuery({ query: SEARCH_USERS, variables: { search: searchInput }, pause: !searchInput })
+  // const [result] = useQuery({ query: SEARCH_USERS, variables: { search: searchInput }, pause: !searchInput })
   return (
     <Box w='100%'>
       <InputGroup w='100%' h='2rem'>
@@ -41,7 +41,7 @@ export default function Search ({ onClose }) {
           onChange={(e) => setSearchInput(e.target.value)}
         />
       </InputGroup>
-      {result.data && searchInput && <SearchResult users={result.data?.users} onClose={onClose} isFetching={result.fetching} />}
+      {/* {result.data && searchInput && <SearchResult users={result.data?.users} onClose={onClose} isFetching={result.fetching} />} */}
     </Box>
   )
 }

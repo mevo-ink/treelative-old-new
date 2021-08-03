@@ -1,8 +1,4 @@
-import {
-  Box,
-  Icon,
-  keyframes
-} from '@chakra-ui/react'
+import { Box, Icon, keyframes } from '@chakra-ui/react'
 
 export default function Loading () {
   const dotOne = keyframes`

@@ -6,9 +6,8 @@ import {
   Button
 } from '@chakra-ui/react'
 
-import { useSetRecoilState } from 'recoil'
-
 import { format } from 'date-fns'
+import { useSetRecoilState } from 'recoil'
 
 import { activeNodeIDAtom } from 'utils/atoms.js'
 

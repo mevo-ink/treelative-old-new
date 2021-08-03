@@ -11,8 +11,8 @@ import {
 import { useQuery } from 'urql'
 import { useSetRecoilState, useRecoilState } from 'recoil'
 
-import { activeNodeIDAtom, layoutMethodsAtom, activeNodePulseIDAtom } from 'utils/atoms.js'
 import { GET_BIRTHDAY_DATA } from 'graphql/queries/layouts'
+import { activeNodeIDAtom, layoutMethodsAtom, activeNodePulseIDAtom } from 'utils/atoms.js'
 
 import Loading from 'components/Loading'
 import ActivePulse from 'components/Layouts/ActivePulse'

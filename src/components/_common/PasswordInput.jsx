@@ -8,11 +8,7 @@ import {
   useDisclosure,
   InputRightElement
 } from '@chakra-ui/react'
-
-import {
-  HiEye,
-  HiEyeOff
-} from 'react-icons/hi'
+import { HiEye, HiEyeOff } from 'react-icons/hi'
 
 export default forwardRef((props, ref) => {
   const { isOpen, onToggle } = useDisclosure()

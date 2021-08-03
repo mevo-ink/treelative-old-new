@@ -4,13 +4,12 @@ import {
   ModalOverlay,
   ModalContent
 } from '@chakra-ui/react'
-
 import { FiEdit } from 'react-icons/fi'
 import { MdDone, MdClose } from 'react-icons/md'
 
 import { useQuery } from 'urql'
-
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+
 import {
   layoutAtom,
   isEditModeAtom,
@@ -18,12 +17,14 @@ import {
   activeNodePulseIDAtom,
   networkMethodsAtom
 } from 'utils/atoms.js'
-
 import { GET_USER } from 'graphql/queries/users'
 
 import Login from 'components/Login'
 import Loading from 'components/Loading'
+import FindMe from 'components/Menu/FindMe'
+import Avatar from 'components/EditUser/Avatar'
 import Slider from 'components/ProfileCard/Slider'
+import FullName from 'components/EditUser/FullName'
 import Birth from 'components/ProfileCard/Slides/Birth'
 import Death from 'components/ProfileCard/Slides/Death'
 import Socials from 'components/ProfileCard/Slides/Socials'
@@ -31,12 +32,8 @@ import Current from 'components/ProfileCard/Slides/Current'
 import Partner from 'components/ProfileCard/Slides/Partner'
 import OuterWrapper from 'components/ProfileCard/OuterWrapper'
 import InnerWrapper from 'components/ProfileCard/InnerWrapper'
-import EditUserAvatar from 'components/EditUser/Avatar'
 import Notification from 'components/ProfileCard/Slides/Notification'
 import ParentChild from 'components/ProfileCard/Slides/ParentChild'
-import EditUserFullName from 'components/EditUser/FullName'
-
-import FindMe from 'components/Menu/FindMe'
 
 export default function ProfileCard () {
   const [isEditMode, setIsEditMode] = useRecoilState(isEditModeAtom)
@@ -97,8 +94,8 @@ export default function ProfileCard () {
               <>
                 <IconButton icon={isEditMode ? <MdDone /> : <FiEdit />} {...innerBtnStyles} left='.3rem' onClick={() => setIsEditMode(!isEditMode)} />
                 <FindMe onClose={onClose} user={result.data?.getUser} {...innerBtnStyles} right='.3rem' />
-                <EditUserAvatar user={user} />
-                <EditUserFullName user={user} />
+                <Avatar user={user} />
+                <FullName user={user} />
                 <Slider>
                   <Death user={user} isHidden={(!user.dateOfDeath && !isEditMode)} />
                   <Birth user={user} />

@@ -1,11 +1,12 @@
 import { Text, Box, Image, Button } from '@chakra-ui/react'
 
 import { useRecoilState } from 'recoil'
+
 import { layoutAtom } from 'utils/atoms.js'
 
-import network from 'images/graphView.png'
 import map from 'images/mapView.png'
 import age from 'images/ageView.png'
+import network from 'images/graphView.png'
 import birthday from 'images/birthdayView.png'
 
 export default function Layouts ({ onClose }) {

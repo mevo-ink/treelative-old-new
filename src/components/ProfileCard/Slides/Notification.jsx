@@ -1,10 +1,7 @@
-import {
-  Flex,
-  Text
-} from '@chakra-ui/react'
+import { Flex, Text } from '@chakra-ui/react'
 
-import EditUserShortName from 'components/EditUser/ShortName'
-import EditUserNotification from 'components/EditUser/Notification'
+import ShortName from 'components/EditUser/ShortName'
+// import Notification from 'components/EditUser/Notification'
 
 export default function Notification ({ user }) {
   return (
@@ -21,9 +18,9 @@ export default function Notification ({ user }) {
       p='1.5rem 0'
     >
       <Text variant='info-title'> Short Name </Text>
-      <EditUserShortName user={user} />
+      <ShortName user={user} />
       <Text variant='info-title' mt='1rem'> Notification </Text>
-      <EditUserNotification user={user} />
+      {/* <Notification user={user} /> */}
     </Flex>
   )
 }

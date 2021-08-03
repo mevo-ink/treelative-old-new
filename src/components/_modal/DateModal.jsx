@@ -16,7 +16,7 @@ import ReactDatePicker from 'react-datepicker'
 
 import Loading from 'components/_common/Loading'
 import CustomSelect from 'components/_select/CustomSelect'
-import DateTimeRenderer from 'components/_common/DateTimeRenderer'
+import DateRenderer from 'components/_common/DateRenderer'
 
 import 'react-datepicker/dist/react-datepicker.css'
 
@@ -73,7 +73,7 @@ export default function DateModal (props) {
               dropdownMode='select'
               renderCustomHeader={CustomHeader}
             />
-            {value && <DateTimeRenderer value={value} />}
+            {value && <DateRenderer value={value} />}
             {isLoading && <Loading />}
           </Stack>
         </ModalBody>

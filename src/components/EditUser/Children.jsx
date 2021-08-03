@@ -1,7 +1,7 @@
 import { useMutation } from 'urql'
 
-import { LIST_AVAILABLE_CHILDREN } from 'graphql/queries/users'
-import { ADD_CHILD, REMOVE_CHILD } from 'graphql/mutations/users'
+import { ADD_CHILD, REMOVE_CHILD } from 'graphql/mutations/child'
+import { LIST_AVAILABLE_CHILDREN } from 'graphql/queries/listAvailable'
 
 import AvatarTrigger from 'components/_trigger/AvatarTrigger'
 

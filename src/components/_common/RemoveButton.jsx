@@ -1,7 +1,6 @@
 import { useState } from 'react'
 
 import { IconButton } from '@chakra-ui/react'
-
 import { IoClose } from 'react-icons/io5'
 
 import ConfirmationModal from 'components/_common/ConfirmationModal'

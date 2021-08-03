@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react'
 
-import { useRecoilValue } from 'recoil'
-import { isEditModeAtom } from 'utils/atoms.js'
-
-import {
-  Box,
-  Flex
-} from '@chakra-ui/react'
-
+import { Box, Flex } from '@chakra-ui/react'
 import { motion, AnimatePresence } from 'framer-motion'
+
+import { useRecoilValue } from 'recoil'
+
+import { isEditModeAtom } from 'utils/atoms.js'
 
 const MotionBox = motion(Box)
 

@@ -13,10 +13,9 @@ import {
 
 import GoogleMapReact from 'google-map-react'
 
+import parseJwt from 'utils/parseJWT'
 import Loading from 'components/Loading'
 import ActivePulse from 'components/Layouts/ActivePulse'
-
-import parseJwt from 'utils/parseJWT'
 
 // https://developers.google.com/maps/documentation/javascript/examples/style-array
 const styles = [

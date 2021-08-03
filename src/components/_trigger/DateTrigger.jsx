@@ -12,8 +12,8 @@ import { useRecoilValue } from 'recoil'
 
 import { isEditModeAtom } from 'utils/atoms.js'
 
-import RemoveButton from 'components/_common/RemoveButton'
 import DateModal from 'components/_modal/DateModal'
+import RemoveButton from 'components/_common/RemoveButton'
 
 const toast = createStandaloneToast()
 

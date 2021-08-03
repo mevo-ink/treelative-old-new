@@ -1,7 +1,7 @@
 import { useMutation } from 'urql'
 
-import { LIST_AVAILABLE_PARTNERS } from 'graphql/queries/users'
-import { ADD_PARTNER, REMOVE_PARTNER } from 'graphql/mutations/users'
+import { LIST_AVAILABLE_PARTNERS } from 'graphql/queries/listAvailable'
+import { ADD_PARTNER, REMOVE_PARTNER } from 'graphql/mutations/partner'
 
 import AvatarTrigger from 'components/_trigger/AvatarTrigger'
 

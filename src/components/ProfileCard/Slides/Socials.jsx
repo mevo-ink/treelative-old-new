@@ -4,9 +4,9 @@ import { useRecoilValue } from 'recoil'
 
 import { isEditModeAtom } from 'utils/atoms.js'
 
-import EditUserEmail from 'components/EditUser/Email'
-import EditUserSocial from 'components/EditUser/Social'
-import EditUserPhoneNumber from 'components/EditUser/PhoneNumber'
+import Email from 'components/EditUser/Email'
+import Social from 'components/EditUser/Social'
+import PhoneNumber from 'components/EditUser/PhoneNumber'
 
 import email from 'images/email.svg'
 import phone from 'images/phone.svg'
@@ -37,13 +37,13 @@ export default function Socials ({ user }) {
       borderRadius='20px'
       p='1.5rem 0'
     >
-      {(user.phoneNumber || isEditMode) && <EditUserPhoneNumber user={user} icon={phone} />}
+      {(user.phoneNumber || isEditMode) && <PhoneNumber user={user} icon={phone} />}
       <Grid w='55%' gridTemplateColumns='repeat(2, 1fr)' flexFlow='wrap'>
         {data.map((social, idx) => (
-          <EditUserSocial key={idx} social={social} userID={user.id} />
+          <Social key={idx} social={social} userID={user.id} />
         ))}
       </Grid>
-      {(user.email || isEditMode) && <EditUserEmail user={user} icon={email} />}
+      {(user.email || isEditMode) && <Email user={user} icon={email} />}
     </Stack>
   )
 }

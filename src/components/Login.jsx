@@ -11,15 +11,12 @@ import {
 } from '@chakra-ui/react'
 import { FaGoogle, FaFacebook, FaTwitter } from 'react-icons/fa'
 
-import { useForm } from 'react-hook-form'
-
+import { useMutation } from 'urql'
 import { object, string } from 'yup'
+import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { google, twitter, facebook } from 'utils/firebase'
-
-import { useMutation } from 'urql'
-
 import { LOGIN, LOGIN_WITH_PROVIDER } from 'graphql/mutations/auth'
 
 import ErrorAlert from 'components/_common/ErrorAlert'

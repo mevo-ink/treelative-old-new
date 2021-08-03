@@ -1,10 +1,6 @@
-import {
-  Flex,
-  Text,
-  Image
-} from '@chakra-ui/react'
+import { Flex, Text, Image } from '@chakra-ui/react'
 
-import EditUserDateOfDeath from 'components/EditUser/DateOfDeath'
+import DateOfDeath from 'components/EditUser/DateOfDeath'
 
 import tombstone from 'images/tombstone.svg'
 
@@ -24,7 +20,7 @@ export default function Death ({ user }) {
       <Text variant='info-title'>
         Date Of Death
       </Text>
-      <EditUserDateOfDeath user={user} />
+      <DateOfDeath user={user} />
       <Image
         src={tombstone}
         alt='tombstone'
