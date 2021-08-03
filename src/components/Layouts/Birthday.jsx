@@ -15,7 +15,7 @@ import { GET_BIRTHDAY_DATA } from 'graphql/queries/layouts'
 import { activeNodeIDAtom, layoutMethodsAtom, activeNodePulseIDAtom } from 'utils/atoms.js'
 
 import Loading from 'components/Loading'
-import ActivePulse from 'components/Layouts/ActivePulse'
+import ActivePulse from 'components/_common/ActivePulse'
 
 export default function Birthday () {
   const setLayoutMethods = useSetRecoilState(layoutMethodsAtom)
