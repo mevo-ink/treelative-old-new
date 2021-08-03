@@ -7,7 +7,11 @@ import { cacheExchange } from '@urql/exchange-graphcache'
 
 import { devtoolsExchange } from '@urql/devtools'
 
-const cache = cacheExchange()
+const cache = cacheExchange({
+  keys: {
+    Social: () => null
+  }
+})
 
 export default createClient({
   url: process.env.REACT_APP_GRAPHQL_URL,

@@ -31,6 +31,9 @@ export default function App () {
 }
 // TODO:
 /*
+  Do not show remove button if value is empty
+  Do not allow to clear full name
+  Double check all modal titles
   BUG:
     - Profile card update - post action - check if in network mode
   Double check all titles of confirmation delete modal

@@ -12,7 +12,7 @@ import email from 'images/email.svg'
 import phone from 'images/phone.svg'
 import twitter from 'images/twitter.svg'
 import facebook from 'images/facebook.svg'
-import linkedIn from 'images/linkedIn.svg'
+import linkedin from 'images/linkedin.svg'
 import instagram from 'images/instagram.svg'
 
 export default function Socials ({ user }) {
@@ -22,7 +22,7 @@ export default function Socials ({ user }) {
     { url: user.social?.instagram, icon: instagram, name: 'Instagram', baseURL: 'https://instagram.com/' },
     { url: user.social?.facebook, icon: facebook, name: 'Facebook', baseURL: 'https://facebook.com/' },
     { url: user.social?.twitter, icon: twitter, name: 'Twitter', baseURL: 'https://twitter.com/' },
-    { url: user.social?.linkedIn, icon: linkedIn, name: 'LinkedIn', baseURL: 'https://linkedin.com/in/' }
+    { url: user.social?.linkedin, icon: linkedin, name: 'linkedin', baseURL: 'https://linkedin.com/in/' }
   ]
 
   return (

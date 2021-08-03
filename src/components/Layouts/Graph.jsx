@@ -39,18 +39,20 @@ export default function Graph () {
           }
         }
       },
-      admin: {
+      couple: {
         shape: 'circularImage',
-        borderWidth: 3,
+        size: 18,
+        image: 'https://res.cloudinary.com/arun99-dev/image/upload/v1624878835/coupleNode_etlqzn.png',
         color: {
-          border: 'hsl(54, 100%, 51%)',
+          background: 'transparent',
+          border: 'transparent',
           highlight: {
-            border: 'hsl(54, 100%, 51%)'
+            border: 'transparent'
           }
         }
       },
-      couple: {
-        shape: 'circularImage',
+      singleParent: {
+        // shape: 'circularImage',
         size: 18,
         image: 'https://res.cloudinary.com/arun99-dev/image/upload/v1624878835/coupleNode_etlqzn.png',
         color: {

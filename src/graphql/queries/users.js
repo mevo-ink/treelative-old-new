@@ -21,7 +21,7 @@ export const GET_USER = gql`
         facebook
         twitter
         instagram
-        linkedIn
+        linkedin
         website
       }
       parents {
