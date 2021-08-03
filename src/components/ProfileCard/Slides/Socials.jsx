@@ -12,8 +12,8 @@ import email from 'images/email.svg'
 import phone from 'images/phone.svg'
 import twitter from 'images/twitter.svg'
 import facebook from 'images/facebook.svg'
-import linkedin from 'images/linkedin.svg'
 import instagram from 'images/instagram.svg'
+import linkedin from 'images/linkedin.svg'
 
 export default function Socials ({ user }) {
   const isEditMode = useRecoilValue(isEditModeAtom)

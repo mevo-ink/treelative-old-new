@@ -110,11 +110,11 @@ export default function Map () {
 
   const [result, refetch] = useQuery({ query: GET_MAP_DATA })
 
-  const { id: authUserID } = parseJwt(window.localStorage.getItem('AUTH_SESSION_ID'))
+  const { _id: authUserID } = parseJwt(window.localStorage.getItem('AUTH_SESSION_ID'))
 
   // center on auth user if location is available - else center on Sri Lanka
   const sriLanka = { lat: 10.99835602, lng: 77.01502627 }
-  const defaultCenter = (authUserID && result.data?.getMapData && result.data.getMapData.known.find(user => user.id === authUserID)?.position) || sriLanka
+  const defaultCenter = (authUserID && result.data?.getMapData && result.data.getMapData.find(user => user.id === authUserID)?.position) || sriLanka
 
   if (result.error) return <p>ERROR</p>
 
@@ -136,7 +136,7 @@ export default function Map () {
         onGoogleApiLoaded={({ map }) => {
           setMapMethods({
             panTo: (userID) => {
-              const position = result.data.getMapData.known.find(user => user.id === userID)?.position
+              const position = result.data.getMapData.find(user => user.id === userID)?.position
               position && map.panTo(position)
               return position
             }
@@ -148,7 +148,7 @@ export default function Map () {
           })
         }}
       >
-        {result.data.getMapData.known.map(user => (
+        {result.data.getMapData.map(user => (
           <Box
             key={user.id}
             position='relative'

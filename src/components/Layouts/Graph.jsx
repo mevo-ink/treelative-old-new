@@ -13,7 +13,7 @@ import parseJwt from 'utils/parseJWT'
 import Loading from 'components/Loading'
 
 export default function Graph () {
-  const { id: authUserID } = parseJwt(window.localStorage.getItem('AUTH_SESSION_ID'))
+  const { _id: authUserID } = parseJwt(window.localStorage.getItem('AUTH_SESSION_ID'))
 
   const options = {
     layout: {
@@ -52,9 +52,9 @@ export default function Graph () {
         }
       },
       singleParent: {
-        // shape: 'circularImage',
-        size: 18,
-        image: 'https://res.cloudinary.com/arun99-dev/image/upload/v1624878835/coupleNode_etlqzn.png',
+        shape: 'circularImage',
+        size: 8,
+        image: 'http://www.clker.com/cliparts/l/J/f/f/K/O/red-circle-no-background.svg.hi.png',
         color: {
           background: 'transparent',
           border: 'transparent',
