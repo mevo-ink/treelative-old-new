@@ -48,7 +48,7 @@ export default function LocationTrigger (props) {
     >
       <Flex position='relative'>
         {isOpen && <LocationModal value={value?.suggested} onSubmit={onSubmit} onClose={onClose} {...inputProps} />}
-        {isEditMode && (
+        {isEditMode && value && (
           <RemoveButton
             title={title}
             onRemove={() => onSubmit(null)}

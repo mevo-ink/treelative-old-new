@@ -52,7 +52,7 @@ export default function InputWithIconTrigger (props) {
             boxShadow='0px 3px 5px hsla(0, 0%, 0%, .2)'
             borderLeftRadius='999px'
           />
-          {isEditMode && (
+          {isEditMode && props.value && (
             <RemoveButton
               title={'Remove' + title.substring(4)}
               onRemove={onSubmit}

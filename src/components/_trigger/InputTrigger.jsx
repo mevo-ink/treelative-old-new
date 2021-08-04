@@ -45,7 +45,7 @@ export default function InputTrigger (props) {
         textAlign='center'
         color='hsla(261, 64%, 18%, 1)'
       >
-        {props.value}
+        {value}
       </Text>
     )
   }
@@ -59,7 +59,7 @@ export default function InputTrigger (props) {
         justifyContent='center'
         animation={isEditMode && `${wiggle} infinite .15s linear`}
       >
-        {isEditMode && (
+        {isEditMode && value && (
           <RemoveButton
             title={title}
             onRemove={onSubmit}

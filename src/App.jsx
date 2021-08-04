@@ -31,7 +31,6 @@ export default function App () {
 }
 // TODO:
 /*
-  Do not show remove button if value is empty
   Do not allow to clear full name
   Double check all modal titles
   BUG:
@@ -111,4 +110,6 @@ export default function App () {
   Add clear button on search results
   Refactor DatePicker Modal & Trigger
   Refactor location Modal and Trigger
+  Do not show remove button if value is empty
+
 */

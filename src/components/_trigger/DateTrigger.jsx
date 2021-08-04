@@ -67,7 +67,7 @@ export default function DateTimePickerDialogTrigger (props) {
     <Flex w='90%' justifyContent='center' animation={`${wiggle} infinite .15s linear`}>
       {isOpen && <DateModal title={title} value={value} onClose={onClose} onSubmit={handleEditDate} isLoading={editDateResult?.fetching} />}
       <Flex justifyContent='center' position='relative'>
-        {isEditMode && <RemoveButton title='Remove Date' onRemove={handleEditDate} isLoading={editDateResult?.fetching} />}
+        {isEditMode && value && <RemoveButton title='Remove Date' onRemove={handleEditDate} isLoading={editDateResult?.fetching} />}
         <Button onClick={onOpen} variant='editable-input'>
           {value ? format(dtDateOnly, 'PP').replace(/[, ]+/g, '/') : 'Unavailable'}
         </Button>

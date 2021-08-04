@@ -41,7 +41,7 @@ export default function IconTrigger (props) {
     <>
       {isOpen && <InputModal title={title} onSubmit={onSubmit} isLoading={isLoading} onClose={onClose} {...inputProps} />}
       <Grid m='.5rem' placeItems='center' animation={isEditMode && `${wiggle} infinite .15s linear`}>
-        {isEditMode && (
+        {isEditMode && props.value && (
           <RemoveButton
             title={'Remove' + title.substring(4)}
             onRemove={onSubmit}
