@@ -7,6 +7,8 @@ import Menu from 'components/Menu'
 import Layouts from 'components/Layouts'
 import ProfileCard from 'components/ProfileCard'
 
+import useServiceWorker from 'hooks/useServiceWorker'
+
 export default function App () {
   const activeNodeID = useRecoilValue(activeNodeIDAtom)
 
@@ -21,6 +23,8 @@ export default function App () {
     }
   }, [])
 
+  useServiceWorker()
+
   return (
     <>
       {activeNodeID && <ProfileCard />}
@@ -34,7 +38,6 @@ export default function App () {
   find a place to shortname & isPublic
   Style Error modal with contact us info
   Add birthday effect on profile card mount
-  Add PWA
   Investigate cache bug on updating partner on slides
   Fix cache issue on menu bar after login
 */
@@ -106,4 +109,5 @@ export default function App () {
   Do not allow to clear full name
   Double check all modal titles
   Double check all titles of confirmation delete modal
+  Add PWA
 */
