@@ -35,7 +35,7 @@ export default function App () {
   Add a way to toggle isPublic
   Double check all modal titles
   Double check all titles of confirmation delete modal
-  Style Error modal with contact us info --- NEED ACCESS TO OUR PROFILE CARDS FOR NOT AUTH USERS
+  Style Error modal with contact us info
   Add birthday effect on profile card mount
   Add PWA
   Investigate cache bug on updating partner on slides
