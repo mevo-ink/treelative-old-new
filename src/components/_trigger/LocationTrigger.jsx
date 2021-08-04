@@ -50,7 +50,7 @@ export default function LocationTrigger (props) {
         {isOpen && <LocationModal value={value?.suggested} title={title} onSubmit={onSubmit} onClose={onClose} {...inputProps} />}
         {isEditMode && value && (
           <RemoveButton
-            title={title}
+            title={'Remove' + title.substring(4)}
             onRemove={() => onSubmit(null)}
             isLoading={isLoading}
           />

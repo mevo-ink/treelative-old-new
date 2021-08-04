@@ -62,7 +62,7 @@ export default function InputTrigger (props) {
       >
         {isEditMode && !notRemovable && value && (
           <RemoveButton
-            title={title}
+            title={'Remove' + title.substring(4)}
             onRemove={onSubmit}
             isLoading={isLoading}
           />

@@ -31,9 +31,7 @@ export default function App () {
 }
 // TODO:
 /*
-  find a place to shortname
-  Add a way to toggle isPublic
-  Double check all titles of confirmation delete modal
+  find a place to shortname & isPublic
   Style Error modal with contact us info
   Add birthday effect on profile card mount
   Add PWA
@@ -107,4 +105,5 @@ export default function App () {
   Return actual data for country distribution insights
   Do not allow to clear full name
   Double check all modal titles
+  Double check all titles of confirmation delete modal
 */
