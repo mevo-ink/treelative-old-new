@@ -11,7 +11,7 @@ import { useSetRecoilState } from 'recoil'
 
 import { activeNodeIDAtom } from 'utils/atoms.js'
 
-export default function SearchResult ({ users, onClose, isFetching }) {
+export default function SearchResult ({ users, isFetching }) {
   const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
   const handleClick = (id) => { setActiveNodeID(id) }
 

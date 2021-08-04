@@ -45,3 +45,15 @@ export const GET_USER = gql`
     }
   }
 `
+
+export const SEARCH_USERS = gql`
+  query SEARCH_USERS ($query: String!) {
+    users: searchUsers (query: $query) {
+      id
+      avatar
+      fullName
+      dateOfBirth
+      currentLocation
+    }
+  }
+`
