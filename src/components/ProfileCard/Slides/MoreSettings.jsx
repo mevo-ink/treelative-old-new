@@ -1,9 +1,8 @@
 import { Flex, Text } from '@chakra-ui/react'
 
 import ShortName from 'components/EditUser/ShortName'
-// import Notification from 'components/EditUser/Notification'
 
-export default function Notification ({ user }) {
+export default function MoreSettings ({ user }) {
   return (
     <Flex
       w='80%'
@@ -19,8 +18,6 @@ export default function Notification ({ user }) {
     >
       <Text variant='info-title'> Short Name </Text>
       <ShortName user={user} />
-      <Text variant='info-title' mt='1rem'> Notification </Text>
-      {/* <Notification user={user} /> */}
     </Flex>
   )
 }

@@ -32,7 +32,7 @@ import Current from 'components/ProfileCard/Slides/Current'
 import Partner from 'components/ProfileCard/Slides/Partner'
 import OuterWrapper from 'components/ProfileCard/OuterWrapper'
 import InnerWrapper from 'components/ProfileCard/InnerWrapper'
-import Notification from 'components/ProfileCard/Slides/Notification'
+import MoreSettings from 'components/ProfileCard/Slides/MoreSettings'
 import ParentChild from 'components/ProfileCard/Slides/ParentChild'
 import { useEffect } from 'react'
 
@@ -111,7 +111,7 @@ export default function ProfileCard () {
                   <Partner user={user} isHidden={(!user.partner && !isEditMode)} />
                   <ParentChild user={user} isHidden={(user.parents.length === 0 && user.children.length === 0 && !isEditMode)} />
                   <Socials user={user} />
-                  <Notification user={user} isHidden={!isEditMode} />
+                  <MoreSettings user={user} isHidden={!isEditMode} />
                 </Slider>
               </>
             )}
