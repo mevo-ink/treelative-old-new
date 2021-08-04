@@ -16,7 +16,7 @@ export default function AgeInsight () {
   if (result.fetching) return <Loading />
 
   return (
-    <ResponsiveContainer w='100%' h='100%'>
+    <ResponsiveContainer>
       <BarChart w={150} h={40} data={result.data.insightsByAge}>
         <XAxis dataKey='ages' angle={270} tickMargin={30} height={100} interval={0} />
         <Bar dataKey='count' fill='#ffffff' />

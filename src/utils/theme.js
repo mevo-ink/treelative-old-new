@@ -144,13 +144,13 @@ const theme = extendTheme({
       baseStyle: {
         dialog: {
           width: '375px',
-          color: 'hsla(0, 0%, 100%, .8)',
+          color: 'hsla(0, 0%, 100%, .9)',
           borderTopLeftRadius: '20px',
           borderTopRightRadius: '20px',
           '@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none)': {
-            WebkitBackdropFilter: 'blur(3px)',
-            backdropFilter: 'blur(3px)',
-            background: 'linear-gradient(115deg, hsla(0, 0%, 100%, .2), hsla(0, 0%, 100%, .05))'
+            WebkitBackdropFilter: 'blur(10px)',
+            backdropFilter: 'blur(10px)',
+            background: 'linear-gradient(115deg, hsla(225, 100%, 100%, .1), hsla(0, 0%, 100%, .05))'
           },
           /* slightly transparent fallback for Firefox (not supporting backdrop-filter) */
           '@supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none))': {

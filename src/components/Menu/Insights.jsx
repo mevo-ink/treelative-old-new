@@ -29,7 +29,7 @@ export default function Insights () {
   const data = [
     { title: 'Members', value: resultGetMembers.data?.countUsers || 0 },
     { title: 'Couples', value: resultGetCouples.data?.countCouples || 0 },
-    { title: 'Country', value: <Icon as={BiWorld} h='30px' /> },
+    { title: 'Country', description: 'Country Distribution', value: <Icon as={BiWorld} h='30px' /> },
     { title: 'Age', description: 'Age Distribution', value: <Icon as={SiApollographql} h='30px' /> }
   ]
 

@@ -39,7 +39,6 @@ export default function Menu () {
           icon={<FaGripLines color='white' />}
           w='100%'
           maxW='375px'
-          h='30px'
           position='absolute'
           left='50%'
           transform='translateX(-50%)'

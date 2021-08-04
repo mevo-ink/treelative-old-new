@@ -7,6 +7,7 @@ import {
 } from '@chakra-ui/react'
 
 import AgeInsight from 'components/Insights/AgeInsight'
+import CountryInsight from 'components/Insights/CountryInsight'
 
 export default function InsightsModal ({ onClose, insight }) {
   let InsightContent
@@ -14,6 +15,9 @@ export default function InsightsModal ({ onClose, insight }) {
   switch (insight.title) {
     case 'Age':
       InsightContent = AgeInsight
+      break
+    case 'Country':
+      InsightContent = CountryInsight
       break
     default:
       break
@@ -24,7 +28,7 @@ export default function InsightsModal ({ onClose, insight }) {
       <ModalOverlay />
       <ModalContent h='500px' w='100%'>
         <ModalHeader>{insight.description || insight.title}</ModalHeader>
-        <ModalBody>
+        <ModalBody h='300px'>
           {InsightContent && <InsightContent />}
         </ModalBody>
       </ModalContent>
