@@ -48,7 +48,6 @@ export default function Birthday () {
   const handleUserSelect = (userID) => {
     setActiveNodePulseID(userID)
     setActiveNodeID(userID)
-    window.history.pushState({}, '', userID)
   }
 
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']

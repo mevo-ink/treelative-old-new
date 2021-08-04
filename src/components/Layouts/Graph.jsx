@@ -126,7 +126,6 @@ export default function Graph () {
       const activeNode = result.data?.getNetworkData.nodes.find(node => nodes[0] === node.id)
       if (activeNode.group !== 'couple') {
         setTimeout(() => {
-          window.history.pushState({}, '', activeNode.id)
           setActiveNodeID(activeNode.id)
         }, 1)
       }

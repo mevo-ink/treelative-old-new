@@ -34,6 +34,7 @@ import OuterWrapper from 'components/ProfileCard/OuterWrapper'
 import InnerWrapper from 'components/ProfileCard/InnerWrapper'
 import Notification from 'components/ProfileCard/Slides/Notification'
 import ParentChild from 'components/ProfileCard/Slides/ParentChild'
+import { useEffect } from 'react'
 
 export default function ProfileCard () {
   const [isEditMode, setIsEditMode] = useRecoilState(isEditModeAtom)
@@ -43,6 +44,13 @@ export default function ProfileCard () {
 
   const layout = useRecoilValue(layoutAtom)
   const networkMethods = useRecoilValue(networkMethodsAtom)
+
+  useEffect(() => {
+    // set the activeNodeID as url path
+    if (activeNodeID) {
+      window.history.pushState(null, null, activeNodeID)
+    }
+  }, [activeNodeID])
 
   const [result, refetch] = useQuery({ query: GET_USER, variables: { id: activeNodeID }, requestPolicy: 'network-only' })
   const user = result.data?.getUser

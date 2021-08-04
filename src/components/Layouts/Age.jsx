@@ -48,7 +48,6 @@ export default function Age () {
   const handleUserSelect = (userID) => {
     setActiveNodePulseID(userID)
     setActiveNodeID(userID)
-    window.history.pushState({}, '', userID)
   }
 
   return (

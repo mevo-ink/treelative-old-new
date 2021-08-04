@@ -123,7 +123,6 @@ export default function Map () {
   const handleUserSelect = (userID) => {
     setActiveNodePulseID(userID)
     setActiveNodeID(userID)
-    window.history.pushState({}, '', userID)
   }
 
   return (

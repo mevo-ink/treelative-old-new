@@ -47,7 +47,6 @@ export default function AvatarTrigger (props) {
 
   const handleAvatarClick = (userID) => {
     setActiveNodeID(userID)
-    window.history.pushState({}, '', userID)
   }
 
   const handleRemoveRelation = (id) => {
