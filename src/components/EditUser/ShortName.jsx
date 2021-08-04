@@ -22,6 +22,7 @@ export default function ShortName ({ user }) {
       onSubmit={handleEditShortName}
       isLoading={editShortNameResult.fetching}
       error={editShortNameResult.error}
+      notRemovable
     />
   )
 }
