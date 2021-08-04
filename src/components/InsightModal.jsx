@@ -23,7 +23,7 @@ export default function InsightsModal ({ onClose, insight }) {
     <Modal isOpen isCentered onClose={onClose} size='lg'>
       <ModalOverlay />
       <ModalContent h='500px' w='100%'>
-        <ModalHeader>{insight.title}</ModalHeader>
+        <ModalHeader>{insight.description || insight.title}</ModalHeader>
         <ModalBody>
           {InsightContent && <InsightContent />}
         </ModalBody>

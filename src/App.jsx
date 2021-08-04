@@ -31,21 +31,15 @@ export default function App () {
 }
 // TODO:
 /*
-  Do not allow to clear full name
+  Do not allow to clear full name - OR combine to edit shortName
+  Add a way to toggle isPublic
   Double check all modal titles
-  BUG:
-    - Profile card update - post action - check if in network mode
   Double check all titles of confirmation delete modal
   Style Error modal with contact us info --- NEED ACCESS TO OUR PROFILE CARDS FOR NOT AUTH USERS
   Add birthday effect on profile card mount
   Add PWA
-  Add privacy slide slide
-  Add new property to user : isPublic in backend
-  Add content to insight modal
   Investigate cache bug on updating partner on slides
   Fix cache issue on menu bar after login
-  SCHEMA CHANGE
-  Return actual data for age distribution insights
   Return actual data for country distribution insights
 */
 // DONE:
@@ -111,5 +105,5 @@ export default function App () {
   Refactor DatePicker Modal & Trigger
   Refactor location Modal and Trigger
   Do not show remove button if value is empty
-
+  Return actual data for age distribution insights
 */

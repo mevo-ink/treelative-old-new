@@ -1,13 +1,19 @@
 import { gql } from 'urql'
 
-export const GET_MEMBERS = gql`
-  query MEMBERS {
+export const COUNT_MEMBERS = gql`
+  query COUNT_MEMBERS {
     countUsers
   }
 `
 
-export const GET_COUPLES = gql`
-  query COUPLES {
+export const COUNT_COUPLES = gql`
+  query COUNT_COUPLES {
     countCouples
+  }
+`
+
+export const INSIGHTS_BY_AGE = gql`
+  query INSIGHTS_BY_AGE {
+    insightsByAge
   }
 `
