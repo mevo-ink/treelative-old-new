@@ -40,7 +40,6 @@ export default function App () {
   Add PWA
   Investigate cache bug on updating partner on slides
   Fix cache issue on menu bar after login
-  Return actual data for country distribution insights
 */
 // DONE:
 /*
@@ -106,4 +105,5 @@ export default function App () {
   Refactor location Modal and Trigger
   Do not show remove button if value is empty
   Return actual data for age distribution insights
+  Return actual data for country distribution insights
 */

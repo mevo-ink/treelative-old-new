@@ -17,3 +17,9 @@ export const INSIGHTS_BY_AGE = gql`
     insightsByAge
   }
 `
+
+export const INSIGHTS_BY_LOCATION = gql`
+  query INSIGHTS_BY_LOCATION {
+    insightsByLocation
+  }
+`
