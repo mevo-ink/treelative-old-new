@@ -31,7 +31,7 @@ export default function App () {
 }
 // TODO:
 /*
-  Do not allow to clear full name - OR combine to edit shortName
+  find a place to shortname
   Add a way to toggle isPublic
   Double check all modal titles
   Double check all titles of confirmation delete modal
@@ -106,4 +106,5 @@ export default function App () {
   Do not show remove button if value is empty
   Return actual data for age distribution insights
   Return actual data for country distribution insights
+  Do not allow to clear full name
 */

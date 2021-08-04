@@ -24,6 +24,7 @@ export default function FullName ({ user }) {
       onSubmit={handleEditFullName}
       isLoading={editFullNameResult.fetching}
       error={editFullNameResult.error}
+      notRemovable
     />
   )
 }

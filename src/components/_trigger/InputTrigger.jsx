@@ -29,6 +29,7 @@ export default function InputTrigger (props) {
     value,
     onSubmit,
     isLoading,
+    notRemovable,
     ...inputProps
   } = props
 
@@ -59,7 +60,7 @@ export default function InputTrigger (props) {
         justifyContent='center'
         animation={isEditMode && `${wiggle} infinite .15s linear`}
       >
-        {isEditMode && value && (
+        {isEditMode && !notRemovable && value && (
           <RemoveButton
             title={title}
             onRemove={onSubmit}
