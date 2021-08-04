@@ -15,6 +15,7 @@ import { GET_BIRTHDAY_DATA } from 'graphql/queries/layouts'
 import { activeNodeIDAtom, layoutMethodsAtom, activeNodePulseIDAtom } from 'utils/atoms.js'
 
 import Loading from 'components/Loading'
+import ErrorModal from 'components/_common/ErrorModal'
 import ActivePulse from 'components/_common/ActivePulse'
 
 export default function Birthday () {
@@ -41,7 +42,13 @@ export default function Birthday () {
     // eslint-disable-next-line
   }, [result.data])
 
-  if (result.error) return <p>ERROR</p>
+  if (result.error) {
+    return (
+      <ErrorModal>
+        {result.error.message}
+      </ErrorModal>
+    )
+  }
 
   if (result.fetching) return <Loading />
 

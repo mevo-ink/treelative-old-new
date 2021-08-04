@@ -17,6 +17,7 @@ import { GET_AGE_DATA } from 'graphql/queries/layouts'
 import { activeNodeIDAtom, activeNodePulseIDAtom, layoutMethodsAtom } from 'utils/atoms.js'
 
 import Loading from 'components/Loading'
+import ErrorModal from 'components/_common/ErrorModal'
 import ActivePulse from 'components/_common/ActivePulse'
 
 export default function Age () {
@@ -41,7 +42,13 @@ export default function Age () {
   //   scrollRef.current.scrollTo({ top: 0, left: scrollRef.current.scrollLeft + e.deltaY })
   // }
 
-  if (result.error) return <p>ERROR</p>
+  if (result.error) {
+    return (
+      <ErrorModal>
+        {result.error.message}
+      </ErrorModal>
+    )
+  }
 
   if (result.fetching) return <Loading />
 

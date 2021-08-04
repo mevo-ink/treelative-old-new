@@ -11,6 +11,7 @@ import { layoutMethodsAtom, networkMethodsAtom, activeNodeIDAtom } from 'utils/a
 
 import parseJwt from 'utils/parseJWT'
 import Loading from 'components/Loading'
+import ErrorModal from 'components/_common/ErrorModal'
 
 export default function Graph () {
   const { _id: authUserID } = parseJwt(window.localStorage.getItem('AUTH_SESSION_ID'))
@@ -153,7 +154,13 @@ export default function Graph () {
     // eslint-disable-next-line
   }, [result.data?.getNetworkData])
 
-  if (result.error) return <p>ERROR</p>
+  if (result.error) {
+    return (
+      <ErrorModal>
+        {result.error.message}
+      </ErrorModal>
+    )
+  }
 
   if (result.fetching) return <Loading />
 

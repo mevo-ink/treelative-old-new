@@ -20,7 +20,7 @@ import { google, twitter, facebook } from 'utils/firebase'
 import { LOGIN, LOGIN_WITH_PROVIDER } from 'graphql/mutations/auth'
 
 import ErrorAlert from 'components/_common/ErrorAlert'
-import ErrorDialog from 'components/_common/ErrorDialog'
+import ErrorModal from 'components/_common/ErrorModal'
 import PasswordInput from 'components/_common/PasswordInput'
 import ForgotPassword from 'components/Login/ForgotPassword'
 import LoginWithProvider from 'components/Login/LoginWithProvider'
@@ -75,7 +75,7 @@ export default function Login ({ onSuccess }) {
       .catch(setInternalError)
   }
 
-  if (internalError) return <ErrorDialog>{internalError.message}</ErrorDialog>
+  if (internalError) return <ErrorModal>{internalError.message}</ErrorModal>
 
   if (loginWithProviderResult?.error?.graphQLErrors[0]?.extensions.code === 'UNREGISTERED') {
     // show unregistered user dialog

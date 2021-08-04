@@ -15,6 +15,7 @@ import GoogleMapReact from 'google-map-react'
 
 import parseJwt from 'utils/parseJWT'
 import Loading from 'components/Loading'
+import ErrorModal from 'components/_common/ErrorModal'
 import ActivePulse from 'components/_common/ActivePulse'
 
 // https://developers.google.com/maps/documentation/javascript/examples/style-array
@@ -116,7 +117,13 @@ export default function Map () {
   const sriLanka = { lat: 10.99835602, lng: 77.01502627 }
   const defaultCenter = (authUserID && result.data?.getMapData && result.data.getMapData.find(user => user.id === authUserID)?.position) || sriLanka
 
-  if (result.error) return <p>ERROR</p>
+  if (result.error) {
+    return (
+      <ErrorModal>
+        {result.error.message}
+      </ErrorModal>
+    )
+  }
 
   if (result.fetching) return <Loading />
 

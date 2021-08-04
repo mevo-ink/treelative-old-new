@@ -4,7 +4,7 @@ import { firebaseAuth } from 'utils/firebase'
 
 import { IconButton } from '@chakra-ui/react'
 
-import ErrorDialog from 'components/_common/ErrorDialog'
+import ErrorModal from 'components/_common/ErrorModal'
 
 export default function LoginWithProvider ({ label, icon: Icon, provider, onSuccess }) {
   const [error, setError] = useState()
@@ -18,7 +18,7 @@ export default function LoginWithProvider ({ label, icon: Icon, provider, onSucc
       .catch(setError)
   }
 
-  if (error) return <ErrorDialog>{error.message}</ErrorDialog>
+  if (error) return <ErrorModal>{error.message}</ErrorModal>
 
   return (
     <IconButton

@@ -13,7 +13,7 @@ import {
 
 import ErrorSVG from 'images/error.svg'
 
-export default function ErrorDialog ({ status = 'error', children, ...props }) {
+export default function ErrorModal ({ status = 'error', children, ...props }) {
   return (
     <Modal isOpen closeOnOverlayClick={false} scrollBehavior='inside' {...props}>
       <ModalOverlay />
