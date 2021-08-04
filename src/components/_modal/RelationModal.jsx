@@ -34,7 +34,7 @@ export default function RelationModal (props) {
     onClose,
     addRelation,
     addRelationResult,
-    LIST_AVAILABLE_RELATIONS
+    SUGGEST_RELATIONS
   } = props
 
   const [isAddNewOpen, setIsAddNewOpen] = useState('')
@@ -90,7 +90,7 @@ export default function RelationModal (props) {
                 <Stack direction='row' justifyContent='space-between' alignItems='center'>
                   <Stack flex='1'>
                     <UserSelection
-                      query={LIST_AVAILABLE_RELATIONS}
+                      query={SUGGEST_RELATIONS}
                       variables={{ userID: user.id }}
                       onChange={handleOnChange}
                       placeholder='Search User'

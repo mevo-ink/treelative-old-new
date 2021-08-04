@@ -1,7 +1,7 @@
 import { useMutation } from 'urql'
 
 import { ADD_CHILD, REMOVE_CHILD } from 'graphql/mutations/child'
-import { LIST_AVAILABLE_CHILDREN } from 'graphql/queries/listAvailable'
+import { SUGGEST_CHILDREN } from 'graphql/queries/suggestList'
 
 import AvatarTrigger from 'components/_trigger/AvatarTrigger'
 
@@ -28,7 +28,7 @@ export default function Children ({ user }) {
       removeRelationResult={removeChildResult}
       addRelation={handleAddChild}
       addRelationResult={addChildResult}
-      LIST_AVAILABLE_RELATIONS={LIST_AVAILABLE_CHILDREN}
+      SUGGEST_RELATIONS={SUGGEST_CHILDREN}
     />
   )
 }

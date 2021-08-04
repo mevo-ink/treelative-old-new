@@ -1,6 +1,6 @@
 import { useMutation } from 'urql'
 
-import { LIST_AVAILABLE_PARTNERS } from 'graphql/queries/listAvailable'
+import { SUGGEST_PARTNERS } from 'graphql/queries/suggestList'
 import { ADD_PARTNER, REMOVE_PARTNER } from 'graphql/mutations/partner'
 
 import AvatarTrigger from 'components/_trigger/AvatarTrigger'
@@ -29,7 +29,7 @@ export default function Partner ({ user }) {
       removeRelationResult={removePartnerResult}
       addRelation={handleAddPartner}
       addRelationResult={addPartnerResult}
-      LIST_AVAILABLE_RELATIONS={LIST_AVAILABLE_PARTNERS}
+      SUGGEST_RELATIONS={SUGGEST_PARTNERS}
     />
   )
 }
