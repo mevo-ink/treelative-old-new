@@ -9,7 +9,7 @@ import age from 'images/ageView.png'
 import network from 'images/graphView.png'
 import birthday from 'images/birthdayView.png'
 
-export default function Layouts ({ onClose }) {
+export default function Layouts () {
   const [layout, setLayout] = useRecoilState(layoutAtom)
 
   const iconsAndNames = [
@@ -20,7 +20,6 @@ export default function Layouts ({ onClose }) {
   ]
 
   const handleLayoutChange = async (layout) => {
-    onClose()
     await new Promise(resolve => setTimeout(resolve, 110))
     setLayout(layout)
   }

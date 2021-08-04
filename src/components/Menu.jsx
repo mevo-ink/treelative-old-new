@@ -76,7 +76,7 @@ export default function Menu () {
                 {result.data?.whoAmI && <Profile onClose={onClose} authUser={result.data?.whoAmI} />}
                 {result.data?.whoAmI && <FindMe onClose={onClose} user={result.data?.whoAmI} size='sm' />}
               </HStack>
-              <Layouts onClose={onClose} />
+              <Layouts />
               <Insights />
             </Stack>
             <Copyright />
