@@ -162,17 +162,18 @@ export default function Map () {
             lng={user.position.lng}
           >
             <Image
-              boxSize='30px'
+              w='40px'
+              h='40px'
               src={user.image}
               fallbackSrc={`https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
               alt='children-avatar'
               objectFit='contain'
               borderRadius='50%'
               position='absolute'
-              zIndex={user.id !== activeNodePulseID && '-2'}
+              zIndex={(user.id !== activeNodePulseID) ? '1' : '2'}
               onClick={() => handleUserSelect(user.id)}
             />
-            {user.id === activeNodePulseID && <ActivePulse />}
+            {user.id === activeNodePulseID && <ActivePulse mapView />}
           </Box>
         ))}
       </GoogleMapReact>

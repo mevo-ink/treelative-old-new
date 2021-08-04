@@ -1,6 +1,6 @@
 import { Box, keyframes } from '@chakra-ui/react'
 
-export default function ActivePulse () {
+export default function ActivePulse ({ mapView }) {
   const pulse = keyframes`
     0% { transform: scale(0.1, 0.1); opacity: 0; }
     50% { opacity: 1;)
@@ -13,7 +13,7 @@ export default function ActivePulse () {
       left='50%'
       top='50%'
       zIndex='0'
-      transform='translate(-20px, -20px)'
+      transform={!mapView && 'translate(-20px, -20px)'}
       _after={{
         content: '""',
         borderRadius: '50%',
