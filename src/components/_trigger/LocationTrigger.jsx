@@ -47,7 +47,7 @@ export default function LocationTrigger (props) {
       animation={isEditMode && `${wiggle} infinite .15s linear`}
     >
       <Flex position='relative'>
-        {isOpen && <LocationModal value={value?.suggested} onSubmit={onSubmit} onClose={onClose} {...inputProps} />}
+        {isOpen && <LocationModal value={value?.suggested} title={title} onSubmit={onSubmit} onClose={onClose} {...inputProps} />}
         {isEditMode && value && (
           <RemoveButton
             title={title}
