@@ -18,10 +18,10 @@ export default function AgeInsight () {
 
   return (
     <ResponsiveContainer>
-      <BarChart w={150} h={40} data={result.data.insightsByAge}>
+      <BarChart w={150} h={40} data={result.data.insightsByAge.data}>
         <XAxis dataKey='ages' angle={270} tickMargin={30} height={100} interval={0} />
         <Bar dataKey='count' fill='#ffffff' label={{ position: 'top' }}>
-          {result.data.insightsByAge.map((entry, index) => (
+          {result.data.insightsByAge.data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill='#ffffff' />
           ))}
         </Bar>

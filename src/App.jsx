@@ -35,6 +35,10 @@ export default function App () {
 }
 // TODO:
 /*
+  Show the unknown count on all Layouts
+  Age & Birthday - give padding bottom
+  Highlight today's date dot icon in birthday view
+  Show unknown count separately from age insights
   find a place to shortname & isPublic
   Style Error modal with contact us info
   Add birthday effect on profile card mount

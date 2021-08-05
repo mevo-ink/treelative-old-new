@@ -35,7 +35,7 @@ export default function Birthday () {
       }
     })
     const date = new Date()
-    while (!result.data?.getBirthdayData[date.toISOString().slice(5, 10)]) {
+    while (!result.data?.getBirthdayData.data[date.toISOString().slice(5, 10)]) {
       date.setDate(date.getDate() + 1)
     }
     document.getElementById(date.toISOString().slice(5, 10)).scrollIntoView({ behavior: 'smooth', block: 'center' })
@@ -103,7 +103,7 @@ export default function Birthday () {
       sx={{ '&::-webkit-scrollbar': { display: 'none' }, scrollbarWidth: 'none' }}
       // onWheel={f}
     >
-      {Object.entries(result.data.getBirthdayData).map(([dob, users]) =>
+      {Object.entries(result.data.getBirthdayData.data).map(([dob, users]) =>
         <Flex
           key={dob}
           id={dob}

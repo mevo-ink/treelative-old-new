@@ -72,6 +72,7 @@ export default function DateModal (props) {
               showMonthDropdown
               dropdownMode='select'
               renderCustomHeader={CustomHeader}
+              maxDate={new Date()}
             />
             {value && <DateRenderer value={value} />}
             {isLoading && <Loading />}
