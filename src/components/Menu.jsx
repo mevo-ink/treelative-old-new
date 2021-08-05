@@ -13,21 +13,13 @@ import {
 } from '@chakra-ui/react'
 import { FaGripLines } from 'react-icons/fa'
 
-import { useQuery } from 'urql'
-
-import { WHO_AM_I } from 'graphql/queries/auth'
-
 import Search from 'components/Menu/Search'
-import FindMe from 'components/Menu/FindMe'
-import Profile from 'components/Menu/Profile'
 import Layouts from 'components/Menu/Layouts'
 import Insights from 'components/Menu/Insights'
 import Copyright from 'components/Menu/Copyright'
-import CreateUser from 'components/Menu/CreateUser'
+import UserOptions from 'components/Menu/UserOptions'
 
 export default function Menu () {
-  const [result] = useQuery({ query: WHO_AM_I })
-
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()
 
@@ -72,9 +64,7 @@ export default function Menu () {
             <Stack p='1.5em .5em' spacing='2rem'>
               <HStack justifyContent='space-between' alignItems='end'>
                 <Search onClose={onClose} />
-                {result.data?.whoAmI.isAdmin && <CreateUser />}
-                {result.data?.whoAmI && <Profile onClose={onClose} authUser={result.data?.whoAmI} />}
-                {result.data?.whoAmI && <FindMe onClose={onClose} user={result.data?.whoAmI} size='sm' />}
+                <UserOptions onClose={onClose} />
               </HStack>
               <Layouts />
               <Insights />

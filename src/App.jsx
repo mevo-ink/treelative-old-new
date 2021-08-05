@@ -39,7 +39,6 @@ export default function App () {
   Style Error modal with contact us info
   Add birthday effect on profile card mount
   Investigate cache bug on updating partner on slides
-  Fix cache issue on menu bar after login
 */
 // DONE:
 /*
@@ -110,4 +109,5 @@ export default function App () {
   Double check all modal titles
   Double check all titles of confirmation delete modal
   Add PWA
+  Fix cache issue on menu bar after login
 */

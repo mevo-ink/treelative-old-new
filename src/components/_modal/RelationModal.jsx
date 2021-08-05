@@ -21,9 +21,9 @@ import { useRecoilValue } from 'recoil'
 import { layoutAtom, networkMethodsAtom } from 'utils/atoms.js'
 
 import Loading from 'components/_common/Loading'
-import CreateUser from 'components/Menu/CreateUser'
 import ErrorAlert from 'components/_common/ErrorAlert'
 import UserSelection from 'components/_common/UserSelection'
+import CreateUser from 'components/Menu/UserOptions/CreateUser'
 
 const toast = createStandaloneToast()
 
