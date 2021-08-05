@@ -45,6 +45,7 @@ export default function App () {
   Investigate cache bug on updating partner on slides
   Add bottom padding for copyright
   Add wiggle effect for menu trigger
+  Add N/A dates and locations for partner slide
 */
 // DONE:
 /*

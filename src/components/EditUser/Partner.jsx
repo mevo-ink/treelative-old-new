@@ -23,8 +23,8 @@ export default function Partner ({ user }) {
     <AvatarTrigger
       title='Add Partner'
       user={user}
-      limit={2}
-      relations={[user.partner]}
+      limit={1}
+      relations={user.partner ? [user.partner] : []}
       removeRelation={handleRemovePartner}
       removeRelationResult={removePartnerResult}
       addRelation={handleAddPartner}
