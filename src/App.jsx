@@ -47,6 +47,7 @@ export default function App () {
   Add N/A dates and locations for partner slide
   Show loading screen when logging in with provider
   Fix any lighthouse issues
+  Hide edit button for non-owner non-admins
 */
 // DONE:
 /*
