@@ -40,7 +40,7 @@ const schemaValidation = object().shape({
 })
 
 export default function Login ({ onSuccess }) {
-  const { isDesktop } = useDevice()
+  const { isTouch } = useDevice()
 
   const [isForgotPasswordOpen, setIsForgotPasswordOpen] = useState(false)
 
@@ -54,7 +54,7 @@ export default function Login ({ onSuccess }) {
   })
 
   // eslint-disable-next-line
-  useEffect(() => { isDesktop && setTimeout(() => setFocus('username')) }, [])
+  useEffect(() => { !isTouch && setTimeout(() => setFocus('username')) }, [])
 
   const onLoginSuccess = (result) => {
     if (result.data) {

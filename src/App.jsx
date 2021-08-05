@@ -43,6 +43,8 @@ export default function App () {
   Style Error modal with contact us info
   Add birthday effect on profile card mount
   Investigate cache bug on updating partner on slides
+  Add bottom padding for copyright
+  Add wiggle effect for menu trigger
 */
 // DONE:
 /*

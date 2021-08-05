@@ -1,5 +1,7 @@
 import { useRef } from 'react'
 
+import useDevice from 'hooks/useDevice'
+
 import {
   Box,
   Stack,
@@ -20,7 +22,9 @@ import Copyright from 'components/Menu/Copyright'
 import UserOptions from 'components/Menu/UserOptions'
 
 export default function Menu () {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isDesktop } = useDevice()
+
+  const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: isDesktop })
   const btnRef = useRef()
 
   return (
@@ -32,8 +36,7 @@ export default function Menu () {
           w='100%'
           maxW='375px'
           position='absolute'
-          left='50%'
-          transform='translateX(-50%)'
+          right='0%'
           zIndex='2'
           bottom='0'
           bg='hsla(0, 0%, 100%, .2)'
@@ -52,7 +55,7 @@ export default function Menu () {
         finalFocusRef={btnRef}
       >
         <DrawerOverlay zIndex='0' />
-        <DrawerContent mx='auto' maxH='25.5rem'>
+        <DrawerContent maxH='25.5rem' left='unset !important'>
           <IconButton
             ref={btnRef}
             icon={<FaGripLines color='white' />}
