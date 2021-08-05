@@ -110,7 +110,6 @@ const theme = extendTheme({
           fontWeight: '400',
           cursor: 'pointer',
           wordBreak: 'break-word',
-          whiteSpace: 'normal',
           color: 'hsla(261, 64%, 18%, 1)',
           background: 'hsla(0, 0%, 100%, .2)',
           boxShadow: '0px 3px 5px hsla(0, 0%, 0%, .2)',
