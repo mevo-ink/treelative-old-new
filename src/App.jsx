@@ -35,6 +35,5 @@ export default function App () {
 }
 // TODO:
 /*
-  Add wiggle effect for menu trigger
   Fix any lighthouse issues
 */
