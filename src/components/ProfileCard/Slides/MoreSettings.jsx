@@ -1,5 +1,6 @@
 import { Flex, Text } from '@chakra-ui/react'
 
+import Public from 'components/EditUser/Public'
 import ShortName from 'components/EditUser/ShortName'
 
 export default function MoreSettings ({ user }) {
@@ -18,6 +19,10 @@ export default function MoreSettings ({ user }) {
     >
       <Text variant='info-title'> Short Name </Text>
       <ShortName user={user} />
+      <Flex alignItems='center' justifyContent='space-between' w='45%' mt='1rem'>
+        <Text variant='info-title' fontSize='1.2rem'> Public </Text>
+        <Public user={user} />
+      </Flex>
     </Flex>
   )
 }

@@ -68,6 +68,15 @@ export const UPDATE_SHORT_NAME = gql`
   }
 `
 
+export const TOGGLE_PUBLIC = gql`
+  mutation TOGGLE_PUBLIC ($userID: String! $input: UpdateUserGeneralInput!) {
+    updateUserGeneral(userID: $userID input: $input) {
+      id
+      isPublic
+    }
+  }
+`
+
 export const UPDATE_USER_USERNAME = gql`
   mutation UPDATE_USER_USERNAME ($userID: String! $input: UpdateUserInput!) {
     updateUser(userID: $userID input: $input) {
@@ -81,15 +90,6 @@ export const RESET_USER_PASSWORD = gql`
   mutation RESET_USER_PASSWORD ($userID: String! $password: String!) {
     resetUserPassword(userID: $userID password: $password){
       id
-    }
-  }
-`
-
-export const UPDATE_USER_SETTINGS = gql`
-  mutation UPDATE_USER_SETTINGS ($userID: String! $input: UpdateUserInput!) {
-    updateUser(userID: $userID input: $input) {
-      id
-      settings
     }
   }
 `
