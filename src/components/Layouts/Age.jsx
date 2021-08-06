@@ -60,6 +60,7 @@ export default function Age () {
   return (
     <Flex
       h='calc(100 * var(--vh))'
+      pb='2.5rem'
       flexDirection='column'
       overflowY='scroll'
       overflowX='hidden'

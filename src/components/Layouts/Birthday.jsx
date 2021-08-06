@@ -96,6 +96,7 @@ export default function Birthday () {
     <Flex
       id='container'
       h='100vh'
+      pb='2.5rem'
       flexDirection='column'
       overflowY='scroll'
       overflowX='hidden'
