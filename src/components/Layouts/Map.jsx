@@ -3,6 +3,7 @@ import { Box, Image } from '@chakra-ui/react'
 import { useQuery } from 'urql'
 import { useSetRecoilState, useRecoilState } from 'recoil'
 
+import { WHO_AM_I } from 'graphql/queries/auth'
 import { GET_MAP_DATA } from 'graphql/queries/layouts'
 import {
   layoutMethodsAtom,
@@ -110,6 +111,7 @@ export default function Map () {
   const [activeNodePulseID, setActiveNodePulseID] = useRecoilState(activeNodePulseIDAtom)
 
   const [result, refetch] = useQuery({ query: GET_MAP_DATA })
+  const [whoAmIResult] = useQuery({ query: WHO_AM_I })
 
   const { _id: authUserID } = parseJwt(window.localStorage.getItem('AUTH_SESSION_ID'))
 
@@ -170,7 +172,7 @@ export default function Map () {
               objectFit='contain'
               borderRadius='50%'
               position='absolute'
-              zIndex={(user.id !== activeNodePulseID) ? '1' : '2'}
+              zIndex={(user.id === activeNodePulseID || user.id === whoAmIResult.data?.whoAmI.id) ? '3' : '2'}
               onClick={() => handleUserSelect(user.id)}
             />
             {user.id === activeNodePulseID && <ActivePulse mapView />}
