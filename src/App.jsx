@@ -35,7 +35,6 @@ export default function App () {
 }
 // TODO:
 /*
-  Show unknown count separately from age insights
   find a place to shortname & isPublic
   Style Error modal with contact us info
   Add birthday effect on profile card mount

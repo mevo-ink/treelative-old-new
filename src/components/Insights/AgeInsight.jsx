@@ -1,3 +1,5 @@
+import { Text } from '@chakra-ui/react'
+
 import {
   Bar,
   Cell,
@@ -17,15 +19,25 @@ export default function AgeInsight () {
   if (result.fetching) return <Loading />
 
   return (
-    <ResponsiveContainer>
-      <BarChart w={150} h={40} data={result.data.insightsByAge.data}>
-        <XAxis dataKey='ages' angle={270} tickMargin={30} height={100} interval={0} />
-        <Bar dataKey='count' fill='#ffffff' label={{ position: 'top' }}>
-          {result.data.insightsByAge.data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill='#ffffff' />
-          ))}
-        </Bar>
-      </BarChart>
-    </ResponsiveContainer>
+    <>
+      <ResponsiveContainer>
+        <BarChart data={result.data.insightsByAge.data}>
+          <XAxis dataKey='ages' angle={270} tickMargin={30} height={100} interval={0} />
+          <Bar dataKey='count' fill='#ffffff' label={{ position: 'top' }}>
+            {result.data.insightsByAge.data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill='#ffffff' />
+            ))}
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
+      <Text
+        mt='-1.6rem'
+        fontSize='.8rem'
+        textAlign='end'
+        opacity='.5'
+      >
+        Other: {result.data.insightsByAge.unknownCount}
+      </Text>
+    </>
   )
 }

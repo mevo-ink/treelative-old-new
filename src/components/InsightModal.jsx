@@ -26,7 +26,7 @@ export default function InsightsModal ({ onClose, insight }) {
   return (
     <Modal isOpen isCentered onClose={onClose} size='lg'>
       <ModalOverlay />
-      <ModalContent h='500px' w='100%'>
+      <ModalContent h='400px' w='100%'>
         <ModalHeader>{insight.description || insight.title}</ModalHeader>
         <ModalBody h='300px'>
           {InsightContent && <InsightContent />}
