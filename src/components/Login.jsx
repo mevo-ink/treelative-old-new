@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 import {
   Flex,
@@ -22,11 +22,7 @@ import { LOGIN, LOGIN_WITH_PROVIDER } from 'graphql/mutations/auth'
 import ErrorAlert from 'components/_common/ErrorAlert'
 import ErrorModal from 'components/_common/ErrorModal'
 import PasswordInput from 'components/_common/PasswordInput'
-import ForgotPassword from 'components/Login/ForgotPassword'
 import LoginWithProvider from 'components/Login/LoginWithProvider'
-import UnregisteredDialog from 'components/Login/UnregisteredDialog'
-
-import useDevice from 'hooks/useDevice'
 
 const loginProviders = [
   { label: 'Login with Google', icon: FaGoogle, provider: google },
@@ -39,28 +35,25 @@ const schemaValidation = object().shape({
   password: string().required().min(3)
 })
 
-export default function Login ({ onSuccess, setIsLoading }) {
-  const { isTouch } = useDevice()
-
+export default function Login ({ onSuccess }) {
   const [isForgotPasswordOpen, setIsForgotPasswordOpen] = useState(false)
 
   const [loginResult, login] = useMutation(LOGIN)
-  const [loginWithProviderResult, loginWithProvider] = useMutation(LOGIN_WITH_PROVIDER)
+  const [onLoginWithProviderResult, loginWithProvider] = useMutation(LOGIN_WITH_PROVIDER)
 
   const [internalError, setInternalError] = useState()
 
-  const { register, handleSubmit, formState: { errors }, setFocus } = useForm({
+  const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schemaValidation)
   })
 
-  // eslint-disable-next-line
-  useEffect(() => { !isTouch && setTimeout(() => setFocus('username')) }, [])
-
   const onLoginSuccess = (result) => {
+    setInternalError({ message: 'OATHA' })
     if (result.data) {
-      setIsLoading(false)
       window.localStorage.setItem('AUTH_SESSION_ID', result.data.login)
       onSuccess()
+    } else {
+      setInternalError(result.error)
     }
   }
 
@@ -76,16 +69,11 @@ export default function Login ({ onSuccess, setIsLoading }) {
       .catch(setInternalError)
   }
 
-  if (internalError) return <ErrorModal>{internalError.message}</ErrorModal>
-
-  if (loginWithProviderResult?.error?.graphQLErrors[0]?.extensions.code === 'UNREGISTERED') {
-    // show unregistered user dialog
-    return <UnregisteredDialog error={loginWithProviderResult?.error} />
-  }
+  if (internalError?.message) return <ErrorModal>{internalError.message}</ErrorModal>
 
   return (
     <>
-      {isForgotPasswordOpen && <ForgotPassword onClose={() => setIsForgotPasswordOpen(false)} />}
+      {isForgotPasswordOpen && <ErrorModal>Password illa</ErrorModal>}
       <Text
         fontSize='1.8rem'
         fontWeight='600'
@@ -96,6 +84,21 @@ export default function Login ({ onSuccess, setIsLoading }) {
       >
         Login
       </Text>
+      <Stack
+        direction='row'
+        width='100%'
+        pb='1rem'
+        justifyContent='space-evenly'
+        color='hsla(261, 64%, 18%, 1)'
+      >
+        {loginProviders.map(loginProvider => (
+          <LoginWithProvider
+            {...loginProvider}
+            key={loginProvider.label}
+            onSuccess={onLoginWithProvider}
+          />
+        ))}
+      </Stack>
       <Stack
         as='form'
         w='100%'
@@ -138,20 +141,10 @@ export default function Login ({ onSuccess, setIsLoading }) {
           bg='linear-gradient(-45deg, hsla(261, 64%, 18%, 1), hsla(359, 88%, 55%, 1))'
           _hover={{ bg: 'linear-gradient(-45deg, hsla(261, 50%, 18%, 1), hsla(359, 88%, 40%, 1))' }}
           _active={{ bg: 'linear-gradient(-45deg, hsla(261, 50%, 18%, 1), hsla(359, 88%, 40%, 1))' }}
-          isLoading={loginResult.fetching}
+          isLoading={loginResult.fetching || onLoginWithProviderResult.fetching}
         >
           Sign in
         </Button>
-        <Stack direction='row' width='100%' justifyContent='space-evenly'>
-          {loginProviders.map(loginProvider => (
-            <LoginWithProvider
-              {...loginProvider}
-              key={loginProvider.label}
-              onSuccess={onLoginWithProvider}
-              setIsLoading={setIsLoading}
-            />
-          ))}
-        </Stack>
       </Stack>
     </>
   )

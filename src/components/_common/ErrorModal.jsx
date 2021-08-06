@@ -72,7 +72,7 @@ export default function ErrorModal ({ children }) {
             fontSize='.8rem'
             my='1.5rem'
           >
-            If The Problem Persists, Contact Us:
+            Contact Us:
           </Text>
           <Flex justifyContent='space-between' w='40%'>
             {[

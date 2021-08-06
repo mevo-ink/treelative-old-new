@@ -14,15 +14,12 @@ import {
   DrawerContent
 } from '@chakra-ui/react'
 import { FaGripLines } from 'react-icons/fa'
-import { motion } from 'framer-motion'
 
 import Search from 'components/Menu/Search'
 import Layouts from 'components/Menu/Layouts'
 import Insights from 'components/Menu/Insights'
 import Copyright from 'components/Menu/Copyright'
 import UserOptions from 'components/Menu/UserOptions'
-
-const MotionBox = motion(Box)
 
 export default function Menu () {
   const { isDesktop } = useDevice()
@@ -32,22 +29,20 @@ export default function Menu () {
 
   return (
     <Box>
-      <MotionBox
-        w='100%'
-        maxW='375px'
-        position='absolute'
-        right='0%'
-        zIndex='2'
-        bottom='-2rem'
-        animate={{ y: [0, -20, 0, -15, 0, -5, 0], transition: { delay: 10, duration: 0.8 } }}
-      >
-        {!isOpen && (
+      {!isOpen && (
+        <Box
+          w='100%'
+          maxW='375px'
+          position='absolute'
+          right='0%'
+          zIndex='2'
+          bottom='0rem'
+        >
           <IconButton
             ref={btnRef}
             icon={<FaGripLines color='white' />}
             w='100%'
-            pt='1rem'
-            pb='3rem'
+            py='.5rem'
             bg='hsla(0, 0%, 100%, .2)'
             backdropFilter='blur(5px)'
             borderRadius='0'
@@ -55,8 +50,8 @@ export default function Menu () {
             borderTopRightRadius='20px'
             onClick={onOpen}
           />
-        )}
-      </MotionBox>
+        </Box>
+      )}
       <Drawer
         isOpen={isOpen}
         isCentered

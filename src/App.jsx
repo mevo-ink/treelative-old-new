@@ -35,6 +35,7 @@ export default function App () {
 }
 // TODO:
 /*
+  ERROR modal refactor verbiage with props
   BUG with wiggle - not closing properly - Body not taking full height on desktop on menu bar close
   Unknown count text not showing in map view
   Add watsapp link for phone number on Click
