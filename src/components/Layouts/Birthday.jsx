@@ -144,6 +144,18 @@ export default function Birthday () {
           </Flex>
         </Flex>
       )}
+      <Text
+        py='1em'
+        textAlign='center'
+        opacity='.5'
+        _before={{
+          content: "'If You Cannot Find Yourself Please Update Your Data'",
+          fontSize: '.6rem',
+          display: 'block'
+        }}
+      >
+        Users Without Date of Birth: {result.data.getBirthdayData.unknownCount}
+      </Text>
     </Flex>
   )
 }

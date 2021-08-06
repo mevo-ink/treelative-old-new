@@ -35,7 +35,6 @@ export default function App () {
 }
 // TODO:
 /*
-  Show the unknown count on all Layouts
   Show unknown count separately from age insights
   find a place to shortname & isPublic
   Style Error modal with contact us info
