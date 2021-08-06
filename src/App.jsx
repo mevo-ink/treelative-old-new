@@ -35,7 +35,6 @@ export default function App () {
 }
 // TODO:
 /*
-  Add birthday effect on profile card mount
   Add wiggle effect for menu trigger
   Fix any lighthouse issues
 */
