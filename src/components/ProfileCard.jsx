@@ -1,11 +1,12 @@
+import { useEffect } from 'react'
+
 import {
   Modal,
   IconButton,
   ModalOverlay,
   ModalContent
 } from '@chakra-ui/react'
-import { FiEdit } from 'react-icons/fi'
-import { MdDone, MdClose } from 'react-icons/md'
+import { MdClose } from 'react-icons/md'
 
 import { useQuery } from 'urql'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
@@ -21,6 +22,7 @@ import { GET_USER } from 'graphql/queries/users'
 
 import Login from 'components/Login'
 import Loading from 'components/Loading'
+import Edit from 'components/ProfileCard/Edit'
 import Avatar from 'components/EditUser/Avatar'
 import Slider from 'components/ProfileCard/Slider'
 import FullName from 'components/EditUser/FullName'
@@ -34,7 +36,6 @@ import OuterWrapper from 'components/ProfileCard/OuterWrapper'
 import InnerWrapper from 'components/ProfileCard/InnerWrapper'
 import MoreSettings from 'components/ProfileCard/Slides/MoreSettings'
 import ParentChild from 'components/ProfileCard/Slides/ParentChild'
-import { useEffect } from 'react'
 
 export default function ProfileCard () {
   const [isEditMode, setIsEditMode] = useRecoilState(isEditModeAtom)
@@ -100,7 +101,7 @@ export default function ProfileCard () {
             {result.error && <Login onSuccess={onLoginSuccess} />}
             {result.data?.getUser && (
               <>
-                <IconButton icon={isEditMode ? <MdDone /> : <FiEdit />} {...innerBtnStyles} left='.3rem' onClick={() => setIsEditMode(!isEditMode)} />
+                <Edit innerBtnStyles={innerBtnStyles} />
                 <FindMe onClose={onClose} user={result.data?.getUser} {...innerBtnStyles} right='.3rem' />
                 <Avatar user={user} />
                 <FullName user={user} />

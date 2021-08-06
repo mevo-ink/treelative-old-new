@@ -43,5 +43,4 @@ export default function App () {
   Add wiggle effect for menu trigger
   Show loading screen when logging in with provider
   Fix any lighthouse issues
-  Hide edit button for non-owner non-admins
 */
