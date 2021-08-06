@@ -36,8 +36,6 @@ export default function App () {
 // TODO:
 /*
   Show the unknown count on all Layouts
-  Age & Birthday - give padding bottom
-  Highlight today's date dot icon in birthday view
   Show unknown count separately from age insights
   find a place to shortname & isPublic
   Style Error modal with contact us info
@@ -119,4 +117,6 @@ export default function App () {
   Double check all titles of confirmation delete modal
   Add PWA
   Fix cache issue on menu bar after login
+  Age & Birthday - give padding bottom
+  Highlight today's date dot icon in birthday view
 */

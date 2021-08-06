@@ -38,7 +38,9 @@ export default function Birthday () {
     while (!result.data?.getBirthdayData.data[date.toISOString().slice(5, 10)]) {
       date.setDate(date.getDate() + 1)
     }
-    document.getElementById(date.toISOString().slice(5, 10)).scrollIntoView({ behavior: 'smooth', block: 'center' })
+    const upcomingBirthDate = document.getElementById(date.toISOString().slice(5, 10))
+    upcomingBirthDate.style.background = 'hsla(100, 100%, 35%, 1)'
+    upcomingBirthDate.scrollIntoView({ behavior: 'smooth', block: 'center' })
     // eslint-disable-next-line
   }, [result.data])
 
@@ -59,39 +61,6 @@ export default function Birthday () {
 
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
-  // const getElementsInArea = (docElm => {
-  //   let viewportHeight = docElm.clientHeight
-  //   return (e, opts) => {
-  //     const found = []
-  //     let i
-  //     if (e && e.type === 'resize') { viewportHeight = docElm.clientHeight }
-  //     for (i = opts.elements.length; i--;) {
-  //       const elm = opts.elements[i]
-  //       const pos = elm.getBoundingClientRect()
-  //       const topPerc = pos.top / viewportHeight * 100
-  //       const bottomPerc = pos.bottom / viewportHeight * 100
-  //       const middle = (topPerc + bottomPerc) / 2
-  //       const inViewport = middle > opts.zone[1] &&
-  //       middle < (100 - opts.zone[1])
-  //       elm.classList.toggle(opts.markedClass, inViewport)
-  //       if (inViewport) {
-  //         found.push(elm)
-  //         elm.style.border = '1px solid rgba(255, 255, 255, .2)'
-  //       }
-  //     }
-  //   }
-  // })(document.documentElement)
-
-  // window.addEventListener('resize', f)
-
-  // function f (e) {
-  //   getElementsInArea(e, {
-  //     elements: document.getElementById('container').getElementsByTagName('div'),
-  //     markedClass: 'active-div',
-  //     zone: [45, 45] // percentage distance from top & bottom
-  //   })
-  // }
-
   return (
     <Flex
       id='container'
@@ -102,12 +71,10 @@ export default function Birthday () {
       overflowX='hidden'
       bg='hsla(0, 0%, 0%, .75)'
       sx={{ '&::-webkit-scrollbar': { display: 'none' }, scrollbarWidth: 'none' }}
-      // onWheel={f}
     >
       {Object.entries(result.data.getBirthdayData.data).map(([dob, users]) =>
         <Flex
           key={dob}
-          id={dob}
           alignItems='center'
           position='relative'
         >
@@ -120,6 +87,7 @@ export default function Birthday () {
             borderRadius='50%'
           />
           <Text
+            id={dob}
             w='6ch'
             px='.5em'
             color='hsla(0, 0%, 100%, .9)'
