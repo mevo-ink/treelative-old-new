@@ -5,6 +5,7 @@ export const GET_USER = gql`
     getUser (id: $id) {
       id
       isAdmin
+      isPublic
       username
       avatar
       fullName
