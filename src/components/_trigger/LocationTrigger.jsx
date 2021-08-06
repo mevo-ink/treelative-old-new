@@ -19,18 +19,23 @@ export default function LocationTrigger (props) {
     value,
     onSubmit,
     isLoading,
+    defaultIsOpen,
     ...inputProps
   } = props
 
   const isEditMode = useRecoilValue(isEditModeAtom)
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen })
 
   const wiggle = keyframes`
     0% { transform: rotate(0deg); }
     50% { transform: rotate(-1deg); }
     100% { transform: rotate(1deg); }
   `
+
+  if (defaultIsOpen) {
+    return isOpen ? <LocationModal value={value?.suggested} title={title} onSubmit={onSubmit} onClose={onClose} {...inputProps} /> : null
+  }
 
   if (!isEditMode) {
     return (

@@ -4,7 +4,7 @@ import { UPDATE_DATE_OF_BIRTH } from 'graphql/mutations/users'
 
 import DateTrigger from 'components/_trigger/DateTrigger'
 
-export default function DateOfBirth ({ user }) {
+export default function DateOfBirth ({ user, ...props }) {
   const [editDateOfBirthResult, editDateOfBirth] = useMutation(UPDATE_DATE_OF_BIRTH)
 
   const handleEditDateOfBirth = dateOfBirth => {
@@ -18,6 +18,7 @@ export default function DateOfBirth ({ user }) {
       value={user.dateOfBirth}
       editDate={handleEditDateOfBirth}
       editDateResult={editDateOfBirthResult}
+      {...props}
     />
   )
 }

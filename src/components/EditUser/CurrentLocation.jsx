@@ -4,7 +4,7 @@ import { UPDATE_CURRENT_LOCATION } from 'graphql/mutations/users'
 
 import LocationTrigger from 'components/_trigger/LocationTrigger'
 
-export default function CurrentLocation ({ user }) {
+export default function CurrentLocation ({ user, ...props }) {
   const [editCurrentLocationResult, updateUserCurrentLocation] = useMutation(UPDATE_CURRENT_LOCATION)
 
   const handleEditCurrentLocation = currentLocation => {
@@ -19,6 +19,7 @@ export default function CurrentLocation ({ user }) {
       onSubmit={handleEditCurrentLocation}
       isLoading={editCurrentLocationResult.fetching}
       error={editCurrentLocationResult.error}
+      {...props}
     />
   )
 }

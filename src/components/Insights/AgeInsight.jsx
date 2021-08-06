@@ -36,7 +36,7 @@ export default function AgeInsight () {
         textAlign='end'
         opacity='.5'
       >
-        Other: {result.data.insightsByAge.unknownCount}
+        Users without Date of Birth: {result.data.insightsByAge.unknownCount}
       </Text>
     </>
   )

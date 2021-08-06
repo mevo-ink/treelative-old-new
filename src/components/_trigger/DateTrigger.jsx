@@ -22,7 +22,8 @@ export default function DateTimePickerDialogTrigger (props) {
     title,
     value,
     editDate,
-    editDateResult
+    editDateResult,
+    defaultIsOpen
   } = props
 
   const isEditMode = useRecoilValue(isEditModeAtom)
@@ -30,7 +31,7 @@ export default function DateTimePickerDialogTrigger (props) {
   const dt = new Date(value)
   const dtDateOnly = new Date(dt.valueOf() + dt.getTimezoneOffset() * 60 * 1000)
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen })
 
   const wiggle = keyframes`
     0% { transform: rotate(0deg); }
@@ -53,6 +54,10 @@ export default function DateTimePickerDialogTrigger (props) {
         }
       })
       .catch(console.log)
+  }
+
+  if (defaultIsOpen) {
+    return isOpen ? <DateModal title={title} value={value} onClose={onClose} onSubmit={handleEditDate} isLoading={editDateResult?.fetching} /> : null
   }
 
   if (!isEditMode) {

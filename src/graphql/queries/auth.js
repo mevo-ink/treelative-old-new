@@ -7,6 +7,8 @@ export const WHO_AM_I = gql`
       isAdmin
       avatar
       fullName
+      dateOfBirth
+      currentLocation
     }
   }
 `
