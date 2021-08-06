@@ -41,7 +41,6 @@ export default function App () {
   Style Error modal with contact us info
   Add birthday effect on profile card mount
   Add wiggle effect for menu trigger
-  Add N/A dates and locations for partner slide
   Show loading screen when logging in with provider
   Fix any lighthouse issues
   Hide edit button for non-owner non-admins
@@ -119,4 +118,5 @@ export default function App () {
   Age & Birthday - give padding bottom
   Highlight today's date dot icon in birthday view
   Add bottom padding for copyright
+  Add N/A dates and locations for partner slide
 */
