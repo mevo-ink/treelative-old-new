@@ -37,11 +37,6 @@ export default function Age () {
     }) // eslint-disable-next-line
   }, [result.data])
 
-  // const scrollRef = useRef(null)
-  // const handleHorizontalScroll = e => {
-  //   scrollRef.current.scrollTo({ top: 0, left: scrollRef.current.scrollLeft + e.deltaY })
-  // }
-
   if (result.error) {
     return (
       <ErrorModal>
