@@ -41,6 +41,5 @@ export default function App () {
   Style Error modal with contact us info
   Add birthday effect on profile card mount
   Add wiggle effect for menu trigger
-  Show loading screen when logging in with provider
   Fix any lighthouse issues
 */

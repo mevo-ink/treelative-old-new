@@ -39,7 +39,7 @@ const schemaValidation = object().shape({
   password: string().required().min(3)
 })
 
-export default function Login ({ onSuccess }) {
+export default function Login ({ onSuccess, setIsLoading }) {
   const { isTouch } = useDevice()
 
   const [isForgotPasswordOpen, setIsForgotPasswordOpen] = useState(false)
@@ -58,6 +58,7 @@ export default function Login ({ onSuccess }) {
 
   const onLoginSuccess = (result) => {
     if (result.data) {
+      setIsLoading(false)
       window.localStorage.setItem('AUTH_SESSION_ID', result.data.login)
       onSuccess()
     }
@@ -147,6 +148,7 @@ export default function Login ({ onSuccess }) {
               {...loginProvider}
               key={loginProvider.label}
               onSuccess={onLoginWithProvider}
+              setIsLoading={setIsLoading}
             />
           ))}
         </Stack>

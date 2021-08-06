@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import {
   Modal,
@@ -38,6 +38,8 @@ import MoreSettings from 'components/ProfileCard/Slides/MoreSettings'
 import ParentChild from 'components/ProfileCard/Slides/ParentChild'
 
 export default function ProfileCard () {
+  const [isLoading, setIsLoading] = useState(false)
+
   const [isEditMode, setIsEditMode] = useRecoilState(isEditModeAtom)
   const [activeNodeID, setActiveNodeID] = useRecoilState(activeNodeIDAtom)
 
@@ -79,7 +81,7 @@ export default function ProfileCard () {
     _active: { background: 'hsla(0, 0%, 50%, .2)' }
   }
 
-  if (result.fetching) return <Loading />
+  if (result.fetching || isLoading) return <Loading />
 
   return (
     <Modal isOpen onClose={onClose} isCentered>
@@ -98,7 +100,7 @@ export default function ProfileCard () {
         />
         <OuterWrapper>
           <InnerWrapper>
-            {result.error && <Login onSuccess={onLoginSuccess} />}
+            {result.error && <Login onSuccess={onLoginSuccess} setIsLoading={setIsLoading} />}
             {result.data?.getUser && (
               <>
                 <Edit innerBtnStyles={innerBtnStyles} />
