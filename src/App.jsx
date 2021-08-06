@@ -36,7 +36,6 @@ export default function App () {
 // TODO:
 /*
   find a place to shortname & isPublic
-  Style Error modal with contact us info
   Add birthday effect on profile card mount
   Add wiggle effect for menu trigger
   Fix any lighthouse issues
