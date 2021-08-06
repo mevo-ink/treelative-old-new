@@ -40,7 +40,6 @@ export default function App () {
   find a place to shortname & isPublic
   Style Error modal with contact us info
   Add birthday effect on profile card mount
-  Add bottom padding for copyright
   Add wiggle effect for menu trigger
   Add N/A dates and locations for partner slide
   Show loading screen when logging in with provider
@@ -119,4 +118,5 @@ export default function App () {
   Fix cache issue on menu bar after login
   Age & Birthday - give padding bottom
   Highlight today's date dot icon in birthday view
+  Add bottom padding for copyright
 */
