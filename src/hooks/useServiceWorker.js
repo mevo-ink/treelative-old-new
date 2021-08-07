@@ -13,7 +13,7 @@ export default function useServiceWorker () {
   const toast = useToast()
 
   const [waitingWorker, setWaitingWorker] = useState()
-  const [newVersionAvailable, setNewVersionAvailable] = useState()
+  const [newVersionAvailable, setNewVersionAvailable] = useState(false)
 
   const onServiceWorkerUpdate = registration => {
     setWaitingWorker(registration && registration.waiting)
@@ -27,17 +27,16 @@ export default function useServiceWorker () {
   }
 
   useEffect(() => {
-    // service worker
+    // register service worker
     if (process.env.NODE_ENV === 'production') {
       serviceWorker.register({ onUpdate: onServiceWorkerUpdate })
     }
     if (newVersionAvailable) {
       toast({
         render: () => (
-          <Box p={3} textAlign='center' borderRadius='xl' bg='white'>
+          <Box p='4' textAlign='center' borderRadius='xl' bg='purple.600' color='white'>
             <Text fontWeight='bold' mb={2}>A new version has been released</Text>
-            <Text fontWeight='bold' fontSize='sm' my={2}>Version {require('../../package.json').version}</Text>
-            <Button colorScheme='teal' size='lg' onClick={updateServiceWorker}>Update</Button>
+            <Button size='lg' onClick={updateServiceWorker}>UPDATE</Button>
           </Box>
         ),
         position: 'top',
