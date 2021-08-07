@@ -38,6 +38,5 @@ export default function App () {
   ERROR modal refactor verbiage with props
   BUG with wiggle - not closing properly - Body not taking full height on desktop on menu bar close
   Unknown count text not showing in map view
-  Add email link for email on Click
   Fix any lighthouse issues
 */

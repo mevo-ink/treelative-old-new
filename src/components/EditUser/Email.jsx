@@ -17,6 +17,7 @@ export default function Email ({ user, icon }) {
     <InputWithIconTrigger
       title='Edit Email'
       name='email'
+      baseURL='https://mailto:'
       icon={icon}
       value={user?.email}
       validation={string().email().required()}
