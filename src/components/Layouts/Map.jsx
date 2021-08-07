@@ -140,10 +140,10 @@ export default function Map () {
         w='100%'
         position='absolute'
         zIndex='10'
-        mt='.5rem'
+        p='.5rem'
         fontSize='.8rem'
         textAlign='end'
-        opacity='.5'
+        opacity='.3'
       >
         Users without Current Location: {result.data.getMapData.unknownCount}
       </Text>

@@ -37,5 +37,4 @@ export default function App () {
 /*
   Fix any lighthouse issues
   Search -> Open Profile Card -> Find Me - In this situation, Menu should close
-  Not getting UnknownCount for Map View
 */
