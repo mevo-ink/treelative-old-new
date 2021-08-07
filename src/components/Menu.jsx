@@ -74,7 +74,7 @@ export default function Menu () {
                 <Search onClose={onClose} />
                 <UserOptions onClose={onClose} />
               </HStack>
-              <Layouts />
+              <Layouts onClose={onClose} />
               <Insights />
             </Stack>
             <Copyright />

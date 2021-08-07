@@ -9,7 +9,11 @@ import age from 'images/ageView.png'
 import network from 'images/graphView.png'
 import birthday from 'images/birthdayView.png'
 
-export default function Layouts () {
+import useDevice from 'hooks/useDevice'
+
+export default function Layouts ({ onClose }) {
+  const { isTouch } = useDevice()
+
   const [layout, setLayout] = useRecoilState(layoutAtom)
 
   const iconsAndNames = [
@@ -20,6 +24,7 @@ export default function Layouts () {
   ]
 
   const handleLayoutChange = async (layout) => {
+    isTouch && onClose()
     await new Promise(resolve => setTimeout(resolve, 110))
     setLayout(layout)
   }
