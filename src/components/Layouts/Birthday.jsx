@@ -119,7 +119,7 @@ export default function Birthday () {
                   my='3'
                   objectFit='contain'
                   borderRadius='50%'
-                  zIndex='1'
+                  zIndex='4'
                   onClick={() => handleUserSelect(user.id)}
                 />
                 {user.id === activeNodePulseID && <ActivePulse />}
@@ -131,7 +131,7 @@ export default function Birthday () {
                   position='absolute'
                   top='5px'
                   right='5px'
-                  zIndex='1'
+                  zIndex='5'
                   fontSize='12px'
                   bg='hsla(310, 100%, 40%, 1)'
                   borderRadius='50%'

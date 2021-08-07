@@ -101,7 +101,7 @@ export default function Age () {
                   my='3'
                   objectFit='contain'
                   borderRadius='50%'
-                  zIndex='1'
+                  zIndex='4'
                   onClick={() => handleUserSelect(user.id)}
                 />
                 {user.id === activeNodePulseID && <ActivePulse />}
@@ -114,7 +114,7 @@ export default function Age () {
                     position='absolute'
                     top='5px'
                     right='5px'
-                    zIndex='1'
+                    zIndex='5'
                     color='hsla(0, 0%, 0%, 1)'
                     bg='hsla(0, 0%, 100%, 1)'
                     borderRadius='50%'

@@ -12,7 +12,7 @@ export default function ActivePulse ({ mapView }) {
       position='absolute'
       left='50%'
       top='50%'
-      zIndex='0'
+      zIndex='3'
       transform={!mapView && 'translate(-20px, -20px)'}
       _after={{
         content: '""',

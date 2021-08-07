@@ -172,7 +172,7 @@ export default function Map () {
               objectFit='contain'
               borderRadius='50%'
               position='absolute'
-              zIndex={(user.id === activeNodePulseID || user.id === whoAmIResult.data?.whoAmI.id) ? '3' : '2'}
+              zIndex={(user.id === activeNodePulseID || user.id === whoAmIResult.data?.whoAmI.id) ? '4' : '2'}
               onClick={() => handleUserSelect(user.id)}
             />
             {user.id === activeNodePulseID && <ActivePulse mapView />}
