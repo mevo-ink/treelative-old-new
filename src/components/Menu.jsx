@@ -7,6 +7,7 @@ import {
   Stack,
   HStack,
   Drawer,
+  keyframes,
   IconButton,
   DrawerBody,
   useDisclosure,
@@ -27,30 +28,36 @@ export default function Menu () {
   const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: isDesktop })
   const btnRef = useRef()
 
+  const wiggle = keyframes`
+    80% { transform: scaleY(1); }
+    95% { transform: scaleY(1.3); }
+    97% { transform: scaleY(1); }
+    99% { transform: scaleY(1.2); }
+    100% { transform: scaleY(1); }
+  `
+
   return (
     <Box>
       {!isOpen && (
-        <Box
+        <IconButton
+          ref={btnRef}
+          icon={<FaGripLines color='white' />}
           w='100%'
+          h='2rem'
           maxW='375px'
           position='absolute'
-          right='0%'
+          right='0'
+          bottom='0'
           zIndex='6'
-          bottom='0rem'
-        >
-          <IconButton
-            ref={btnRef}
-            icon={<FaGripLines color='white' />}
-            w='100%'
-            py='.5rem'
-            bg='hsla(0, 0%, 100%, .2)'
-            backdropFilter='blur(5px)'
-            borderRadius='0'
-            borderTopLeftRadius='20px'
-            borderTopRightRadius='20px'
-            onClick={onOpen}
-          />
-        </Box>
+          bg='hsla(0, 0%, 100%, .2)'
+          backdropFilter='blur(5px)'
+          borderRadius='0'
+          borderTopLeftRadius='20px'
+          borderTopRightRadius='20px'
+          transformOrigin='50% 100%'
+          animation={`${wiggle} 3s 5s ease-in`}
+          onClick={onOpen}
+        />
       )}
       <Drawer
         isOpen={isOpen}

@@ -35,7 +35,6 @@ export default function App () {
 }
 // TODO:
 /*
-  BUG with wiggle - not closing properly - Body not taking full height on desktop on menu bar close
   Unknown count text not showing in map view
   Fix any lighthouse issues
   Search -> Open Profile Card -> Find Me - In this situation, Menu should close
