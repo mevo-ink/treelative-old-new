@@ -17,6 +17,7 @@ export default function PhoneNumber ({ user, icon }) {
     <InputWithIconTrigger
       title='Edit Phone Number'
       name='phoneNumber'
+      baseURL='https://wa.me/'
       icon={icon}
       value={user?.phoneNumber}
       validation={string().matches(/^\+?\d{10,14}$/, { message: 'Invalid Phone Number', excludeEmptyString: true })}

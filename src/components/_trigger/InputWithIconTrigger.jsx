@@ -19,6 +19,7 @@ export default function InputWithIconTrigger (props) {
   const {
     icon,
     title,
+    baseURL,
     onSubmit,
     isLoading,
     ...inputProps
@@ -35,7 +36,7 @@ export default function InputWithIconTrigger (props) {
 
   const handleClick = () => {
     if (isEditMode) onOpen()
-    else console.log('What Are We Going To Do OnClick?')
+    else window.location.href = baseURL + props.value
   }
 
   return (
