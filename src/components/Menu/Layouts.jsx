@@ -24,7 +24,7 @@ export default function Layouts ({ onClose }) {
   ]
 
   const handleLayoutChange = async (layout) => {
-    isDesktop && onClose()
+    !isDesktop && onClose()
     await new Promise(resolve => setTimeout(resolve, 110))
     setLayout(layout)
   }
