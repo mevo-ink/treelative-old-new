@@ -42,4 +42,5 @@ export default function App () {
   Use react-pie-chart app
   Style insights
   Remove standalone couple insights - include in members popup somehow
+  Menu bar - increase breakpoint for mobile - not taking full width
 */
