@@ -3,10 +3,13 @@ import { useState, useEffect } from 'react'
 import * as serviceWorker from 'serviceWorkerRegistration'
 
 import {
-  Box,
-  Text,
+  Modal,
   Button,
-  useToast
+  useToast,
+  ModalBody,
+  ModalHeader,
+  ModalOverlay,
+  ModalContent
 } from '@chakra-ui/react'
 
 export default function useServiceWorker () {
@@ -34,10 +37,22 @@ export default function useServiceWorker () {
     if (newVersionAvailable) {
       toast({
         render: () => (
-          <Box p='4' textAlign='center' borderRadius='xl' bg='purple.600' color='white'>
-            <Text fontWeight='bold' mb={2}>A new version has been released</Text>
-            <Button size='lg' onClick={updateServiceWorker}>UPDATE</Button>
-          </Box>
+          <Modal
+            isOpen
+            isCentered
+            onClose={() => {}}
+            closeOnOverlayClick={false}
+          >
+            <ModalOverlay />
+            <ModalContent textAlign='center' p='1rem'>
+              <ModalHeader>
+                A new version has been released!
+              </ModalHeader>
+              <ModalBody>
+                <Button variant='submit' onClick={updateServiceWorker}>UPDATE</Button>
+              </ModalBody>
+            </ModalContent>
+          </Modal>
         ),
         position: 'top',
         duration: null,

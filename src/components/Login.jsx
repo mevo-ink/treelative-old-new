@@ -39,7 +39,7 @@ export default function Login ({ onSuccess }) {
   const [isForgotPasswordOpen, setIsForgotPasswordOpen] = useState(false)
 
   const [loginResult, login] = useMutation(LOGIN)
-  const [onLoginWithProviderResult, loginWithProvider] = useMutation(LOGIN_WITH_PROVIDER)
+  const [loginWithProviderResult, loginWithProvider] = useMutation(LOGIN_WITH_PROVIDER)
 
   const [internalError, setInternalError] = useState()
 
@@ -52,8 +52,6 @@ export default function Login ({ onSuccess }) {
     if (result.data) {
       window.localStorage.setItem('AUTH_SESSION_ID', result.data.login)
       onSuccess()
-    } else {
-      setInternalError(result.error)
     }
   }
 
@@ -81,7 +79,8 @@ export default function Login ({ onSuccess }) {
 
   return (
     <>
-      {isForgotPasswordOpen && <ErrorModal />}
+      {isForgotPasswordOpen && <ErrorModal isContact message='Please ' />}
+      {loginWithProviderResult.error && <ErrorModal> {loginWithProviderResult.error.message} </ErrorModal>}
       <Text
         fontSize='1.8rem'
         fontWeight='600'
@@ -149,7 +148,7 @@ export default function Login ({ onSuccess }) {
           bg='linear-gradient(-45deg, hsla(261, 64%, 18%, 1), hsla(359, 88%, 55%, 1))'
           _hover={{ bg: 'linear-gradient(-45deg, hsla(261, 50%, 18%, 1), hsla(359, 88%, 40%, 1))' }}
           _active={{ bg: 'linear-gradient(-45deg, hsla(261, 50%, 18%, 1), hsla(359, 88%, 40%, 1))' }}
-          isLoading={loginResult.fetching || onLoginWithProviderResult.fetching}
+          isLoading={loginResult.fetching || loginWithProviderResult.fetching}
         >
           Sign in
         </Button>
