@@ -69,11 +69,19 @@ export default function Login ({ onSuccess }) {
       .catch(setInternalError)
   }
 
-  if (internalError?.message) return <ErrorModal>{internalError.message}</ErrorModal>
+  if (internalError?.message) {
+    return (
+      <ErrorModal
+        icon
+        title='Ops!'
+        message={internalError.message}
+      />
+    )
+  }
 
   return (
     <>
-      {isForgotPasswordOpen && <ErrorModal>Password illa</ErrorModal>}
+      {isForgotPasswordOpen && <ErrorModal />}
       <Text
         fontSize='1.8rem'
         fontWeight='600'

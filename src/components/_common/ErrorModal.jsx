@@ -10,6 +10,7 @@ import {
   ModalOverlay,
   ModalContent
 } from '@chakra-ui/react'
+import { MdClose } from 'react-icons/md'
 import { FaAtlassian } from 'react-icons/fa'
 import { IoLogoJavascript } from 'react-icons/io'
 
@@ -19,60 +20,82 @@ import { activeNodeIDAtom } from 'utils/atoms.js'
 
 import ErrorPNG from 'images/error.png'
 
-export default function ErrorModal ({ children }) {
+export default function ErrorModal (props) {
+  const {
+    icon,
+    title,
+    message,
+    btn,
+    handleBtnClick
+  } = props
+
   const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
+
   return (
-    <Modal isOpen isCentered closeOnOverlayClick={false} scrollBehavior='inside'>
+    <Modal isOpen isCentered scrollBehavior='inside'>
       <ModalOverlay />
       <ModalContent bg='transparent'>
+        <IconButton
+          size='2rem'
+          icon={<MdClose size='1.5rem' />}
+          position='absolute'
+          zIndex='1'
+          right='1rem'
+          top='1rem'
+          borderRadius='5px'
+          bg='transparent'
+          onClick={() => console.log('Don\'t Know How To Close, Pls Help!')}
+        />
         <ModalBody as={Grid} placeItems='center' p='2em'>
-          <Image src={ErrorPNG} alt='Error' w='100px' mb='1rem' />
-          <Text
-            textAlign='center'
-            fontSize='1.3rem'
-            fontWeight='600'
-            mb='2rem'
-            _after={{
-              content: "'Something Went Wrong.'",
-              display: 'block'
-            }}
-          >
-            Oops!
-          </Text>
-          <Text
-            w='100%'
-            py='1em'
-            textAlign='center'
-            borderRadius='10px'
-            bg='hsla(0, 100%, 70%, .3)'
-          >
-            {children}
-          </Text>
-          <Button
-            w='8em'
-            h='2em'
-            mt='2rem'
-            fontSize='1.3rem'
-            color='white'
-            border='none'
-            borderRadius='0.5em'
-            bg='linear-gradient(hsl(337, 100%, 55%), hsl(16, 60%, 65%) 100%)'
-            _hover={{
-              bg: 'linear-gradient(hsla(337, 100%, 55%, .5), hsla(16, 60%, 65%, .5) 100%)'
-            }}
-            _active={{
-              bg: 'linear-gradient(hsla(337, 100%, 55%, .5), hsla(16, 60%, 65%, .5) 100%)'
-            }}
-            onClick={() => { window.location.href = '/' }}
-          >
-            Refresh
-          </Button>
+          {icon && <Image src={ErrorPNG} alt='Error' w='100px' mb='1rem' />}
+          {title && (
+            <Text
+              textAlign='center'
+              fontSize='1.3rem'
+              fontWeight='600'
+              mb='2rem'
+            >
+              {title}
+            </Text>
+          )}
+          {message && (
+            <Text
+              w='100%'
+              py='1em'
+              textAlign='center'
+              borderRadius='10px'
+              bg='hsla(0, 100%, 70%, .3)'
+            >
+              {message}
+            </Text>
+          )}
+          {btn && (
+            <Button
+              w='8em'
+              h='2em'
+              mt='2rem'
+              fontSize='1.3rem'
+              color='white'
+              border='none'
+              borderRadius='0.5em'
+              bg='linear-gradient(hsl(337, 100%, 55%), hsl(16, 60%, 65%) 100%)'
+              _hover={{
+                bg: 'linear-gradient(hsla(337, 100%, 55%, .5), hsla(16, 60%, 65%, .5) 100%)'
+              }}
+              _active={{
+                bg: 'linear-gradient(hsla(337, 100%, 55%, .5), hsla(16, 60%, 65%, .5) 100%)'
+              }}
+              onClick={handleBtnClick}
+            >
+              Refresh
+            </Button>
+          )}
           <Text
             textAlign='center'
             fontSize='.8rem'
             my='1.5rem'
           >
-            Contact Us:
+            Please, Contact Us:
           </Text>
           <Flex justifyContent='space-between' w='40%'>
             {[
