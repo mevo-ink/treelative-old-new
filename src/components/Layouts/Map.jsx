@@ -1,4 +1,4 @@
-import { Box, Image } from '@chakra-ui/react'
+import { Box, Image, Text } from '@chakra-ui/react'
 
 import { useQuery } from 'urql'
 import { useSetRecoilState, useRecoilState } from 'recoil'
@@ -136,6 +136,17 @@ export default function Map () {
 
   return (
     <Box h='calc(100 * var(--vh))'>
+      <Text
+        w='100%'
+        position='absolute'
+        zIndex='10'
+        mt='.5rem'
+        fontSize='.8rem'
+        textAlign='end'
+        opacity='.5'
+      >
+        Users without Current Location: {result.data.getMapData.unknownCount}
+      </Text>
       <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_LOCATION_API_KEY }}
         defaultCenter={defaultCenter}

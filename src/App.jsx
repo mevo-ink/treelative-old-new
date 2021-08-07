@@ -35,7 +35,7 @@ export default function App () {
 }
 // TODO:
 /*
-  Unknown count text not showing in map view
   Fix any lighthouse issues
   Search -> Open Profile Card -> Find Me - In this situation, Menu should close
+  Not getting UnknownCount for Map View
 */
