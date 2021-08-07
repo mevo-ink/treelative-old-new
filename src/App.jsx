@@ -36,5 +36,8 @@ export default function App () {
 // TODO:
 /*
   Fix any lighthouse issues
-  Search -> Open Profile Card -> Find Me - In this situation, Menu should close
+  FIX accessibility issues
+  Add hook to create fallback image on user creation
+  Update existing user avatars
+  Use react-pie-chart app
 */
