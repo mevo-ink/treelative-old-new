@@ -117,7 +117,7 @@ export default function Map () {
 
   // center on auth user if location is available - else center on Sri Lanka
   const sriLanka = { lat: 10.99835602, lng: 77.01502627 }
-  const defaultCenter = (authUserID && result.data?.getMapData && result.data.getMapData.find(user => user.id === authUserID)?.position) || sriLanka
+  const defaultCenter = (authUserID && result.data?.getMapData?.data && result.data.getMapData.data.find(user => user.id === authUserID)?.position) || sriLanka
 
   if (result.error) {
     return (
@@ -143,9 +143,9 @@ export default function Map () {
         p='.5rem'
         fontSize='.8rem'
         textAlign='end'
-        opacity='.3'
+        opacity='.6'
       >
-        Users without Current Location: {result.data.getMapData.unknownCount}
+        Unknown Users: {result.data.getMapData.unknownCount}
       </Text>
       <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_LOCATION_API_KEY }}
@@ -155,7 +155,7 @@ export default function Map () {
         onGoogleApiLoaded={({ map }) => {
           setMapMethods({
             panTo: (userID) => {
-              const position = result.data.getMapData.find(user => user.id === userID)?.position
+              const position = result.data.getMapData.data.find(user => user.id === userID)?.position
               position && map.panTo(position)
               return position
             }
@@ -167,7 +167,7 @@ export default function Map () {
           })
         }}
       >
-        {result.data.getMapData.map(user => (
+        {result.data.getMapData.data.map(user => (
           <Box
             key={user.id}
             position='relative'

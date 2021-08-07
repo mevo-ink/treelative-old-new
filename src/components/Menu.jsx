@@ -55,7 +55,7 @@ export default function Menu () {
           borderTopLeftRadius='20px'
           borderTopRightRadius='20px'
           transformOrigin='50% 100%'
-          animation={`${wiggle} 3s 5s ease-in`}
+          animation={`${wiggle} 3s ease-in`}
           onClick={onOpen}
         />
       )}
