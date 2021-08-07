@@ -66,7 +66,7 @@ export default function Menu () {
         onClose={onClose}
         finalFocusRef={btnRef}
       >
-        {/* <DrawerOverlay zIndex='0' /> */}
+        <DrawerOverlay />
         <DrawerContent maxH='26.5rem' left='unset !important'>
           <IconButton
             ref={btnRef}
