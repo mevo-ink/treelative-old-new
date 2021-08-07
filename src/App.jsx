@@ -40,4 +40,6 @@ export default function App () {
   Add hook to create fallback image on user creation
   Update existing user avatars
   Use react-pie-chart app
+  Style insights
+  Remove standalone couple insights - include in members popup somehow
 */
