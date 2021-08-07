@@ -12,7 +12,7 @@ import birthday from 'images/birthdayView.png'
 import useDevice from 'hooks/useDevice'
 
 export default function Layouts ({ onClose }) {
-  const { isTouch } = useDevice()
+  const { isDesktop } = useDevice()
 
   const [layout, setLayout] = useRecoilState(layoutAtom)
 
@@ -24,7 +24,7 @@ export default function Layouts ({ onClose }) {
   ]
 
   const handleLayoutChange = async (layout) => {
-    isTouch && onClose()
+    isDesktop && onClose()
     await new Promise(resolve => setTimeout(resolve, 110))
     setLayout(layout)
   }
