@@ -8,7 +8,7 @@ import {
 import { useQuery } from 'urql'
 import { INSIGHTS_BY_LOCATION } from 'graphql/queries/insights'
 
-import Loading from 'components/Loading'
+import Loading from 'components/_common/Loading'
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']
 

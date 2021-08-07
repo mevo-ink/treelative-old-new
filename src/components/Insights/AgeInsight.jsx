@@ -11,7 +11,7 @@ import {
 import { useQuery } from 'urql'
 import { INSIGHTS_BY_AGE } from 'graphql/queries/insights'
 
-import Loading from 'components/Loading'
+import Loading from 'components/_common/Loading'
 
 export default function AgeInsight () {
   const [result] = useQuery({ query: INSIGHTS_BY_AGE })
