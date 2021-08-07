@@ -35,7 +35,7 @@ export default function Menu () {
           maxW='375px'
           position='absolute'
           right='0%'
-          zIndex='2'
+          zIndex='6'
           bottom='0rem'
         >
           <IconButton
