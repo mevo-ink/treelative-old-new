@@ -8,7 +8,8 @@ import {
   ModalBody,
   IconButton,
   ModalOverlay,
-  ModalContent
+  ModalContent,
+  useDisclosure
 } from '@chakra-ui/react'
 import { MdClose } from 'react-icons/md'
 import { FaAtlassian } from 'react-icons/fa'
@@ -29,10 +30,12 @@ export default function ErrorModal (props) {
     handleBtnClick
   } = props
 
+  const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true })
+
   const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
 
   return (
-    <Modal isOpen isCentered scrollBehavior='inside'>
+    <Modal isOpen={isOpen} isCentered scrollBehavior='inside'>
       <ModalOverlay />
       <ModalContent bg='transparent'>
         <IconButton
@@ -44,7 +47,7 @@ export default function ErrorModal (props) {
           top='1rem'
           borderRadius='5px'
           bg='transparent'
-          onClick={() => console.log('Don\'t Know How To Close, Pls Help!')}
+          onClick={onClose}
         />
         <ModalBody as={Grid} placeItems='center' p='2em'>
           {icon && <Image src={ErrorPNG} alt='Error' w='100px' mb='1rem' />}
