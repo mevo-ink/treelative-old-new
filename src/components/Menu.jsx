@@ -1,7 +1,5 @@
 import { useRef } from 'react'
 
-// import useDevice from 'hooks/useDevice'
-
 import {
   Box,
   Stack,
@@ -23,8 +21,6 @@ import Copyright from 'components/Menu/Copyright'
 import UserOptions from 'components/Menu/UserOptions'
 
 export default function Menu () {
-  // const { isDesktop } = useDevice()
-  // { defaultIsOpen: isDesktop }
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()
 
@@ -44,14 +40,14 @@ export default function Menu () {
           icon={<FaGripLines color='white' />}
           aria-label='Menu Button'
           w='100%'
-          h='2rem'
+          h='2.5rem'
           maxW='420px'
           position='absolute'
           right='0'
           bottom='0'
           zIndex='6'
           bg='hsla(0, 0%, 100%, .2)'
-          backdropFilter='blur(5px)'
+          backdropFilter='blur(8px)'
           borderRadius='0'
           borderTopLeftRadius='20px'
           borderTopRightRadius='20px'
