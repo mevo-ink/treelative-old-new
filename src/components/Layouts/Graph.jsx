@@ -123,12 +123,11 @@ export default function Graph () {
     const clearSelection = function () { network.unselectAll() }
     network.on('dragStart', clearSelection)
     // set activeNodeID on user node click
-    network.on('selectNode', ({ nodes }) => {
+    network.on('selectNode', ({ nodes, event }) => {
+      event.preventDefault()
       const activeNode = result.data?.getNetworkData.nodes.find(node => nodes[0] === node.id)
       if (activeNode.group !== 'couple') {
-        setTimeout(() => {
-          setActiveNodeID(activeNode.id)
-        }, 200)
+        setActiveNodeID(activeNode.id)
       }
     })
     // limit the zoom
