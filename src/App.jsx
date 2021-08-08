@@ -36,8 +36,6 @@ export default function App () {
 // TODO:
 /*
   Fix any lighthouse issues
-  Add hook to create fallback image on user creation
-  Update existing user avatars
   Use react-pie-chart app
   Style insights
 */
