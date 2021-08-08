@@ -74,6 +74,7 @@ export default function CreateUser ({ initialValue = '', onClose: onParentClose 
       <IconButton
         isRound
         icon={<IoPersonAddSharp color='white' />}
+        aria-label='Create User Button'
         size='sm'
         bg='hsla(220, 100%, 60%, .8)'
         onClick={onOpen}

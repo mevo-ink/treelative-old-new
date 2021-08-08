@@ -100,6 +100,7 @@ export default function FindMe ({ onClose, user, ...styles }) {
       <IconButton
         isRound
         icon={<BiCurrentLocation />}
+        aria-label='Find Me Button'
         bg='hsla(220, 100%, 60%, .8)'
         onClick={handleFindMe}
         {...styles}

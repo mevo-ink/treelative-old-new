@@ -42,6 +42,7 @@ export default function Menu () {
         <IconButton
           ref={btnRef}
           icon={<FaGripLines color='white' />}
+          aria-label='Menu Button'
           w='100%'
           h='2rem'
           maxW='375px'
@@ -71,6 +72,7 @@ export default function Menu () {
           <IconButton
             ref={btnRef}
             icon={<FaGripLines color='white' />}
+            aria-label='Menu Button'
             borderRadius='20px 20px 0 0'
             bg='hsla(0, 0%, 100%, .2)'
             onClick={onClose}
