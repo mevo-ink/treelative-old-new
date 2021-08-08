@@ -143,7 +143,7 @@ const theme = extendTheme({
     Drawer: {
       baseStyle: {
         dialog: {
-          width: '375px',
+          width: '420px',
           color: 'hsla(0, 0%, 100%, .9)',
           borderTopLeftRadius: '20px',
           borderTopRightRadius: '20px',

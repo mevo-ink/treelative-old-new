@@ -36,11 +36,9 @@ export default function App () {
 // TODO:
 /*
   Fix any lighthouse issues
-  FIX accessibility issues
   Add hook to create fallback image on user creation
   Update existing user avatars
   Use react-pie-chart app
   Style insights
   Remove standalone couple insights - include in members popup somehow
-  Menu bar - increase breakpoint for mobile - not taking full width
 */

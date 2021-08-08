@@ -45,7 +45,7 @@ export default function Menu () {
           aria-label='Menu Button'
           w='100%'
           h='2rem'
-          maxW='375px'
+          maxW='420px'
           position='absolute'
           right='0'
           bottom='0'
