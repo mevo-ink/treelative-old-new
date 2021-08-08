@@ -6,13 +6,17 @@ import {
   ModalBody
 } from '@chakra-ui/react'
 
-import AgeInsight from 'components/Insights/AgeInsight'
-import CountryInsight from 'components/Insights/CountryInsight'
+import AgeInsight from 'components/Menu/Insights/AgeInsight'
+import MembersInsight from 'components/Menu/Insights/MembersInsight'
+import CountryInsight from 'components/Menu/Insights/CountryInsight'
 
 export default function InsightsModal ({ onClose, insight }) {
   let InsightContent
 
   switch (insight.title) {
+    case 'Members':
+      InsightContent = MembersInsight
+      break
     case 'Age':
       InsightContent = AgeInsight
       break

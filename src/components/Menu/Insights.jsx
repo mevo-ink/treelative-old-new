@@ -14,13 +14,12 @@ import { SiApollographql } from 'react-icons/si'
 
 import { useQuery } from 'urql'
 
-import { COUNT_MEMBERS, COUNT_COUPLES } from 'graphql/queries/insights'
+import { COUNT_MEMBERS } from 'graphql/queries/insights'
 
-import InsightModal from 'components/InsightModal'
+import InsightModal from 'components/Menu/Insights/InsightModal'
 
 export default function Insights () {
   const [resultGetMembers] = useQuery({ query: COUNT_MEMBERS })
-  const [resultGetCouples] = useQuery({ query: COUNT_COUPLES })
 
   const [openInsight, setOpenInsight] = useState(null)
 
@@ -28,7 +27,6 @@ export default function Insights () {
 
   const data = [
     { title: 'Members', value: resultGetMembers.data?.countUsers || 0 },
-    { title: 'Couples', value: resultGetCouples.data?.countCouples || 0 },
     { title: 'Country', description: 'Country Distribution', value: <Icon as={BiWorld} h='30px' /> },
     { title: 'Age', description: 'Age Distribution', value: <Icon as={SiApollographql} h='30px' /> }
   ]
