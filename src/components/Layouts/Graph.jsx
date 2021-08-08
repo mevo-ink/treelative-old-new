@@ -18,7 +18,7 @@ export default function Graph () {
 
   const options = {
     layout: {
-      improvedLayout: false
+      improvedLayout: true
     },
     nodes: {
       borderWidth: 2,
@@ -128,7 +128,7 @@ export default function Graph () {
       if (activeNode.group !== 'couple') {
         setTimeout(() => {
           setActiveNodeID(activeNode.id)
-        }, 1)
+        }, 200)
       }
     })
     // limit the zoom
