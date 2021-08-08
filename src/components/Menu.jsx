@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 
-import useDevice from 'hooks/useDevice'
+// import useDevice from 'hooks/useDevice'
 
 import {
   Box,
@@ -23,9 +23,9 @@ import Copyright from 'components/Menu/Copyright'
 import UserOptions from 'components/Menu/UserOptions'
 
 export default function Menu () {
-  const { isDesktop } = useDevice()
-
-  const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: isDesktop })
+  // const { isDesktop } = useDevice()
+  // { defaultIsOpen: isDesktop }
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()
 
   const wiggle = keyframes`
