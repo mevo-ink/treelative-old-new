@@ -39,7 +39,7 @@ export default function Layouts ({ onClose }) {
           <Button
             key={idx}
             w='60px'
-            h='auto'
+            h='60px'
             p='0'
             mr='1rem'
             bg='hsla(0, 0%, 100%, .3)'
@@ -49,8 +49,9 @@ export default function Layouts ({ onClose }) {
           >
             <Image
               src={iconAndName.icon}
+              alt={iconAndName.name + '-icon'}
+              w='100%'
               h='100%'
-              objectFit='contain'
               p='.5em'
             />
           </Button>

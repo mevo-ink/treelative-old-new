@@ -179,7 +179,7 @@ export default function Map () {
               h='40px'
               src={user.image}
               fallbackSrc={`https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
-              alt='children-avatar'
+              alt='avatar'
               objectFit='contain'
               borderRadius='50%'
               position='absolute'

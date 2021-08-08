@@ -94,7 +94,7 @@ export default function Age () {
                 <Image
                   src={user.avatar}
                   fallbackSrc={user.brokenAvatar}
-                  alt='children-avatar'
+                  alt='avatar'
                   w='40px'
                   h='40px'
                   mx='.5rem'

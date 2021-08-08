@@ -23,8 +23,8 @@ export default function Profile ({ onClose, authUser }) {
         src={authUser.avatar}
         fallbackSrc={`https://ui-avatars.com/api/?name=${authUser.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
         alt='avatar'
+        w='100%'
         h='100%'
-        objectFit='contain'
         borderRadius='50%'
       />
     </Button>
