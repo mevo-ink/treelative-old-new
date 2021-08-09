@@ -35,8 +35,6 @@ export default function App () {
 }
 // TODO:
 /*
-  Fix any lighthouse issues
-  Use react-pie-chart app
-  Style insights
+  Choose complementing colours for insights
   Discuss about an ErrorModal
 */

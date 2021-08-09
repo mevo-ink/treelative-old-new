@@ -130,13 +130,8 @@ export default function Age () {
         py='1em'
         textAlign='center'
         opacity='.5'
-        // _before={{
-        //   content: "'If You Cannot Find Yourself Please Update Your Data'",
-        //   fontSize: '.6rem',
-        //   display: 'block'
-        // }}
       >
-        Unknown Users: {result.data.getAgeData.unknownCount}
+        Users without data: {result.data.getAgeData.unknownCount}
       </Text>
     </Flex>
   )

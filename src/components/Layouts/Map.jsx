@@ -143,9 +143,9 @@ export default function Map () {
         p='.5rem'
         fontSize='.8rem'
         textAlign='end'
-        opacity='.6'
+        opacity='.8'
       >
-        Unknown Users: {result.data.getMapData.unknownCount}
+        Users without data: {result.data.getMapData.unknownCount}
       </Text>
       <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_LOCATION_API_KEY }}
