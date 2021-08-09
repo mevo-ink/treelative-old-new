@@ -38,4 +38,5 @@ export default function App () {
   Fix any lighthouse issues
   Use react-pie-chart app
   Style insights
+  Discuss about an ErrorModal
 */
