@@ -67,4 +67,7 @@ export default function App () {
   - Add titles for all layouts - similar to titles for insights.
   - Always close menu bar on layout change - even if desktop
   - Add tooltips for pie and bar charts - for insights - with user avatars that fall under that category
+ BUG?
+  - How can a non-admin user edit their child profile? or their deceased parent profile?
+    - add new authorization flag for a user to edit their direct family member profile?
 */
