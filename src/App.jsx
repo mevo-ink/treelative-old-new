@@ -36,4 +36,5 @@ export default function App () {
 // TODO:
 /*
   Style insights
+  Discuss about an ErrorModal
 */
