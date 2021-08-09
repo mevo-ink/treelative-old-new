@@ -55,4 +55,5 @@ export default function App () {
   Choose complementing colours for insights
   Discuss about an ErrorModal - have atom state for error
   add option to reset password in UI for admin
+  MAKE YOUTUBE VIDEO OF how to / intro
 */
