@@ -35,6 +35,24 @@ export default function App () {
 }
 // TODO:
 /*
+  Add PWA prompt
+  Set all users to have unverified flag set to true - change default password
+  API-
+    - query to suggest users with no email - unauthenticated endpoint
+    - mutation to update a user's email - authenticated endpoint - but check for firebase token
+    - mutation to create a new user - authenticated endpoint - but check for firebase token
+    - loginWIthProvider - 2 different responses
+      - email illa - We could not find an account associated with the email
+      - email irukku but unverified - please wait
+      - success
+  LOGIN PROCESS - OAUTH
+   - all users will have unverified flag set to true at the beginning
+   - if the user has a profile associated wit the email - continue
+   - else:
+     - Give the user to choose from existing users with no email associated
+     - If the user chooses an existing user, update the profile with the email: remove the unverified flag after manual verification
+     - If the user chooses to create a new user, create a new profile with the email: remove the unverified flag after manual verification
   Choose complementing colours for insights
   Discuss about an ErrorModal - have atom state for error
+  add option to reset password in UI for admin
 */
