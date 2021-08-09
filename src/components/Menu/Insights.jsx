@@ -26,7 +26,7 @@ export default function Insights () {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const data = [
-    { title: 'Members', value: resultGetMembers.data?.countUsers || 0 },
+    { title: 'Members', description: 'Overview', value: resultGetMembers.data?.countUsers || 0 },
     { title: 'Country', description: 'Country Distribution', value: <Icon as={BiWorld} h='30px' /> },
     { title: 'Age', description: 'Age Distribution', value: <Icon as={SiApollographql} h='30px' /> }
   ]

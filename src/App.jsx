@@ -36,5 +36,5 @@ export default function App () {
 // TODO:
 /*
   Choose complementing colours for insights
-  Discuss about an ErrorModal
+  Discuss about an ErrorModal - have atom state for error
 */

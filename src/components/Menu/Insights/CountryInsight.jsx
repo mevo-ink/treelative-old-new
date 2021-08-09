@@ -18,7 +18,7 @@ import { INSIGHTS_BY_LOCATION } from 'graphql/queries/insights'
 
 import Loading from 'components/_common/Loading'
 
-const COLORS = ['#F56565', '#ECC94B', '#48BB78', '#4299E1', '#A0AEC0', '#38B2AC', '#9F7AEA', '#000000']
+const COLORS = ['hsl(0, 88%, 68%)', 'hsla(47, 88%, 68%)', 'hsl(145, 88%, 68%)', 'hsl(208, 88%, 68%)']
 
 const baseURL = ' https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.3/flags/4x3/'
 
@@ -43,27 +43,37 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
   }
 }
 
-const renderLegend = (props) => {
-  const { payload } = props
-
-  return (
-    <Wrap spacing='4' justify='center'>
-      {
-        payload.map((entry, index) => (entry.payload.code &&
-          <WrapItem key={`item-${index}`}>
-            <Image src={baseURL + entry.payload.code?.toLowerCase() + '.svg'} width='20px' height='20px' mr='1' />
-            <Text>{(entry.payload.percent * 100).toFixed(0)}%</Text>
-          </WrapItem>
-        ))
-      }
-    </Wrap>
-  )
-}
-
 export default function CountryInsight () {
   const [result] = useQuery({ query: INSIGHTS_BY_LOCATION })
 
   if (result.fetching) return <Loading />
+
+  const renderLegend = (props) => {
+    const { payload } = props
+
+    return (
+      <>
+        <Wrap spacing='4' justify='center'>
+          {
+            payload.map((entry, index) => (entry.payload.code &&
+              <WrapItem key={`item-${index}`}>
+                <Image src={baseURL + entry.payload.code?.toLowerCase() + '.svg'} width='20px' height='20px' mr='1' />
+                <Text>{(entry.payload.percent * 100).toFixed(0)}%</Text>
+              </WrapItem>
+            ))
+          }
+        </Wrap>
+        <Text
+          mt='1rem'
+          fontSize='.8rem'
+          textAlign='end'
+          opacity='.5'
+        >
+          Users without data: {result.data.insightsByLocation.unknownCount}
+        </Text>
+      </>
+    )
+  }
 
   return (
     <>
@@ -75,24 +85,16 @@ export default function CountryInsight () {
             cy='50%'
             labelLine={false}
             label={renderCustomizedLabel}
-            outerRadius={150}
+            outerRadius={145}
             dataKey='count'
           >
             {result.data.insightsByLocation.data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} stroke='hsla(225, 36%, 4%, 1)' />
             ))}
           </Pie>
-          <Legend verticalAlign='top' layout='vertical' content={renderLegend} />
+          <Legend verticalAlign='bottom' layout='vertical' content={renderLegend} />
         </PieChart>
       </ResponsiveContainer>
-      <Text
-        mt='-1.6rem'
-        fontSize='.8rem'
-        textAlign='end'
-        opacity='.5'
-      >
-        Users without data: {result.data.insightsByLocation.unknownCount}
-      </Text>
     </>
   )
 }
