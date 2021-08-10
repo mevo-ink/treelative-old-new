@@ -41,3 +41,8 @@ export const layoutMethodsAtom = atom({
   key: 'layoutMethods',
   default: {}
 })
+
+export const errorAtom = atom({
+  key: 'error',
+  default: null
+})
