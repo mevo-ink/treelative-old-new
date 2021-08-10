@@ -69,4 +69,11 @@ export default function App () {
  BUG?
   - How can a non-admin user edit their child profile? or their deceased parent profile?
     - add new authorization flag for a user to edit their direct family member profile?
+
+ SLIDES switcher
+   - Instead of circle indicators at the bottom - have icons representing the slide. Ex, have a baby/birth kinda icon for the first slide. and skull for dead, ...etc
+   - All of these icons will be visible at all times. And a user should be able to click one of these icons and go to that slide. This can help the confusion of some slides only shown if data is there or in edit mode. Plus easy navigation for desktop (or even mobile) to quickly navigate to a particular slide.
+   - But, we still keep the same functionality of swiping the slides and that will only go the next available slides (skip any unavailable slides)
+   - If a slide is unavailable, maybe can show some kinda indication on the icon (but it should not be disabled) - so even if a user clicks on a icon that corresponds to a slide that is unavailable, we still show that slide with unavailable text.
+   - This will also give users an idea of what that particular slide it is about. Since we don't have an explicit TITLE for each slide, if the icon we chose somehow conveys that, we're good!
 */
