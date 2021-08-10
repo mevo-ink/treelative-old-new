@@ -1,8 +1,8 @@
-import { Box, Grid, Link, Image, keyframes } from '@chakra-ui/react'
+import { Box, Grid, Link, keyframes } from '@chakra-ui/react'
 
 import infoUnavailable from 'images/infoUnavailable.png'
 
-export default function LocationRenderer ({ location, avatar, fullName }) {
+export default function LocationRenderer ({ location, avatar }) {
   let imageURL = infoUnavailable
 
   if (location) {
@@ -40,15 +40,15 @@ export default function LocationRenderer ({ location, avatar, fullName }) {
               transform='rotate(-45deg)'
               mb='30px'
             >
-              <Image
-                src={avatar}
-                fallbackSrc={`https://ui-avatars.com/api/?name=${fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
-                alt='avatar'
-                w='30px'
-                objectFit='contain'
+              <Box
+                w='100%'
+                h='100%'
                 transform='rotate(45deg)'
-                borderRadius='50%'
                 border='3px solid hsla(220, 98%, 57%, 1)'
+                backgroundImage={avatar}
+                backgroundSize='100% auto'
+                backgroundPosition='center'
+                borderRadius='50%'
               />
             </Box>
             <Box
