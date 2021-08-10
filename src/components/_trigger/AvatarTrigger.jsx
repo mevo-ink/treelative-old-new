@@ -2,7 +2,6 @@ import {
   Box,
   Text,
   Flex,
-  Image,
   Button,
   keyframes,
   IconButton,
@@ -74,8 +73,7 @@ export default function AvatarTrigger (props) {
             <Box
               w='3.2rem'
               h='3.2rem'
-              mx='.2rem'
-              mt='1rem'
+              mt='.7rem'
               cursor='pointer'
               position='relative'
             >
@@ -95,14 +93,13 @@ export default function AvatarTrigger (props) {
                 _disabled={{ opacity: '1' }}
                 onClick={() => handleAvatarClick(user.id)}
               >
-                <Image
-                  src={user.avatar}
-                  fallbackSrc={`https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
-                  alt='user-avatar'
-                  w='100%'
-                  h='100%'
-                  p='.3rem'
+                <Box
+                  w='2.5rem'
+                  h='2.5rem'
                   borderRadius='50%'
+                  backgroundImage={user.avatar}
+                  backgroundSize='100% auto'
+                  backgroundPosition='center'
                 />
               </Button>
             </Box>

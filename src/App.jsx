@@ -56,7 +56,6 @@ export default function App () {
   Discuss about an ErrorModal - have atom state for error
   add option to reset password in UI for admin
   MAKE YOUTUBE VIDEO OF how to / intro
-  Crop the avatar ratio 1:1
   USER FEEDBACKS
    - Login la auth providers are not intuitive aam
      - either keep username/password login as a separate modal - or make auth providers icon more prominent - user original logo colors/something ..
