@@ -2,7 +2,6 @@ import { useState } from 'react'
 
 import {
   Box,
-  Image,
   FormLabel,
   keyframes,
   IconButton,
@@ -15,8 +14,6 @@ import { useRecoilValue } from 'recoil'
 
 import { UPDATE_AVATAR } from 'graphql/mutations/users'
 import { networkMethodsAtom, isEditModeAtom } from 'utils/atoms.js'
-
-import crown from 'images/adminCrown.png'
 
 const toast = createStandaloneToast()
 
@@ -125,21 +122,10 @@ export default function Avatar ({ user }) {
   return (
     <Box
       w='30%'
-      minH='auto'
+      h='30%'
       mt='-2.8rem'
       position='relative'
     >
-      {user.role === 'ADMIN' && (
-        <Image
-          src={crown}
-          alt='crown'
-          w='100%'
-          objectFit='contain'
-          position='absolute'
-          top='-2.5rem'
-          zIndex='2'
-        />
-      )}
       {isEditMode && (
         <>
           <input
@@ -162,22 +148,22 @@ export default function Avatar ({ user }) {
               bg='hsla(0, 0%, 0%, .8)'
               borderRadius='50%'
               boxShadow='0px 3px 5px hsla(0, 0%, 0%, .3)'
-              border={user.role === 'ADMIN' ? '5px solid hsla(54, 100%, 51%, 1)' : '5px solid hsla(0, 0%, 100%, 1)'}
+              border={user.isAdmin ? '5px solid hsla(54, 100%, 51%, 1)' : '5px solid hsla(0, 0%, 100%, 1)'}
               animation={`${wiggle} infinite .15s linear`}
               accept='image/png, image/jpeg, image/jpg, image/gif'
             />
           </FormLabel>
         </>
       )}
-      <Image
-        src={avatarURL}
-        fallbackSrc={`https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
-        alt='avatar'
-        objectFit='contain'
-        w='100%'
-        border={user.role === 'ADMIN' ? '5px solid hsla(54, 100%, 51%, 1)' : '5px solid hsla(0, 0%, 100%, 1)'}
+      <Box
+        w='6rem'
+        h='6rem'
+        border={user.isAdmin ? '5px solid hsla(54, 100%, 51%, 1)' : '5px solid hsla(0, 0%, 100%, 1)'}
         borderRadius='50%'
         boxShadow='0px 6px 8px hsla(0, 0%, 0%, .25)'
+        backgroundImage={avatarURL}
+        backgroundSize='100% auto'
+        backgroundPosition='center'
       />
     </Box>
   )
