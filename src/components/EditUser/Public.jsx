@@ -24,7 +24,7 @@ export default function Public ({ user }) {
       display='flex'
       justifyContent={user.isPublic ? 'flex-end' : 'flex-start'}
       w='40px'
-      h='25px'
+      h='26px'
       p='3px'
       borderRadius='999px'
       cursor='pointer'
