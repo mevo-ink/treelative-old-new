@@ -64,7 +64,7 @@ export default function AvatarTrigger (props) {
       })
   }
 
-  if (relations.length === 0) return <Text variant='info'> Unavailable </Text>
+  if (relations.length === 0 && !isEditMode) return <Text variant='info'> Unavailable </Text>
 
   return (
     <>
