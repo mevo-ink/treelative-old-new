@@ -24,8 +24,7 @@ export default function Death ({ user }) {
       <Image
         src={tombstone}
         alt='tombstone'
-        w='85%'
-        minH='20%'
+        w='60%'
         mt='1rem'
         cursor='pointer'
       />
