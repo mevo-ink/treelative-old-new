@@ -9,11 +9,7 @@ import age from 'images/ageView.png'
 import network from 'images/graphView.png'
 import birthday from 'images/birthdayView.png'
 
-import useDevice from 'hooks/useDevice'
-
 export default function Layouts ({ onClose }) {
-  const { isDesktop } = useDevice()
-
   const [layout, setLayout] = useRecoilState(layoutAtom)
 
   const iconsAndNames = [
@@ -24,7 +20,7 @@ export default function Layouts ({ onClose }) {
   ]
 
   const handleLayoutChange = async (layout) => {
-    !isDesktop && onClose()
+    onClose()
     await new Promise(resolve => setTimeout(resolve, 110))
     setLayout(layout)
   }

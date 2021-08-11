@@ -42,8 +42,8 @@ export default function App () {
     - mutation to update a user's email - authenticated endpoint - but check for firebase token
     - mutation to create a new user - authenticated endpoint - but check for firebase token
     - loginWIthProvider - 2 different responses
-      - email illa - We could not find an account associated with the email
-      - email irukku but unverified - please wait
+      - without email - We could not find an account associated with the email
+      - with email, but unverified - please wait
       - success
   LOGIN PROCESS - OAUTH
    - all users will have unverified flag set to true at the beginning
@@ -54,16 +54,15 @@ export default function App () {
      - If the user chooses to create a new user, create a new profile with the email: remove the unverified flag after manual verification
   Discuss about an ErrorModal - have atom state for error
   add option to reset password in UI for admin
-  MAKE YOUTUBE VIDEO OF how to / intro
+  MAKE YouTube VIDEO OF how to / intro
   USER FEEDBACKS
    - Login la auth providers are not intuitive aam
      - either keep username/password login as a separate modal - or make auth providers icon more prominent - user original logo colors/something ..
   - Add way to escape from edit mode easily by clicking somewhere else
-    - OR - big change - confusion with hidden slides without edit mode- hmm.. maybe find a way to show all slides, even if data is not avaialble
+    - OR - big change - confusion with hidden slides without edit mode- hmm.. maybe find a way to show all slides, even if data is not available
   - Swiping on desktop is hard - make radio buttons on bottom clickable to switch slides - or add left-right navigation buttons for non-touch devices
   - Clicking on search results- expecting to find/show the user on current layout - without opening the profile card
   - Add titles for all layouts - similar to titles for insights.
-  - Always close menu bar on layout change - even if desktop
   - Add tooltips for pie and bar charts - for insights - with user avatars that fall under that category
  BUG?
   - How can a non-admin user edit their child profile? or their deceased parent profile?
