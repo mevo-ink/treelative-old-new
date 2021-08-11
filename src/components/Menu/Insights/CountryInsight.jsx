@@ -18,8 +18,6 @@ import { INSIGHTS_BY_LOCATION } from 'graphql/queries/insights'
 
 import Loading from 'components/_common/Loading'
 
-const COLORS = ['hsl(0, 88%, 68%)', 'hsla(47, 88%, 68%)', 'hsl(145, 88%, 68%)', 'hsl(208, 88%, 68%)']
-
 const baseURL = ' https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.3/flags/4x3/'
 
 const RADIAN = Math.PI / 180
@@ -89,7 +87,7 @@ export default function CountryInsight () {
             dataKey='count'
           >
             {result.data.insightsByLocation.data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} stroke='hsla(225, 36%, 4%, 1)' />
+              <Cell key={`cell-${index}`} fill={`hsla(${index * 40}, 100%, 40%, 1)`} stroke='hsla(225, 36%, 4%, 1)' />
             ))}
           </Pie>
           <Legend verticalAlign='bottom' layout='vertical' content={renderLegend} />

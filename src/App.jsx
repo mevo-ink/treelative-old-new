@@ -52,7 +52,6 @@ export default function App () {
      - Give the user to choose from existing users with no email associated
      - If the user chooses an existing user, update the profile with the email: remove the unverified flag after manual verification
      - If the user chooses to create a new user, create a new profile with the email: remove the unverified flag after manual verification
-  Choose complementing colours for insights
   Discuss about an ErrorModal - have atom state for error
   add option to reset password in UI for admin
   MAKE YOUTUBE VIDEO OF how to / intro
