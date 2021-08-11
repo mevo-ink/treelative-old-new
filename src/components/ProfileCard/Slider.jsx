@@ -124,6 +124,7 @@ export default function Slider ({ children = [] }) {
             borderRadius='5px'
             background='hsla(0, 0%, 100%, .5)'
             border={idx === page ? '2px solid hsla(0, 0%, 100%, .8)' : 'none'}
+            onClick={() => setPageDirection([idx, ''])}
           >
             <Image src={child.props.icon} w='100%' h='100%' p='.25rem' />
           </Button>
