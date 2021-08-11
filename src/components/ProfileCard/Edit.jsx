@@ -1,6 +1,6 @@
 import { IconButton } from '@chakra-ui/react'
 import { FiEdit } from 'react-icons/fi'
-import { MdDone } from 'react-icons/md'
+import { IoMdDoneAll } from 'react-icons/io'
 
 import { useQuery } from 'urql'
 import { useRecoilState, useRecoilValue } from 'recoil'
@@ -19,7 +19,7 @@ export default function Edit ({ innerBtnStyles }) {
     <>
       {(authUser?.isAdmin || authUser?.id === activeNodeID) && (
         <IconButton
-          icon={isEditMode ? <MdDone /> : <FiEdit />}
+          icon={isEditMode ? <IoMdDoneAll /> : <FiEdit />}
           {...innerBtnStyles}
           left='.3rem'
           bgColor={isEditMode && 'hsla(130, 65%, 55%, .5)'}
