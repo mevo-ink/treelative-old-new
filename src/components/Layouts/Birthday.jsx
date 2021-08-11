@@ -4,7 +4,6 @@ import {
   Box,
   Flex,
   Text,
-  Image,
   Divider
 } from '@chakra-ui/react'
 
@@ -109,10 +108,7 @@ export default function Birthday () {
           >
             {users.map(user => (
               <Flex key={user.id} position='relative'>
-                <Image
-                  src={user.avatar}
-                  fallbackSrc={user.brokenAvatar}
-                  alt='avatar'
+                <Box
                   w='40px'
                   h='40px'
                   mx='.5rem'
@@ -120,6 +116,9 @@ export default function Birthday () {
                   objectFit='contain'
                   borderRadius='50%'
                   zIndex='4'
+                  backgroundImage={user.avatar}
+                  backgroundSize='100% auto'
+                  backgroundPosition='center'
                   onClick={() => handleUserSelect(user.id)}
                 />
                 {user.id === activeNodePulseID && <ActivePulse />}

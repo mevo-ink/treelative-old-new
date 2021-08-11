@@ -5,7 +5,6 @@ import {
   Flex,
   Icon,
   Text,
-  Image,
   Divider
 } from '@chakra-ui/react'
 import { FaSkullCrossbones } from 'react-icons/fa'
@@ -91,10 +90,7 @@ export default function Age () {
           >
             {users.map(user => (
               <Flex key={user.id} position='relative'>
-                <Image
-                  src={user.avatar}
-                  fallbackSrc={user.brokenAvatar}
-                  alt='avatar'
+                <Box
                   w='40px'
                   h='40px'
                   mx='.5rem'
@@ -102,6 +98,9 @@ export default function Age () {
                   objectFit='contain'
                   borderRadius='50%'
                   zIndex='4'
+                  backgroundImage={user.avatar}
+                  backgroundSize='100% auto'
+                  backgroundPosition='center'
                   onClick={() => handleUserSelect(user.id)}
                 />
                 {user.id === activeNodePulseID && <ActivePulse />}
