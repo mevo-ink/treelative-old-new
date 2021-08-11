@@ -58,8 +58,6 @@ export default function App () {
   USER FEEDBACKS
    - Login la auth providers are not intuitive aam
      - either keep username/password login as a separate modal - or make auth providers icon more prominent - user original logo colors/something ..
-  - Add way to escape from edit mode easily by clicking somewhere else
-    - OR - big change - confusion with hidden slides without edit mode- hmm.. maybe find a way to show all slides, even if data is not available
   - Swiping on desktop is hard - make radio buttons on bottom clickable to switch slides - or add left-right navigation buttons for non-touch devices
   - Clicking on search results- expecting to find/show the user on current layout - without opening the profile card
   - Add titles for all layouts - similar to titles for insights.
