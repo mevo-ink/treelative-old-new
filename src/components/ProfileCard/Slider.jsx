@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { Box, Flex, Image } from '@chakra-ui/react'
+import { Box, Flex, Image, Button } from '@chakra-ui/react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 import { useRecoilValue } from 'recoil'
@@ -114,17 +114,19 @@ export default function Slider ({ children = [] }) {
         justifyContent='space-between'
       >
         {children.map((child, idx) => (
-          <Box
+          <Button
             key={idx + 10}
             w='1.5rem'
             h='1.5rem'
+            minW='unset'
+            p='unset'
             m='1.5rem .4rem'
             borderRadius='5px'
             background='hsla(0, 0%, 100%, .5)'
             border={idx === page ? '2px solid hsla(0, 0%, 100%, .8)' : 'none'}
           >
             <Image src={child.props.icon} w='100%' h='100%' p='.25rem' />
-          </Box>
+          </Button>
         ))}
       </Flex>
     </>
