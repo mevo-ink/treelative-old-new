@@ -23,7 +23,7 @@ export default function AvatarTrigger (props) {
   const {
     user,
     title,
-    relations = [],
+    relations,
     removeRelation,
     removeRelationResult,
     limit = 8,
@@ -63,6 +63,8 @@ export default function AvatarTrigger (props) {
         }
       })
   }
+
+  if (relations.length === 0) return <Text variant='info'> Unavailable </Text>
 
   return (
     <>
