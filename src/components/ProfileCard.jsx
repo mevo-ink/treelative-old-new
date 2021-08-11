@@ -37,6 +37,14 @@ import InnerWrapper from 'components/ProfileCard/InnerWrapper'
 import MoreSettings from 'components/ProfileCard/Slides/MoreSettings'
 import ParentChild from 'components/ProfileCard/Slides/ParentChild'
 
+import death from 'images/ProfileCard/death.png'
+import birth from 'images/ProfileCard/birth.png'
+import current from 'images/ProfileCard/current.png'
+import partner from 'images/ProfileCard/partner.png'
+import contact from 'images/ProfileCard/contact.png'
+import relation from 'images/ProfileCard/relation.png'
+import settings from 'images/ProfileCard/settings.png'
+
 export default function ProfileCard () {
   const [isEditMode, setIsEditMode] = useRecoilState(isEditModeAtom)
   const [activeNodeID, setActiveNodeID] = useRecoilState(activeNodeIDAtom)
@@ -106,13 +114,13 @@ export default function ProfileCard () {
                 <Avatar user={user} />
                 <FullName user={user} />
                 <Slider>
-                  <Death user={user} isHidden={(!user.dateOfDeath && !isEditMode)} />
-                  <Birth user={user} />
-                  <Current user={user} />
-                  <Partner user={user} isHidden={(!user.partner && !isEditMode)} />
-                  <ParentChild user={user} isHidden={(user.parents.length === 0 && user.children.length === 0 && !isEditMode)} />
-                  <Socials user={user} />
-                  <MoreSettings user={user} isHidden={!isEditMode} />
+                  <Death user={user} icon={death} isHidden={(!user.dateOfDeath && !isEditMode)} />
+                  <Birth user={user} icon={birth} />
+                  <Current user={user} icon={current} />
+                  <Partner user={user} icon={partner} isHidden={(!user.partner && !isEditMode)} />
+                  <ParentChild user={user} icon={relation} isHidden={(user.parents.length === 0 && user.children.length === 0 && !isEditMode)} />
+                  <Socials user={user} icon={contact} />
+                  <MoreSettings user={user} icon={settings} isHidden={!isEditMode} />
                 </Slider>
               </>
             )}

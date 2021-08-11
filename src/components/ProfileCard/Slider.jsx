@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { Box, Flex } from '@chakra-ui/react'
+import { Box, Flex, Image } from '@chakra-ui/react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 import { useRecoilValue } from 'recoil'
@@ -116,14 +116,15 @@ export default function Slider ({ children = [] }) {
         {children.map((child, idx) => (
           <Box
             key={idx + 10}
-            w='.5rem'
-            h='.5rem'
-            m='1.5rem .2rem'
-            borderRadius='50%'
-            background={idx === page ? 'hsla(261, 64%, 18%, 1)' : 'hsla(0, 0%, 100%, .5)'}
-            border={idx === page ? '1px solid hsla(0, 0%, 100%, .9)' : 'none'}
-            display={child.props.isHidden ? 'none' : ''}
-          />
+            w='1.5rem'
+            h='1.5rem'
+            m='1.5rem .4rem'
+            borderRadius='5px'
+            background='hsla(0, 0%, 100%, .5)'
+            border={idx === page ? '2px solid hsla(0, 0%, 100%, .8)' : 'none'}
+          >
+            <Image src={child.props.icon} w='100%' h='100%' p='.25rem' />
+          </Box>
         ))}
       </Flex>
     </>
