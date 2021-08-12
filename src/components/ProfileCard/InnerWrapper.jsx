@@ -5,7 +5,7 @@ const InnerWrapper = ({ children }) => {
     <Flex
       w='85%'
       m='2rem 0'
-      mt='5.5rem'
+      mt='4.3rem'
       background='hsla(0, 0%, 100%, .6)'
       borderRadius='20px'
       display='flex'
