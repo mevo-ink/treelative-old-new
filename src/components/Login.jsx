@@ -1,51 +1,36 @@
 import { useState } from 'react'
 
 import {
+  Box,
   Flex,
   Text,
-  Input,
   Stack,
-  Button,
-  FormLabel,
-  FormControl
+  Divider
 } from '@chakra-ui/react'
+import { FiLogIn } from 'react-icons/fi'
 import { FaGoogle, FaFacebook, FaTwitter } from 'react-icons/fa'
 
 import { useMutation } from 'urql'
-import { object, string } from 'yup'
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
 
 import { google, twitter, facebook } from 'utils/firebase'
-import { LOGIN, LOGIN_WITH_PROVIDER } from 'graphql/mutations/auth'
+import { LOGIN_WITH_PROVIDER } from 'graphql/mutations/auth'
 
-import ErrorAlert from 'components/_common/ErrorAlert'
 import ErrorModal from 'components/_common/ErrorModal'
-import PasswordInput from 'components/_common/PasswordInput'
-import LoginWithProvider from 'components/Login/LoginWithProvider'
+import LoginButton from 'components/Login/LoginButton'
+import LoginWithEmail from 'components/Login/LoginWithEmail'
 
 const loginProviders = [
-  { label: 'Login with Google', icon: FaGoogle, provider: google },
-  { label: 'Login with Facebook', icon: FaFacebook, provider: facebook },
-  { label: 'Login with Twitter', icon: FaTwitter, provider: twitter }
+  { label: 'Login with Facebook', icon: FaFacebook, color: 'linear-gradient(180deg, hsl(222, 47%, 43%), hsl(222, 47%, 33%))', provider: facebook },
+  { label: 'Login with Google', icon: FaGoogle, color: 'linear-gradient(180deg, hsl(13, 73%, 49%), hsl(13, 73%, 39%))', provider: google },
+  { label: 'Login with Twitter', icon: FaTwitter, color: 'linear-gradient(180deg, hsl(196, 100%, 48%), hsl(196, 100%, 38%))', provider: twitter }
 ]
 
-const schemaValidation = object().shape({
-  username: string().required(),
-  password: string().required().min(3)
-})
-
 export default function Login ({ onSuccess }) {
-  const [isForgotPasswordOpen, setIsForgotPasswordOpen] = useState(false)
+  const [showLoginWithEmail, setShowLoginWithEmail] = useState(false)
 
-  const [loginResult, login] = useMutation(LOGIN)
   const [loginWithProviderResult, loginWithProvider] = useMutation(LOGIN_WITH_PROVIDER)
 
   const [internalError, setInternalError] = useState()
-
-  const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(schemaValidation)
-  })
 
   const onLoginSuccess = (result) => {
     setInternalError({ message: 'OATHA' })
@@ -53,12 +38,6 @@ export default function Login ({ onSuccess }) {
       window.localStorage.setItem('AUTH_SESSION_ID', result.data.login)
       onSuccess()
     }
-  }
-
-  const onLoginWithPassword = (input) => {
-    login({ input })
-      .then(onLoginSuccess)
-      .catch(setInternalError)
   }
 
   const onLoginWithProvider = (token, { email }) => {
@@ -78,81 +57,45 @@ export default function Login ({ onSuccess }) {
   }
 
   return (
-    <>
-      {isForgotPasswordOpen && <ErrorModal isContact message='Please ' />}
+    <Box w='100%' p='2rem 2.5rem' color='hsla(261, 64%, 18%, 1)'>
       {loginWithProviderResult.error && <ErrorModal> {loginWithProviderResult.error.message} </ErrorModal>}
       <Text
+        mb='1rem'
         fontSize='1.8rem'
         fontWeight='600'
-        color='hsla(261, 64%, 18%, 1)'
-        pt='1.2em'
-        pb='.6em'
-        px='1em'
+        color='unset'
       >
-        Login
+        Sign In
       </Text>
-      <Stack
-        direction='row'
-        width='100%'
-        pb='1rem'
-        justifyContent='space-evenly'
-        color='hsla(261, 64%, 18%, 1)'
-      >
-        {loginProviders.map(loginProvider => (
-          <LoginWithProvider
-            {...loginProvider}
-            key={loginProvider.label}
-            onSuccess={onLoginWithProvider}
-          />
-        ))}
-      </Stack>
-      <Stack
-        as='form'
-        w='100%'
-        pb='3em'
-        px='2em'
-        spacing='2rem'
-        color='hsla(261, 64%, 18%, 1)'
-        onSubmit={handleSubmit(onLoginWithPassword)}
-      >
-        <FormControl id='username' isRequired isInvalid={errors?.username}>
-          <FormLabel>Username</FormLabel>
-          <Input
-            {...register('username')}
-            type='username'
-            autoComplete='username'
-          />
-          <ErrorAlert>{errors?.username?.message}</ErrorAlert>
-        </FormControl>
-        <FormControl id='password' isRequired isInvalid={errors?.password}>
-          <Flex justify='space-between'>
-            <FormLabel>Password</FormLabel>
-            <Button
-              variant='link'
-              color='hsla(359, 88%, 50%, 1)'
-              fontSize='.8rem'
-              fontWeight='100'
-              onClick={() => setIsForgotPasswordOpen(true)}
-              tabIndex='-1'
-            >
-              Forgot Password?
-            </Button>
-          </Flex>
-          <PasswordInput {...register('password')} />
-          <ErrorAlert>{errors?.password?.message}</ErrorAlert>
-        </FormControl>
-        {loginResult.error && <ErrorAlert>{loginResult.error.message}</ErrorAlert>}
-        <Button
-          type='submit'
-          variant='submit'
-          bg='linear-gradient(-45deg, hsla(261, 64%, 18%, 1), hsla(359, 88%, 55%, 1))'
-          _hover={{ bg: 'linear-gradient(-45deg, hsla(261, 50%, 18%, 1), hsla(359, 88%, 40%, 1))' }}
-          _active={{ bg: 'linear-gradient(-45deg, hsla(261, 50%, 18%, 1), hsla(359, 88%, 40%, 1))' }}
-          isLoading={loginResult.fetching || loginWithProviderResult.fetching}
+      {!showLoginWithEmail && (
+        <Stack
+          width='100%'
+          spacing='1rem'
+          justifyContent='space-evenly'
         >
-          Sign in
-        </Button>
-      </Stack>
-    </>
+          {loginProviders.map(loginProvider => (
+            <LoginButton
+              {...loginProvider}
+              key={loginProvider.label}
+              onSuccess={onLoginWithProvider}
+            />
+          ))}
+          <Flex alignItems='center' borderColor='hsla(261, 64%, 18%, .5)'>
+            <Divider borderColor='unset' />
+            <Text mx='.8rem' fontSize='.8rem' color='unset'>OR</Text>
+            <Divider borderColor='unset' />
+          </Flex>
+          <LoginButton
+            label='Login with Email'
+            icon={FiLogIn}
+            color='linear-gradient(180deg, hsl(0, 0%, 27%), hsl(0, 0%, 17%))'
+            setShowLoginWithEmail={setShowLoginWithEmail}
+          />
+        </Stack>
+      )}
+      {showLoginWithEmail && (
+        <LoginWithEmail onLoginSuccess={onLoginSuccess} setInternalError={setInternalError} setShowLoginWithEmail={setShowLoginWithEmail} />
+      )}
+    </Box>
   )
 }
