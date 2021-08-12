@@ -64,7 +64,6 @@ export default function App () {
     - Add isEditable in getUser response - bases on direct family members
   Add find me ring indicator graph view
   Optimize image before uploading to minio - limit frontend image size
-  Show unavaialble phonenumber and email always
   - Add tooltips for pie and bar charts - for insights - with user avatars that fall under that category
     Add two new queries:
     - Get users by age

@@ -1,12 +1,10 @@
 import {
-  Icon,
   Flex,
   Image,
   Button,
   keyframes,
   useDisclosure
 } from '@chakra-ui/react'
-import { MdAdd } from 'react-icons/md'
 
 import { useRecoilValue } from 'recoil'
 
@@ -67,8 +65,7 @@ export default function InputWithIconTrigger (props) {
             borderLeftRadius='unset'
             onClick={handleClick}
           >
-            {props.value}
-            {!props.value && <Icon as={MdAdd} w='20px' h='20px' />}
+            {props.value ? props.value : 'Unavailable'}
           </Button>
         </Flex>
       </Flex>
