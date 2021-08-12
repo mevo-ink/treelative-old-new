@@ -49,9 +49,9 @@ export default function Avatar ({ user }) {
   const [isLoading, setIsLoading] = useState(false)
 
   const wiggle = keyframes`
-    0% { transform: rotate(0deg); }
-    50% { transform: rotate(-2deg); }
-    100% { transform: rotate(2deg); }
+    0% { transform: rotate(0deg) }
+    50% { transform: rotate(-2deg) }
+    100% { transform: rotate(2deg) }
   `
 
   const handleError = (error) => {
@@ -112,10 +112,25 @@ export default function Avatar ({ user }) {
     event.preventDefault()
     const selectedFile = event.target.files[0]
     if (!selectedFile) return
-    if ((selectedFile.size / 1024 / 1024) > 10) {
-      handleError({ message: 'File size exceeds 10 MB' })
-    } else {
-      handleUpload(selectedFile)
+
+    const reader = new FileReader()
+    reader.readAsDataURL(selectedFile)
+    reader.onload = (e) => {
+      const imgElement = document.createElement('img')
+      imgElement.src = e.target.result
+      imgElement.onload = async (e) => {
+        const canvas = document.createElement('canvas')
+        const maxWidth = 130
+        const scaleSize = maxWidth / e.target.width
+        canvas.width = maxWidth
+        canvas.height = e.target.height * scaleSize
+        const context = canvas.getContext('2d')
+        context.drawImage(e.target, 0, 0, canvas.width, canvas.height)
+        const srcEncoded = context.canvas.toDataURL(e.target, 'image/png')
+        const blob = await (await fetch(srcEncoded)).blob()
+        const file = new File([blob], 'avatar.png', { type: 'image/png', lastModified: new Date() })
+        handleUpload(file)
+      }
     }
   }
 
@@ -140,8 +155,9 @@ export default function Avatar ({ user }) {
               icon={<HiCamera size='40px' />}
               as='span'
               isLoading={isLoading}
-              w='100%'
-              h='100%'
+              w='6rem'
+              h='6rem'
+              mt='4px'
               color='hsla(0, 0%, 100%, 1)'
               position='absolute'
               zIndex='1'
