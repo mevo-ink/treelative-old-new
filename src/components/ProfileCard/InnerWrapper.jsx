@@ -1,11 +1,6 @@
 import { Flex } from '@chakra-ui/react'
 
-import { useRecoilState } from 'recoil'
-
-import { isEditModeAtom } from 'utils/atoms.js'
-
 const InnerWrapper = ({ children }) => {
-  const [isEditMode, setIsEditMode] = useRecoilState(isEditModeAtom)
   return (
     <Flex
       w='85%'
@@ -18,7 +13,6 @@ const InnerWrapper = ({ children }) => {
       alignItems='center'
       position='relative'
       boxShadow='0 0 0 100vw hsla(0, 0%, 0%, .25)'
-      onClick={() => isEditMode && setIsEditMode(false)}
     >
       {children}
     </Flex>

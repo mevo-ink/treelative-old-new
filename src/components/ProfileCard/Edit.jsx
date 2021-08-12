@@ -22,6 +22,9 @@ export default function Edit ({ innerBtnStyles }) {
           icon={isEditMode ? <MdDone /> : <FiEdit />}
           {...innerBtnStyles}
           left='.3rem'
+          bgColor={isEditMode && 'hsla(130, 65%, 55%, .5)'}
+          _active={{ bgColor: isEditMode && 'hsla(130, 65%, 45%, .5)' }}
+          _hover={{ bgColor: isEditMode && 'hsla(130, 65%, 45%, .5)' }}
           onClick={() => setIsEditMode(!isEditMode)}
         />
       )}
