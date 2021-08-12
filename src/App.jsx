@@ -62,7 +62,6 @@ export default function App () {
   - How can a non-admin user edit their child profile? or their deceased parent profile?
     - add new authorization flag for a user to edit their direct family member profile?
     - Add isEditable in getUser response - bases on direct family members
-  Remove find me indicator on layout change
   Add find me ring indicator graph view
   Change couple icon in slide switcher
   Optimize image before uploading to minio - limit frontend image size
