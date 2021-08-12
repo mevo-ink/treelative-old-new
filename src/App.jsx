@@ -58,10 +58,18 @@ export default function App () {
   USER FEEDBACKS
    - Login la auth providers are not intuitive aam
      - either keep username/password login as a separate modal - or make auth providers icon more prominent - user original logo colors/something ..
-  - Clicking on search results- expecting to find/show the user on current layout - without opening the profile card
-  - Add titles for all layouts - similar to titles for insights.
-  - Add tooltips for pie and bar charts - for insights - with user avatars that fall under that category
- BUG?
+
   - How can a non-admin user edit their child profile? or their deceased parent profile?
     - add new authorization flag for a user to edit their direct family member profile?
+    - Add isEditable in getUser response - bases on direct family members
+  Remove find me indicator on layout change
+  Add find me ring indicator graph view
+  Change couple icon in slide switcher
+  Optimize image before uploading to minio - limit frontend image size
+  Show unavaialble phonenumber and email always
+  - Add tooltips for pie and bar charts - for insights - with user avatars that fall under that category
+    Add two new queries:
+    - Get users by age
+    - Get users by location
+    - Use these both to show tooltips on charts - avatars
 */
