@@ -54,7 +54,7 @@ export default function LoginWithUsername ({ onLoginSuccess, setInternalError, s
           <Input
             {...register('username')}
             type='username'
-            autocomplete='off'
+            autoComplete='off'
           />
           <ErrorAlert>{errors?.username?.message}</ErrorAlert>
         </FormControl>
@@ -90,8 +90,9 @@ export default function LoginWithUsername ({ onLoginSuccess, setInternalError, s
       <Button
         leftIcon={<IoCaretBack />}
         h='auto'
-        p='.8rem .5rem'
+        p='.5rem'
         ml='-.5rem'
+        mt='.5rem'
         fontSize='.8rem'
         fontWeight='400'
         bg='transparent'
