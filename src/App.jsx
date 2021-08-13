@@ -38,6 +38,10 @@ export default function App () {
   Set all users to have unverified flag set to true
   Authentication with Firebase Magic Email
   Add tooltips for pie and bar charts - for insights - with user avatars that fall under that category
+    Add two new queries:
+      - Get users by age
+      - Get users by location
+      - Use these both to show tooltips on charts - avatars
   Add PWA prompt
   Refactor Error Modal
   Add find me ring indicator graph view
@@ -59,9 +63,4 @@ export default function App () {
      - Give the user to choose from existing users with no email associated
      - If the user chooses an existing user, update the profile with the email: remove the unverified flag after manual verification
      - If the user chooses to create a new user, create a new profile with the email: remove the unverified flag after manual verification
-
-    Add two new queries:
-    - Get users by age
-    - Get users by location
-    - Use these both to show tooltips on charts - avatars
 */
