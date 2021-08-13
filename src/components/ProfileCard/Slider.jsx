@@ -1,11 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { Box, Flex, Image, Button } from '@chakra-ui/react'
 import { motion, AnimatePresence } from 'framer-motion'
-
-import { useRecoilValue } from 'recoil'
-
-import { isEditModeAtom } from 'utils/atoms.js'
 
 const MotionBox = motion(Box)
 
@@ -46,16 +42,9 @@ const findNextPage = (slides, currentIndex, direction = 1) => {
 }
 
 export default function Slider ({ children = [] }) {
-  const isEditMode = useRecoilValue(isEditModeAtom)
-
   const initialPage = children[0].props.isHidden ? findNextPage(children, 0, 1) : 0
 
   const [[page, direction], setPageDirection] = useState([initialPage, 1])
-
-  useEffect(() => {
-    !isEditMode && children[page].props.isHidden && setPageDirection([findNextPage(children, page, 1), direction])
-    // eslint-disable-next-line
-  }, [isEditMode])
 
   const swipePower = (offset, velocity) => Math.abs(offset) * velocity
 
