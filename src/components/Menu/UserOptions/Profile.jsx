@@ -21,7 +21,6 @@ export default function Profile ({ onClose, authUser }) {
     >
       <Image
         src={authUser.avatar}
-        fallbackSrc={`https://ui-avatars.com/api/?name=${authUser.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
         alt='avatar'
         w='2rem'
         h='2rem'

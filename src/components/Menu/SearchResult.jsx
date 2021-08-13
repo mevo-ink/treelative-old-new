@@ -39,7 +39,6 @@ export default function SearchResult ({ users, isFetching }) {
             w='30px'
             objectFit='contain'
             borderRadius='50%'
-            fallbackSrc={`https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`}
           />
           <Box w='80%' ml='.5rem' textAlign='left'>
             <Text
