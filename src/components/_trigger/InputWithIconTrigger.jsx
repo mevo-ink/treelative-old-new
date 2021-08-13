@@ -33,6 +33,7 @@ export default function InputWithIconTrigger (props) {
   `
 
   const handleClick = () => {
+    if (!props.value) return
     if (isEditMode) onOpen()
     else window.location.href = baseURL + props.value
   }
