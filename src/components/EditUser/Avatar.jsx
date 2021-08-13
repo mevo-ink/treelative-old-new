@@ -148,7 +148,7 @@ export default function Avatar ({ user }) {
             id='avatar'
             style={{ display: 'none' }}
             onChange={handleFileSelect}
-            accept='image/png, image/jpeg, image/jpg, image/gif'
+            accept='image/png, image/jpeg, image/jpg'
           />
           <FormLabel htmlFor='avatar'>
             <IconButton
@@ -166,7 +166,7 @@ export default function Avatar ({ user }) {
               boxShadow='0px 3px 5px hsla(0, 0%, 0%, .3)'
               border={user.isAdmin ? '5px solid hsla(54, 100%, 51%, 1)' : '5px solid hsla(0, 0%, 100%, 1)'}
               animation={`${wiggle} infinite .15s linear`}
-              accept='image/png, image/jpeg, image/jpg, image/gif'
+              accept='image/png, image/jpeg, image/jpg'
             />
           </FormLabel>
         </>
