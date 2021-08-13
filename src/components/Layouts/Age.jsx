@@ -10,7 +10,7 @@ import {
 import { FaSkullCrossbones } from 'react-icons/fa'
 
 import { useQuery } from 'urql'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { GET_AGE_DATA } from 'graphql/queries/layouts'
 import { activeNodeIDAtom, activeNodePulseIDAtom, layoutMethodsAtom } from 'utils/atoms.js'
@@ -24,7 +24,7 @@ export default function Age () {
 
   const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
 
-  const [activeNodePulseID, setActiveNodePulseID] = useRecoilState(activeNodePulseIDAtom)
+  const activeNodePulseID = useRecoilValue(activeNodePulseIDAtom)
 
   const [result, refetch] = useQuery({ query: GET_AGE_DATA })
 
@@ -39,11 +39,6 @@ export default function Age () {
   if (result.error) return <ErrorModal> {result.error.message} </ErrorModal>
 
   if (result.fetching) return <Loading />
-
-  const handleUserSelect = (userID) => {
-    setActiveNodePulseID(userID)
-    setActiveNodeID(userID)
-  }
 
   return (
     <Flex
@@ -101,7 +96,7 @@ export default function Age () {
                   backgroundImage={user.avatar}
                   backgroundSize='100% auto'
                   backgroundPosition='center'
-                  onClick={() => handleUserSelect(user.id)}
+                  onClick={() => setActiveNodeID(user.id)}
                 />
                 {user.id === activeNodePulseID && <ActivePulse />}
                 {user.dateOfDeath && (

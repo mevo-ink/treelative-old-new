@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react'
 
 import { useQuery } from 'urql'
-import { useSetRecoilState, useRecoilState } from 'recoil'
+import { useSetRecoilState, useRecoilValue } from 'recoil'
 
 import { GET_BIRTHDAY_DATA } from 'graphql/queries/layouts'
 import { activeNodeIDAtom, layoutMethodsAtom, activeNodePulseIDAtom } from 'utils/atoms.js'
@@ -24,7 +24,7 @@ export default function Birthday () {
 
   const [result, refetch] = useQuery({ query: GET_BIRTHDAY_DATA })
 
-  const [activeNodePulseID, setActiveNodePulseID] = useRecoilState(activeNodePulseIDAtom)
+  const activeNodePulseID = useRecoilValue(activeNodePulseIDAtom)
 
   useEffect(() => {
     if (!result.data) return
@@ -52,11 +52,6 @@ export default function Birthday () {
   }
 
   if (result.fetching) return <Loading />
-
-  const handleUserSelect = (userID) => {
-    setActiveNodePulseID(userID)
-    setActiveNodeID(userID)
-  }
 
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
@@ -119,7 +114,7 @@ export default function Birthday () {
                   backgroundImage={user.avatar}
                   backgroundSize='100% auto'
                   backgroundPosition='center'
-                  onClick={() => handleUserSelect(user.id)}
+                  onClick={() => setActiveNodeID(user.id)}
                 />
                 {user.id === activeNodePulseID && <ActivePulse />}
                 <Text

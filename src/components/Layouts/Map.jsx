@@ -1,7 +1,7 @@
 import { Box, Image, Text } from '@chakra-ui/react'
 
 import { useQuery } from 'urql'
-import { useSetRecoilState, useRecoilState } from 'recoil'
+import { useSetRecoilState, useRecoilValue } from 'recoil'
 
 import { WHO_AM_I } from 'graphql/queries/auth'
 import { GET_MAP_DATA } from 'graphql/queries/layouts'
@@ -108,7 +108,7 @@ export default function Map () {
 
   const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
 
-  const [activeNodePulseID, setActiveNodePulseID] = useRecoilState(activeNodePulseIDAtom)
+  const activeNodePulseID = useRecoilValue(activeNodePulseIDAtom)
 
   const [result, refetch] = useQuery({ query: GET_MAP_DATA })
   const [whoAmIResult] = useQuery({ query: WHO_AM_I })
@@ -128,11 +128,6 @@ export default function Map () {
   }
 
   if (result.fetching) return <Loading />
-
-  const handleUserSelect = (userID) => {
-    setActiveNodePulseID(userID)
-    setActiveNodeID(userID)
-  }
 
   return (
     <Box h='calc(100 * var(--vh))'>
@@ -184,7 +179,7 @@ export default function Map () {
               borderRadius='50%'
               position='absolute'
               zIndex={(user.id === activeNodePulseID || user.id === whoAmIResult.data?.whoAmI.id) ? '4' : '2'}
-              onClick={() => handleUserSelect(user.id)}
+              onClick={() => setActiveNodeID(user.id)}
             />
             {user.id === activeNodePulseID && <ActivePulse mapView />}
           </Box>
