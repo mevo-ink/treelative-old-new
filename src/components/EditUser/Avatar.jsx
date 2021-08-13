@@ -13,11 +13,12 @@ import { useMutation } from 'urql'
 import { useRecoilValue } from 'recoil'
 
 import { UPDATE_AVATAR } from 'graphql/mutations/users'
-import { networkMethodsAtom, isEditModeAtom } from 'utils/atoms.js'
+import { networkMethodsAtom, isEditModeAtom, layoutAtom } from 'utils/atoms.js'
 
 const toast = createStandaloneToast()
 
 export default function Avatar ({ user }) {
+  const layout = useRecoilValue(layoutAtom)
   const networkMethods = useRecoilValue(networkMethodsAtom)
 
   const invalidateImageCache = (imageURL) => {
@@ -33,6 +34,7 @@ export default function Avatar ({ user }) {
       cache: 'no-cache'
     }
 
+    if (layout !== 'network') return
     window.fetch(new window.Request(user.avatar), init)
       .then(() => {
         // update network node with new image url
