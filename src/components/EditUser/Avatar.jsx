@@ -115,6 +115,7 @@ export default function Avatar ({ user }) {
     const selectedFile = event.target.files[0]
     if (!selectedFile) return
 
+    /* eslint-disable */
     const reader = new FileReader()
     reader.readAsDataURL(selectedFile)
     reader.onload = (e) => {
@@ -134,6 +135,7 @@ export default function Avatar ({ user }) {
         handleUpload(file)
       }
     }
+    /* eslint-enable */
   }
 
   return (
