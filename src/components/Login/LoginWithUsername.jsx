@@ -47,7 +47,6 @@ export default function LoginWithUsername ({ onLoginSuccess, setInternalError, s
         as='form'
         w='100%'
         spacing='2rem'
-        color='hsla(261, 64%, 18%, 1)'
         onSubmit={handleSubmit(onLoginWithPassword)}
       >
         <FormControl id='username' isRequired isInvalid={errors?.username}>

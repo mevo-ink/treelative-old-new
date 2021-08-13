@@ -88,6 +88,7 @@ export default function ProfileCard () {
   }
 
   if (result.fetching) return <Loading />
+  if (result.error) return <Login onSuccess={onLoginSuccess} onClose={onClose} />
 
   return (
     <Modal isOpen onClose={onClose} isCentered>
@@ -106,7 +107,6 @@ export default function ProfileCard () {
         />
         <OuterWrapper>
           <InnerWrapper>
-            {result.error && <Login onSuccess={onLoginSuccess} />}
             {result.data?.getUser && (
               <>
                 <Edit innerBtnStyles={innerBtnStyles} />
