@@ -17,7 +17,7 @@ import { LOGIN_WITH_PROVIDER } from 'graphql/mutations/auth'
 
 import ErrorModal from 'components/_common/ErrorModal'
 import LoginButton from 'components/Login/LoginButton'
-import LoginWithEmail from 'components/Login/LoginWithEmail'
+import LoginWithUsername from 'components/Login/LoginWithUsername'
 
 const loginProviders = [
   { label: 'Login with Facebook', icon: FaFacebook, color: 'linear-gradient(180deg, hsl(222, 47%, 43%), hsl(222, 47%, 33%))', provider: facebook },
@@ -26,7 +26,7 @@ const loginProviders = [
 ]
 
 export default function Login ({ onSuccess }) {
-  const [showLoginWithEmail, setShowLoginWithEmail] = useState(false)
+  const [showLoginWithUsername, setShowLoginWithUsername] = useState(false)
 
   const [loginWithProviderResult, loginWithProvider] = useMutation(LOGIN_WITH_PROVIDER)
 
@@ -67,7 +67,7 @@ export default function Login ({ onSuccess }) {
       >
         Sign In
       </Text>
-      {!showLoginWithEmail && (
+      {!showLoginWithUsername && (
         <Stack
           width='100%'
           spacing='1rem'
@@ -86,15 +86,15 @@ export default function Login ({ onSuccess }) {
             <Divider borderColor='unset' />
           </Flex>
           <LoginButton
-            label='Login with Email'
+            label='Login with Username'
             icon={FiLogIn}
             color='linear-gradient(180deg, hsl(0, 0%, 27%), hsl(0, 0%, 17%))'
-            setShowLoginWithEmail={setShowLoginWithEmail}
+            setShowLoginWithUsername={setShowLoginWithUsername}
           />
         </Stack>
       )}
-      {showLoginWithEmail && (
-        <LoginWithEmail onLoginSuccess={onLoginSuccess} setInternalError={setInternalError} setShowLoginWithEmail={setShowLoginWithEmail} />
+      {showLoginWithUsername && (
+        <LoginWithUsername onLoginSuccess={onLoginSuccess} setInternalError={setInternalError} setShowLoginWithUsername={setShowLoginWithUsername} />
       )}
     </Box>
   )

@@ -35,9 +35,15 @@ export default function App () {
 }
 // TODO:
 /*
-  Add PWA prompt
   Set all users to have unverified flag set to true
-  API-
+  Authentication with Firebase Magic Email
+  Add tooltips for pie and bar charts - for insights - with user avatars that fall under that category
+  Add PWA prompt
+  Refactor Error Modal
+  Add find me ring indicator graph view
+  MAKE YouTube VIDEO OF how to / intro
+
+  API
     - query to suggest users with no email - unauthenticated endpoint
     - mutation to update a user's email - authenticated endpoint - but check for firebase token
     - mutation to create a new user - authenticated endpoint - but check for firebase token
@@ -45,6 +51,7 @@ export default function App () {
       - without email - We could not find an account associated with the email
       - with email, but unverified - please wait
       - success
+
   LOGIN PROCESS - OAUTH
    - all users will have unverified flag set to true at the beginning
    - if the user has a profile associated wit the email - continue
@@ -52,12 +59,7 @@ export default function App () {
      - Give the user to choose from existing users with no email associated
      - If the user chooses an existing user, update the profile with the email: remove the unverified flag after manual verification
      - If the user chooses to create a new user, create a new profile with the email: remove the unverified flag after manual verification
-  Discuss about an ErrorModal - have atom state for error
-  Authentication with Firebase Magic Email
-  MAKE YouTube VIDEO OF how to / intro
 
-  Add find me ring indicator graph view
-  - Add tooltips for pie and bar charts - for insights - with user avatars that fall under that category
     Add two new queries:
     - Get users by age
     - Get users by location

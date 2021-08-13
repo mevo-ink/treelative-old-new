@@ -6,11 +6,11 @@ import { Button } from '@chakra-ui/react'
 
 import ErrorModal from 'components/_common/ErrorModal'
 
-export default function LoginButton ({ label, icon: Icon, color, provider, onSuccess, setShowLoginWithEmail }) {
+export default function LoginButton ({ label, icon: Icon, color, provider, onSuccess, setShowLoginWithUsername }) {
   const [error, setError] = useState()
 
   const onLogin = () => {
-    if (!provider) return setShowLoginWithEmail(true)
+    if (!provider) return setShowLoginWithUsername(true)
     firebaseAuth.signInWithPopup(provider)
       .then(async (result) => {
         const token = await firebaseAuth.currentUser.getIdToken()

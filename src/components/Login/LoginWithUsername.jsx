@@ -26,7 +26,7 @@ const schemaValidation = object().shape({
   password: string().required().min(3)
 })
 
-export default function LoginWithEmail ({ onLoginSuccess, setInternalError, setShowLoginWithEmail }) {
+export default function LoginWithUsername ({ onLoginSuccess, setInternalError, setShowLoginWithUsername }) {
   const [loginResult, login] = useMutation(LOGIN)
 
   const [isForgotPasswordOpen, setIsForgotPasswordOpen] = useState(false)
@@ -96,7 +96,7 @@ export default function LoginWithEmail ({ onLoginSuccess, setInternalError, setS
         fontSize='.8rem'
         fontWeight='400'
         bg='transparent'
-        onClick={() => setShowLoginWithEmail(false)}
+        onClick={() => setShowLoginWithUsername(false)}
       >
         Back
       </Button>
