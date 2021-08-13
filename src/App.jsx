@@ -36,7 +36,7 @@ export default function App () {
 // TODO:
 /*
   Add PWA prompt
-  Set all users to have unverified flag set to true - change default password
+  Set all users to have unverified flag set to true
   API-
     - query to suggest users with no email - unauthenticated endpoint
     - mutation to update a user's email - authenticated endpoint - but check for firebase token
@@ -53,11 +53,8 @@ export default function App () {
      - If the user chooses an existing user, update the profile with the email: remove the unverified flag after manual verification
      - If the user chooses to create a new user, create a new profile with the email: remove the unverified flag after manual verification
   Discuss about an ErrorModal - have atom state for error
-  add option to reset password in UI for admin
+  Authentication with Firebase Magic Email
   MAKE YouTube VIDEO OF how to / intro
-  USER FEEDBACKS
-   - Login la auth providers are not intuitive aam
-     - either keep username/password login as a separate modal - or make auth providers icon more prominent - user original logo colors/something ..
 
   Add find me ring indicator graph view
   - Add tooltips for pie and bar charts - for insights - with user avatars that fall under that category
