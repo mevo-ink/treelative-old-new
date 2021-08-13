@@ -59,9 +59,6 @@ export default function App () {
    - Login la auth providers are not intuitive aam
      - either keep username/password login as a separate modal - or make auth providers icon more prominent - user original logo colors/something ..
 
-  - How can a non-admin user edit their child profile? or their deceased parent profile?
-    - add new authorization flag for a user to edit their direct family member profile?
-    - Add isEditable in getUser response - bases on direct family members
   Add find me ring indicator graph view
   - Add tooltips for pie and bar charts - for insights - with user avatars that fall under that category
     Add two new queries:

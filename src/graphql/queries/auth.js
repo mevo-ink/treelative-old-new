@@ -9,6 +9,15 @@ export const WHO_AM_I = gql`
       fullName
       dateOfBirth
       currentLocation
+      parents {
+        id
+      }
+      children {
+        id
+      }
+      partner {
+        id
+      }
     }
   }
 `

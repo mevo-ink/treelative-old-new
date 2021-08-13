@@ -15,9 +15,14 @@ export default function Edit ({ innerBtnStyles }) {
   const [whoAmIResult] = useQuery({ query: WHO_AM_I })
   const authUser = whoAmIResult.data?.whoAmI
 
+  const checkEditable = () => {
+    if (authUser?.children.find(child => child.id === activeNodeID)) return true
+    if (authUser?.parents.find(parent => parent.id === activeNodeID)) return true
+    if (activeNodeID === authUser?.partner?.id) return true
+  }
   return (
     <>
-      {(authUser?.isAdmin || authUser?.id === activeNodeID) && (
+      {(authUser?.isAdmin || authUser?.id === activeNodeID || checkEditable()) && (
         <IconButton
           icon={isEditMode ? <MdDone /> : <FiEdit />}
           {...innerBtnStyles}
