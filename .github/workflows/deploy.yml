@@ -22,10 +22,6 @@ jobs:
           touch .env
           echo NEXT_PUBLIC_GOOGLE_LOCATION_API_KEY=${{ secrets.NEXT_PUBLIC_GOOGLE_LOCATION_API_KEY }} >> .env
           cat .env
-      - name: Decrypt firebaseAuth secrets
-        run: ./.github/scripts/decrypt_secret.sh
-        env:
-          DECRYPT_PASSPHRASE: ${{ secrets.DECRYPT_PASSPHRASE }}
       - name: Push to Docker Hub
         uses: docker/build-push-action@v2
         with:

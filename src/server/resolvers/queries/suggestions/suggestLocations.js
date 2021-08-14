@@ -9,7 +9,7 @@ export default async (parent, args, context, info) => {
     .placeAutocomplete({
       params: {
         input: args.query,
-        key: process.env.GOOGLE_LOCATION_API_KEY
+        key: process.env.NEXT_PUBLIC_GOOGLE_LOCATION_API_KEY
       },
       timeout: 1000 // milliseconds
     })
