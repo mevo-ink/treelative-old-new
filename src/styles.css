@@ -1,0 +1,11 @@
+html, body {
+  background: url('/bg.jpg') !important;
+  background-size: cover;
+  background-position: center center;
+  overflow: hidden;
+}
+
+body {
+  width: 100vw;
+  height: calc(100 * var(--vh));
+}
