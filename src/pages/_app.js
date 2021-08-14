@@ -39,3 +39,44 @@ const App = ({ Component, pageProps }) => {
 }
 
 export default withUrqlClient(client)(App)
+
+// TODO:
+/*
+  Set all users to have unverified flag set to true
+  Authentication with Firebase Magic Email
+  Add tooltips for pie and bar charts - for insights - with user avatars that fall under that category
+    Add two new queries:
+      - Get users by age
+      - Get users by location
+      - Use these both to show tooltips on charts - avatars
+  Add PWA prompt
+  Refactor Error Modal
+  Add find me ring indicator graph view
+  MAKE YouTube VIDEO OF how to / intro
+  API
+    - query to suggest users with no email - unauthenticated endpoint
+    - mutation to update a user's email - authenticated endpoint - but check for firebase token
+    - mutation to create a new user - authenticated endpoint - but check for firebase token
+    - loginWIthProvider - 2 different responses
+      - without email - We could not find an account associated with the email
+      - with email, but unverified - please wait
+      - success
+  LOGIN PROCESS - OAUTH
+   - all users will have unverified flag set to true at the beginning
+   - if the user has a profile associated wit the email - continue
+   - else:
+     - Give the user to choose from existing users with no email associated
+     - If the user chooses an existing user, update the profile with the email: remove the unverified flag after manual verification
+     - If the user chooses to create a new user, create a new profile with the email: remove the unverified flag after manual verification
+
+  NEXT JS
+    - fetch server side data for layouts
+    - handle profile card url with next route
+    - if time- user next js' Image component
+
+  Replace minIO with google storage
+
+  ?? deploy tyo netlify?
+
+  Replace mongo with firestore ??
+*/
