@@ -8,4 +8,6 @@ if (!admin.apps.length) {
 
 export const db = admin.firestore()
 
+export const storage = admin.storage().bucket('gs://treelative-007.appspot.com')
+
 export default admin

@@ -6,6 +6,8 @@ import schema from 'server/schema'
 import dbConnect from 'server/mongo/dbConnect'
 import models from 'server/mongo/models'
 
+import { db, storage } from 'server/utils/firebase'
+
 import { authenticateUserToken } from 'server/utils/authentication'
 
 const apolloServer = new ApolloServer({
@@ -20,6 +22,8 @@ const apolloServer = new ApolloServer({
     // also add mongoose models to the context
     return {
       user,
+      db,
+      storage,
       models
     }
   }
