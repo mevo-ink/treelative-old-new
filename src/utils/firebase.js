@@ -5,12 +5,13 @@ import 'firebase/database'
 import 'firebase/analytics'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDNoslz_ADYpcRTUd-1jOn-QqRKjb3Ct5g',
-  authDomain: 'j2a-org.firebaseapp.com',
-  projectId: 'j2a-org',
-  messagingSenderId: '873251493439',
-  appId: '1:873251493439:web:9af14879c7e433c4db8a8a',
-  measurementId: 'G-8XQXPL9XQV'
+  apiKey: 'AIzaSyAYwyuzHLuCtdEWZs-g552auLodHI5g9sA',
+  authDomain: 'treelative-007.firebaseapp.com',
+  projectId: 'treelative-007',
+  storageBucket: 'treelative-007.appspot.com',
+  messagingSenderId: '485856278904',
+  appId: '1:485856278904:web:b4a378b55fc3ccc1db708d',
+  measurementId: 'G-9SNJVQ27BK'
 }
 
 if (!firebase.apps.length) {
