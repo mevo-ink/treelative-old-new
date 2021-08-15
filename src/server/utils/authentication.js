@@ -11,19 +11,22 @@ export const generateToken = user => jwt.sign(
   user, JWT_SECRET, { expiresIn: JWT_EXPIRY }
 )
 
-export const authenticateUserToken = async (req, models) => {
+export const authenticateUserToken = async (req, db) => {
   try {
     const token = req.headers.auth_session_id
 
     if (!token) return null
 
-    const { _id } = jwt.verify(token, JWT_SECRET)
+    const { id } = jwt.verify(token, JWT_SECRET)
 
-    if (!_id) return null
+    if (!id) return null
 
-    const user = await models.User.findOne({ _id }, 'username isAdmin fullName').lean()
+    const userDoc = await db.collection('users').doc(id).get()
+    if (!userDoc.exists) {
+      throw new ApolloError('Unauthenticated', 401)
+    }
 
-    return user
+    return userDoc.data()
   } catch (error) {
     if (['TokenExpiredError', 'JsonWebTokenError'].includes(error.name)) {
       return null

@@ -52,7 +52,6 @@ export default {
   DateTime: DateTimeResolver,
 
   User: {
-    id: parent => parent._id.toString(),
     avatar: getUserAvatar,
     partner: getUserPartner,
     parents: getUserParents,

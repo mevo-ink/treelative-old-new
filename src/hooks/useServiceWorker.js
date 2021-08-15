@@ -18,10 +18,8 @@ export default function useServiceWorker () {
   const updateServiceWorker = () => {
     // Send a message to the waiting service worker, instructing it to activate.
     window.workbox.messageSkipWaiting()
-    window.workbox.addEventListener('controlling', event => {
-      setNewVersionAvailable(false)
-      window.location.reload()
-    })
+    setNewVersionAvailable(false)
+    window.location.reload()
   }
 
   useEffect(() => {

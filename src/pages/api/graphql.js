@@ -18,7 +18,7 @@ const apolloServer = new ApolloServer({
     // connect to mongo
     await dbConnect()
     // authenticate the user (if auth header is present) and add to context
-    const user = await authenticateUserToken(req, models)
+    const user = await authenticateUserToken(req, db)
     // also add mongoose models to the context
     return {
       user,
