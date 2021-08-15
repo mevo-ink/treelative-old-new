@@ -19,7 +19,7 @@ export default async (parent, args, context, info) => {
     const birthMonthDay = user.dateOfBirth.toISOString().slice(5, 10)
 
     user.id = user._id
-    user.avatar = `https://${process.env.MINIO_ENDPOINT}/avatar/${user.id}.jpg`
+    user.avatar = `${process.env.STORAGE_ENDPOINT}/avatars/${user.id}.png`
     user.brokenAvatar = `https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`
     user.age = calculateAge(user.dateOfBirth, user.dateOfDeath ? new Date(user.dateOfDeath) : new Date())
 

@@ -25,7 +25,6 @@
     "graphql": "15.5.1",
     "graphql-scalars": "1.10.0",
     "jsonwebtoken": "8.5.1",
-    "minio": "7.0.18",
     "mongoose": "5.13.7",
     "next": "11.1.0",
     "next-pwa": "5.2.24",
@@ -42,6 +41,7 @@
     "recoil": "0.4.0",
     "recoil-persist": "3.0.0",
     "urql": "2.0.4",
+    "uuidv4": "^6.2.11",
     "vis-network": "9.0.5",
     "yup": "0.32.9"
   },

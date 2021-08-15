@@ -2,8 +2,6 @@ import { ApolloError } from 'apollo-server-micro'
 
 import { isOwner } from 'server/utils/authorization'
 
-import minioClient from 'server/utils/minioClient'
-
 export default async (parent, args, context, info) => {
   if (!isOwner(context, args.userID)) {
     throw new ApolloError('You are not authorized to perform this action', 'UNAUTHORIZED')
@@ -15,8 +13,12 @@ export default async (parent, args, context, info) => {
     throw new ApolloError('No such user exists', 'FORBIDDEN')
   }
 
-  // expires in 60 secs
-  const presignedUrl = minioClient.presignedPutObject('avatar', `${args.userID}.jpg`, 60)
+  const file = context.storage.file(`avatars/${user._id.toString()}.png`)
+  const presignedUrl = await file.getSignedUrl({
+    version: 'v4',
+    action: 'write',
+    expires: Date.now() + 15 * 60 * 1000 // 15 minutes
+  })
 
-  return presignedUrl
+  return presignedUrl[0]
 }

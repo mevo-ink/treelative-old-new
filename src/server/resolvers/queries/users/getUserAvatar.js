@@ -1,3 +1,3 @@
 export default async (parent, args, context, info) => {
-  return `https://${process.env.MINIO_ENDPOINT}/avatar/${parent._id}.jpg`
+  return `${process.env.STORAGE_ENDPOINT}/avatars/${parent._id}.png`
 }

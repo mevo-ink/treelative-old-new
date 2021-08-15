@@ -20,6 +20,8 @@ export default gql`
     removeUserParent (userID: String! parentID: String!): User!
     removeUserChild (userID: String! childID: String!): User!
     removeUserPartner(userID: String! partnerID: String!): User!
+
+    scriptAvatars: Boolean
   }
 
   input LoginInput {

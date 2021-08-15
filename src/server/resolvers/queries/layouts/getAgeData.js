@@ -8,7 +8,7 @@ export default async (parent, args, context, info) => {
     const birthYear = new Date(user.dateOfBirth).toISOString().slice(0, 4)
 
     user.id = user._id
-    user.avatar = `https://${process.env.MINIO_ENDPOINT}/avatar/${user._id}.jpg`
+    user.avatar = `${process.env.STORAGE_ENDPOINT}/avatars/${user._id}.png`
     user.brokenAvatar = `https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`
 
     if (data[birthYear]) {

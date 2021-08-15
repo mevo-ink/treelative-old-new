@@ -44,6 +44,9 @@ import getMapData from './queries/layouts/getMapData'
 import getAgeData from './queries/layouts/getAgeData'
 import getBirthdayData from './queries/layouts/getBirthdayData'
 
+// admin only scripts
+import avatars from './mutations/scripts/avatars'
+
 export default {
   JSON: JSONResolver,
   DateTime: DateTimeResolver,
@@ -89,6 +92,7 @@ export default {
     addUserPartner,
     removeUserParent,
     removeUserChild,
-    removeUserPartner
+    removeUserPartner,
+    scriptAvatars: avatars
   }
 }
