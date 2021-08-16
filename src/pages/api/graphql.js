@@ -3,7 +3,7 @@ import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-co
 
 import schema from 'server/schema'
 
-import dbConnect from 'server/mongo/dbConnect'
+// import dbConnect from 'server/mongo/dbConnect'
 import models from 'server/mongo/models'
 
 import db from 'server/utils/firebase/database'
@@ -17,7 +17,7 @@ const apolloServer = new ApolloServer({
   plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
   context: async ({ req }) => {
     // connect to mongo
-    await dbConnect()
+    // await dbConnect()
     // authenticate the user (if auth header is present) and add to context
     const user = await authenticateUserToken(req, db)
     // also add mongoose models to the context

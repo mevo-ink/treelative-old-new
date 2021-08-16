@@ -46,4 +46,24 @@ db.findOneAndUpdate = async (collection, filters, input) => {
   return db.findOneByIdAndUpdate(collection, user.id, input)
 }
 
+db.deleteOne = async (collection, id) => {
+  const user = (await db.collection(collection).doc(id).get()).data()
+  user.parents.map(async parentID => await db.deleteChild(collection, id, parentID))
+  // db.deleteChild(collection, id)
+  // return db.collection(collection).doc(id).delete()
+}
+
+db.deleteChild = async (collection, childID, parentID) => {
+  // remove child from parent
+  const parent = (await db.collection(collection).doc(parentID).get()).data()
+  parent.children = parent.children.filter(id => id !== childID)
+  await db.collection(collection).doc(parentID).set({ children: parent.children }, { merge: true })
+  // remove parent from child
+  const child = (await db.collection(collection).doc(childID).get()).data()
+  child.parents = await child.parents.filter(id => id !== parentID)
+  console.log(child.parents)
+  await db.collection(collection).doc(childID).set({ parents: child.parents }, { merge: true })
+  return true
+}
+
 export default db
