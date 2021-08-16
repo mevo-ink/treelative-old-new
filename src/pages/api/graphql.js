@@ -6,7 +6,8 @@ import schema from 'server/schema'
 import dbConnect from 'server/mongo/dbConnect'
 import models from 'server/mongo/models'
 
-import { db, storage } from 'server/utils/firebase'
+import db from 'server/utils/firebase/database'
+import storage from 'server/utils/firebase/storage'
 
 import { authenticateUserToken } from 'server/utils/authentication'
 

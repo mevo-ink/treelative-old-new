@@ -1,14 +1,15 @@
-import admin from 'firebase-admin'
+import admin from '.'
 
-if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.applicationDefault()
-  })
-}
+import { v4 as uuidv4 } from 'uuid'
 
-export const db = admin.firestore()
+const db = admin.firestore()
 
 // firestore common methods
+db.create = async (collection, input) => {
+  const id = uuidv4()
+  return db.findOneByIdAndUpdate(collection, id, { ...input, id })
+}
+
 db.findOne = async (collection, filters) => {
   let queryRef = db.collection(collection)
   for (const [key, filter] of Object.entries(filters)) {
@@ -37,13 +38,12 @@ db.findOneByIdAndUpdate = async (collection, id, input) => {
 db.findOneAndUpdate = async (collection, filters, input) => {
   let queryRef = db.collection(collection)
   for (const [key, filter] of Object.entries(filters)) {
+    console.log(key, '==', filter)
     queryRef = queryRef.where(key, '==', filter)
   }
   const results = await queryRef.get()
-  const id = results.docs[0].data()
-  return db.findOneByIdAndUpdate(collection, { id }, input)
+  const user = results.docs[0].data()
+  return db.findOneByIdAndUpdate(collection, user.id, input)
 }
 
-export const storage = admin.storage().bucket('gs://treelative-007.appspot.com')
-
-export default admin
+export default db

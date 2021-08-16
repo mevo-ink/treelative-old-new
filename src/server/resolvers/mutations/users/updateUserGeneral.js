@@ -2,8 +2,6 @@ import { ApolloError } from 'apollo-server-micro'
 
 import { isOwner } from 'server/utils/authorization'
 
-import { updateAndReturn } from 'server/utils/database'
-
 import getParsedLocations from 'server/utils/getParsedLocations'
 
 export default async (parent, args, context, info) => {
@@ -14,11 +12,7 @@ export default async (parent, args, context, info) => {
   // parse location data
   args.input.parsedLocations = await getParsedLocations(args.input)
 
-  // const user = await context.models.User.findOneAndUpdate(
-  //   { _id: args.userID },
-  //   { ...args.input, ...parsedLocations },
-  //   { new: true }
-  // )
+  const user = await context.db.findOneByIdAndUpdate('users', args.userID, args.input)
 
-  return updateAndReturn(context, args.userID, args.input)
+  return user
 }

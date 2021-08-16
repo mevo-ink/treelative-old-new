@@ -4,7 +4,7 @@ import { isAdmin } from 'server/utils/authorization'
 
 import fetch from 'node-fetch'
 
-import { uuid } from 'uuidv4'
+import { v4 as uuidv4 } from 'uuid'
 
 export default async (parent, args, context, info) => {
   isAdmin(context)
@@ -23,7 +23,7 @@ export default async (parent, args, context, info) => {
     await context.storage.upload('deleteMe.png', {
       public: true,
       destination: `avatars/${user._id.toString()}.png`,
-      metadata: { metadata: { firebaseStorageDownloadTokens: uuid() } }
+      metadata: { metadata: { firebaseStorageDownloadTokens: uuidv4() } }
     })
 
     fs.unlinkSync('deleteMe.png')
