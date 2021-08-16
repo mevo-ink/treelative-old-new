@@ -4,6 +4,8 @@ import fs from 'fs'
 
 import { isAdmin } from 'server/utils/authorization'
 
+import { updateAndReturn } from 'server/utils/helperFunctions'
+
 import fetch from 'node-fetch'
 
 import { uuid } from 'uuidv4'
@@ -11,26 +13,18 @@ import { uuid } from 'uuidv4'
 export default async (parent, args, context, info) => {
   isAdmin(context)
 
-  const username = args.input.fullName.trim().replace(' ', '_')
-  const password = await hash('123', 10)
-
-  const user = await context.models.User.create({
-    ...args.input,
-    username,
-    password
-  })
-
+  args.input.username = args.input.fullName.trim().replace(' ', '_')
+  args.input.password = await hash('123', 10)
   const userID = uuid()
-  const docRef = context.db.collection('users').doc(userID)
-  await docRef.set({
-    ...args.input,
-    id: userID,
-    username,
-    password
-  })
+
+  // const user = await context.models.User.create({
+  //   ...args.input,
+  //   username,
+  //   password
+  // })
 
   // download user avatar from ui-avatars and upload to google storage
-  const url = `https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`
+  const url = `https://ui-avatars.com/api/?name=${args.input.fullName}&background=random&rounded=true&font-size=0.5&bold=true`
   const response = await fetch(url)
   const data = await response.arrayBuffer()
   const buffer = Buffer.from(data, 'base64')
@@ -45,10 +39,5 @@ export default async (parent, args, context, info) => {
 
   fs.unlinkSync('deleteMe.png')
 
-  const userRef = await context.db.collection('users').doc(userID)
-  const userDoc = (await userRef.get()).data()
-
-  console.log(userDoc)
-
-  return user
+  return updateAndReturn(context, userID, args.input)
 }
