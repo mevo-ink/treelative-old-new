@@ -10,9 +10,9 @@ export default async (parent, args, context, info) => {
   }
 
   // parse location data
-  args.input.parsedLocations = await getParsedLocations(args.input)
+  const parsedLocations = await getParsedLocations(args.input)
 
-  const user = await context.db.findOneByIdAndUpdate('users', args.userID, args.input)
+  const user = await context.db.findOneByIdAndUpdate('users', args.userID, { ...args.input, ...parsedLocations })
 
   return user
 }
