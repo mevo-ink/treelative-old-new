@@ -1,10 +1,4 @@
-export const updateAndReturn = async (context, args, parsedLocations) => {
-  await context.db.collection('users').doc(args.userID).set({
-    id: args.userID,
-    ...args.input,
-    ...parsedLocations
-  }, { merge: true })
-
-  const user = (await context.db.collection('users').doc(args.userID).get()).data()
-  return user
+export const updateAndReturn = async (context, userID, argsInput) => {
+  await context.db.collection('users').doc(userID).set({ id: userID, ...argsInput }, { merge: true })
+  return (await context.db.collection('users').doc(userID).get()).data()
 }
