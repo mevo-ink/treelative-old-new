@@ -29,8 +29,9 @@ db.findAll = async (collection, filters = {}) => {
 }
 
 db.findOneByIdAndUpdate = async (collection, id, input) => {
-  await db.collection(collection).doc(id).set(input, { merge: true })
-  return (await db.collection(collection).doc(id).get()).data()
+  const ref = db.collection(collection).doc(id)
+  await ref.set(input, { merge: true })
+  return (await ref.get()).data()
 }
 
 db.findOneAndUpdate = async (collection, filters, input) => {
