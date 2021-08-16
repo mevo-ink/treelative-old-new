@@ -2,7 +2,7 @@ import { ApolloError } from 'apollo-server-micro'
 
 import { isOwner } from 'server/utils/authorization'
 
-import { updateAndReturn } from 'server/utils/helperFunctions'
+import { updateAndReturn } from 'server/utils/database'
 
 import getParsedLocations from 'server/utils/getParsedLocations'
 

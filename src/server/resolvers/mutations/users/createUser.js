@@ -4,7 +4,7 @@ import fs from 'fs'
 
 import { isAdmin } from 'server/utils/authorization'
 
-import { updateAndReturn } from 'server/utils/helperFunctions'
+import { updateAndReturn } from 'server/utils/database'
 
 import fetch from 'node-fetch'
 
