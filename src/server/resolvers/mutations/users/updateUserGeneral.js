@@ -12,7 +12,7 @@ export default async (parent, args, context, info) => {
   }
 
   // parse location data
-  const parsedLocations = await getParsedLocations(args.input)
+  args.input.parsedLocations = await getParsedLocations(args.input)
 
   // const user = await context.models.User.findOneAndUpdate(
   //   { _id: args.userID },
@@ -20,5 +20,5 @@ export default async (parent, args, context, info) => {
   //   { new: true }
   // )
 
-  return updateAndReturn(context, args, parsedLocations)
+  return updateAndReturn(context, args.userID, args.input)
 }
