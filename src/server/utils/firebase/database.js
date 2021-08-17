@@ -4,8 +4,9 @@ const db = admin.firestore()
 
 // firestore common methods
 db.create = async (collection, input) => {
-  const { id } = db.collection('users').doc()
-  return db.findOneByIdAndUpdate(collection, id, { ...input, id })
+  const newUserRef = db.collection('users').doc()
+  await newUserRef.set({ ...input, id: newUserRef.id })
+  return db.findOneById(collection, newUserRef.id)
 }
 
 db.findOneById = async (collection, id) => {
@@ -35,6 +36,15 @@ db.findOneByIdAndUpdate = async (collection, id, input) => {
   const ref = db.collection(collection).doc(id)
   await ref.update(input)
   return (await ref.get()).data()
+}
+
+db.findOneAndUpdate = async (collection, filters, input) => {
+  let queryRef = db.collection(collection)
+  for (const [key, filter] of Object.entries(filters)) {
+    queryRef = queryRef.where(key, '==', filter)
+  }
+  const results = await queryRef.get()
+  return results.empty ? null : db.findOneByIdAndUpdate(collection, results.docs[0].data().id, input)
 }
 
 db.deleteOneById = async (collection, id) => {
