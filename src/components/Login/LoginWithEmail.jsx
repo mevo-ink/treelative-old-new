@@ -58,23 +58,6 @@ export default function LoginWithEmail ({ onLoginSuccess, setInternalError, setS
           />
           <ErrorAlert>{errors?.username?.message}</ErrorAlert>
         </FormControl>
-        <FormControl id='password' isRequired isInvalid={errors?.password}>
-          <Flex justify='space-between'>
-            <FormLabel>Password</FormLabel>
-            <Button
-              variant='link'
-              color='hsla(359, 88%, 50%, 1)'
-              fontSize='.8rem'
-              fontWeight='100'
-              onClick={() => setIsForgotPasswordOpen(true)}
-              tabIndex='-1'
-            >
-              Forgot Password?
-            </Button>
-          </Flex>
-          <PasswordInput {...register('password')} />
-          <ErrorAlert>{errors?.password?.message}</ErrorAlert>
-        </FormControl>
         {loginResult.error && <ErrorAlert>{loginResult.error.message}</ErrorAlert>}
         <Button
           type='submit'
@@ -84,7 +67,7 @@ export default function LoginWithEmail ({ onLoginSuccess, setInternalError, setS
           _active={{ bg: 'linear-gradient(180deg, hsl(0, 0%, 27%), hsl(0, 0%, 17%))' }}
           isLoading={loginResult.fetching}
         >
-          Sign in
+          Send Verification
         </Button>
       </Stack>
       <Button
