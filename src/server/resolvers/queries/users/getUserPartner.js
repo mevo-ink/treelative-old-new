@@ -1,5 +1,5 @@
-export default async (parent, args, context, info) => {
-  const user = parent.partner ? await context.db.findOneById('users', parent.partner) : null
+export default async (user, args, context, info) => {
+  const partner = user.partner ? await context.db.findOneById('users', user.partner) : null
 
-  return user
+  return partner
 }
