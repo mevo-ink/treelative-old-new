@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import {
   Input,
   Stack,
@@ -7,57 +9,59 @@ import {
 } from '@chakra-ui/react'
 import { IoCaretBack } from 'react-icons/io5'
 
-import { useMutation } from 'urql'
-import { object, string } from 'yup'
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-
-import { LOGIN } from 'graphql/mutations/auth'
+import { firebaseAuth } from 'utils/firebase'
 
 import ErrorAlert from 'components/_common/ErrorAlert'
 
-const schemaValidation = object().shape({
-  username: string().required(),
-  password: string().required().min(3)
-})
-
 export default function LoginWithEmail ({ onLoginSuccess, setInternalError, setShowLoginWithEmail }) {
-  const [loginResult, login] = useMutation(LOGIN)
-
-  const onLoginWithPassword = (input) => {
-    login({ input })
-      .then(onLoginSuccess)
-      .catch(setInternalError)
+  const [error, setError] = useState(null)
+  const actionCodeSettings = {
+    url: 'https://www.example.com/finishSignUp?cartId=1234',
+    handleCodeInApp: true,
+    iOS: {
+      bundleId: 'com.example.ios'
+    },
+    android: {
+      packageName: 'com.example.android',
+      installApp: true,
+      minimumVersion: '12'
+    },
+    dynamicLinkDomain: 'example.page.link'
   }
 
-  const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(schemaValidation)
-  })
+  const onLoginWithEmail = (e) => {
+    e.preventDefault()
+    setError(null)
+    firebaseAuth.sendSignInLinkToEmail(e.target[0].value, actionCodeSettings)
+      .then(() => {
+        window.localStorage.setItem('emailForSignIn', e.target[0].value)
+        onLoginSuccess()
+      })
+      .catch(err => setError(err.message))
+  }
   return (
     <>
       <Stack
         as='form'
         w='100%'
         spacing='2rem'
-        onSubmit={handleSubmit(onLoginWithPassword)}
+        onSubmit={(e) => onLoginWithEmail(e)}
       >
-        <FormControl id='username' isRequired isInvalid={errors?.username}>
+        <FormControl id='username' isRequired>
           <FormLabel>Email</FormLabel>
           <Input
-            {...register('username')}
-            type='username'
+            type='email'
             autoComplete='off'
           />
-          <ErrorAlert>{errors?.username?.message}</ErrorAlert>
         </FormControl>
-        {loginResult.error && <ErrorAlert>{loginResult.error.message}</ErrorAlert>}
+        {error && <ErrorAlert>{error}</ErrorAlert>}
         <Button
           type='submit'
           variant='submit'
           bg='linear-gradient(180deg, hsl(0, 0%, 27%), hsl(0, 0%, 17%))'
           _hover={{ bg: 'linear-gradient(180deg, hsl(0, 0%, 27%), hsl(0, 0%, 17%))' }}
           _active={{ bg: 'linear-gradient(180deg, hsl(0, 0%, 27%), hsl(0, 0%, 17%))' }}
-          isLoading={loginResult.fetching}
+          // isLoading={loginResult.fetching}
         >
           Send Verification
         </Button>
