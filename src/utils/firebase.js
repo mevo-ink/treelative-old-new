@@ -34,12 +34,9 @@ facebook.addScope('user_birthday')
 const google = new firebase.auth.GoogleAuthProvider()
 google.addScope('https://www.googleapis.com/auth/userinfo.email')
 
-const twitter = new firebase.auth.TwitterAuthProvider()
-
 export {
   firebaseAuth,
   facebook,
   google,
-  twitter,
   database
 }

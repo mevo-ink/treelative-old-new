@@ -104,7 +104,7 @@ export default function Login ({ onSuccess, onClose }) {
                 <Divider borderColor='unset' />
               </Flex>
               <LoginButton
-                label='Login with Username'
+                label='Login with Email'
                 icon={FiLogIn}
                 color='linear-gradient(180deg, hsl(0, 0%, 27%), hsl(0, 0%, 17%))'
                 setShowLoginWithEmail={setShowLoginWithEmail}
