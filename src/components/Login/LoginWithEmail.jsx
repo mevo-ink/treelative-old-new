@@ -26,7 +26,7 @@ const schemaValidation = object().shape({
   password: string().required().min(3)
 })
 
-export default function LoginWithUsername ({ onLoginSuccess, setInternalError, setShowLoginWithUsername }) {
+export default function LoginWithEmail ({ onLoginSuccess, setInternalError, setShowLoginWithEmail }) {
   const [loginResult, login] = useMutation(LOGIN)
 
   const [isForgotPasswordOpen, setIsForgotPasswordOpen] = useState(false)
@@ -50,7 +50,7 @@ export default function LoginWithUsername ({ onLoginSuccess, setInternalError, s
         onSubmit={handleSubmit(onLoginWithPassword)}
       >
         <FormControl id='username' isRequired isInvalid={errors?.username}>
-          <FormLabel>Username</FormLabel>
+          <FormLabel>Email</FormLabel>
           <Input
             {...register('username')}
             type='username'
@@ -96,7 +96,7 @@ export default function LoginWithUsername ({ onLoginSuccess, setInternalError, s
         fontSize='.8rem'
         fontWeight='400'
         bg='transparent'
-        onClick={() => setShowLoginWithUsername(false)}
+        onClick={() => setShowLoginWithEmail(false)}
       >
         Back
       </Button>
