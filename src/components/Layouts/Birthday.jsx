@@ -33,13 +33,15 @@ export default function Birthday () {
         refetch({ requestPolicy: 'network-only' })
       }
     })
-    const date = new Date()
-    while (!result.data?.getBirthdayData.data[date.toISOString().slice(5, 10)]) {
-      date.setDate(date.getDate() + 1)
+    if (Object.keys(result.data?.getBirthdayData.data).length > 0) {
+      const date = new Date()
+      while (!result.data?.getBirthdayData.data[date.toISOString().slice(5, 10)]) {
+        date.setDate(date.getDate() + 1)
+      }
+      const upcomingBirthDate = document.getElementById(date.toISOString().slice(5, 10))
+      upcomingBirthDate.style.background = 'hsla(100, 100%, 35%, 1)'
+      upcomingBirthDate.scrollIntoView({ behavior: 'smooth', block: 'center' })
     }
-    const upcomingBirthDate = document.getElementById(date.toISOString().slice(5, 10))
-    upcomingBirthDate.style.background = 'hsla(100, 100%, 35%, 1)'
-    upcomingBirthDate.scrollIntoView({ behavior: 'smooth', block: 'center' })
     // eslint-disable-next-line
   }, [result.data])
 
