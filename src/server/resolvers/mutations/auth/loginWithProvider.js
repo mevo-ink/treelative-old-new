@@ -20,5 +20,7 @@ export default async (parent, args, context, info) => {
     throw new ApolloError(`We could not find an account associated with the email ${email}`, 'UNREGISTERED')
   }
 
-  return generateToken(user)
+  const { id, isAdmin } = user
+
+  return generateToken({ id, isAdmin })
 }
