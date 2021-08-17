@@ -20,7 +20,7 @@ export default async (parent, args, context, info) => {
         couplesMap[coupleID] = {
           id: coupleID,
           group: 'couple',
-          coupleOne: user,
+          coupleOne: user.id,
           coupleTwo: user.partner,
           children: uniqueChildren
         }
@@ -43,8 +43,8 @@ export default async (parent, args, context, info) => {
 
   const nodeEdges = couples.map(couple => (
     [
-      { from: couple.coupleOne.id, to: couple.id, color: '#F10037' },
-      couple.coupleTwo ? { from: couple.coupleTwo.id, to: couple.id, color: '#F10037' } : null,
+      { from: couple.coupleOne, to: couple.id, color: '#F10037' },
+      couple.coupleTwo ? { from: couple.coupleTwo, to: couple.id, color: '#F10037' } : null,
       ...couple.children.map(childID => (
         { from: couple.id, to: childID, color: '#07E901' }
       ))
