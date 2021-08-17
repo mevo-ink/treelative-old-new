@@ -1,7 +1,4 @@
-import { useState } from 'react'
-
 import {
-  Flex,
   Input,
   Stack,
   Button,
@@ -18,8 +15,6 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { LOGIN } from 'graphql/mutations/auth'
 
 import ErrorAlert from 'components/_common/ErrorAlert'
-import ErrorModal from 'components/_common/ErrorModal'
-import PasswordInput from 'components/_common/PasswordInput'
 
 const schemaValidation = object().shape({
   username: string().required(),
@@ -28,8 +23,6 @@ const schemaValidation = object().shape({
 
 export default function LoginWithEmail ({ onLoginSuccess, setInternalError, setShowLoginWithEmail }) {
   const [loginResult, login] = useMutation(LOGIN)
-
-  const [isForgotPasswordOpen, setIsForgotPasswordOpen] = useState(false)
 
   const onLoginWithPassword = (input) => {
     login({ input })
@@ -42,7 +35,6 @@ export default function LoginWithEmail ({ onLoginSuccess, setInternalError, setS
   })
   return (
     <>
-      {isForgotPasswordOpen && <ErrorModal isContact message='Please' />}
       <Stack
         as='form'
         w='100%'

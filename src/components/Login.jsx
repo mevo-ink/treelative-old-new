@@ -13,11 +13,11 @@ import {
 } from '@chakra-ui/react'
 import { FiLogIn } from 'react-icons/fi'
 import { MdClose } from 'react-icons/md'
-import { FaGoogle, FaFacebook, FaTwitter } from 'react-icons/fa'
+import { FaGoogle, FaFacebook } from 'react-icons/fa'
 
 import { useMutation } from 'urql'
 
-import { google, twitter, facebook } from 'utils/firebase'
+import { google, facebook } from 'utils/firebase'
 import { LOGIN_WITH_PROVIDER } from 'graphql/mutations/auth'
 
 import ErrorModal from 'components/_common/ErrorModal'
@@ -26,8 +26,7 @@ import LoginWithEmail from 'components/Login/LoginWithEmail'
 
 const loginProviders = [
   { label: 'Login with Facebook', icon: FaFacebook, color: 'linear-gradient(180deg, hsl(222, 47%, 43%), hsl(222, 47%, 33%))', provider: facebook },
-  { label: 'Login with Google', icon: FaGoogle, color: 'linear-gradient(180deg, hsl(13, 73%, 49%), hsl(13, 73%, 39%))', provider: google },
-  { label: 'Login with Twitter', icon: FaTwitter, color: 'linear-gradient(180deg, hsl(196, 100%, 48%), hsl(196, 100%, 38%))', provider: twitter }
+  { label: 'Login with Google', icon: FaGoogle, color: 'linear-gradient(180deg, hsl(13, 73%, 49%), hsl(13, 73%, 39%))', provider: google }
 ]
 
 export default function Login ({ onSuccess, onClose }) {
