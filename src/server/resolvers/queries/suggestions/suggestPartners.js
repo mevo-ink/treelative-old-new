@@ -18,5 +18,5 @@ export default async (parent, args, context, info) => {
     }
   ).limit(5).lean()
 
-  return usersNotParentsOrPartnerWithCurrentUser.filter(({ _id }) => _id.toString() !== userID)
+  return usersNotParentsOrPartnerWithCurrentUser.filter(id => id !== userID)
 }

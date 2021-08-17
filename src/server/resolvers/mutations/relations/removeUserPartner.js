@@ -11,33 +11,27 @@ export default async (parent, args, context, info) => {
     throw new ApolloError('You are not authorized to perform this action', 'UNAUTHORIZED')
   }
 
+  const FieldValue = context.admin.firestore.FieldValue
+
   // remove the partnerID as a partner from userID
-  const user = await context.models.User.findOneAndUpdate(
-    { _id: userID },
-    { $unset: { partner: '' } },
-    { new: true }
-  )
+  const user = await context.db.findOneByIdAndUpdate('users', userID, { partner: FieldValue.delete() })
 
   // remove the userID as a partner from partnerID
-  const partner = await context.models.User.findOneAndUpdate(
-    { _id: partnerID },
-    { $unset: { partner: '' } },
-    { new: true }
-  )
+  const partner = await context.db.findOneByIdAndUpdate('users', partnerID, { partner: FieldValue.delete() })
 
   // if either couple has children - remove them all
-  const userChildIDs = user.children.map(({ _id }) => _id)
-  const partnerChildIDs = partner.children.map(({ _id }) => _id)
+  const userChildIDs = user.children | []
+  const partnerChildIDs = partner.children | []
 
   if (userChildIDs.length > 0) {
     for (const id of userChildIDs) {
-      await removeUserChild(context.models, userID, id)
+      await removeUserChild(context, userID, id)
     }
   }
 
   if (partnerChildIDs.length > 0) {
     for (const id of partnerChildIDs) {
-      await removeUserChild(context.models, partnerID, id)
+      await removeUserChild(context, partnerID, id)
     }
   }
 

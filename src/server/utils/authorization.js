@@ -12,5 +12,5 @@ export const isAdmin = (context) => {
 }
 
 export const isOwner = (context, userID) => {
-  return isAdmin(context) || context.user._id === userID
+  return isAdmin(context) || context.user.id === userID
 }

@@ -1,6 +1,6 @@
 export default async (parent, args, context, info) => {
-  const users = await context.models.User.find({ currentLocation: { $ne: null } }, 'currentLocation').lean()
-  const unknownCount = await context.models.User.countDocuments({ currentLocation: { $eq: null } })
+  const users = await context.db.findAll('users', { currentLocation: { '!=': null } })
+  const unknownCount = (await context.db.collection('users').where('currentLocation', '==', null).get()).docs.length
 
   const groupByCountry = {}
 

@@ -13,10 +13,7 @@ export default async (parent, args, context, info) => {
 
   const hashedPassword = await hash(password, 10)
 
-  const response = await context.models.User.updateOne(
-    { _id: userID },
-    { password: hashedPassword }
-  )
+  await context.db.findOneByIdAndUpdate('users', args.userID, { password: hashedPassword })
 
-  return response.ok === 1
+  return true
 }

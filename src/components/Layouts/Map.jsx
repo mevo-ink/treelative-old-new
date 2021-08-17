@@ -113,7 +113,7 @@ export default function Map () {
   const [result, refetch] = useQuery({ query: GET_MAP_DATA })
   const [whoAmIResult] = useQuery({ query: WHO_AM_I })
 
-  const { _id: authUserID } = parseJwt()
+  const { id: authUserID } = parseJwt()
 
   // center on auth user if location is available - else center on Sri Lanka
   const sriLanka = { lat: 10.99835602, lng: 77.01502627 }

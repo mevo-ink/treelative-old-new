@@ -4,12 +4,10 @@ import { isAdmin } from 'server/utils/authorization'
 
 import fetch from 'node-fetch'
 
-import { v4 as uuidv4 } from 'uuid'
-
 export default async (parent, args, context, info) => {
   isAdmin(context)
 
-  const users = (await context.models.User.find({}, 'id fullName').lean())
+  const users = await context.db.findAll('users')
 
   // get avatar from ui-avatars.com/api using fullName and upload to storage avatar bucket
   for (const user of users) {
@@ -22,8 +20,7 @@ export default async (parent, args, context, info) => {
 
     await context.storage.upload('deleteMe.png', {
       public: true,
-      destination: `avatars/${user._id.toString()}.png`,
-      metadata: { metadata: { firebaseStorageDownloadTokens: uuidv4() } }
+      destination: `avatars/${user.id}.png`
     })
 
     fs.unlinkSync('deleteMe.png')

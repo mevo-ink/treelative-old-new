@@ -6,8 +6,6 @@ import { isAdmin } from 'server/utils/authorization'
 
 import fetch from 'node-fetch'
 
-import { v4 as uuidv4 } from 'uuid'
-
 export default async (parent, args, context, info) => {
   isAdmin(context)
 
@@ -16,21 +14,18 @@ export default async (parent, args, context, info) => {
 
   const user = await context.db.create('users', args.input)
 
-  // download user avatar from ui-avatars and upload to google storage
+  // download default user avatar from ui-avatars and upload to storage
   const url = `https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`
   const response = await fetch(url)
   const data = await response.arrayBuffer()
-  const buffer = Buffer.from(data, 'base64')
+  const buffer = Buffer.from(data)
+  const tmpFile = 'avatar.png'
 
-  fs.writeFileSync('deleteMe.png', buffer)
+  fs.writeFileSync(tmpFile, buffer)
 
-  await context.storage.upload('deleteMe.png', {
-    public: true,
-    destination: `avatars/${user.id}.png`,
-    metadata: { metadata: { firebaseStorageDownloadTokens: uuidv4() } }
-  })
+  await context.storage.upload(tmpFile, { destination: `avatars/${user.id}.png` })
 
-  fs.unlinkSync('deleteMe.png')
+  fs.unlinkSync(tmpFile)
 
   return user
 }

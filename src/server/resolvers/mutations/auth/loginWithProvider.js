@@ -14,7 +14,7 @@ export default async (parent, args, context, info) => {
     throw new ApolloError('User is not registered.', 'UNREGISTERED')
   }
 
-  const user = await context.models.User.findOne({ email }, 'isAdmin').lean()
+  const user = await context.db.findOne('users', { email })
 
   if (!user) {
     throw new ApolloError(`We could not find an account associated with the email ${email}`, 'UNREGISTERED')

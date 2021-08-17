@@ -21,12 +21,7 @@ export const authenticateUserToken = async (req, db) => {
 
     if (!id) return null
 
-    const userDoc = await db.collection('users').doc(id).get()
-    if (!userDoc.exists) {
-      throw new ApolloError('Unauthenticated', 401)
-    }
-
-    return userDoc.data()
+    return (await db.collection('users').doc(id).get()).data()
   } catch (error) {
     if (['TokenExpiredError', 'JsonWebTokenError'].includes(error.name)) {
       return null

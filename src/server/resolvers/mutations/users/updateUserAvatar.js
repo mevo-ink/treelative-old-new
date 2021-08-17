@@ -7,13 +7,13 @@ export default async (parent, args, context, info) => {
     throw new ApolloError('You are not authorized to perform this action', 'UNAUTHORIZED')
   }
 
-  const user = await context.models.User.findOne({ _id: args.userID }, 'id').lean()
+  const user = await context.db.findOneById('users', args.userID)
 
   if (!user) {
     throw new ApolloError('No such user exists', 'FORBIDDEN')
   }
 
-  const file = context.storage.file(`avatars/${user._id.toString()}.png`)
+  const file = context.storage.file(`avatars/${user.id}.png`)
   const presignedUrl = await file.getSignedUrl({
     version: 'v4',
     action: 'write',

@@ -1,5 +1,5 @@
 export default async (parent, args, context, info) => {
-  const users = await context.models.User.find({ _id: { $in: parent.parents } }).lean()
+  const users = parent.parents ? await context.db.findAll('users', { id: { in: parent.parents } }) : []
 
   return users
 }

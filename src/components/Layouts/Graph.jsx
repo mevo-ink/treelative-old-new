@@ -14,7 +14,7 @@ import Loading from 'components/Loading'
 import ErrorModal from 'components/_common/ErrorModal'
 
 export default function Graph () {
-  const { _id: authUserID } = parseJwt()
+  const { id: authUserID } = parseJwt()
 
   const options = {
     layout: {

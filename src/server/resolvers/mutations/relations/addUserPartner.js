@@ -12,22 +12,14 @@ export default async (parent, args, context, info) => {
   }
 
   // add the partnerID as a partner to userID
-  const user = await context.models.User.findOneAndUpdate(
-    { _id: userID },
-    { partner: { _id: partnerID } },
-    { new: true }
-  )
+  const user = await context.db.findOneByIdAndUpdate('users', userID, { partner: partnerID })
 
   // add the userID as a partner to partnerID
-  const partner = await context.models.User.findOneAndUpdate(
-    { _id: partnerID },
-    { partner: { _id: userID } },
-    { new: true }
-  )
+  const partner = await context.db.findOneByIdAndUpdate('users', partnerID, { partner: userID })
 
   // if either couple has children - connect any missing ones
-  const userChildIDs = user.children.map(({ _id }) => _id)
-  const partnerChildIDs = partner.children.map(({ _id }) => _id)
+  const userChildIDs = user.children || []
+  const partnerChildIDs = partner.children || []
 
   const userChildrenNotInPartner = []
   for (const userID of userChildIDs) {
@@ -45,13 +37,13 @@ export default async (parent, args, context, info) => {
 
   if (userChildrenNotInPartner.length > 0) {
     for (const id of userChildrenNotInPartner) {
-      await addUserChild(context.models, partnerID, id)
+      await addUserChild(context, partnerID, id)
     }
   }
 
   if (partnerChildrenNotInUser.length > 0) {
     for (const id of partnerChildrenNotInUser) {
-      await addUserChild(context.models, userID, id)
+      await addUserChild(context, userID, id)
     }
   }
 

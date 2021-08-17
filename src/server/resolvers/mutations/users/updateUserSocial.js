@@ -12,11 +12,7 @@ export default async (parent, args, context, info) => {
     updateObject[`social.${key}`] = args.input[key]
   }
 
-  const user = await context.models.User.findOneAndUpdate(
-    { _id: args.userID },
-    { $set: updateObject },
-    { new: true }
-  )
+  const user = await context.db.findOneByIdAndUpdate('users', args.userID, updateObject)
 
   return user
 }

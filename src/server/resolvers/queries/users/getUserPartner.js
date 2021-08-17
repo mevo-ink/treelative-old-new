@@ -1,5 +1,5 @@
 export default async (parent, args, context, info) => {
-  const user = await context.models.User.findOne({ _id: parent.partner }).lean()
+  const user = parent.partner ? await context.db.findOneById('users', parent.partner) : null
 
   return user
 }

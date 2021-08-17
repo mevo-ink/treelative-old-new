@@ -2,19 +2,14 @@ import { ApolloError } from 'apollo-server-micro'
 
 import { isOwner } from 'server/utils/authorization'
 
-export const removeUserChild = async (models, userID, childID) => {
+export const removeUserChild = async (context, userID, childID) => {
+  const FieldValue = context.admin.firestore.FieldValue
+
   // remove the childID from this user
-  const user = await models.User.findOneAndUpdate(
-    { _id: userID },
-    { $pull: { children: childID } },
-    { new: true }
-  )
+  const user = await context.db.findOneByIdAndUpdate('users', userID, { children: FieldValue.arrayRemove(childID) })
 
   // remove this user as a parent from childID
-  await models.User.updateOne(
-    { _id: childID },
-    { $pull: { parents: userID } }
-  )
+  await context.db.findOneByIdAndUpdate('users', childID, { parents: FieldValue.arrayRemove(userID) })
 
   return user
 }
@@ -26,11 +21,11 @@ export default async (parent, args, context, info) => {
     throw new ApolloError('You are not authorized to perform this action', 'UNAUTHORIZED')
   }
 
-  const user = await removeUserChild(context.models, userID, childID)
+  const user = await removeUserChild(context, userID, childID)
 
   // if the user has a partner
   if (user.partner) {
-    await removeUserChild(context.models, user.partner._id, userID)
+    await removeUserChild(context, user.partner, userID)
   }
 
   return user

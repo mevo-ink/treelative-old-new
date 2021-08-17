@@ -1,13 +1,15 @@
 import admin from '.'
 
-import { v4 as uuidv4 } from 'uuid'
-
 const db = admin.firestore()
 
 // firestore common methods
 db.create = async (collection, input) => {
-  const id = uuidv4()
+  const { id } = db.collection('users').doc()
   return db.findOneByIdAndUpdate(collection, id, { ...input, id })
+}
+
+db.findOneById = async (collection, id) => {
+  return (await db.collection(collection).doc(id).get()).data()
 }
 
 db.findOne = async (collection, filters) => {
@@ -31,7 +33,7 @@ db.findAll = async (collection, filters = {}) => {
 
 db.findOneByIdAndUpdate = async (collection, id, input) => {
   const ref = db.collection(collection).doc(id)
-  await ref.set(input, { merge: true })
+  await ref.update(input)
   return (await ref.get()).data()
 }
 
@@ -46,11 +48,9 @@ db.findOneAndUpdate = async (collection, filters, input) => {
   return db.findOneByIdAndUpdate(collection, user.id, input)
 }
 
-db.deleteOne = async (collection, id) => {
-  const user = (await db.collection(collection).doc(id).get()).data()
-  user.parents.map(async parentID => await db.deleteChild(collection, id, parentID))
-  // db.deleteChild(collection, id)
-  // return db.collection(collection).doc(id).delete()
+db.deleteOneById = async (collection, id) => {
+  const ref = db.collection(collection).doc(id)
+  await ref.delete()
 }
 
 db.deleteChild = async (collection, childID, parentID) => {

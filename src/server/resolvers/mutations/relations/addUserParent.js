@@ -2,20 +2,14 @@ import { ApolloError } from 'apollo-server-micro'
 
 import { isOwner } from 'server/utils/authorization'
 
-export const addUserParent = async (models, userID, parentID) => {
+export const addUserParent = async (context, userID, parentID) => {
+  const FieldValue = context.admin.firestore.FieldValue
+
   // add the parentID as a parent to this user
-  const user = await models.User.findOneAndUpdate(
-    { _id: userID },
-    { $addToSet: { parents: { _id: parentID } } },
-    { new: true }
-  )
+  const user = await context.db.findOneByIdAndUpdate('users', userID, { parents: FieldValue.arrayUnion(parentID) })
 
   // add this user as a child to the parentID
-  const userParent = await models.User.findOneAndUpdate(
-    { _id: parentID },
-    { $addToSet: { children: { _id: userID } } },
-    { new: true }
-  )
+  const userParent = await context.db.findOneByIdAndUpdate('users', parentID, { parents: FieldValue.arrayUnion(userID) })
 
   return { user, userParent }
 }
@@ -27,11 +21,11 @@ export default async (parent, args, context, info) => {
     throw new ApolloError('You are not authorized to perform this action', 'UNAUTHORIZED')
   }
 
-  const { user, userParent } = await addUserParent(context.models, userID, parentID)
+  const { user, userParent } = await addUserParent(context, userID, parentID)
 
   // if the parent has a partner
   if (userParent.partner) {
-    await addUserParent(context.models, userID, userParent.partner._id)
+    await addUserParent(context, userID, userParent.partner)
   }
 
   return user

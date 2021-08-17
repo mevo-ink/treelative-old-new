@@ -10,8 +10,8 @@ const calculateAge = (birthday, today) => {
 }
 
 export default async (parent, args, context, info) => {
-  const users = await context.models.User.find({ dateOfBirth: { $ne: null } }, 'dateOfBirth').lean()
-  const unknownCount = await context.models.User.countDocuments({ dateOfBirth: { $eq: null } })
+  const users = await context.db.findAll('users', { dateOfBirth: { '!=': null } })
+  const unknownCount = (await context.db.collection('users').where('dateOfBirth', '==', null).get()).docs.length
 
   const groupByAge = {}
 
