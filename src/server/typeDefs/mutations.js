@@ -22,6 +22,7 @@ export default gql`
     removeUserPartner(userID: String! partnerID: String!): User!
 
     scriptAvatars: Boolean
+    scriptMigrate: Boolean
   }
 
   input LoginInput {

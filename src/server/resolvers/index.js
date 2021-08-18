@@ -46,6 +46,7 @@ import getBirthdayData from './queries/layouts/getBirthdayData'
 
 // admin only scripts
 import avatars from './mutations/scripts/avatars'
+import migrate from './mutations/scripts/migrate'
 
 export default {
   JSON: JSONResolver,
@@ -92,6 +93,7 @@ export default {
     removeUserParent,
     removeUserChild,
     removeUserPartner,
-    scriptAvatars: avatars
+    scriptAvatars: avatars,
+    scriptMigrate: migrate
   }
 }

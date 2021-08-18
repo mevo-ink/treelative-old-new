@@ -40,3 +40,6 @@ workbox-*
 
 # firebase
 firebaseAuth.json
+
+# scripts
+allData.json
