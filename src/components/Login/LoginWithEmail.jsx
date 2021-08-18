@@ -21,7 +21,7 @@ export default function LoginWithEmail ({ onLoginSuccess, setInternalError, setS
   const [isLoading, setIsLoading] = useState(false)
 
   const actionCodeSettings = {
-    url: window.location.href,
+    url: 'http://' + window.location.host,
     handleCodeInApp: true
   }
 
@@ -42,10 +42,17 @@ export default function LoginWithEmail ({ onLoginSuccess, setInternalError, setS
       })
   }
 
-  const handleBack = () => {
-    if (verificationMsg) return setVerificationMsg(false)
-    else setShowLoginWithEmail(false)
-  }
+  // try {
+  //   if (firebaseAuth.isSignInWithEmailLink(window.location.href)) {
+  //     let email = window.localStorage.getItem('emailForSignIn')
+  //     if (!email) {
+  //       email = window.prompt('Please provide your email for confirmation')
+  //     }
+  //     firebaseAuth.signInWithEmailLink(email, window.location.href)
+  //     window.localStorage.removeItem('emailForSignIn')
+  //   }
+  // } catch (err) { console.log(err) }
+
   return (
     <>
       <Stack
@@ -111,7 +118,7 @@ export default function LoginWithEmail ({ onLoginSuccess, setInternalError, setS
         fontSize='.8rem'
         fontWeight='400'
         bg='transparent'
-        onClick={handleBack}
+        onClick={() => verificationMsg ? setVerificationMsg(false) : setShowLoginWithEmail(false)}
       >
         Back
       </Button>
