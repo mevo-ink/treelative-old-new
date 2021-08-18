@@ -119,6 +119,7 @@ const theme = extendTheme({
           _active: { bg: 'hsla(0, 0%, 50%, .2)' }
         },
         submit: {
+          lineHeight: '100%',
           fontSize: '1rem',
           fontWeight: '400',
           color: 'white',
