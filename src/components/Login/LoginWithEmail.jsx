@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import {
+  Text,
   Input,
   Stack,
   Button,
@@ -14,30 +15,36 @@ import { firebaseAuth } from 'utils/firebase'
 import ErrorAlert from 'components/_common/ErrorAlert'
 
 export default function LoginWithEmail ({ onLoginSuccess, setInternalError, setShowLoginWithEmail }) {
+  const [email, setEmail] = useState(null)
   const [error, setError] = useState(null)
+  const [verificationMsg, setVerificationMsg] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+
   const actionCodeSettings = {
-    url: 'https://www.example.com/finishSignUp?cartId=1234',
-    handleCodeInApp: true,
-    iOS: {
-      bundleId: 'com.example.ios'
-    },
-    android: {
-      packageName: 'com.example.android',
-      installApp: true,
-      minimumVersion: '12'
-    },
-    dynamicLinkDomain: 'example.page.link'
+    url: window.location.href,
+    handleCodeInApp: true
   }
 
   const onLoginWithEmail = (e) => {
     e.preventDefault()
+    setIsLoading(true)
+    setEmail(e.target[0].value)
     setError(null)
     firebaseAuth.sendSignInLinkToEmail(e.target[0].value, actionCodeSettings)
       .then(() => {
         window.localStorage.setItem('emailForSignIn', e.target[0].value)
-        onLoginSuccess()
+        setVerificationMsg(true)
+        setIsLoading(false)
       })
-      .catch(err => setError(err.message))
+      .catch(err => {
+        setError(err.message)
+        setIsLoading(false)
+      })
+  }
+
+  const handleBack = () => {
+    if (verificationMsg) return setVerificationMsg(false)
+    else setShowLoginWithEmail(false)
   }
   return (
     <>
@@ -47,24 +54,53 @@ export default function LoginWithEmail ({ onLoginSuccess, setInternalError, setS
         spacing='2rem'
         onSubmit={(e) => onLoginWithEmail(e)}
       >
-        <FormControl id='username' isRequired>
-          <FormLabel>Email</FormLabel>
-          <Input
-            type='email'
-            autoComplete='off'
-          />
-        </FormControl>
+        {email && verificationMsg && (
+          <Stack spacing='unset'>
+            <Text
+              _before={{
+                content: '"Check Your Email"',
+                display: 'block',
+                marginBottom: '.5rem',
+                textAlign: 'center',
+                fontWeight: '600'
+              }}
+              textAlign='center'
+            >
+              We sent an email to you at {email}.
+            </Text>
+            <Text textAlign='center'>It has a magic link that'll sign you in.</Text>
+          </Stack>
+        )}
+        {!verificationMsg && (
+          <FormControl isRequired>
+            <FormLabel>Email</FormLabel>
+            <Input type='email' aria-label='Email Input' autoComplete='off' defaultValue={email} />
+          </FormControl>
+        )}
         {error && <ErrorAlert>{error}</ErrorAlert>}
-        <Button
-          type='submit'
-          variant='submit'
-          bg='linear-gradient(180deg, hsl(0, 0%, 27%), hsl(0, 0%, 17%))'
-          _hover={{ bg: 'linear-gradient(180deg, hsl(0, 0%, 27%), hsl(0, 0%, 17%))' }}
-          _active={{ bg: 'linear-gradient(180deg, hsl(0, 0%, 27%), hsl(0, 0%, 17%))' }}
-          // isLoading={loginResult.fetching}
-        >
-          Send Verification
-        </Button>
+        {!verificationMsg && (
+          <Button
+            type='submit'
+            variant='submit'
+            bg='linear-gradient(180deg, hsl(0, 0%, 27%), hsl(0, 0%, 17%))'
+            _hover={{ bg: 'linear-gradient(180deg, hsl(0, 0%, 27%), hsl(0, 0%, 17%))' }}
+            _active={{ bg: 'linear-gradient(180deg, hsl(0, 0%, 27%), hsl(0, 0%, 17%))' }}
+            isLoading={isLoading}
+          >
+            Send Verification
+          </Button>
+        )}
+        {verificationMsg && (
+          <Button
+            variant='submit'
+            bg='linear-gradient(180deg, hsl(0, 0%, 27%), hsl(0, 0%, 17%))'
+            _hover={{ bg: 'linear-gradient(180deg, hsl(0, 0%, 27%), hsl(0, 0%, 17%))' }}
+            _active={{ bg: 'linear-gradient(180deg, hsl(0, 0%, 27%), hsl(0, 0%, 17%))' }}
+            onClick={() => (window.location.href = 'mailto:' + email)}
+          >
+            Open Mail App
+          </Button>
+        )}
       </Stack>
       <Button
         leftIcon={<IoCaretBack />}
@@ -75,7 +111,7 @@ export default function LoginWithEmail ({ onLoginSuccess, setInternalError, setS
         fontSize='.8rem'
         fontWeight='400'
         bg='transparent'
-        onClick={() => setShowLoginWithEmail(false)}
+        onClick={handleBack}
       >
         Back
       </Button>
