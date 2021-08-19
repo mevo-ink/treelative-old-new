@@ -7,10 +7,10 @@ export const addUserChild = async (context, userID, childID) => {
 
   const FieldValue = context.admin.firestore.FieldValue
 
-  const user = await context.db.findOneByIdAndUpdate('users', userID, { children: FieldValue.arrayUnion(childID) })
+  const user = await context.db.findOneByIdAndUpdate('users', userID, { children: FieldValue.arrayUnion(context.db.doc(`users/${childID}`)) })
 
   // add this user as a parent for the childID
-  await context.db.findOneByIdAndUpdate('users', childID, { parents: FieldValue.arrayUnion(userID) })
+  await context.db.findOneByIdAndUpdate('users', childID, { parents: FieldValue.arrayUnion(context.db.doc(`users/${userID}`)) })
 
   return user
 }

@@ -8,7 +8,7 @@ export default async (parent, args, context, info) => {
   const FieldValue = context.admin.firestore.FieldValue
 
   // remove user from any parents or children list
-  await context.db.findOneAndUpdate('users', {}, { parents: FieldValue.arrayRemove(args.userID), children: FieldValue.arrayRemove(args.userID) })
+  await context.db.findOneAndUpdate('users', {}, { parents: FieldValue.arrayRemove(context.db.doc(`users/${args.userID}`)), children: FieldValue.arrayRemove(context.db.doc(`users/${args.userID}`)) })
 
   // remove user from partner's partner field
   await context.db.findOneAndUpdate('users', { partner: { '==': args.userID } }, { partner: null })

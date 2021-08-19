@@ -12,10 +12,10 @@ export default async (parent, args, context, info) => {
   }
 
   // add the partnerID as a partner to userID
-  const user = await context.db.findOneByIdAndUpdate('users', userID, { partner: partnerID })
+  const user = await context.db.findOneByIdAndUpdate('users', userID, { partner: context.db.doc(`users/${partnerID}`) })
 
   // add the userID as a partner to partnerID
-  const partner = await context.db.findOneByIdAndUpdate('users', partnerID, { partner: userID })
+  const partner = await context.db.findOneByIdAndUpdate('users', partnerID, { partner: context.db.doc(`users/${userID}`) })
 
   // if either couple has children - connect any missing ones
   const userChildIDs = user.children || []

@@ -6,10 +6,10 @@ export const removeUserParent = async (context, userID, parentID) => {
   const FieldValue = context.admin.firestore.FieldValue
 
   // remove the parentID as a parent from this user
-  const user = await context.db.findOneByIdAndUpdate('users', userID, { parents: FieldValue.arrayRemove(parentID) })
+  const user = await context.db.findOneByIdAndUpdate('users', userID, { parents: FieldValue.arrayRemove(context.db.doc(`users/${parentID}`)) })
 
   // remove this user as a child from the parentID
-  const userParent = await context.db.findOneByIdAndUpdate('users', parentID, { children: FieldValue.arrayRemove(userID) })
+  const userParent = await context.db.findOneByIdAndUpdate('users', parentID, { children: FieldValue.arrayRemove(context.db.doc(`users/${userID}`)) })
 
   return { user, userParent }
 }
