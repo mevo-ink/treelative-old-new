@@ -10,13 +10,14 @@ export default async (parent, args, context, info) => {
 
   const { userID, query } = args
 
-  const usersNotChildrenOrPartnerWithCurrentUser = await context.models.User.find(
+  const usersNotChildrenOrPartnerWithCurrentUser = await context.db.findAll('users',
     {
-      $or: fuzzySearch(query),
-      parents: { $nin: [userID] },
-      partner: { $ne: userID }
-    }
-  ).limit(5).lean()
+      // $or: fuzzySearch(query),
+      parents: { 'not-in': [[context.db.doc(`users/${userID}`)]] },
+      // partner: { '!=': userID }
+    },
+    5
+  )
 
   return usersNotChildrenOrPartnerWithCurrentUser.filter(id => id !== userID)
 }

@@ -22,13 +22,13 @@ db.findOne = async (collection, filters) => {
   return results.empty ? null : results.docs[0].data()
 }
 
-db.findAll = async (collection, filters = {}) => {
+db.findAll = async (collection, filters = {}, limit = 99999) => {
   let queryRef = db.collection(collection)
   for (const [key, filter] of Object.entries(filters)) {
     const [operator, value] = Object.entries(filter)[0]
     queryRef = queryRef.where(key, operator, value)
   }
-  const snapshot = await queryRef.get()
+  const snapshot = await queryRef.limit(limit).get()
   return snapshot.docs.map(doc => doc.data())
 }
 
