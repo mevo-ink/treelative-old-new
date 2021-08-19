@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import {
   Box,
@@ -35,6 +35,11 @@ export default function Login ({ onSuccess, onClose }) {
   const [loginWithProviderResult, loginWithProvider] = useMutation(LOGIN_WITH_PROVIDER)
 
   const [internalError, setInternalError] = useState()
+
+  useEffect(() => {
+    // store referrer to redirect after login
+    window.localStorage.setItem('REDIRECT_REFERRER', window.location.href)
+  }, [])
 
   const onLoginSuccess = (result) => {
     setInternalError({ message: 'OATHA' })

@@ -21,7 +21,7 @@ export default function LoginWithEmail ({ onLoginSuccess, setInternalError, setS
   const [isLoading, setIsLoading] = useState(false)
 
   const actionCodeSettings = {
-    url: 'http://' + window.location.host,
+    url: `${window.location.origin}/auth/finishLoginWithEmail`,
     handleCodeInApp: true
   }
 
@@ -59,7 +59,7 @@ export default function LoginWithEmail ({ onLoginSuccess, setInternalError, setS
         as='form'
         w='100%'
         spacing='2rem'
-        onSubmit={(e) => onLoginWithEmail(e)}
+        onSubmit={onLoginWithEmail}
       >
         {email && verificationMsg && (
           <Stack spacing='unset'>
@@ -97,7 +97,7 @@ export default function LoginWithEmail ({ onLoginSuccess, setInternalError, setS
             Send Verification
           </Button>
         )}
-        {verificationMsg && (
+        {/* {verificationMsg && (
           <Button
             variant='submit'
             bg='linear-gradient(180deg, hsl(0, 0%, 27%), hsl(0, 0%, 17%))'
@@ -107,7 +107,7 @@ export default function LoginWithEmail ({ onLoginSuccess, setInternalError, setS
           >
             Open Mail App
           </Button>
-        )}
+        )} */}
       </Stack>
       <Button
         leftIcon={<IoCaretBack />}
