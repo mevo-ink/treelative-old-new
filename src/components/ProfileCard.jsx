@@ -37,7 +37,7 @@ import InnerWrapper from 'components/ProfileCard/InnerWrapper'
 import MoreSettings from 'components/ProfileCard/Slides/MoreSettings'
 import ParentChild from 'components/ProfileCard/Slides/ParentChild'
 
-export default function ProfileCard () {
+export default function ProfileCard ({ isServerRendered = false }) {
   const [isEditMode, setIsEditMode] = useRecoilState(isEditModeAtom)
   const [activeNodeID, setActiveNodeID] = useRecoilState(activeNodeIDAtom)
 
@@ -61,9 +61,13 @@ export default function ProfileCard () {
     window.history.pushState({}, '', '/')
     setActiveNodeID(null)
     setActiveNodePulseID(null)
-    // unselect all nodes if on network layout
-    layout === 'network' && networkMethods.unselectAll()
     setIsEditMode(false)
+    // unselect all nodes if on network layout
+    if (isServerRendered) {
+      window.location.reload()
+    } else {
+      layout === 'network' && networkMethods.unselectAll()
+    }
   }
 
   const onLoginSuccess = () => { refetch({ requestPolicy: 'network-only' }) }

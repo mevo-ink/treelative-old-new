@@ -6,7 +6,6 @@ export const GET_USER = gql`
       id
       isAdmin
       isPublic
-      username
       avatar
       fullName
       shortName

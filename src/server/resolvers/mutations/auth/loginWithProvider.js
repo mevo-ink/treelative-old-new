@@ -20,6 +20,10 @@ export default async (parent, args, context, info) => {
     throw new ApolloError(`We could not find an account associated with the email ${email}`, 'UNREGISTERED')
   }
 
+  if (!user.isEmailVerified) {
+    throw new ApolloError(`You account with email ${email} has not been activated yet.`, 'UNREGISTERED')
+  }
+
   const { id, isAdmin } = user
 
   return generateToken({ id, isAdmin })

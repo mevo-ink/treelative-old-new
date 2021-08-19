@@ -8,7 +8,6 @@ export default gql`
     id: String
     isAdmin: Boolean
     isPublic: Boolean
-    username: String!
     fullName: String!
     shortName: String!
     email: String

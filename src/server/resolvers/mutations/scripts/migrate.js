@@ -20,15 +20,15 @@ export default async (parent, args, context, info) => {
       birthLocation: user.birthLocation || null,
       currentLocation: user.currentLocation || null,
       marriageLocation: user.marriageLocation || null,
-      dateOfBirth: user.dateOfBirth ? context.admin.firestore.Timestamp.fromDate(new Date(user.dateOfBirth)) : null,
-      dateOfMarriage: user.dateOfMarriage ? context.admin.firestore.Timestamp.fromDate(new Date(user.dateOfMarriage)) : null,
-      dateOfDeath: user.dateOfDeath ? context.admin.firestore.Timestamp.fromDate(new Date(user.dateOfDeath)) : null,
+      dateOfBirth: user.dateOfBirth || null,
+      dateOfMarriage: user.dateOfMarriage || null,
+      dateOfDeath: user.dateOfDeath || null,
       social: {
-        facebook: user.social.facebook || null,
-        twitter: user.social.twitter || null,
-        instagram: user.social.instagram || null,
-        linkedin: user.social.linkedin || null,
-        website: user.social.website || null
+        facebook: user.social?.facebook || null,
+        twitter: user.social?.twitter || null,
+        instagram: user.social?.instagram || null,
+        linkedin: user.social?.linkedin || null,
+        website: user.social?.website || null
       },
       partner: null,
       parents: [],
@@ -45,7 +45,7 @@ export default async (parent, args, context, info) => {
 
     await context.storage.upload('deleteMe.png', {
       public: true,
-      destination: `avatars/${user.id}.png`
+      destination: `avatars/${newUserRef.id}.png`
     })
 
     fs.unlinkSync('deleteMe.png')

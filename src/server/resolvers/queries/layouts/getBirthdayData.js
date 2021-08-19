@@ -10,24 +10,27 @@ const calculateAge = (birthday, today) => {
 }
 
 export default async (parent, args, context, info) => {
+  const users = await context.db.findAll('users', { dateOfBirth: { '!=': null } })
+  const unknownCount = (await context.db.collection('users').where('dateOfBirth', '==', null).get()).docs.length
+
   const data = {}
-  let unknownCount = 0
-  const users = await context.db.findAll('users')
 
   for (const user of users) {
-    if (user.dateOfBirth) {
-      const birthMonthDay = new Date(user.dateOfBirth).toISOString().slice(5, 10)
+    const birthMonthDay = user.dateOfBirth.slice(5, 10)
 
-      user.avatar = `${process.env.STORAGE_ENDPOINT}/avatars/${user.id}.png`
-      user.brokenAvatar = `https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`
-      user.age = calculateAge(user.dateOfBirth, user.dateOfDeath ? new Date(user.dateOfDeath) : new Date())
+    const shortUser = {}
+    shortUser.id = user.id
+    shortUser.shortName = user.shortName
+    shortUser.fullName = user.fullName
+    shortUser.avatar = `${process.env.STORAGE_ENDPOINT}/avatars/${user.id}.png`
+    shortUser.brokenAvatar = `https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`
+    shortUser.age = calculateAge(user.dateOfBirth, user.dateOfDeath ? new Date(user.dateOfDeath) : new Date())
 
-      if (data[birthMonthDay]) {
-        data[birthMonthDay] = [...data[birthMonthDay], user]
-      } else {
-        data[birthMonthDay] = [user]
-      }
-    } else unknownCount = unknownCount + 1
+    if (data[birthMonthDay]) {
+      data[birthMonthDay] = [...data[birthMonthDay], shortUser]
+    } else {
+      data[birthMonthDay] = [shortUser]
+    }
   }
 
   const orderedResult = Object.keys(data).sort((a, b) => {

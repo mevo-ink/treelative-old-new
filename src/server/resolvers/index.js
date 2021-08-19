@@ -1,6 +1,5 @@
 import { JSONResolver, DateTimeResolver } from 'graphql-scalars'
 
-import login from './mutations/auth/login'
 import loginWithProvider from './mutations/auth/loginWithProvider'
 import resetUserPassword from './mutations/auth/resetUserPassword'
 
@@ -79,7 +78,6 @@ export default {
   },
 
   Mutation: {
-    login,
     loginWithProvider,
     resetUserPassword,
     createUser,

@@ -1,5 +1,3 @@
-import { hash } from 'bcryptjs'
-
 import fs from 'fs'
 
 import { isAdmin } from 'server/utils/authorization'
@@ -8,9 +6,6 @@ import fetch from 'node-fetch'
 
 export default async (parent, args, context, info) => {
   isAdmin(context)
-
-  args.input.username = args.input.fullName.trim().replace(' ', '_')
-  args.input.password = await hash('123', 10)
 
   const user = await context.db.create('users', args.input)
 

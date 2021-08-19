@@ -77,15 +77,6 @@ export const TOGGLE_PUBLIC = gql`
   }
 `
 
-export const UPDATE_USER_USERNAME = gql`
-  mutation UPDATE_USER_USERNAME ($userID: String! $input: UpdateUserInput!) {
-    updateUser(userID: $userID input: $input) {
-      id
-      username
-    }
-  }
-`
-
 export const RESET_USER_PASSWORD = gql`
   mutation RESET_USER_PASSWORD ($userID: String! $password: String!) {
     resetUserPassword(userID: $userID password: $password){
