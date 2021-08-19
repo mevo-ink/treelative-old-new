@@ -11,13 +11,11 @@ export default async (parent, args, context, info) => {
     throw new ApolloError('You are not authorized to perform this action', 'UNAUTHORIZED')
   }
 
-  const FieldValue = context.admin.firestore.FieldValue
-
   // remove the partnerID as a partner from userID
-  const user = await context.db.findOneByIdAndUpdate('users', userID, { partner: FieldValue.delete() })
+  const user = await context.db.findOneByIdAndUpdate('users', userID, { partner: null })
 
   // remove the userID as a partner from partnerID
-  const partner = await context.db.findOneByIdAndUpdate('users', partnerID, { partner: FieldValue.delete() })
+  const partner = await context.db.findOneByIdAndUpdate('users', partnerID, { partner: null })
 
   // if either couple has children - remove them all
   const userChildIDs = user.children | []

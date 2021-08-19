@@ -11,7 +11,7 @@ export default async (parent, args, context, info) => {
   await context.db.findOneAndUpdate('users', {}, { parents: FieldValue.arrayRemove(args.userID), children: FieldValue.arrayRemove(args.userID) })
 
   // remove user from partner's partner field
-  await context.db.findOneAndUpdate('users', { partner: { '==': args.userID } }, { partner: FieldValue.delete() })
+  await context.db.findOneAndUpdate('users', { partner: { '==': args.userID } }, { partner: null })
 
   return true
 }
