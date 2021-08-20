@@ -10,13 +10,19 @@ export default async (parent, args, context, info) => {
 
   const { userID, query } = args
 
-  const usersNotParentsOrPartnerWithCurrentUser = await context.models.User.find(
-    {
-      $or: fuzzySearch(query),
-      parents: { $nin: [userID] },
-      partner: { $eq: null }
-    }
-  ).limit(5).lean()
+  // const usersNotParentsOrPartnerWithCurrentUser = await context.models.User.find(
+  //   {
+  //     $or: fuzzySearch(query),
+  //     parents: { $nin: [userID] },
+  //     partner: { $eq: null }
+  //   }
+  // ).limit(5).lean()
 
-  return usersNotParentsOrPartnerWithCurrentUser.filter(id => id !== userID)
+  const searchResults = await context.algolia.search(args.query, {
+    hitsPerPage: 5,
+    // filters: 'parents:""'
+  })
+
+  return searchResults.hits
+  // return usersNotParentsOrPartnerWithCurrentUser.filter(id => id !== userID)
 }

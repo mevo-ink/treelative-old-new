@@ -16,6 +16,7 @@
     "@hookform/resolvers": "2.7.1",
     "@urql/devtools": "2.0.3",
     "@urql/exchange-graphcache": "4.2.1",
+    "algoliasearch": "4.10.3",
     "apollo-server-micro": "3.1.2",
     "bcryptjs": "2.4.3",
     "firebase": "8.9.1",

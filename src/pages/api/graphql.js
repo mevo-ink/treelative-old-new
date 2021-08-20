@@ -6,6 +6,7 @@ import schema from 'server/schema'
 import admin from 'server/utils/firebase'
 import db from 'server/utils/firebase/database'
 import storage from 'server/utils/firebase/storage'
+import algolia from 'server/utils/search'
 
 import { authenticateUserToken } from 'server/utils/authentication'
 
@@ -21,7 +22,8 @@ const apolloServer = new ApolloServer({
       user,
       admin,
       db,
-      storage
+      storage,
+      algolia
     }
   }
 })
