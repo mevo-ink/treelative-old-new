@@ -43,7 +43,7 @@ export default withUrqlClient(client)(App)
 // TODO:
 /*
   Set all users to have unverified flag set to true
-  Authentication with Firebase Magic Email
+  Review Firebase Magic Email - also add phone number login
   Add tooltips for pie and bar charts - for insights - with user avatars that fall under that category
     Add two new queries:
       - Get users by age
@@ -74,9 +74,19 @@ export default withUrqlClient(client)(App)
     - handle profile card url with next route
     - if time- user next js' Image component
 
-  Replace minIO with google storage
-
   ?? deploy tyo netlify?
 
-  Replace mongo with firestore ??
+  ROUTES:
+    /auth
+      - /login
+      - /verifyEmail
+      - /verifyPhoneNumber
+    /layouts
+      - /graph
+      - /map
+      - /age
+      - /birthday
+    /profile/:id
+    /contactUs
+
 */
