@@ -24,8 +24,7 @@ export default async (parent, args, context, info) => {
     for (const doc of snapshot.docs) {
       const snapshot = await doc.data()
       if (snapshot.id === context.user.id) continue
-      const userParents = await Promise.all(snapshot.parents.map(async parent => await parent.get()))
-      if (userParents.includes(args.userID)) continue
+      if (snapshot.parents.map(parent => parent.id).includes(args.userID)) continue
       if (snapshot.partner?.id === args.userID) continue
       // if snapshot matches the search query; add to partialResult
       if (snapshot.shortName?.toLowerCase().includes(searchQuery)) {

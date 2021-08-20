@@ -18,8 +18,8 @@ export default async (parent, args, context, info) => {
   const partner = await context.db.findOneByIdAndUpdate('users', partnerID, { partner: context.db.doc(`users/${userID}`) })
 
   // if either couple has children - connect any missing ones
-  const userChildIDs = user.children || []
-  const partnerChildIDs = partner.children || []
+  const userChildIDs = user.children.map(child => child.id) || []
+  const partnerChildIDs = partner.children.map(child => child.id) || []
 
   const userChildrenNotInPartner = []
   for (const userID of userChildIDs) {

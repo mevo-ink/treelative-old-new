@@ -12,16 +12,16 @@ export default async (parent, args, context, info) => {
   const couplesMap = {}
   for (const user of users) {
     if (user.partner) {
-      const coupleID = [user.id, user.partner].sort().join('-')
+      const coupleID = [user.id, user.partner.id].sort().join('-')
       if (!couplesMap[coupleID]) {
-        const coupleOneChildIDs = user.children
+        const coupleOneChildIDs = user.children.map(child => child.id)
         const coupleTwoChildIDs = (await context.db.findAll('users', { parent: { 'array-contains': context.db.doc(`users/${user.partner}`) } })).map(child => child.id)
         const uniqueChildren = coupleOneChildIDs.concat(coupleTwoChildIDs.filter((item) => coupleOneChildIDs.indexOf(item) < 0))
         couplesMap[coupleID] = {
           id: coupleID,
           group: 'couple',
           coupleOne: user.id,
-          coupleTwo: (await user.partner.get()).id,
+          coupleTwo: user.partner.id,
           children: uniqueChildren
         }
       }
@@ -33,7 +33,7 @@ export default async (parent, args, context, info) => {
         id: coupleID,
         group: 'singleParent',
         coupleOne: user.id,
-        children: (await Promise.all(user.children.map(child => child.get()))).map(child => child.id)
+        children: user.children.map(child => child.id)
       }
     }
   }

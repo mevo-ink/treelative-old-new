@@ -26,7 +26,7 @@ export default async (parent, args, context, info) => {
 
   // if the user has a partner
   if (user.partner) {
-    await addUserChild(context, user.partner, childID)
+    await addUserChild(context, user.partner.id, childID)
   }
 
   return user

@@ -25,7 +25,7 @@ export default async (parent, args, context, info) => {
 
   // if the parent has a partner
   if (userParent.partner) {
-    await removeUserParent(context, userID, userParent.partner)
+    await removeUserParent(context, userID, userParent.partner.id)
   }
 
   return user
