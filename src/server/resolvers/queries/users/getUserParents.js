@@ -1,9 +1,4 @@
 export default async (user, args, context, info) => {
-  return Promise.all(user.parents.map(async parent => {
-    if (typeof parent === 'string') {
-      return context.db.findOneById('users', parent.split('/').pop())
-    } else {
-      return (await parent.get()).data()
-    }
-  }))
+  const userParentsRef = (await context.db.findOneById('users', user.id)).parents
+  return Promise.all(userParentsRef.map(async parent => (await parent.get()).data()))
 }
