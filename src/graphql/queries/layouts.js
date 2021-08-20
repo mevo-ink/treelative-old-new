@@ -1,4 +1,4 @@
-import { gql } from 'urql'
+import gql from 'graphql-tag'
 
 export const GET_NETWORK_DATA = gql`
   query GET_NETWORK_DATA {

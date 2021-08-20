@@ -13,7 +13,7 @@ export const generateToken = user => jwt.sign(
 
 export const authenticateUserToken = async (req, db) => {
   try {
-    const token = req.headers.auth_session_id
+    const token = req?.headers.auth_session_id
 
     if (!token) return null
 

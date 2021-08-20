@@ -9,12 +9,25 @@ import theme from 'utils/theme'
 
 import { RecoilRoot } from 'recoil'
 
-import { withUrqlClient } from 'next-urql'
-import client from 'graphql/client'
+import { ApolloProvider } from '@apollo/client'
+import { useApollo } from 'graphql/client'
 
-const App = ({ Component, pageProps }) => {
+export default function App ({ Component, pageProps }) {
+  const apolloClient = useApollo(pageProps.initialApolloState)
+
   useEffect(() => {
     document.documentElement.lang = 'en-us'
+  }, [])
+
+  useEffect(() => {
+    // add event listener on resize to handle mobile navbar issue
+    document.querySelector(':root').style.setProperty('--vh', window.innerHeight / 100 + 'px')
+    const resize = window.addEventListener('resize', () => {
+      document.querySelector(':root').style.setProperty('--vh', window.innerHeight / 100 + 'px')
+    })
+    return () => {
+      window.removeEventListener('resize', resize)
+    }
   }, [])
 
   return (
@@ -32,13 +45,13 @@ const App = ({ Component, pageProps }) => {
           <link rel='apple-touch-icon' href='/logo192.png' />
           <link href='https://fonts.googleapis.com/css2?family=Lato&display=swap' rel='stylesheet' />
         </Head>
-        <Component {...pageProps} />
+        <ApolloProvider client={apolloClient}>
+          <Component {...pageProps} />
+        </ApolloProvider>
       </RecoilRoot>
     </ChakraProvider>
   )
 }
-
-export default withUrqlClient(client)(App)
 
 // TODO:
 /*

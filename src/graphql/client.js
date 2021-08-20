@@ -1,22 +1,73 @@
-import { dedupExchange, fetchExchange } from 'urql'
-import { cacheExchange } from '@urql/exchange-graphcache'
+import { useMemo } from 'react'
+import { ApolloClient, InMemoryCache } from '@apollo/client'
 
-const cache = cacheExchange({
-  keys: {
-    Social: () => null
+// import admin from 'server/utils/firebase'
+// import db from 'server/utils/firebase/database'
+// import storage from 'server/utils/firebase/storage'
+
+import { authenticateUserToken } from 'server/utils/authentication'
+
+let apolloClient
+
+function createIsomorphLink (ff) {
+  const { HttpLink } = require('@apollo/client/link/http')
+  return new HttpLink({
+    uri: 'http://localhost:7000/api/graphql',
+    credentials: 'same-origin'
+  })
+
+  if (typeof window === 'undefined') {
+    const { SchemaLink } = require('@apollo/client/link/schema')
+    const { schema } = require('../server/schema')
+    return new SchemaLink({
+      schema,
+      context: async req => {
+        // authenticate the user (if auth header is present) and add to context
+        const db = require('server/utils/firebase/database').default
+        // const user = await authenticateUserToken(req, db)
+        // also add firebase utils to the context
+        return {
+          // user,
+          admin: require('server/utils/firebase').default,
+          db,
+          storage: require('server/utils/firebase/storage').default
+        }
+      }
+    })
+  } else {
+    const { HttpLink } = require('@apollo/client/link/http')
+    return new HttpLink({
+      uri: '/api/graphql',
+      credentials: 'same-origin'
+    })
   }
-})
+}
 
-const client = ssrExchange => ({
-  url: '/api/graphql',
-  exchanges: [dedupExchange, cache, ssrExchange, fetchExchange],
-  fetchOptions: () => {
-    const isServerSide = typeof window === 'undefined'
-    const AUTH_SESSION_ID = (!isServerSide && window.localStorage.getItem('AUTH_SESSION_ID')) || null
-    return {
-      headers: { AUTH_SESSION_ID }
-    }
+function createApolloClient () {
+  return new ApolloClient({
+    ssrMode: typeof window === 'undefined',
+    link: createIsomorphLink(),
+    cache: new InMemoryCache()
+  })
+}
+
+export function initializeApollo (initialState = null) {
+  const _apolloClient = apolloClient ?? createApolloClient()
+
+  // If your page has Next.js data fetching methods that use Apollo Client, the initial state
+  // gets hydrated here
+  if (initialState) {
+    _apolloClient.cache.restore(initialState)
   }
-})
+  // For SSG and SSR always create a new Apollo Client
+  if (typeof window === 'undefined') return _apolloClient
+  // Create the Apollo Client once in the client
+  if (!apolloClient) apolloClient = _apolloClient
 
-export default client
+  return _apolloClient
+}
+
+export function useApollo (initialState) {
+  const store = useMemo(() => initializeApollo(initialState), [initialState])
+  return store
+}

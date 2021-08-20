@@ -5,6 +5,10 @@ html, body {
   overflow: hidden;
 }
 
+/* :root {
+  --vh: 100vh;
+} */
+
 body {
   width: 100vw;
   height: calc(100 * var(--vh));

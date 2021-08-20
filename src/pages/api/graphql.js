@@ -1,7 +1,7 @@
 import { ApolloServer } from 'apollo-server-micro'
 import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core'
 
-import schema from 'server/schema'
+import { schema } from 'server/schema'
 
 import admin from 'server/utils/firebase'
 import db from 'server/utils/firebase/database'
@@ -15,6 +15,7 @@ const apolloServer = new ApolloServer({
   plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
   context: async ({ req }) => {
     // authenticate the user (if auth header is present) and add to context
+    console.log(req)
     const user = await authenticateUserToken(req, db)
     // also add firebase utils to the context
     return {
