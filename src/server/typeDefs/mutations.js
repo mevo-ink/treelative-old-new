@@ -30,7 +30,6 @@ export default gql`
   }
 
   input UpdateUserGeneralInput {
-    username: String
     email: String
     phoneNumber: String
     fullName: String
