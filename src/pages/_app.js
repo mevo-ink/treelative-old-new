@@ -80,8 +80,6 @@ export default function App ({ Component, pageProps }) {
      - If the user chooses to create a new user, create a new profile with the email: remove the unverified flag after manual verification
 
   NEXT JS
-    - fetch server side data for layouts
-    - handle profile card url with next route
     - if time- user next js' Image component
 
   ?? deploy tyo netlify?
@@ -91,11 +89,7 @@ export default function App ({ Component, pageProps }) {
       - /login
       - /verifyEmail
       - /verifyPhoneNumber
-    /layouts
-      - /graph
-      - /map
-      - /age
-      - /birthday
+    /index - all layouts
     /profile/:id
     /contactUs
 

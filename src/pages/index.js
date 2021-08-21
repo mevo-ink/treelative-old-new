@@ -13,7 +13,7 @@ import {
 import Cookies from 'cookies'
 import cookieCutter from 'cookie-cutter'
 
-import Floating from 'components/floating'
+import Floating from 'components/Floating'
 
 const Home = ({ layout }) => <><Floating /><Layouts layout={layout} /></>
 
