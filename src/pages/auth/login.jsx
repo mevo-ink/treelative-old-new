@@ -46,7 +46,6 @@ const Login = ({ onSuccess, onClose }) => {
   }, [])
 
   const onLoginSuccess = (result) => {
-    setInternalError({ message: 'OATHA' })
     if (result.data) {
       window.localStorage.setItem('AUTH_SESSION_ID', result.data.login)
       const referrer = window.localStorage.getItem('REDIRECT_REFERRER')
