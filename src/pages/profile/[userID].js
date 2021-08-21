@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 import { withUrqlClient } from 'next-urql'
 import client from 'graphql/client'
@@ -19,7 +20,7 @@ import {
 import { MdClose } from 'react-icons/md'
 
 import Loading from 'components/Loading'
-import ErrorAlert from 'components/_common/ErrorAlert'
+// import ErrorAlert from 'components/_common/ErrorAlert'
 
 import Edit from 'components/ProfileCard/Edit'
 import Avatar from 'components/EditUser/Avatar'
@@ -56,6 +57,10 @@ const Profile = () => {
 
   const [isEditMode, setIsEditMode] = useRecoilState(isEditModeAtom)
 
+  useEffect(() => {
+    if (result.error) router.push('/auth/login')
+  }, [result.error])
+
   const onClose = () => {
     setIsEditMode(false)
     const referrer = window.localStorage.getItem('REDIRECT_REFERRER')
@@ -80,7 +85,7 @@ const Profile = () => {
         />
         <OuterWrapper>
           {result.fetching && <Loading />}
-          {result.error && <ErrorAlert>{result.error.message}</ErrorAlert>}
+          {/* {result.error && <ErrorAlert>{result.error.message}</ErrorAlert>} */}
           {user && (
             <InnerWrapper>
               <Edit innerBtnStyles={innerBtnStyles} />
