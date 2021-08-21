@@ -170,7 +170,7 @@ const Graph = () => {
     <>
       {!isStabilized && <Loading />}
       <Box
-        h='100vh'
+        h='calc(100 * var(--vh))'
         ref={graphRef}
       />
     </>
