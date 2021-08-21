@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import {
   Box,
@@ -41,11 +41,16 @@ const Login = ({ onSuccess, onClose }) => {
 
   const [internalError, setInternalError] = useState()
 
+  useEffect(() => {
+    if (window.localStorage.getItem('AUTH_SESSION_ID')) router.push('/layouts/graph')
+  }, [])
+
   const onLoginSuccess = (result) => {
     setInternalError({ message: 'OATHA' })
     if (result.data) {
       window.localStorage.setItem('AUTH_SESSION_ID', result.data.login)
-      onSuccess()
+      const referrer = window.localStorage.getItem('REDIRECT_REFERRER')
+      router.push(referrer || '/layouts/graph')
     }
   }
 
