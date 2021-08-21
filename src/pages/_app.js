@@ -9,12 +9,7 @@ import theme from 'utils/theme'
 
 import { RecoilRoot } from 'recoil'
 
-import { ApolloProvider } from '@apollo/client'
-import { useApollo } from 'graphql/client'
-
 export default function App ({ Component, pageProps }) {
-  const apolloClient = useApollo(pageProps.initialApolloState)
-
   useEffect(() => {
     document.documentElement.lang = 'en-us'
   }, [])
@@ -45,9 +40,7 @@ export default function App ({ Component, pageProps }) {
           <link rel='apple-touch-icon' href='/logo192.png' />
           <link href='https://fonts.googleapis.com/css2?family=Lato&display=swap' rel='stylesheet' />
         </Head>
-        <ApolloProvider client={apolloClient}>
-          <Component {...pageProps} />
-        </ApolloProvider>
+        <Component {...pageProps} />
       </RecoilRoot>
     </ChakraProvider>
   )

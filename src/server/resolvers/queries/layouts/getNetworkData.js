@@ -1,5 +1,4 @@
 export default async (parent, args, context, info) => {
-  console.log(context)
   const users = await context.db.findAll('users')
 
   const nodeUsers = users.map(user => ({

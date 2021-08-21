@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 
 import { Box } from '@chakra-ui/react'
 
-// import { useQuery } from 'urql'
+import { useQuery } from 'urql'
 import { useSetRecoilState } from 'recoil'
 import { Network } from 'vis-network/peer/umd/vis-network.js'
 
@@ -13,10 +13,10 @@ import parseJwt from 'utils/parseJWT'
 import Loading from 'components/Loading'
 import ErrorModal from 'components/_common/ErrorModal'
 
-import { useQuery } from '@apollo/client'
-import { initializeApollo } from 'graphql/client'
+import { withUrqlClient } from 'next-urql'
+import client from 'graphql/client'
 
-export default function Graph () {
+const Graph = () => {
   const { id: authUserID } = parseJwt()
 
   const options = {
@@ -78,15 +78,12 @@ export default function Graph () {
   const setNetworkMethods = useSetRecoilState(networkMethodsAtom)
   const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
 
-  const { data, error, loading, refetch } = useQuery(GET_NETWORK_DATA)
-
-  console.log(data, error, loading)
-  // const [result, refetch] = useQuery({ query: GET_NETWORK_DATA })
+  const [result, refetch] = useQuery({ query: GET_NETWORK_DATA })
 
   useEffect(() => {
-    if (!data?.getNetworkData) return
+    if (!result.data?.getNetworkData) return
     // set network in store
-    const network = new Network(graphRef.current, data.getNetworkData, options)
+    const network = new Network(graphRef.current, result.data.getNetworkData, options)
     setNetworkMethods({
       updateNode: (id, property, value) => {
         network.body.data.nodes.update({ id, [property]: value })
@@ -104,12 +101,12 @@ export default function Graph () {
         })
       },
       refetch: () => {
-        refetch()
+        refetch({ requestPolicy: 'network-only' })
       }
     })
     setLayoutMethods({
       refetch: () => {
-        refetch()
+        refetch({ requestPolicy: 'network-only' })
       }
     })
     // zoom on Graph mount
@@ -131,7 +128,7 @@ export default function Graph () {
     // set activeNodeID on user node click
     network.on('selectNode', ({ nodes, event }) => {
       event.preventDefault()
-      const activeNode = data?.getNetworkData.nodes.find(node => nodes[0] === node.id)
+      const activeNode = result.data?.getNetworkData.nodes.find(node => nodes[0] === node.id)
       if (activeNode.group !== 'couple') {
         setActiveNodeID(activeNode.id)
       }
@@ -157,17 +154,17 @@ export default function Graph () {
       }
     })
     // eslint-disable-next-line
-  }, [data?.getNetworkData])
+  }, [result.data?.getNetworkData])
 
-  if (error) {
+  if (result.error) {
     return (
       <ErrorModal>
-        {error.message}
+        {result.error.message}
       </ErrorModal>
     )
   }
 
-  if (loading) return <Loading />
+  if (result.fetching) return <Loading />
 
   return (
     <>
@@ -180,16 +177,7 @@ export default function Graph () {
   )
 }
 
-export async function getStaticProps () {
-  const apolloClient = initializeApollo()
+// populate initial data on server
+Graph.getInitialProps = async (ctx) => ctx.urqlClient.query(GET_NETWORK_DATA).toPromise()
 
-  const r = await apolloClient.query({
-    query: GET_NETWORK_DATA,
-  })
-
-  return {
-    props: {
-      initialApolloState: apolloClient.cache.extract(),
-    },
-  }
-}
+export default withUrqlClient(client)(Graph)
