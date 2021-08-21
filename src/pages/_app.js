@@ -1,6 +1,5 @@
 import 'styles.css'
 
-import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
 import Head from 'next/head'
@@ -10,15 +9,13 @@ import theme from 'utils/theme'
 
 import { RecoilRoot } from 'recoil'
 
+import useServiceWorker from 'hooks/useServiceWorker'
+
 export default function App ({ Component, pageProps }) {
-  const router = useRouter()
+  useServiceWorker()
 
   useEffect(() => {
     document.documentElement.lang = 'en-us'
-    if (window.localStorage.getItem('AUTH_SESSION_ID')) {
-      const referrer = window.localStorage.getItem('REDIRECT_REFERRER')
-      router.push(referrer || '/layouts/graph')
-    } else { router.push('/auth/login') }
   }, [])
 
   useEffect(() => {

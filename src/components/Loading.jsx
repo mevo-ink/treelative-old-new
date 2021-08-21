@@ -1,47 +1,49 @@
 import { Box, Icon, keyframes } from '@chakra-ui/react'
 
+const dotOne = keyframes`
+  20% {transform: scale(1)}
+  45% {transform: translate(16px, 12px) scale(.45)}
+  60% {transform: translate(80px, 60px) scale(.45)}
+  80% {transform: translate(80px, 60px) scale(.45)}
+  100% {transform: translateY(0px) scale(1)}
+`
+
+const dotTwo = keyframes`
+  20% {transform: scale(1)}
+  45% {transform: translate(-16px, 12px) scale(.45)}
+  60% {transform: translate(-80px, 60px) scale(.45)}
+  80% {transform: translate(-80px, 60px) scale(.45)}
+  100% {transform: translateY(0px) scale(1)}
+`
+
+const dotThree = keyframes`
+  20% {transform: scale(1)}
+  45% {transform: translateY(-18px) scale(.45)}
+  60% {transform: translateY(-90px) scale(.45)}
+  80% {transform: translateY(-90px) scale(.45)}
+  100% {transform: translateY(0px) scale(1)}
+`
+
+const rotate = keyframes`
+  55% {transform: translate(-50%, -50%) rotate(0deg)}
+  80% {transform: translate(-50%, -50%) rotate(360deg)}
+  100% {transform: translate(-50%, -50%) rotate(360deg)}
+`
+
+const dotStyle = {
+  width: '70px',
+  height: '70px',
+  borderRadius: '50%',
+  backgroundColor: '#000',
+  position: 'absolute',
+  top: '0',
+  bottom: '0',
+  left: '0',
+  right: '0',
+  margin: 'auto'
+}
+
 export default function Loading () {
-  const dotOne = keyframes`
-    20% {transform: scale(1)}
-    45% {transform: translate(16px, 12px) scale(.45)}
-    60% {transform: translate(80px, 60px) scale(.45)}
-    80% {transform: translate(80px, 60px) scale(.45)}
-    100% {transform: translateY(0px) scale(1)}
-  `
-
-  const dotTwo = keyframes`
-    20% {transform: scale(1)}
-    45% {transform: translate(-16px, 12px) scale(.45)}
-    60% {transform: translate(-80px, 60px) scale(.45)}
-    80% {transform: translate(-80px, 60px) scale(.45)}
-    100% {transform: translateY(0px) scale(1)}
-  `
-  const dotThree = keyframes`
-    20% {transform: scale(1)}
-    45% {transform: translateY(-18px) scale(.45)}
-    60% {transform: translateY(-90px) scale(.45)}
-    80% {transform: translateY(-90px) scale(.45)}
-    100% {transform: translateY(0px) scale(1)}
-  `
-  const rotate = keyframes`
-    55% {transform: translate(-50%, -50%) rotate(0deg)}
-    80% {transform: translate(-50%, -50%) rotate(360deg)}
-    100% {transform: translate(-50%, -50%) rotate(360deg)}
-  `
-
-  const dotStyle = {
-    width: '70px',
-    height: '70px',
-    borderRadius: '50%',
-    backgroundColor: '#000',
-    position: 'absolute',
-    top: '0',
-    bottom: '0',
-    left: '0',
-    right: '0',
-    margin: 'auto'
-  }
-
   return (
     <Box
       w='100%'

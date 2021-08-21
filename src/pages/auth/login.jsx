@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import {
   Box,
@@ -41,10 +41,6 @@ const Login = ({ onSuccess, onClose }) => {
 
   const [internalError, setInternalError] = useState()
 
-  useEffect(() => {
-    if (window.localStorage.getItem('AUTH_SESSION_ID')) router.push('/layouts/graph')
-  }, [])
-
   const onLoginSuccess = (result) => {
     if (result.data) {
       window.localStorage.setItem('AUTH_SESSION_ID', result.data.login)
@@ -72,8 +68,8 @@ const Login = ({ onSuccess, onClose }) => {
   }
 
   return (
-    <Modal isOpen onClose={onClose} isCentered>
-      <ModalOverlay onClick={handleClose} />
+    <Modal isOpen onClose={handleClose} isCentered>
+      <ModalOverlay />
       <ModalContent>
         <IconButton
           size='2rem'
@@ -132,6 +128,6 @@ const Login = ({ onSuccess, onClose }) => {
 }
 
 // populate initial data on server
-Login.getInitialProps = async (ctx) => ctx.urqlClient.mutation(LOGIN_WITH_PROVIDER).toPromise()
+// Login.getInitialProps = async (ctx) => ctx.urqlClient.mutation(LOGIN_WITH_PROVIDER).toPromise()
 
 export default withUrqlClient(client)(Login)

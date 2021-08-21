@@ -20,7 +20,10 @@ import Insights from 'components/Menu/Insights'
 import Copyright from 'components/Menu/Copyright'
 import UserOptions from 'components/Menu/UserOptions'
 
-export default function Menu () {
+import { withUrqlClient } from 'next-urql'
+import client from 'graphql/client'
+
+const Menu = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()
 
@@ -89,3 +92,5 @@ export default function Menu () {
     </Box>
   )
 }
+
+export default withUrqlClient(client)(Menu)

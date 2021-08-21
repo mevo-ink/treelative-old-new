@@ -1,38 +1,24 @@
 import { useEffect } from 'react'
 
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilValue } from 'recoil'
 
-import { layoutAtom, activeNodeIDAtom } from 'utils/atoms.js'
+import { layoutAtom } from 'utils/atoms.js'
 
 import Map from 'components/Layouts/Map'
 import Age from 'components/Layouts/Age'
 import Graph from 'components/Layouts/Graph'
 import Birthday from 'components/Layouts/Birthday'
 
-export default function Layouts () {
+import cookieCutter from 'cookie-cutter'
+
+export default function Layouts ({ layout: initialValue }) {
   const layout = useRecoilValue(layoutAtom)
-  const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
 
-  // show the profile card if url contains activeNodeID
   useEffect(() => {
-    const activeNodeID = window.location.pathname.slice(1)
-    // add event listener on activeNodeID url change
-    const onLocationChange = () => {
-      setActiveNodeID(window.location.pathname.slice(1))
-    }
-    window.addEventListener('popstate', onLocationChange)
-    if (activeNodeID !== '/') {
-      setTimeout(() => {
-        setActiveNodeID(activeNodeID)
-      }, 1)
-    }
-    return () => {
-      window.removeEventListener('popstate', onLocationChange)
-    }
-    // eslint-disable-next-line
-  }, [])
+    layout && cookieCutter.set('layout', layout)
+  }, [layout])
 
-  switch (layout) {
+  switch (layout || initialValue) {
     case 'map':
       return <Map />
     case 'age':

@@ -7,12 +7,10 @@ import {
 import { MdClose } from 'react-icons/md'
 
 import { useQuery } from 'urql'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useRecoilState } from 'recoil'
 
 import {
-  isEditModeAtom,
-  activeNodeIDAtom,
-  activeNodePulseIDAtom
+  isEditModeAtom
 } from 'utils/atoms.js'
 import { GET_USER } from 'graphql/queries/users'
 
@@ -24,7 +22,6 @@ import Slider from 'components/ProfileCard/Slider'
 import FullName from 'components/EditUser/FullName'
 import Birth from 'components/ProfileCard/Slides/Birth'
 import Death from 'components/ProfileCard/Slides/Death'
-import FindMe from 'components/Menu/UserOptions/FindMe'
 import Socials from 'components/ProfileCard/Slides/Socials'
 import Current from 'components/ProfileCard/Slides/Current'
 import Partner from 'components/ProfileCard/Slides/Partner'
@@ -33,10 +30,7 @@ import InnerWrapper from 'components/ProfileCard/InnerWrapper'
 import MoreSettings from 'components/ProfileCard/Slides/MoreSettings'
 import ParentChild from 'components/ProfileCard/Slides/ParentChild'
 
-import { withUrqlClient } from 'next-urql'
-import client from 'graphql/client'
-
-import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 const innerBtnStyles = {
   position: 'absolute',
@@ -49,26 +43,17 @@ const innerBtnStyles = {
   _active: { background: 'hsla(0, 0%, 50%, .2)' }
 }
 
-const ProfileCard = () => {
-  const [activeNodeID, setActiveNodeID] = useRecoilState(activeNodeIDAtom)
+const ProfileCard = ({ userID }) => {
+  const router = useRouter()
 
   const [isEditMode, setIsEditMode] = useRecoilState(isEditModeAtom)
 
-  const setActiveNodePulseID = useSetRecoilState(activeNodePulseIDAtom)
-
-  const [result, refetch] = useQuery({ query: GET_USER, variables: { id: activeNodeID } })
+  const [result, refetch] = useQuery({ query: GET_USER, variables: { id: userID } })
   const user = result.data?.getUser
 
-  useEffect(() => {
-    window.history.pushState('', '', `/profile/${activeNodeID}`)
-    return () => window.history.pushState('', '', '/')
-  }, [])
-
   const onClose = () => {
-    setActiveNodePulseID(null)
     setIsEditMode(false)
-    // clear the activeNodeID
-    setActiveNodeID(null)
+    router.push('/')
   }
 
   const onLoginSuccess = () => { refetch({ requestPolicy: 'network-only' }) }
@@ -96,7 +81,6 @@ const ProfileCard = () => {
             {user && (
               <>
                 <Edit innerBtnStyles={innerBtnStyles} />
-                <FindMe onClose={onClose} user={user} {...innerBtnStyles} right='.3rem' />
                 <Avatar user={user} />
                 <FullName user={user} />
                 <Slider>
@@ -117,4 +101,4 @@ const ProfileCard = () => {
   )
 }
 
-export default withUrqlClient(client)(ProfileCard)
+export default ProfileCard

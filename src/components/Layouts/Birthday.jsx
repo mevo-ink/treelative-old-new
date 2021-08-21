@@ -63,7 +63,7 @@ export default function Birthday () {
       h='100vh'
       pb='2.5rem'
       flexDirection='column'
-      overflowY='scroll'
+      overflowY='scroll !important'
       overflowX='hidden'
       bg='hsla(0, 0%, 0%, .75)'
       sx={{ '&::-webkit-scrollbar': { display: 'none' }, scrollbarWidth: 'none' }}

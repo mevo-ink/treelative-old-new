@@ -8,7 +8,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "@apollo/client": "^3.4.8",
     "@chakra-ui/react": "1.6.6",
     "@emotion/react": "11.4.1",
     "@emotion/styled": "11.3.0",
@@ -19,7 +18,9 @@
     "@urql/exchange-graphcache": "4.3.0",
     "apollo-server-micro": "3.1.2",
     "bcryptjs": "2.4.3",
-    "firebase": "8.9.1",
+    "cookie-cutter": "0.2.0",
+    "cookies": "0.8.0",
+    "firebase": "8.10.0",
     "firebase-admin": "9.11.1",
     "framer-motion": "4.1.17",
     "google-map-react": "2.1.10",
@@ -38,9 +39,8 @@
     "react-is": "17.0.2",
     "react-minimal-pie-chart": "8.2.0",
     "react-select": "4.3.1",
-    "recharts": "2.1.0",
+    "recharts": "2.1.1",
     "recoil": "0.4.0",
-    "recoil-persist": "3.0.0",
     "urql": "2.0.4",
     "vis-network": "9.0.5",
     "yup": "0.32.9"

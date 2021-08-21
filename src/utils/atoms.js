@@ -1,9 +1,5 @@
 import { atom } from 'recoil'
 
-import { recoilPersist } from 'recoil-persist'
-
-const { persistAtom } = recoilPersist()
-
 // profile card related atoms
 export const activeNodeIDAtom = atom({
   key: 'activeNodeID',
@@ -23,8 +19,7 @@ export const isEditModeAtom = atom({
 // layout related atoms
 export const layoutAtom = atom({
   key: 'layout',
-  default: 'network',
-  effects_UNSTABLE: [persistAtom]
+  default: null
 })
 
 export const networkMethodsAtom = atom({

@@ -124,7 +124,6 @@ export default function Graph () {
     network.on('dragStart', clearSelection)
     // set activeNodeID on user node click
     network.on('selectNode', ({ nodes, event }) => {
-      event.preventDefault()
       const activeNode = result.data?.getNetworkData.nodes.find(node => nodes[0] === node.id)
       if (activeNode.group !== 'couple') {
         setActiveNodeID(activeNode.id)
