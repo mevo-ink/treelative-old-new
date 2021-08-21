@@ -47,6 +47,7 @@ export default function finishLoginWithEmail () {
       window.localStorage.setItem('AUTH_SESSION_ID', result.data.login)
       // redirect back to the original page where login was initiated
       const referrer = window.localStorage.getItem('REDIRECT_REFERRER')
+      window.localStorage.removeItem('REDIRECT_REFERRER')
       referrer ? window.location.href = referrer : window.location.href = '/'
     }
   }

@@ -48,7 +48,7 @@ export default function ErrorModal (props) {
           onClick={onClose}
         />
         <ModalBody as={Grid} placeItems='center' p='2em'>
-          {icon && <Image src='images/error.png' alt='Error' w='100px' mb='1rem' />}
+          {icon && <Image src='/images/error.png' alt='Error' w='100px' mb='1rem' />}
           {title && (
             <Text
               textAlign='center'

@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router'
+
 import { useEffect } from 'react'
 
 import {
@@ -37,37 +39,30 @@ import InnerWrapper from 'components/ProfileCard/InnerWrapper'
 import MoreSettings from 'components/ProfileCard/Slides/MoreSettings'
 import ParentChild from 'components/ProfileCard/Slides/ParentChild'
 
-export default function ProfileCard ({ isServerRendered = false }) {
+export default function ProfileCard ({ userID, isServerRendered = false }) {
+  const router = useRouter()
+
   const [isEditMode, setIsEditMode] = useRecoilState(isEditModeAtom)
-  const [activeNodeID, setActiveNodeID] = useRecoilState(activeNodeIDAtom)
 
   const setActiveNodePulseID = useSetRecoilState(activeNodePulseIDAtom)
 
   const layout = useRecoilValue(layoutAtom)
   const networkMethods = useRecoilValue(networkMethodsAtom)
 
-  useEffect(() => {
-    // set the activeNodeID as url path
-    if (activeNodeID) {
-      window.history.pushState(null, null, activeNodeID)
-    }
-  }, [activeNodeID])
-
-  const [result, refetch] = useQuery({ query: GET_USER, variables: { id: activeNodeID }, requestPolicy: 'network-only' })
+  const [result, refetch] = useQuery({ query: GET_USER, variables: { id: userID }, requestPolicy: 'network-only' })
   const user = result.data?.getUser
 
   const onClose = () => {
     // clear the activeNodeID
-    window.history.pushState({}, '', '/')
-    setActiveNodeID(null)
+    router.back()
     setActiveNodePulseID(null)
     setIsEditMode(false)
-    // unselect all nodes if on network layout
-    if (isServerRendered) {
-      window.location.reload()
-    } else {
-      layout === 'network' && networkMethods.unselectAll()
-    }
+    // // unselect all nodes if on network layout
+    // if (isServerRendered) {
+    //   window.location.reload()
+    // } else {
+    //   layout === 'network' && networkMethods.unselectAll()
+    // }
   }
 
   const onLoginSuccess = () => { refetch({ requestPolicy: 'network-only' }) }
@@ -110,13 +105,13 @@ export default function ProfileCard ({ isServerRendered = false }) {
                 <Avatar user={user} />
                 <FullName user={user} />
                 <Slider>
-                  <Death user={user} icon='images/ProfileCard/death.png' isHidden={(!user.dateOfDeath && !isEditMode)} />
-                  <Birth user={user} icon='images/ProfileCard/birth.png' />
-                  <Current user={user} icon='images/ProfileCard/current.png' />
-                  <Partner user={user} icon='images/ProfileCard/partner.png' isHidden={(!user.partner && !isEditMode)} />
-                  <ParentChild user={user} icon='images/ProfileCard/relation.png' isHidden={(user.parents.length === 0 && user.children.length === 0 && !isEditMode)} />
-                  <Socials user={user} icon='images/ProfileCard/contact.png' />
-                  <MoreSettings user={user} icon='images/ProfileCard/settings.png' isHidden={!isEditMode} />
+                  <Death user={user} icon='/images/ProfileCard/death.png' isHidden={(!user.dateOfDeath && !isEditMode)} />
+                  <Birth user={user} icon='/images/ProfileCard/birth.png' />
+                  <Current user={user} icon='/images/ProfileCard/current.png' />
+                  <Partner user={user} icon='/images/ProfileCard/partner.png' isHidden={(!user.partner && !isEditMode)} />
+                  <ParentChild user={user} icon='/images/ProfileCard/relation.png' isHidden={(user.parents.length === 0 && user.children.length === 0 && !isEditMode)} />
+                  <Socials user={user} icon='/images/ProfileCard/contact.png' />
+                  <MoreSettings user={user} icon='/images/ProfileCard/settings.png' isHidden={!isEditMode} />
                 </Slider>
               </>
             )}

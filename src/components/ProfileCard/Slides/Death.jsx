@@ -20,7 +20,7 @@ export default function Death ({ user }) {
       </Text>
       <DateOfDeath user={user} />
       <Image
-        src='images/tombstone.svg'
+        src='/images/tombstone.svg'
         alt='tombstone'
         w='60%'
         mt='1rem'

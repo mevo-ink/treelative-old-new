@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router'
+
 import { useState, useEffect, useRef } from 'react'
 
 import { Box } from '@chakra-ui/react'
@@ -17,6 +19,8 @@ import { withUrqlClient } from 'next-urql'
 import client from 'graphql/client'
 
 const Graph = () => {
+  const router = useRouter()
+
   const { id: authUserID } = parseJwt()
 
   const options = {
@@ -130,7 +134,7 @@ const Graph = () => {
       event.preventDefault()
       const activeNode = result.data?.getNetworkData.nodes.find(node => nodes[0] === node.id)
       if (activeNode.group !== 'couple') {
-        setActiveNodeID(activeNode.id)
+        router.push(`/profile/${activeNode.id}`)
       }
     })
     // limit the zoom

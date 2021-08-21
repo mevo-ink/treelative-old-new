@@ -9,10 +9,10 @@ export default function Layouts ({ onClose }) {
   const setActiveNodeID = useSetRecoilState(activeNodePulseIDAtom)
 
   const iconsAndNames = [
-    { icon: 'images/graphView.png', name: 'network' },
-    { icon: 'images/mapView.png', name: 'map' },
-    { icon: 'images/ageView.png', name: 'age' },
-    { icon: 'images/birthdayView.png', name: 'birthday' }
+    { icon: '/images/graphView.png', name: 'network' },
+    { icon: '/images/mapView.png', name: 'map' },
+    { icon: '/images/ageView.png', name: 'age' },
+    { icon: '/images/birthdayView.png', name: 'birthday' }
   ]
 
   const handleLayoutChange = async (layout) => {

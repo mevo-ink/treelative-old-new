@@ -1,7 +1,7 @@
 import { Box, Grid, Link, keyframes } from '@chakra-ui/react'
 
 export default function LocationRenderer ({ location, avatar }) {
-  let imageURL = 'images/infoUnavailable.png'
+  let imageURL = '/images/infoUnavailable.png'
 
   if (location) {
     const { lat, lng } = location.geometry.location

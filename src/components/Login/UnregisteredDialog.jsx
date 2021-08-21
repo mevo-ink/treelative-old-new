@@ -13,8 +13,6 @@ import {
   ModalCloseButton
 } from '@chakra-ui/react'
 
-import UnregisteredSVG from 'images/unregistered.svg'
-
 export default function UnregisteredDialog ({ error }) {
   return (
     <Modal isOpen closeOnOverlayClick={false} scrollBehavior='inside' onClose={() => window.location.reload()}>
@@ -33,7 +31,7 @@ export default function UnregisteredDialog ({ error }) {
               borderRadius='lg'
               pb='4'
             >
-              <Image ignoreFallback width='200px' src={UnregisteredSVG} alt='Unregistered' pb='4' />
+              <Image ignoreFallback width='200px' src='/images/unregistered.svg' alt='Unregistered' pb='4' />
               <AlertIcon boxSize='40px' mr={0} />
               <AlertTitle mt={4} mb={1} fontSize='lg'>
                 No Account Found
