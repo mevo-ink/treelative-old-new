@@ -1,9 +1,13 @@
+import { useRouter } from 'next/router'
 import { withUrqlClient } from 'next-urql'
 
-import LoginServer from 'components/LoginServer'
+import Login from 'components/Login'
 
 import client from 'graphql/client'
 
-const Login = () => <LoginServer />
+const LoginServer = () => {
+  const router = useRouter()
+  return <Login onClose={() => router.push('/')} isServer />
+}
 
-export default withUrqlClient(client)(Login)
+export default withUrqlClient(client)(LoginServer)

@@ -56,7 +56,7 @@ const ProfileCard = () => {
 
   const setActiveNodePulseID = useSetRecoilState(activeNodePulseIDAtom)
 
-  const [result, refetch] = useQuery({ query: GET_USER, variables: { id: activeNodeID } })
+  const [result] = useQuery({ query: GET_USER, variables: { id: activeNodeID } })
   const user = result.data?.getUser
 
   useEffect(() => {
@@ -71,10 +71,8 @@ const ProfileCard = () => {
     setActiveNodeID(null)
   }
 
-  const onLoginSuccess = () => { refetch({ requestPolicy: 'network-only' }) }
-
   if (result.fetching) return <Loading />
-  if (result.error) return <Login onSuccess={onLoginSuccess} onClose={onClose} />
+  if (result.error) return <Login onClose={onClose} />
 
   return (
     <Modal isOpen onClose={onClose} isCentered>

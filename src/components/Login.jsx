@@ -29,7 +29,7 @@ const loginProviders = [
   { label: 'Login with Google', icon: FaGoogle, color: 'linear-gradient(180deg, hsl(13, 73%, 49%), hsl(13, 73%, 39%))', provider: google }
 ]
 
-export default function Login ({ onSuccess, onClose }) {
+export default function Login ({ onClose, isServer }) {
   const [showLoginWithEmail, setShowLoginWithEmail] = useState(false)
 
   const [loginWithProviderResult, loginWithProvider] = useMutation(LOGIN_WITH_PROVIDER)
@@ -39,14 +39,13 @@ export default function Login ({ onSuccess, onClose }) {
   useEffect(() => {
     // store referrer to redirect after login
     window.localStorage.setItem('REDIRECT_REFERRER', window.location.href)
+    if (window.localStorage.getItem('AUTH_SESSION_ID')) onClose()
   }, [])
 
   const onLoginSuccess = (result) => {
-    setInternalError({ message: 'OATHA' })
-    if (result.data) {
-      window.localStorage.setItem('AUTH_SESSION_ID', result.data.login)
-      onSuccess()
-    }
+    // setInternalError({ message: 'OATHA' })
+    result.data && window.localStorage.setItem('AUTH_SESSION_ID', result.data.login)
+    isServer && onClose()
   }
 
   const onLoginWithProvider = (token, { email }) => {
@@ -55,15 +54,7 @@ export default function Login ({ onSuccess, onClose }) {
       .catch(setInternalError)
   }
 
-  if (internalError?.message) {
-    return (
-      <ErrorModal
-        icon
-        title='Ops!'
-        message={internalError.message}
-      />
-    )
-  }
+  if (internalError?.message) return <ErrorModal icon title='Ops!' message={internalError.message} />
 
   return (
     <Modal isOpen onClose={onClose} isCentered>
