@@ -32,5 +32,11 @@ export default gql`
     suggestLocations (query: String): JSON!
 
     suggestNewUsers (query: String!): [User!]
+
+    # insights tooltip
+    getUsersByAges (ages: String!): [User!]
+    getUsersByCountry (country: String!): [User!]
+
+    getContactUsers: [User!]
   }
 `

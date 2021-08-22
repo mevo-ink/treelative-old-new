@@ -52,14 +52,17 @@ export default function App ({ Component, pageProps }) {
 // TODO:
 /*
   Review Firebase Magic Email - also add phone number login
+
   Add tooltips for pie and bar charts - for insights - with user avatars that fall under that category
-    Add two new queries:
-      - Get users by age
-      - Get users by country
-      - Use these both to show tooltips on charts - avatars
+
   Add PWA prompt
+
+  Investigate firebase cloud notifications
+
   Refactor Error Modal
+
   Add find me ring indicator graph view
+
   MAKE YouTube VIDEO OF how to / intro
 
   LOGIN PROCESS - OAUTH
@@ -87,8 +90,15 @@ export default function App ({ Component, pageProps }) {
   DONE:
     - query to suggest users with no email - unauthenticated endpoint
        suggestNewUsers (query: "vara")
-    - mutation to update a user's email - authenticated endpoint - but check for firebase token
+    - mutation to update a user's email - authenticated endpoint by checking for firebase token
        connectUserEmail(userID: "asd" email: "ad" token:"ad")
     - mutation to create a new user and link with email ^ same as above, send empty userID
-      connectUserEmail(userID: "asd" email: "ad" token:"ad")
+      connectUserEmail(email: "ad" token:"ad")
+
+    Add two new queries: for insights tooltips
+      - Get users by age  - getUsersByAges(ages: "0-10")
+      - Get users by country  - getUsersByCountry(country: "Canada")
+
+    Add query to get contact us users
+      - getContactUsers -- returns all admin users
 */

@@ -26,6 +26,7 @@ import getUserAvatar from './queries/users/getUserAvatar'
 import getUserPartner from './queries/users/getUserPartner'
 import getUserParents from './queries/users/getUserParents'
 import getUserChildren from './queries/users/getUserChildren'
+import getContactUsers from './queries/users/getContactUsers'
 
 import searchUsers from './queries/users/searchUsers'
 
@@ -33,6 +34,8 @@ import countUsers from './queries/insights/countUsers'
 import countCouples from './queries/insights/countCouples'
 import insightsByAge from './queries/insights/insightsByAge'
 import insightsByLocation from './queries/insights/insightsByLocation'
+import getUsersByAges from './queries/insights/getUsersByAges'
+import getUsersByCountry from './queries/insights/getUsersByCountry'
 
 import suggestParents from './queries/suggestions/suggestParents'
 import suggestChildren from './queries/suggestions/suggestChildren'
@@ -78,7 +81,10 @@ export default {
     getBirthdayData,
     insightsByAge,
     insightsByLocation,
-    suggestNewUsers
+    suggestNewUsers,
+    getUsersByAges,
+    getUsersByCountry,
+    getContactUsers
   },
 
   Mutation: {
