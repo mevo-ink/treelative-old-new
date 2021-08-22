@@ -55,7 +55,7 @@ export default function Graph () {
       singleParent: {
         shape: 'circularImage',
         size: 8,
-        image: 'http://www.clker.com/cliparts/l/J/f/f/K/O/red-circle-no-background.svg.hi.png',
+        image: 'https://i.dlpng.com/static/png/5459404-red-circle-png-images-download-424-png-resources-with-transparent-red-dot-png-260_260_preview.png',
         color: {
           background: 'transparent',
           border: 'transparent',
@@ -110,8 +110,6 @@ export default function Graph () {
     network.on('stabilized', () => {
       setIsStabilized(true)
       const position = authUserID ? network.getPosition(authUserID) : null
-      console.log(network)
-
       network.moveTo({
         position,
         scale: 0.8,
