@@ -1,12 +1,7 @@
 import { Box, Grid, Link, keyframes } from '@chakra-ui/react'
 
 export default function LocationRenderer ({ location, avatar }) {
-  let imageURL = '/images/infoUnavailable.png'
-
-  if (location) {
-    const { lat, lng } = location.geometry.location
-    imageURL = `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=15&size=230x200&key=${process.env.NEXT_PUBLIC_GOOGLE_LOCATION_API_KEY}`
-  }
+  const imageURL = location?.imageURL || '/images/infoUnavailable.png'
 
   const pulse = keyframes`
     0% { transform: scale(0.1, 0.1); opacity: 0; }

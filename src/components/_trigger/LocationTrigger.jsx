@@ -34,13 +34,13 @@ export default function LocationTrigger (props) {
   `
 
   if (defaultIsOpen) {
-    return isOpen ? <LocationModal value={value?.suggested} title={title} onSubmit={onSubmit} onClose={onClose} {...inputProps} /> : null
+    return isOpen ? <LocationModal value={value} title={title} onSubmit={onSubmit} onClose={onClose} {...inputProps} /> : null
   }
 
   if (!isEditMode) {
     return (
       <Text variant='info'>
-        {value ? value?.suggested?.terms?.slice(-3).map(val => val.value).join(', ') : 'Unavailable'}
+        {value?.description || 'Unavailable'}
       </Text>
     )
   }
@@ -52,7 +52,7 @@ export default function LocationTrigger (props) {
       animation={isEditMode && `${wiggle} infinite .15s linear`}
     >
       <Flex position='relative'>
-        {isOpen && <LocationModal value={value?.suggested} title={title} onSubmit={onSubmit} onClose={onClose} {...inputProps} />}
+        {isOpen && <LocationModal value={value} title={title} onSubmit={onSubmit} onClose={onClose} {...inputProps} />}
         {isEditMode && value && (
           <RemoveButton
             title={'Remove' + title.substring(4)}
@@ -65,7 +65,7 @@ export default function LocationTrigger (props) {
           variant='editable-input'
           animation={`${wiggle} infinite .15s linear`}
         >
-          {value ? value?.suggested?.terms?.slice(-3).map(val => val.value).join(', ') : 'Unavailable'}
+          {value?.description || 'Unavailable'}
         </Button>
       </Flex>
     </Flex>

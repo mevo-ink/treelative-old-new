@@ -21,7 +21,7 @@ export default function Birth ({ user }) {
       <DateOfBirth user={user} />
       <Text variant='info-title' mt='1rem'> Birth Location </Text>
       <BirthLocation user={user} />
-      <LocationRenderer location={user.birthLocation?.parsed} avatar={user.avatar} fullName={user.fullName} />
+      <LocationRenderer location={user.birthLocation} avatar={user.avatar} fullName={user.fullName} />
     </Flex>
   )
 }

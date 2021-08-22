@@ -53,7 +53,7 @@ export default function SearchResult ({ users, isFetching }) {
             </Text>
             <Flex mt='.3rem'>
               <Text mr='.3rem' fontSize='.5rem' fontWeight='100'> {user.dateOfBirth && handleDateOfBirth(user.dateOfBirth)} </Text>
-              <Text fontSize='.5rem' fontWeight='100'> {user.currentLocation && user.currentLocation.suggested.terms.slice(-1).map(val => val.value).join(', ')} </Text>
+              <Text fontSize='.5rem' fontWeight='100'> {user.currentLocation?.description} </Text>
             </Flex>
           </Box>
         </Flex>

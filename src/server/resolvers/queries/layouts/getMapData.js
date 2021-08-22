@@ -16,14 +16,15 @@ export default async (parent, args, context, info) => {
   const seenLocations = {}
 
   const usersMap = users.map(user => {
-    const locationKey = Object.values(user.currentLocation.parsed.geometry.location).join('-')
+    const { lat, lng } = user.currentLocation
+    const locationKey = `${lat}-${lng}`
     const result = {
       id: user.id,
       shortName: user.shortName,
       fullName: user.fullName,
       image: `${process.env.STORAGE_ENDPOINT}/avatars/${user.id}.png`,
       brokenImage: `https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`,
-      position: seenLocations[locationKey] ? adjustLocation(seenLocations[locationKey], user.currentLocation.parsed.geometry.location) : user.currentLocation.parsed.geometry.location
+      position: seenLocations[locationKey] ? adjustLocation(seenLocations[locationKey], { lat, lng }) : { lat, lng }
     }
     seenLocations[locationKey] = (seenLocations[locationKey] || 0) + 1
     return result

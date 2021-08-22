@@ -7,13 +7,10 @@ export default async (parent, args, context, info) => {
   const countryCodeMap = {}
 
   for (const user of users) {
-    const country = user.currentLocation.suggested.terms.pop().value
+    const country = user.currentLocation?.country
 
-    if (user.currentLocation) {
-      const countryInfo = user.currentLocation.parsed.address_components.find(({ types }) => types.includes('country'))
-      if (countryInfo) {
-        countryCodeMap[country] = countryInfo.short_name
-      }
+    if (country) {
+      countryCodeMap[country] = user.currentLocation.code
     }
 
     groupByCountry[country] = (groupByCountry[country] || 0) + 1

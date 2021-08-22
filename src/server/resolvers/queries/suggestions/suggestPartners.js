@@ -35,9 +35,9 @@ export default async (parent, args, context, info) => {
         partialResult.push(snapshot)
       } else if (snapshot.phoneNumber?.toLowerCase().includes(searchQuery)) {
         partialResult.push(snapshot)
-      } else if (snapshot.birthLocation?.suggested.description.toLowerCase().includes(searchQuery)) {
+      } else if (snapshot.birthLocation?.description.toLowerCase().includes(searchQuery)) {
         partialResult.push(snapshot)
-      } else if (snapshot.currentLocation?.suggested.description.toLowerCase().includes(searchQuery)) {
+      } else if (snapshot.currentLocation?.description.toLowerCase().includes(searchQuery)) {
         partialResult.push(snapshot)
       }
       // limit partialResult to 5
