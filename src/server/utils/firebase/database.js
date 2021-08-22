@@ -52,4 +52,22 @@ db.deleteOneById = async (collection, id) => {
   await ref.delete()
 }
 
+db.checkCache = async (id) => {
+  const snapshot = await db.collection('cache').doc(id).get()
+  return snapshot.exists
+}
+
+db.readCache = async (id) => {
+  const snapshot = await db.collection('cache').doc(id).get()
+  return snapshot.exists ? snapshot.data() : null
+}
+
+db.writeCache = async (id, data) => {
+  db.collection('cache').doc(id).set(data)
+}
+
+db.deleteCache = async (id) => {
+  db.collection('cache').doc(id).delete()
+}
+
 export default db

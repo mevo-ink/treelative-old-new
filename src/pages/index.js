@@ -1,4 +1,10 @@
 import Layouts from 'components/Layouts'
+import Menu from 'components/Menu'
+
+import { useRecoilValue } from 'recoil'
+import { activeNodeIDAtom } from 'utils/atoms.js'
+
+import ProfileCard from 'components/ProfileCard'
 
 import { withUrqlClient } from 'next-urql'
 import client from 'graphql/client'
@@ -13,9 +19,17 @@ import {
 import Cookies from 'cookies'
 import cookieCutter from 'cookie-cutter'
 
-import Floating from 'components/Floating'
+const Home = ({ layout }) => {
+  const activeNodeID = useRecoilValue(activeNodeIDAtom)
 
-const Home = ({ layout }) => <><Floating /><Layouts layout={layout} /></>
+  return (
+    <>
+      {activeNodeID && <ProfileCard />}
+      <Menu />
+      <Layouts layout={layout} />
+    </>
+  )
+}
 
 // populate initial data on server
 Home.getInitialProps = async (ctx) => {

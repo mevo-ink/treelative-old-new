@@ -10,6 +10,9 @@ const calculateAge = (birthday, today) => {
 }
 
 export default async (parent, args, context, info) => {
+  const cacheId = 'birthday-layout'
+  if (await context.db.checkCache(cacheId)) return context.db.readCache(cacheId)
+
   const users = await context.db.findAll('users', { dateOfBirth: { '!=': null } })
   const unknownCount = (await context.db.collection('users').where('dateOfBirth', '==', null).get()).docs.length
 
@@ -51,8 +54,9 @@ export default async (parent, args, context, info) => {
     {}
   )
 
-  return {
-    data: orderedResult,
-    unknownCount
-  }
+  const response = { data: orderedResult, unknownCount }
+
+  context.db.writeCache(cacheId, response)
+
+  return response
 }

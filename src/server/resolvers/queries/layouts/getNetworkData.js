@@ -1,4 +1,7 @@
 export default async (parent, args, context, info) => {
+  const cacheId = 'network-layout'
+  if (await context.db.checkCache(cacheId)) return context.db.readCache(cacheId)
+
   const users = await context.db.findAll('users')
 
   const nodeUsers = users.map(user => ({
@@ -55,5 +58,9 @@ export default async (parent, args, context, info) => {
   const nodes = [...nodeUsers, ...nodeCouples]
   const edges = [...nodeEdges]
 
-  return { nodes, edges }
+  const response = { nodes, edges }
+
+  context.db.writeCache(cacheId, response)
+
+  return response
 }

@@ -6,6 +6,10 @@ const adjustLocation = (count, { lat, lng }) => {
 }
 
 export default async (parent, args, context, info) => {
+  const cacheId = 'map-layout'
+
+  if (await context.db.checkCache(cacheId)) return context.db.readCache(cacheId)
+
   const users = await context.db.findAll('users', { currentLocation: { '!=': null } })
   const unknownCount = (await context.db.collection('users').where('currentLocation', '==', null).get()).docs.length
 
@@ -25,8 +29,9 @@ export default async (parent, args, context, info) => {
     return result
   })
 
-  return {
-    data: usersMap,
-    unknownCount
-  }
+  const response = { data: usersMap, unknownCount }
+
+  context.db.writeCache(cacheId, response)
+
+  return response
 }

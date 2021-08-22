@@ -15,10 +15,9 @@ export default function App ({ Component, pageProps }) {
   useServiceWorker()
 
   useEffect(() => {
+    // set language
     document.documentElement.lang = 'en-us'
-  }, [])
 
-  useEffect(() => {
     // add event listener on resize to handle mobile navbar issue
     document.querySelector(':root').style.setProperty('--vh', window.innerHeight / 100 + 'px')
     const resize = window.addEventListener('resize', () => {
@@ -52,12 +51,12 @@ export default function App ({ Component, pageProps }) {
 
 // TODO:
 /*
-  Set all users to have unverified flag set to true
+  Add CACHE for layout calls in firestore
   Review Firebase Magic Email - also add phone number login
   Add tooltips for pie and bar charts - for insights - with user avatars that fall under that category
     Add two new queries:
       - Get users by age
-      - Get users by location
+      - Get users by country
       - Use these both to show tooltips on charts - avatars
   Add PWA prompt
   Refactor Error Modal
