@@ -57,3 +57,14 @@ export const SEARCH_USERS = gql`
     }
   }
 `
+
+export const GET_CONTACT_USERS = gql`
+  query GET_CONTACT_USERS {
+    getContactUsers {
+      id
+      fullName
+      avatar
+      shortName
+    }
+  }
+`
