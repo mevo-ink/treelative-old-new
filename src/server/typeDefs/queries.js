@@ -30,5 +30,7 @@ export default gql`
     suggestChildren (userID: String! query: String): [User!]
     suggestPartners (userID: String! query: String): [User!]
     suggestLocations (query: String): JSON!
+
+    suggestNewUsers (query: String!): [User!]
   }
 `

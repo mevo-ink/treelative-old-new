@@ -62,7 +62,6 @@ export default function App ({ Component, pageProps }) {
   Add find me ring indicator graph view
   MAKE YouTube VIDEO OF how to / intro
   API
-    - query to suggest users with no email - unauthenticated endpoint
     - mutation to update a user's email - authenticated endpoint - but check for firebase token
     - mutation to create a new user - authenticated endpoint - but check for firebase token
     - loginWIthProvider - 2 different responses
@@ -90,5 +89,8 @@ export default function App ({ Component, pageProps }) {
     /index - all layouts
     /profile/:id
     /contactUs
+
+  DONE:
+    - query to suggest users with no email - unauthenticated endpoint
 
 */

@@ -38,6 +38,8 @@ import suggestChildren from './queries/suggestions/suggestChildren'
 import suggestPartners from './queries/suggestions/suggestPartners'
 import suggestLocations from './queries/suggestions/suggestLocations'
 
+import suggestNewUsers from './queries/suggestions/suggestNewUsers'
+
 import getNetworkData from './queries/layouts/getNetworkData'
 import getMapData from './queries/layouts/getMapData'
 import getAgeData from './queries/layouts/getAgeData'
@@ -74,7 +76,8 @@ export default {
     getAgeData,
     getBirthdayData,
     insightsByAge,
-    insightsByLocation
+    insightsByLocation,
+    suggestNewUsers
   },
 
   Mutation: {

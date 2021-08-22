@@ -6,14 +6,6 @@ export default async (parent, args, context, info) => {
     throw new ApolloError('You must be authenticated to perform this action', 'UNAUTHENTICATED')
   }
 
-  // const usersNotChildrenOrPartnerWithCurrentUser = await context.db.findAll('users',
-  //   {
-  //     // $or: fuzzySearch(query),
-  //     parents: { 'not-in': [[context.db.doc(`users/${userID}`)]] },
-  //     // partner: { '!=': userID }
-  //   },
-  //   5
-  // )
   const searchQueries = args.query.toLowerCase().split(' ')
   const results = []
 
