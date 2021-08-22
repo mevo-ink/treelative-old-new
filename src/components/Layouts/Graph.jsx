@@ -110,6 +110,8 @@ export default function Graph () {
     network.on('stabilized', () => {
       setIsStabilized(true)
       const position = authUserID ? network.getPosition(authUserID) : null
+      console.log(network)
+
       network.moveTo({
         position,
         scale: 0.8,
@@ -123,7 +125,8 @@ export default function Graph () {
     const clearSelection = function () { network.unselectAll() }
     network.on('dragStart', clearSelection)
     // set activeNodeID on user node click
-    network.on('selectNode', ({ nodes, event }) => {
+    network.on('selectNode', ({ nodes }) => {
+      network.unselectAll()
       const activeNode = result.data?.getNetworkData.nodes.find(node => nodes[0] === node.id)
       if (activeNode.group !== 'couple') {
         setActiveNodeID(activeNode.id)
