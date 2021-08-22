@@ -61,13 +61,7 @@ export default function App ({ Component, pageProps }) {
   Refactor Error Modal
   Add find me ring indicator graph view
   MAKE YouTube VIDEO OF how to / intro
-  API
-    - mutation to update a user's email - authenticated endpoint - but check for firebase token
-    - mutation to create a new user - authenticated endpoint - but check for firebase token
-    - loginWIthProvider - 2 different responses
-      - without email - We could not find an account associated with the email
-      - with email, but unverified - please wait
-      - success
+
   LOGIN PROCESS - OAUTH
    - all users will have unverified flag set to true at the beginning
    - if the user has a profile associated wit the email - continue
@@ -92,5 +86,9 @@ export default function App ({ Component, pageProps }) {
 
   DONE:
     - query to suggest users with no email - unauthenticated endpoint
-
+       suggestNewUsers (query: "vara")
+    - mutation to update a user's email - authenticated endpoint - but check for firebase token
+       connectUserEmail(userID: "asd" email: "ad" token:"ad")
+    - mutation to create a new user and link with email ^ same as above, send empty userID
+      connectUserEmail(userID: "asd" email: "ad" token:"ad")
 */
