@@ -61,6 +61,8 @@ export default function App ({ Component, pageProps }) {
 
   MAKE YouTube VIDEO OF how to / intro
 
+  Change Single Parent couple node icon
+
   LOGIN PROCESS - OAUTH
    - all users will have unverified flag set to true at the beginning
    - if the user has a profile associated wit the email - continue
