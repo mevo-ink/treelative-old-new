@@ -19,7 +19,11 @@ import {
 import Cookies from 'cookies'
 import cookieCutter from 'cookie-cutter'
 
+import useServiceWorker from 'hooks/useServiceWorker'
+
 const Home = ({ layout }) => {
+  useServiceWorker()
+
   const activeNodeID = useRecoilValue(activeNodeIDAtom)
 
   return (

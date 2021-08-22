@@ -9,11 +9,7 @@ import theme from 'utils/theme'
 
 import { RecoilRoot } from 'recoil'
 
-import useServiceWorker from 'hooks/useServiceWorker'
-
 export default function App ({ Component, pageProps }) {
-  useServiceWorker()
-
   useEffect(() => {
     // set language
     document.documentElement.lang = 'en-us'
