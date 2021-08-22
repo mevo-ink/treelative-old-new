@@ -2,12 +2,20 @@ import fs from 'fs'
 
 import fetch from 'node-fetch'
 
+import getParsedLocations from 'server/utils/getParsedLocations'
+
 export default async (parent, args, context, info) => {
   const rawUsers = fs.readFileSync('allData.json')
   const users = JSON.parse(rawUsers)
 
   for (const user of users) {
     const newUserRef = context.db.collection('users').doc()
+    const parsedLocations = await getParsedLocations({
+      birthLocation: user.birthLocation?.suggested,
+      currentLocation: user.currentLocation?.suggested,
+      marriageLocation: user.marriageLocation?.suggested
+    })
+
     await newUserRef.set({
       id: newUserRef.id,
       isAdmin: false,
@@ -17,9 +25,9 @@ export default async (parent, args, context, info) => {
       email: user.email || null,
       isEmailVerified: false,
       phoneNumber: user.phoneNumber || null,
-      birthLocation: user.birthLocation || null,
-      currentLocation: user.currentLocation || null,
-      marriageLocation: user.marriageLocation || null,
+      birthLocation: parsedLocations.birthLocation || null,
+      currentLocation: parsedLocations.currentLocation || null,
+      marriageLocation: parsedLocations.marriageLocation || null,
       dateOfBirth: user.dateOfBirth || null,
       dateOfMarriage: user.dateOfMarriage || null,
       dateOfDeath: user.dateOfDeath || null,
