@@ -51,7 +51,6 @@ export default function App ({ Component, pageProps }) {
 
 // TODO:
 /*
-  Add CACHE for layout calls in firestore
   Review Firebase Magic Email - also add phone number login
   Add tooltips for pie and bar charts - for insights - with user avatars that fall under that category
     Add two new queries:

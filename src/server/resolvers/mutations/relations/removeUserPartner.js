@@ -33,5 +33,8 @@ export default async (parent, args, context, info) => {
     }
   }
 
+  // clear cache
+  context.db.deleteCache('network-layout')
+
   return user
 }

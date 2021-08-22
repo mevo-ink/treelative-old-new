@@ -47,5 +47,11 @@ export default async (parent, args, context, info) => {
 
   fs.unlinkSync(tmpFile)
 
+  // clear cache
+  context.db.deleteCache('network-layout')
+  context.db.deleteCache('map-layout')
+  context.db.deleteCache('age-layout')
+  context.db.deleteCache('birthday-layout')
+
   return user
 }

@@ -14,5 +14,14 @@ export default async (parent, args, context, info) => {
 
   const user = await context.db.findOneByIdAndUpdate('users', args.userID, { ...args.input, ...parsedLocations })
 
+  // clear cache
+  if (Object.keys(args.input).find(field => field.includes('location'))) {
+    context.db.deleteCache('map-layout')
+  }
+  if (Object.keys(args.input).find(field => field.includes('dateOfBirth'))) {
+    context.db.deleteCache('age-layout')
+    context.db.deleteCache('birthday-layout')
+  }
+
   return user
 }

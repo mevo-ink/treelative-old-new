@@ -28,5 +28,8 @@ export default async (parent, args, context, info) => {
     await addUserParent(context, userID, userParent.partner.id)
   }
 
+  // clear cache
+  context.db.deleteCache('network-layout')
+
   return user
 }
