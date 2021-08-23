@@ -43,7 +43,7 @@ export default function Graph () {
       couple: {
         shape: 'circularImage',
         size: 18,
-        image: 'https://res.cloudinary.com/arun99-dev/image/upload/v1624878835/coupleNode_etlqzn.png',
+        image: '/images/coupleNode.png',
         color: {
           background: 'transparent',
           border: 'transparent',
@@ -55,7 +55,7 @@ export default function Graph () {
       singleParent: {
         shape: 'circularImage',
         size: 8,
-        image: 'https://i.dlpng.com/static/png/5459404-red-circle-png-images-download-424-png-resources-with-transparent-red-dot-png-260_260_preview.png',
+        image: '/images/singleParent.png',
         color: {
           background: 'transparent',
           border: 'transparent',
