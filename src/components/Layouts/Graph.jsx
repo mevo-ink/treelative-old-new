@@ -126,7 +126,7 @@ export default function Graph () {
     network.on('selectNode', ({ nodes }) => {
       network.unselectAll()
       const activeNode = result.data?.getNetworkData.nodes.find(node => nodes[0] === node.id)
-      if (activeNode.group !== 'couple') {
+      if (activeNode.group === 'individual') {
         setActiveNodeID(activeNode.id)
       }
     })
