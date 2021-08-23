@@ -75,6 +75,7 @@ export const GET_USERS_BY_COUNTRY = gql`
       id
       fullName
       avatar
+      currentLocation
     }
   }
 `
@@ -86,6 +87,7 @@ export const GET_USERS_BY_AGES = gql`
       fullName
       avatar
       age
+      dateOfBirth
     }
   }
 `
