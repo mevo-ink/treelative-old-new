@@ -1,4 +1,5 @@
 import { useQuery } from 'urql'
+import { format } from 'date-fns'
 
 import { useSetRecoilState } from 'recoil'
 import { activeNodeIDAtom } from 'utils/atoms.js'
@@ -22,41 +23,58 @@ export default function UsersMoreInfo ({ query, variables, onClose, title }) {
 
   const [result] = useQuery({ query, variables })
 
+  const handleDate = (date) => {
+    const dt = new Date(date)
+    const dtDateOnly = new Date(dt.valueOf() + dt.getTimezoneOffset() * 60 * 1000)
+    return format(dtDateOnly, 'PP').replace(/[, ]+/g, '/')
+  }
+
+  console.log(result)
+
   return (
     <Modal isOpen isCentered onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{result.data?.users?.length} {title}</ModalHeader>
-        <ModalBody maxH='300px' overflowY='auto'>
+        <ModalBody
+          maxH='300px'
+          overflowY='auto'
+          mr='20px'
+          sx={{
+            '::-webkit-scrollbar': { width: '2px' },
+            '::-webkit-scrollbar-thumb': { background: 'hsla(0, 0%, 100%, 1)' }
+          }}
+        >
           {result.fetching && <Loading />}
           {result.data && (
             <Stack>
               {result.data.users.map(user => (
                 <HStack key={user.id} position='relative'>
                   <Box
-                    w='40px'
-                    h='40px'
-                    mx='.5rem'
-                    my='3'
-                    objectFit='contain'
+                    w='35px'
+                    h='35px'
+                    m='.5rem'
                     borderRadius='50%'
-                    zIndex='4'
                     backgroundImage={user.avatar}
                     backgroundSize='100% auto'
                     backgroundPosition='center'
                     onClick={() => setActiveNodeID(user.id)}
                   />
-                  <Text>{user.fullName}</Text>
+                  <Box>
+                    <Text>{user.fullName}</Text>
+                    <Text fontSize='.8rem'>{user.age && handleDate(user.dateOfBirth)}</Text>
+                    <Text fontSize='.6rem'>{user.currentLocation && user.currentLocation.description}</Text>
+                  </Box>
                   {user.age && (
                     <Text
-                      w='20px'
-                      h='20px'
+                      w='18px'
+                      h='18px'
                       display='grid'
                       placeItems='center'
                       position='absolute'
-                      top='0px'
-                      zIndex='5'
-                      fontSize='12px'
+                      top='0'
+                      left='23px'
+                      fontSize='10px'
                       bg='hsla(310, 100%, 40%, 1)'
                       borderRadius='50%'
                       boxShadow='0px 3px 5px hsla(0, 0%, 0%, .8)'

@@ -47,6 +47,8 @@ export default function App ({ Component, pageProps }) {
 
 // TODO:
 /*
+  BUG: - add parentOne and then parentTwo, both parents are not becoming partners.
+
   Review Firebase Magic Email - also add phone number login
 
   Add PWA prompt
