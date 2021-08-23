@@ -49,8 +49,6 @@ export default function App ({ Component, pageProps }) {
 /*
   Review Firebase Magic Email - also add phone number login
 
-  Add tooltips for pie and bar charts - for insights - with user avatars that fall under that category
-
   Add PWA prompt
 
   Investigate firebase cloud notifications
@@ -99,4 +97,6 @@ export default function App ({ Component, pageProps }) {
 
     Add query to get contact us users
       - getContactUsers -- returns all admin users
+
+    Add tooltips for pie and bar charts - for insights - with user avatars that fall under that category
 */

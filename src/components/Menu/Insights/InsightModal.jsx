@@ -1,9 +1,9 @@
 import {
   Modal,
-  ModalOverlay,
-  ModalContent,
+  ModalBody,
   ModalHeader,
-  ModalBody
+  ModalOverlay,
+  ModalContent
 } from '@chakra-ui/react'
 
 import AgeInsight from 'components/Menu/Insights/AgeInsight'

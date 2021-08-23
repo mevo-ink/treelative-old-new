@@ -1,4 +1,7 @@
+import { useState } from 'react'
+
 import {
+  Box,
   Text,
   Wrap,
   Image,
@@ -8,15 +11,19 @@ import {
 import {
   Pie,
   Cell,
-  PieChart,
   Legend,
+  Tooltip,
+  PieChart,
   ResponsiveContainer
 } from 'recharts'
 
 import { useQuery } from 'urql'
 import { INSIGHTS_BY_LOCATION } from 'graphql/queries/insights'
+import { GET_USERS_BY_COUNTRY } from 'graphql/queries/users'
 
 import Loading from 'components/_common/Loading'
+
+import UsersMoreInfo from 'components/Menu/Insights/UsersMoreInfo'
 
 const baseURL = ' https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.3/flags/4x3/'
 
@@ -29,7 +36,7 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
   if (code) {
     return (
       <svg x={x} y={y} fill='white' textAnchor={x > cx ? 'start' : 'end'}>
-        <image href={baseURL + code.toLowerCase() + '.svg'} width='20' height='20' />
+        <image href={baseURL + code.toLowerCase() + '.svg'} width='20' height='20' style={{ pointerEvents: 'none' }} />
       </svg>
     )
   } else {
@@ -41,7 +48,28 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
   }
 }
 
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    const country = payload[0].payload.country
+    return (
+      <Box
+        p='2'
+        color='white'
+        borderRadius='20px'
+        background='hsla(225, 36%, 4%, 0.6)'
+      >
+        <Text>{country}</Text>
+      </Box>
+    )
+  }
+  return null
+}
+
 export default function CountryInsight () {
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  const [isMoreInfoOpen, setIsMoreInfoOpen] = useState(false)
+
   const [result] = useQuery({ query: INSIGHTS_BY_LOCATION })
 
   if (result.fetching) return <Loading />
@@ -75,6 +103,14 @@ export default function CountryInsight () {
 
   return (
     <>
+      {isMoreInfoOpen && (
+        <UsersMoreInfo
+          title={`users from ${isMoreInfoOpen}`}
+          query={GET_USERS_BY_COUNTRY}
+          variables={{ country: isMoreInfoOpen }}
+          onClose={() => setIsMoreInfoOpen(null)}
+        />
+      )}
       <ResponsiveContainer>
         <PieChart>
           <Pie
@@ -87,9 +123,17 @@ export default function CountryInsight () {
             dataKey='count'
           >
             {result.data.insightsByLocation.data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={`hsla(${index * 40}, 100%, 40%, 1)`} stroke='hsla(225, 36%, 4%, 1)' />
+              <Cell
+                key={`cell-${index}`}
+                cursor='pointer'
+                fill={index === activeIndex ? `hsla(${index * 40}, 100%, 60%, 1)` : `hsla(${index * 40}, 100%, 40%, 1)`}
+                stroke='hsla(225, 36%, 4%, 1)'
+                onClick={() => setIsMoreInfoOpen(entry.country)}
+                onMouseOver={() => setActiveIndex(index)}
+              />
             ))}
           </Pie>
+          <Tooltip content={<CustomTooltip />} />
           <Legend verticalAlign='bottom' layout='vertical' content={renderLegend} />
         </PieChart>
       </ResponsiveContainer>

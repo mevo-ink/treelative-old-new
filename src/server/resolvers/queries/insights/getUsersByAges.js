@@ -14,7 +14,11 @@ export default async (parent, args, context, info) => {
 
   const usersMatching = []
 
-  const [min, max] = args.ages.split('-')
+  let [min, max] = args.ages.split('-')
+  if (args.ages === '80+') {
+    min = 80
+    max = Number.MAX_SAFE_INTEGER
+  }
 
   for (const user of users) {
     const age = calculateAge(user.dateOfBirth, user.dateOfDeath ? new Date(user.dateOfDeath) : new Date())

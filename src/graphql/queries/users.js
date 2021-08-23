@@ -68,3 +68,23 @@ export const GET_CONTACT_USERS = gql`
     }
   }
 `
+
+export const GET_USERS_BY_COUNTRY = gql`
+  query GET_USERS_BY_COUNTRY ($country: String!) {
+    users: getUsersByCountry (country: $country) {
+      id
+      fullName
+      avatar
+    }
+  }
+`
+
+export const GET_USERS_BY_AGES = gql`
+  query GET_USERS_BY_AGES ($ages: String!) {
+    users: getUsersByAges (ages: $ages) {
+      id
+      fullName
+      avatar
+    }
+  }
+`
