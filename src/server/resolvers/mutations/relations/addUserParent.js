@@ -2,6 +2,8 @@ import { ApolloError } from 'apollo-server-micro'
 
 import { isOwner } from 'server/utils/authorization'
 
+import addUserPartner from './addUserPartner'
+
 export const addUserParent = async (context, userID, parentID) => {
   const FieldValue = context.admin.firestore.FieldValue
 
@@ -26,6 +28,9 @@ export default async (parent, args, context, info) => {
   // if the parent has a partner
   if (userParent.partner) {
     await addUserParent(context, userID, userParent.partner.id)
+  } else {
+    const [otherUserParentID] = user.parents.map(parent => parent.id).filter(userParentID => parentID !== userParentID)
+    otherUserParentID && await addUserPartner(null, { userID: parentID, partnerID: otherUserParentID }, context)
   }
 
   // clear cache

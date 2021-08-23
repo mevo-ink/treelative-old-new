@@ -36,12 +36,6 @@ export default function Login ({ onClose, isServer }) {
 
   const [internalError, setInternalError] = useState()
 
-  useEffect(() => {
-    // store referrer to redirect after login
-    window.localStorage.setItem('REDIRECT_REFERRER', window.location.href)
-    if (window.localStorage.getItem('AUTH_SESSION_ID')) onClose()
-  }, [])
-
   const onLoginSuccess = (result) => {
     // setInternalError({ message: 'OATHA' })
     result.data && window.localStorage.setItem('AUTH_SESSION_ID', result.data.login)

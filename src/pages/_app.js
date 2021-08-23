@@ -47,10 +47,6 @@ export default function App ({ Component, pageProps }) {
 
 // TODO:
 /*
-  BUG:
-    - add parentOne and then parentTwo, both parents are not becoming partners.
-    - avatar image is not showing
-
   Review Firebase Magic Email - also add phone number login
 
   Add PWA prompt
@@ -103,4 +99,6 @@ export default function App ({ Component, pageProps }) {
       - getContactUsers -- returns all admin users
 
     Add tooltips for pie and bar charts - for insights - with user avatars that fall under that category
+
+    add parentOne and then parentTwo, both parents are not becoming partners.
 */

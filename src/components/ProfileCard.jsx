@@ -62,7 +62,7 @@ const ProfileCard = () => {
   useEffect(() => {
     window.history.pushState('', '', `/profile/${activeNodeID}`)
     return () => window.history.pushState('', '', '/')
-  }, [])
+  }, [activeNodeID])
 
   const onClose = () => {
     setActiveNodePulseID(null)
