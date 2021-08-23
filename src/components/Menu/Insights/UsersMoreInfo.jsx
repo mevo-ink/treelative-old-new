@@ -32,7 +32,7 @@ export default function UsersMoreInfo ({ query, variables, onClose, title }) {
           {result.data && (
             <Stack>
               {result.data.users.map(user => (
-                <HStack key={user.id}>
+                <HStack key={user.id} position='relative'>
                   <Box
                     w='40px'
                     h='40px'
@@ -47,6 +47,23 @@ export default function UsersMoreInfo ({ query, variables, onClose, title }) {
                     onClick={() => setActiveNodeID(user.id)}
                   />
                   <Text>{user.fullName}</Text>
+                  {user.age && (
+                    <Text
+                      w='20px'
+                      h='20px'
+                      display='grid'
+                      placeItems='center'
+                      position='absolute'
+                      top='0px'
+                      zIndex='5'
+                      fontSize='12px'
+                      bg='hsla(310, 100%, 40%, 1)'
+                      borderRadius='50%'
+                      boxShadow='0px 3px 5px hsla(0, 0%, 0%, .8)'
+                    >
+                      {user.age}
+                    </Text>
+                  )}
                 </HStack>
               ))}
             </Stack>

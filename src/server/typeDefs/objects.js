@@ -25,6 +25,7 @@ export default gql`
     children: [User!]
     createdAt: DateTime
     updatedAt: DateTime
+    age: Int # transient
   }
 
   type Social {

@@ -85,6 +85,7 @@ export const GET_USERS_BY_AGES = gql`
       id
       fullName
       avatar
+      age
     }
   }
 `

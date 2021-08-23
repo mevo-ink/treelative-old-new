@@ -23,9 +23,10 @@ export default async (parent, args, context, info) => {
   for (const user of users) {
     const age = calculateAge(user.dateOfBirth, user.dateOfDeath ? new Date(user.dateOfDeath) : new Date())
     if (age >= min && age <= max) {
-      usersMatching.push(user)
+      usersMatching.push({ ...user, age })
     }
   }
 
-  return usersMatching
+  // sort by age
+  return usersMatching.sort((a, b) => a.age - b.age)
 }
