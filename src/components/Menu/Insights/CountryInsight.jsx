@@ -105,7 +105,7 @@ export default function CountryInsight () {
     <>
       {isMoreInfoOpen && (
         <UsersMoreInfo
-          title={`users from ${isMoreInfoOpen}`}
+          title={`${isMoreInfoOpen}`}
           query={GET_USERS_BY_COUNTRY}
           variables={{ country: isMoreInfoOpen }}
           onClose={() => setIsMoreInfoOpen(null)}
