@@ -32,7 +32,7 @@ export default function AgeInsight () {
     <>
       {isMoreInfoOpen && (
         <UsersMoreInfo
-          title={`users between ages ${isMoreInfoOpen}`}
+          title={`Age ${isMoreInfoOpen}`}
           query={GET_USERS_BY_AGES}
           variables={{ ages: isMoreInfoOpen }}
           onClose={() => setIsMoreInfoOpen(null)}

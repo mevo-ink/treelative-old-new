@@ -29,13 +29,11 @@ export default function UsersMoreInfo ({ query, variables, onClose, title }) {
     return format(dtDateOnly, 'PP').replace(/[, ]+/g, '/')
   }
 
-  console.log(result)
-
   return (
     <Modal isOpen isCentered onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>{result.data?.users?.length} {title}</ModalHeader>
+        <ModalHeader>{title} ({result.data?.users?.length})</ModalHeader>
         <ModalBody
           maxH='300px'
           overflowY='auto'
