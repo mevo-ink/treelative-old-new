@@ -49,17 +49,30 @@ export default function App ({ Component, pageProps }) {
 /*
   Review Firebase Magic Email - also add phone number login
 
+  Pic chart disappearing svgs on click - fix
+
+  Investigate - if can use Avatar tag instead of setting div background image
+
   Add PWA prompt
 
   Investigate firebase cloud notifications
 
+  parse location description like old days
+
   Refactor Error Modal
 
-  Add find me ring indicator graph view
+  Make contact us modal
 
-  MAKE YouTube VIDEO OF how to / intro
+  Add find me ring indicator graph view - version 2.1 - if server side canvas rendering is a success !
+
+  MAKE YouTube VIDEO OF how to / intro - fireship collab
 
   Change Single Parent couple node icon
+
+  Show delete button on profile card for admins only
+
+  Add query for admins to get all unverified users with email/phoneNumber
+  Add mutation to reject/accept user email/phoneNumber - only admins
 
   LOGIN PROCESS - OAUTH
    - all users will have unverified flag set to true at the beginning
@@ -101,4 +114,5 @@ export default function App ({ Component, pageProps }) {
     Add tooltips for pie and bar charts - for insights - with user avatars that fall under that category
 
     add parentOne and then parentTwo, both parents are not becoming partners.
+
 */
