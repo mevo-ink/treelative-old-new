@@ -93,7 +93,7 @@ const ProfileCard = () => {
           <InnerWrapper>
             {user && (
               <>
-                <Edit innerBtnStyles={innerBtnStyles} />
+                <Edit innerBtnStyles={innerBtnStyles} user={user} />
                 <FindMe onClose={onClose} user={user} {...innerBtnStyles} right='.3rem' />
                 <Avatar user={user} />
                 <FullName user={user} />
