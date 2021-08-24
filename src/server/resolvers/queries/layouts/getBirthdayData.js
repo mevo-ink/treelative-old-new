@@ -53,7 +53,7 @@ export default async (parent, args, context, info) => {
     }
   }).reduce(
     (obj, key) => {
-      obj[key] = data[key]
+      obj[parseInt(key.replace('-', ''))] = data[key]
       return obj
     },
     {}
