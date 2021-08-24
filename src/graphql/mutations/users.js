@@ -87,8 +87,6 @@ export const RESET_USER_PASSWORD = gql`
 
 export const DELETE_USER = gql`
   mutation DELETE_USER ($userID: String!) {
-    deleteUser(userID: $userID){
-      id
-    }
+    deleteUser(userID: $userID)
   }
 `
