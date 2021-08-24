@@ -47,6 +47,8 @@ export default function App ({ Component, pageProps }) {
 
 // TODO:
 /*
+  Always show profile icon in menu - to sign in
+
   Review Firebase Magic Email - also add phone number login
 
   Pic chart disappearing svgs on click - fix
