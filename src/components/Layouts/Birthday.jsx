@@ -7,6 +7,8 @@ import {
   Divider
 } from '@chakra-ui/react'
 
+import Image from 'next/image'
+
 import { useQuery } from 'urql'
 import { useSetRecoilState, useRecoilValue } from 'recoil'
 
@@ -104,8 +106,22 @@ export default function Birthday () {
             }}
           >
             {users.map(user => (
-              <Flex key={user.id} position='relative'>
-                <Box
+              <Flex key={user.id} position='relative' boxSize='40px' my='3' mx='.5rem'>
+                <Image
+                  src={user.avatar}
+                  layout='fill'
+                  objectFit='contain'
+                  className='avatar'
+                  onClick={() => setActiveNodeID(user.id)}
+                />
+                <style jsx global>
+                  {`
+                    .avatar {
+                      border-radius: 50%;
+                    }
+                  `}
+                </style>
+                {/* <Box
                   w='40px'
                   h='40px'
                   mx='.5rem'
@@ -117,7 +133,7 @@ export default function Birthday () {
                   backgroundSize='100% auto'
                   backgroundPosition='center'
                   onClick={() => setActiveNodeID(user.id)}
-                />
+                /> */}
                 {user.id === activeNodePulseID && <ActivePulse />}
                 <Text
                   w='20px'
@@ -125,8 +141,8 @@ export default function Birthday () {
                   display='grid'
                   placeItems='center'
                   position='absolute'
-                  top='5px'
-                  right='5px'
+                  top='-7px'
+                  right='-3px'
                   zIndex='5'
                   fontSize='12px'
                   bg='hsla(310, 100%, 40%, 1)'
