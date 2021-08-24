@@ -69,8 +69,6 @@ export default function App ({ Component, pageProps }) {
 
   Change Single Parent couple node icon
 
-  Show delete button on profile card for admins only
-
   Add query for admins to get all unverified users with email/phoneNumber
   Add mutation to reject/accept user email/phoneNumber - only admins
 
