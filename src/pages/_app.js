@@ -47,6 +47,8 @@ export default function App ({ Component, pageProps }) {
 
 // TODO:
 /*
+  BUG: - Dates
+
   Always show profile icon in menu - to sign in
 
   Review Firebase Magic Email - also add phone number login
