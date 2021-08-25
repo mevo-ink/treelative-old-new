@@ -122,7 +122,6 @@ export default function Avatar ({ user }) {
   }, [croppedImage])
 
   const handleFileSelect = (event) => {
-    event.preventDefault()
     const selectedFile = event.target.files[0]
     if (!selectedFile) return
 

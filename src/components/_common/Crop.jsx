@@ -34,7 +34,7 @@ export default function Crop ({ image, onClose, setCroppedImage }) {
   })
 
   return (
-    <Modal isOpen onClose={onClose} isCentered>
+    <Modal isOpen isCentered>
       <ModalOverlay />
       <ModalContent h='550px' overflow='hidden'>
         <Box h='90%'>
