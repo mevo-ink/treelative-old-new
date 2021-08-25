@@ -54,6 +54,7 @@ export default function App ({ Component, pageProps }) {
   Pic chart disappearing svgs on click - fix
 
   Investigate - if can use Avatar tag instead of setting div background image
+    - On birthday we auto-scroll to upcoming birth date, and the images are not already loaded because of lazy load. Making everything feel slow.
 
   Add PWA prompt
 
@@ -81,9 +82,6 @@ export default function App ({ Component, pageProps }) {
      - Give the user to choose from existing users with no email associated
      - If the user chooses an existing user, update the profile with the email: remove the unverified flag after manual verification
      - If the user chooses to create a new user, create a new profile with the email: remove the unverified flag after manual verification
-
-  NEXT JS
-    - if time- user next js' Image component
 
   ?? deploy tyo netlify?
 
@@ -114,5 +112,4 @@ export default function App ({ Component, pageProps }) {
     Add tooltips for pie and bar charts - for insights - with user avatars that fall under that category
 
     add parentOne and then parentTwo, both parents are not becoming partners.
-
 */

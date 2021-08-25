@@ -40,7 +40,6 @@ export default function Birthday () {
       while (!result.data?.getBirthdayData.data[parseInt(date.toISOString().slice(5, 10).replace('-', ''))]) {
         date.setDate(date.getDate() + 1)
       }
-      console.log(date)
       const upcomingBirthDate = document.getElementById(parseInt(date.toISOString().slice(5, 10).replace('-', '')))
       upcomingBirthDate.style.background = 'hsla(100, 100%, 35%, 1)'
       upcomingBirthDate.scrollIntoView({ behavior: 'smooth', block: 'center' })
