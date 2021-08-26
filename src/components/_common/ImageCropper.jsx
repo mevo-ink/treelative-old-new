@@ -18,7 +18,7 @@ import { getCroppedImg } from 'utils/canvasUtils'
 
 import Cropper from 'react-easy-crop'
 
-export default function Crop ({ image, onClose, setCroppedImage }) {
+export default function ImageCropper ({ image, onClose, setCroppedImage }) {
   const [crop, setCrop] = useState({ x: 0, y: 0 })
   const [zoom, setZoom] = useState(1)
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
@@ -59,7 +59,7 @@ export default function Crop ({ image, onClose, setCroppedImage }) {
           <Slider
             aria-label='Crop Image Slider'
             w='90%'
-            defaultValue={zoom}
+            value={zoom}
             min={1}
             max={3}
             step={0.1}

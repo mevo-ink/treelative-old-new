@@ -15,7 +15,7 @@ import { useRecoilValue } from 'recoil'
 import { UPDATE_AVATAR } from 'graphql/mutations/users'
 import { networkMethodsAtom, isEditModeAtom, layoutAtom } from 'utils/atoms.js'
 
-import Crop from 'components/_common/Crop'
+import ImageCropper from 'components/_common/ImageCropper'
 
 const toast = createStandaloneToast()
 
@@ -136,7 +136,7 @@ export default function Avatar ({ user }) {
   return (
     <>
       {(showCrop && selectedFile) && (
-        <Crop
+        <ImageCropper
           image={selectedFile}
           setCroppedImage={setCroppedImage}
           onClose={() => setShowCrop(false)}
