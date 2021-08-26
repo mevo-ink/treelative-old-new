@@ -11,7 +11,7 @@ export default function UserOptions ({ onClose }) {
   return (
     <>
       {result.data?.whoAmI.isAdmin && <CreateUser />}
-      {result.data?.whoAmI && <Profile onClose={onClose} authUser={result.data?.whoAmI} />}
+      <Profile onClose={onClose} authUser={result.data?.whoAmI} />
       {result.data?.whoAmI && <FindMe onClose={onClose} user={result.data?.whoAmI} size='sm' />}
     </>
   )
