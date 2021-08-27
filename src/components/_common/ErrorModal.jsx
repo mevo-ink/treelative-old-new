@@ -1,4 +1,5 @@
 import {
+  Box,
   Grid,
   Flex,
   Text,
@@ -12,12 +13,12 @@ import {
   useDisclosure
 } from '@chakra-ui/react'
 import { MdClose } from 'react-icons/md'
-import { FaAtlassian } from 'react-icons/fa'
-import { IoLogoJavascript } from 'react-icons/io'
 
+import { useQuery } from 'urql'
 import { useSetRecoilState } from 'recoil'
 
 import { activeNodeIDAtom } from 'utils/atoms.js'
+import { GET_CONTACT_USERS } from 'graphql/queries/users'
 
 export default function ErrorModal (props) {
   const {
@@ -27,6 +28,8 @@ export default function ErrorModal (props) {
     btn,
     handleBtnClick
   } = props
+
+  const [result] = useQuery({ query: GET_CONTACT_USERS })
 
   const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true })
 
@@ -99,17 +102,16 @@ export default function ErrorModal (props) {
             Please, Contact Us:
           </Text>
           <Flex justifyContent='space-between' w='40%'>
-            {[
-              { id: '6109d9f6b69e44d70c30461c', Avatar: FaAtlassian },
-              { id: '6109d9f9b69e44d70c30467a', Avatar: IoLogoJavascript }
-            ].map((admin, idx) => (
-              <IconButton
-                key={idx}
-                isRound
-                icon={<admin.Avatar />}
-                w='2rem'
-                onClick={() => setActiveNodeID(admin.id)}
-              />
+            {result.data.getContactUsers.map(user => (
+              <Box key={user.id}>
+                <Image
+                  src={user.avatar}
+                  w='3rem'
+                  borderRadius='50%'
+                  onClick={() => setActiveNodeID(user.id)}
+                />
+                <Text mt='.5rem' textAlign='center'>{user.shortName}</Text>
+              </Box>
             ))}
           </Flex>
         </ModalBody>
