@@ -47,7 +47,7 @@ export default function App ({ Component, pageProps }) {
 
 // TODO:
 /*
-  BUG: - Dates
+  BUG: - New dates are saving as timestamps in fireStore, but in migrated data they are stored as string.
 
   Review Firebase Magic Email - also add phone number login
 
@@ -68,7 +68,7 @@ export default function App ({ Component, pageProps }) {
 
   Add find me ring indicator graph view - version 2.1 - if server side canvas rendering is a success !
 
-  MAKE YouTube VIDEO OF how to / intro - fireship collab
+  MAKE YouTube VIDEO OF how to / intro
 
   Change Single Parent couple node icon
 

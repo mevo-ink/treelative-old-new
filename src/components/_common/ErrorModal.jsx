@@ -110,7 +110,7 @@ export default function ErrorModal (props) {
                   borderRadius='50%'
                   onClick={() => setActiveNodeID(user.id)}
                 />
-                <Text mt='.5rem' textAlign='center'>{user.shortName}</Text>
+                <Text fontSize='.5rem' mt='.5rem' textAlign='center'>{user.shortName}</Text>
               </Box>
             ))}
           </Flex>
