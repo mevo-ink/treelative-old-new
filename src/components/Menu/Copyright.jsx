@@ -1,12 +1,14 @@
-import { Flex, Text, Link, useDisclosure } from '@chakra-ui/react'
+import { useState } from 'react'
+
+import { Flex, Text, Link } from '@chakra-ui/react'
 
 import ErrorModal from 'components/_common/ErrorModal'
 
 export default function Copyright () {
-  const { isOpen, onOpen } = useDisclosure()
+  const [showContactUs, setShowContactUs] = useState(false)
   return (
     <>
-      {isOpen && <ErrorModal />}
+      {showContactUs && <ErrorModal />}
       <Flex w='100%' justifyContent='space-between'>
         <Text fontSize='.6rem' pb='1rem'>
           &#xA9; {new Date().getFullYear()}. Designed by &nbsp;
@@ -16,7 +18,7 @@ export default function Copyright () {
         </Text>
         <Text fontSize='.6rem' pb='1rem'>
           Need Help?
-          <Link onClick={() => onOpen}> Contact Us</Link>
+          <Link onClick={() => setShowContactUs(true)}> Contact Us</Link>
         </Text>
       </Flex>
     </>
