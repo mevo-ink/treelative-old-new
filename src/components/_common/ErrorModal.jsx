@@ -102,7 +102,7 @@ export default function ErrorModal (props) {
             Please, Contact Us:
           </Text>
           <Flex justifyContent='space-between' w='40%'>
-            {result.data.getContactUsers.map(user => (
+            {result.data && result.data.getContactUsers.map(user => (
               <Box key={user.id}>
                 <Image
                   src={user.avatar}

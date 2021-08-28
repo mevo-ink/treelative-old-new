@@ -47,13 +47,7 @@ export default function Birthday () {
     // eslint-disable-next-line
   }, [result.data])
 
-  if (result.error) {
-    return (
-      <ErrorModal>
-        {result.error.message}
-      </ErrorModal>
-    )
-  }
+  if (result.error) return <ErrorModal icon title='Oops!' message={result.error.message} />
 
   if (result.fetching) return <Loading />
 
