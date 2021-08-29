@@ -41,7 +41,7 @@ export default function Birthday () {
         date.setDate(date.getDate() + 1)
       }
       const upcomingBirthDate = document.getElementById(parseInt(date.toISOString().slice(5, 10).replace('-', '')))
-      upcomingBirthDate.style.background = 'hsla(100, 100%, 35%, 1)'
+      upcomingBirthDate.style.background = 'hsla(100, 100%, 25%, 1)'
       upcomingBirthDate.scrollIntoView({ behavior: 'smooth', block: 'center' })
     }
     // eslint-disable-next-line

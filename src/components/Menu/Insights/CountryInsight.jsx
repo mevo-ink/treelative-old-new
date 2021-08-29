@@ -4,7 +4,6 @@ import {
   Box,
   Text,
   Wrap,
-  Image,
   WrapItem
 } from '@chakra-ui/react'
 
