@@ -83,7 +83,11 @@ export default function CountryInsight () {
           {
             payload.map((entry, index) => (entry.payload.code &&
               <WrapItem key={`item-${index}`}>
-                <Image src={baseURL + entry.payload.code?.toLowerCase() + '.svg'} width='20px' height='20px' mr='1' />
+                <img
+                  src={baseURL + entry.payload.code?.toLowerCase() + '.svg'}
+                  alt={entry.payload.code?.toLowerCase()}
+                  style={{ width: '20px', height: '20px', marginRight: '.3rem' }}
+                />
                 <Text>{(entry.payload.percent * 100).toFixed(0)}%</Text>
               </WrapItem>
             ))

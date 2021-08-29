@@ -51,8 +51,6 @@ export default function App ({ Component, pageProps }) {
 
   Review Firebase Magic Email - also add phone number login
 
-  Pic chart disappearing svgs on click - fix
-
   Investigate - if can use Avatar tag instead of setting div background image
     - On birthday we auto-scroll to upcoming birth date, and the images are not already loaded because of lazy load. Making everything feel slow.
 
