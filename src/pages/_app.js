@@ -68,8 +68,6 @@ export default function App ({ Component, pageProps }) {
 
   MAKE YouTube VIDEO OF how to / intro
 
-  Change Single Parent couple node icon
-
   Add query for admins to get all unverified users with email/phoneNumber
   Add mutation to reject/accept user email/phoneNumber - only admins
 
