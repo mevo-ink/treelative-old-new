@@ -1,61 +1,94 @@
-// calculate the age in years given a date of birth
-const calculateAge = (birthday, today) => {
-  const birthDate = new Date(birthday)
-  let age = today.getFullYear() - birthDate.getFullYear()
-  const m = today.getMonth() - birthDate.getMonth()
-  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-    age--
-  }
-  return age
-}
+import dbConnect from 'utils/mongodb'
 
 export default async (parent, args, context, info) => {
-  const users = await context.db.findAll('users', { dateOfBirth: { '!=': null } })
-  const unknownCount = (await context.db.collection('users').where('dateOfBirth', '==', null).get()).docs.length
+  const db = await dbConnect()
 
-  const groupByAge = {}
+  const unknownCount = await db.collection('users').count({ dateOfBirth: { $exists: false } })
 
-  for (const user of users) {
-    const age = calculateAge(user.dateOfBirth, user.dateOfDeath ? new Date(user.dateOfDeath) : new Date())
-    if (age >= 1 && age < 10) {
-      groupByAge['0-10'] = (groupByAge['0-10'] || 0) + 1
-    } else if (age >= 10 && age < 20) {
-      groupByAge['10-20'] = (groupByAge['10-20'] || 0) + 1
-    } else if (age >= 20 && age < 30) {
-      groupByAge['20-30'] = (groupByAge['20-30'] || 0) + 1
-    } else if (age >= 30 && age < 40) {
-      groupByAge['30-40'] = (groupByAge['30-40'] || 0) + 1
-    } else if (age >= 40 && age < 50) {
-      groupByAge['40-50'] = (groupByAge['40-50'] || 0) + 1
-    } else if (age >= 50 && age < 60) {
-      groupByAge['50-60'] = (groupByAge['50-60'] || 0) + 1
-    } else if (age >= 60 && age < 70) {
-      groupByAge['60-70'] = (groupByAge['60-70'] || 0) + 1
-    } else if (age >= 70 && age < 80) {
-      groupByAge['70-80'] = (groupByAge['70-80'] || 0) + 1
-    } else if (age >= 80) {
-      groupByAge['80+'] = (groupByAge['80+'] || 0) + 1
-    }
-  }
-
-  const orderedResult = Object.keys(groupByAge).sort((a, b) => {
-    if (a > b) {
-      return 1
-    } else if (a < b) {
-      return -1
-    } else {
-      return 0
-    }
-  }).reduce(
-    (obj, key) => {
-      obj[key] = groupByAge[key]
-      return obj
-    },
-    {}
-  )
+  // get ranges of ages with 10 year increments
+  const data = await db
+    .collection('users')
+    .aggregate([
+      {
+        $match: {
+          dateOfBirth: { $exists: true }
+        }
+      },
+      {
+        $project: {
+          age: {
+            $cond: {
+              if: '$dateOfDeath',
+              then: {
+                $subtract: [{ $year: '$dateOfDeath' }, { $year: '$dateOfBirth' }]
+              },
+              else: {
+                $cond: {
+                  if: {
+                    // check if current date is before the birthday
+                    $lt: [{ $dayOfYear: '$$NOW' }, { $dayOfYear: '$dateOfBirth' }]
+                  },
+                  then: {
+                    // subtract 1 from the age if current date is before the birthday
+                    $subtract: [{ $subtract: [{ $year: '$$NOW' }, { $year: '$dateOfBirth' }] }, 1]
+                  },
+                  else: {
+                    $subtract: [{ $year: '$$NOW' }, { $year: '$dateOfBirth' }]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        $facet: {
+          ageRanges: [
+            {
+              $bucket: {
+                groupBy: '$age',
+                boundaries: [0, 10, 20, 30, 40, 50, 60, 70, 80],
+                default: '80',
+                output: {
+                  count: { $sum: 1 }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        // rename count of each age range with eg. { ages: '0-10', count: 1 }
+        $project: {
+          ages: {
+            $map: {
+              input: '$ageRanges',
+              as: 'ageRange',
+              in: {
+                ages: {
+                  $concat: [
+                    { $toString: '$$ageRange._id' },
+                    {
+                      $cond: {
+                      // if the range is 80, set it to 80+
+                        if: { $eq: ['$$ageRange._id', '80'] },
+                        then: '+',
+                        else: { $concat: ['-', { $toString: { $add: [{ $toInt: { $toString: '$$ageRange._id' } }, 10] } }] }
+                      }
+                    }
+                  ]
+                },
+                count: '$$ageRange.count'
+              }
+            }
+          }
+        }
+      }
+    ])
+    .next()
 
   return {
-    data: Object.entries(orderedResult).map(([key, value]) => ({ ages: key, count: value })),
+    data,
     unknownCount
   }
 }

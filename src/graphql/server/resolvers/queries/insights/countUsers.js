@@ -1,7 +1,7 @@
+import dbConnect from 'utils/mongodb'
+
 export default async (parent, args, context, info) => {
-  const snapshot = await context.db.collection('users').get()
+  const db = await dbConnect()
 
-  const usersCount = snapshot.docs.length
-
-  return usersCount
+  return await db.collection('users').countDocuments({})
 }

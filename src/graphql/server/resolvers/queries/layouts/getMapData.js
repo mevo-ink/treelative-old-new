@@ -16,7 +16,11 @@ export default async (parent, args, context, info) => {
 
   const unknownCount = await db.collection('users').count({ currentLocation: { $exists: false } })
 
-  const users = await db.collection('users').find({ currentLocation: { $exists: true } }).toArray()
+  const users = await db
+    .collection('users')
+    .find({ currentLocation: { $exists: true } })
+    .project({ shortName: 1, fullName: 1, currentLocation: 1 })
+    .toArray()
 
   const seenLocations = {}
 

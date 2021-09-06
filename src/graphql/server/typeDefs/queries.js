@@ -5,13 +5,13 @@ export default gql`
     healthCheck: String!
 
     # auth
-    whoAmI: User!
+    whoAmI: JSON!
 
     # profile card
-    getUser (id: String!): User
+    getUser (id: String!): JSON
 
     # search
-    searchUsers (query: String!): [User!]
+    searchUsers (query: String!): JSON!
 
     # layouts
     getGraphData: JSON!
@@ -26,17 +26,17 @@ export default gql`
     insightsByLocation: JSON!
 
     # dropdown suggestions
-    suggestParents (userID: String! query: String): [User!]
-    suggestChildren (userID: String! query: String): [User!]
-    suggestPartners (userID: String! query: String): [User!]
+    suggestParents (userID: String! query: String): JSON!
+    suggestChildren (userID: String! query: String): JSON!
+    suggestPartners (userID: String! query: String): JSON!
     suggestLocations (query: String): JSON!
 
-    suggestNewUsers (query: String!): [User!]
+    suggestNewUsers (query: String!): JSON!
 
     # insights tooltip
-    getUsersByAges (ages: String!): [User!]
-    getUsersByCountry (country: String!): [User!]
+    getUsersByAges (ages: String!): JSON!
+    getUsersByCountry (country: String!): JSON!
 
-    getContactUsers: [User!]
+    getContactUsers: JSON!
   }
 `

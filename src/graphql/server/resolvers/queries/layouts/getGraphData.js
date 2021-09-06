@@ -7,7 +7,11 @@ export default async (parent, args, context, info) => {
   const cache = await db.collection('cache').findOne({ name: cacheKey })
   if (cache) return cache.data
 
-  const users = await db.collection('users').find().toArray()
+  const users = await db
+    .collection('users')
+    .find()
+    .project({ shortName: 1, fullName: 1, partner: 1, children: 1 })
+    .toArray()
 
   const nodeUsers = users.map(user => ({
     id: user._id.toString(),

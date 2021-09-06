@@ -1,7 +1,9 @@
+import dbConnect from 'utils/mongodb'
+
 export default async (parent, args, context, info) => {
-  const snapshot = await context.db.collection('users').where('partner', '!=', null).get()
+  const db = await dbConnect()
 
-  const usersCount = snapshot.docs.length
+  const couplesCount = await db.collection('users').countDocuments({ partner: { $exists: true } })
 
-  return usersCount > 1 ? usersCount / 2 : usersCount
+  return couplesCount > 1 ? couplesCount / 2 : couplesCount
 }

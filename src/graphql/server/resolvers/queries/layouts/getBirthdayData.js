@@ -25,7 +25,6 @@ export default async (parent, args, context, info) => {
           birthday: {
             $substr: ['$dateOfBirth', 5, 5]
           },
-          dateOfDeath: 1,
           shortName: 1,
           fullName: 1,
           avatar: {
@@ -39,28 +38,22 @@ export default async (parent, args, context, info) => {
             $cond: {
               if: '$dateOfDeath',
               then: {
-                $floor: [
-                  {
-                    $divide: [
-                      {
-                        $subtract: ['$dateOfDeath', '$dateOfBirth']
-                      },
-                      1000 * 60 * 60 * 24 * 365.25
-                    ]
-                  }
-                ]
+                $subtract: [{ $year: '$dateOfDeath' }, { $year: '$dateOfBirth' }]
               },
               else: {
-                $floor: [
-                  {
-                    $divide: [
-                      {
-                        $subtract: [new Date(), '$dateOfBirth']
-                      },
-                      1000 * 60 * 60 * 24 * 365.25
-                    ]
+                $cond: {
+                  if: {
+                    // check if current date is before the birthday
+                    $lt: [{ $dayOfYear: new Date() }, { $dayOfYear: '$dateOfBirth' }]
+                  },
+                  then: {
+                    // subtract 1 from the age if current date is before the birthday
+                    $subtract: [{ $subtract: [{ $year: new Date() }, { $year: '$dateOfBirth' }] }, 1]
+                  },
+                  else: {
+                    $subtract: [{ $year: new Date() }, { $year: '$dateOfBirth' }]
                   }
-                ]
+                }
               }
             }
           }
