@@ -5,7 +5,7 @@ export default async (parent, args, context, info) => {
 
   const unknownCount = await db.collection('users').count({ currentLocation: { $exists: false } })
 
-  // group by currentLocation.country: eg: { country: 'America', code: 'US', count: 1 }
+  // group by currentLocation.code: eg: { country: 'America', code: 'US', count: 1 }
   const data = await db.collection('users')
     .aggregate([
       {
@@ -15,19 +15,21 @@ export default async (parent, args, context, info) => {
       },
       {
         $group: {
-          _id: '$currentLocation.country',
+          _id: '$currentLocation.code',
           country: { $first: '$currentLocation.country' },
           code: { $first: '$currentLocation.code' },
           count: { $sum: 1 }
         }
       },
       {
-        $project: {
-          _id: 0
+        $sort: {
+          count: -1
         }
       },
       {
-        $sort: { count: -1 }
+        $project: {
+          _id: 0
+        }
       }
     ])
     .toArray()
