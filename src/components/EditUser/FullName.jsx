@@ -3,7 +3,7 @@ import React from 'react'
 import { string } from 'yup'
 import { useMutation } from 'urql'
 
-import { UPDATE_FULL_NAME } from 'graphql/mutations/users'
+import { UPDATE_FULL_NAME } from 'graphql/client/mutations/users'
 
 import InputTrigger from 'components/_trigger/InputTrigger'
 

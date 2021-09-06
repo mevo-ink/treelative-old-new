@@ -12,7 +12,7 @@ import { useRecoilState } from 'recoil'
 import {
   isEditModeAtom
 } from 'utils/atoms.js'
-import { GET_USER } from 'graphql/queries/users'
+import { GET_USER } from 'graphql/client/queries/users'
 
 import Login from 'components/Login'
 import Loading from 'components/Loading'

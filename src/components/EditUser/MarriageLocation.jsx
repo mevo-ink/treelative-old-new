@@ -1,6 +1,6 @@
 import { useMutation } from 'urql'
 
-import { UPDATE_MARRIAGE_LOCATION } from 'graphql/mutations/partner'
+import { UPDATE_MARRIAGE_LOCATION } from 'graphql/client/mutations/partner'
 
 import LocationTrigger from 'components/_trigger/LocationTrigger'
 

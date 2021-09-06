@@ -17,7 +17,7 @@ import { object, string } from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { CREATE_USER } from 'graphql/mutations/users'
+import { CREATE_USER } from 'graphql/client/mutations/users'
 
 import useDevice from 'hooks/useDevice'
 import FormDialog from 'components/_common/FormDialog'

@@ -7,14 +7,14 @@ import { activeNodeIDAtom } from 'utils/atoms.js'
 import ProfileCard from 'components/ProfileCard'
 
 import { withUrqlClient } from 'next-urql'
-import client from 'graphql/client'
+import client from 'graphql/client/client'
 
 import {
   GET_NETWORK_DATA,
   GET_MAP_DATA,
   GET_AGE_DATA,
   GET_BIRTHDAY_DATA
-} from 'graphql/queries/layouts'
+} from 'graphql/client/queries/layouts'
 
 import Cookies from 'cookies'
 import cookieCutter from 'cookie-cutter'

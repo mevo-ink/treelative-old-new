@@ -1,6 +1,6 @@
 import { useMutation } from 'urql'
 
-import { UPDATE_BIRTH_LOCATION } from 'graphql/mutations/users'
+import { UPDATE_BIRTH_LOCATION } from 'graphql/client/mutations/users'
 
 import LocationTrigger from 'components/_trigger/LocationTrigger'
 

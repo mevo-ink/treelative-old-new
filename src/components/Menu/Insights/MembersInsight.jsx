@@ -8,7 +8,7 @@ import {
 
 import { useQuery } from 'urql'
 
-import { COUNT_MEMBERS, COUNT_COUPLES } from 'graphql/queries/insights'
+import { COUNT_MEMBERS, COUNT_COUPLES } from 'graphql/client/queries/insights'
 
 export default function MembersInsight () {
   const [resultGetMembers] = useQuery({ query: COUNT_MEMBERS })

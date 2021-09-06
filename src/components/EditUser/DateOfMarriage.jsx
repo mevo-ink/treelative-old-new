@@ -1,6 +1,6 @@
 import { useMutation } from 'urql'
 
-import { UPDATE_DATE_OF_MARRIAGE } from 'graphql/mutations/partner'
+import { UPDATE_DATE_OF_MARRIAGE } from 'graphql/client/mutations/partner'
 
 import DateTrigger from 'components/_trigger/DateTrigger'
 

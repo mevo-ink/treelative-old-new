@@ -14,7 +14,7 @@ import {
   activeNodeIDAtom,
   activeNodePulseIDAtom
 } from 'utils/atoms.js'
-import { GET_USER } from 'graphql/queries/users'
+import { GET_USER } from 'graphql/client/queries/users'
 
 import Login from 'components/Login'
 import Loading from 'components/Loading'
@@ -34,7 +34,7 @@ import MoreSettings from 'components/ProfileCard/Slides/MoreSettings'
 import ParentChild from 'components/ProfileCard/Slides/ParentChild'
 
 import { withUrqlClient } from 'next-urql'
-import client from 'graphql/client'
+import client from 'graphql/client/client'
 
 import { useEffect } from 'react'
 

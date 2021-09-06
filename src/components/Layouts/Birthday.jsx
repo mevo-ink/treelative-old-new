@@ -12,7 +12,7 @@ import Image from 'next/image'
 import { useQuery } from 'urql'
 import { useSetRecoilState, useRecoilValue } from 'recoil'
 
-import { GET_BIRTHDAY_DATA } from 'graphql/queries/layouts'
+import { GET_BIRTHDAY_DATA } from 'graphql/client/queries/layouts'
 import { activeNodeIDAtom, layoutMethodsAtom, activeNodePulseIDAtom } from 'utils/atoms.js'
 
 import Loading from 'components/Loading'

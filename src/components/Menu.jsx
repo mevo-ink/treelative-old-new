@@ -21,7 +21,7 @@ import Copyright from 'components/Menu/Copyright'
 import UserOptions from 'components/Menu/UserOptions'
 
 import { withUrqlClient } from 'next-urql'
-import client from 'graphql/client'
+import client from 'graphql/client/client'
 
 const Menu = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()

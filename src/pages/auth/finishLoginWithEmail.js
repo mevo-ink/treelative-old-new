@@ -6,7 +6,7 @@ import Loading from 'components/_common/Loading'
 import ErrorAlert from 'components/_common/ErrorAlert'
 
 import { useMutation } from 'urql'
-import { LOGIN_WITH_PROVIDER } from 'graphql/mutations/auth'
+import { LOGIN_WITH_PROVIDER } from 'graphql/client/mutations/auth'
 
 import {
   Text,

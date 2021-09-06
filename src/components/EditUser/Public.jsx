@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 
 import { useMutation } from 'urql'
 
-import { TOGGLE_PUBLIC } from 'graphql/mutations/users'
+import { TOGGLE_PUBLIC } from 'graphql/client/mutations/users'
 
 const MotionBox = motion(Box)
 export default function Public ({ user }) {

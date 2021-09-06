@@ -1,5 +1,7 @@
 import firebase from 'firebase/app'
 
+import admin from 'firebase-admin'
+
 import 'firebase/auth'
 import 'firebase/database'
 import 'firebase/analytics'
@@ -23,7 +25,11 @@ if (!firebase.apps.length) {
   }
 }
 
-const database = firebase.database()
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.applicationDefault()
+  })
+}
 
 const firebaseAuth = firebase.auth()
 
@@ -34,9 +40,11 @@ facebook.addScope('user_birthday')
 const google = new firebase.auth.GoogleAuthProvider()
 google.addScope('https://www.googleapis.com/auth/userinfo.email')
 
+const storage = admin.storage().bucket('gs://treelative-007.appspot.com')
+
 export {
   firebaseAuth,
   facebook,
   google,
-  database
+  storage
 }

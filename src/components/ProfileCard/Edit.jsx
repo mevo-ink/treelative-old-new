@@ -5,7 +5,7 @@ import { MdDone } from 'react-icons/md'
 import { useQuery } from 'urql'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
-import { WHO_AM_I } from 'graphql/queries/auth'
+import { WHO_AM_I } from 'graphql/client/queries/auth'
 import { isEditModeAtom, activeNodeIDAtom } from 'utils/atoms.js'
 
 import Delete from 'components/ProfileCard/Delete'

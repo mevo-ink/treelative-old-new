@@ -3,8 +3,8 @@ import { Box, Image, Text } from '@chakra-ui/react'
 import { useQuery } from 'urql'
 import { useSetRecoilState, useRecoilValue } from 'recoil'
 
-import { WHO_AM_I } from 'graphql/queries/auth'
-import { GET_MAP_DATA } from 'graphql/queries/layouts'
+import { WHO_AM_I } from 'graphql/client/queries/auth'
+import { GET_MAP_DATA } from 'graphql/client/queries/layouts'
 import {
   layoutMethodsAtom,
   activeNodeIDAtom,

@@ -6,7 +6,7 @@ import { useQuery } from 'urql'
 import { useSetRecoilState } from 'recoil'
 import { Network } from 'vis-network/peer/umd/vis-network.js'
 
-import { GET_NETWORK_DATA } from 'graphql/queries/layouts'
+import { GET_NETWORK_DATA } from 'graphql/client/queries/layouts'
 import { layoutMethodsAtom, networkMethodsAtom, activeNodeIDAtom } from 'utils/atoms.js'
 
 import parseJwt from 'utils/parseJWT'
@@ -78,9 +78,9 @@ export default function Graph () {
   const [result, refetch] = useQuery({ query: GET_NETWORK_DATA })
 
   useEffect(() => {
-    if (!result.data?.getNetworkData) return
+    if (!result.data?.getGraphData) return
     // set network in store
-    const network = new Network(graphRef.current, result.data?.getNetworkData, options)
+    const network = new Network(graphRef.current, result.data?.getGraphData, options)
     setNetworkMethods({
       updateNode: (id, property, value) => {
         network.body.data.nodes.update({ id, [property]: value })
@@ -125,7 +125,7 @@ export default function Graph () {
     // set activeNodeID on user node click
     network.on('selectNode', ({ nodes }) => {
       network.unselectAll()
-      const activeNode = result.data?.getNetworkData.nodes.find(node => nodes[0] === node.id)
+      const activeNode = result.data?.getGraphData.nodes.find(node => nodes[0] === node.id)
       if (activeNode.group === 'individual') {
         setActiveNodeID(activeNode.id)
       }
@@ -151,7 +151,7 @@ export default function Graph () {
       }
     })
     // eslint-disable-next-line
-  }, [result.data?.getNetworkData])
+  }, [result.data?.getGraphData])
 
   if (result.error) {
     return (

@@ -18,7 +18,7 @@ import { useQuery } from 'urql'
 import { useSetRecoilState } from 'recoil'
 
 import { activeNodeIDAtom } from 'utils/atoms.js'
-import { GET_CONTACT_USERS } from 'graphql/queries/users'
+import { GET_CONTACT_USERS } from 'graphql/client/queries/users'
 
 export default function ErrorModal (props) {
   const {

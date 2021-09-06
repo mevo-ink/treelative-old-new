@@ -12,7 +12,7 @@ import { FaSkullCrossbones } from 'react-icons/fa'
 import { useQuery } from 'urql'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
-import { GET_AGE_DATA } from 'graphql/queries/layouts'
+import { GET_AGE_DATA } from 'graphql/client/queries/layouts'
 import { activeNodeIDAtom, activeNodePulseIDAtom, layoutMethodsAtom } from 'utils/atoms.js'
 
 import Loading from 'components/Loading'

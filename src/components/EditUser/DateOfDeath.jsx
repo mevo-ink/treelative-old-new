@@ -1,6 +1,6 @@
 import { useMutation } from 'urql'
 
-import { UPDATE_DATE_OF_DEATH } from 'graphql/mutations/users'
+import { UPDATE_DATE_OF_DEATH } from 'graphql/client/mutations/users'
 
 import DateTrigger from 'components/_trigger/DateTrigger'
 

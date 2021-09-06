@@ -3,7 +3,7 @@ import { withUrqlClient } from 'next-urql'
 
 import Login from 'components/Login'
 
-import client from 'graphql/client'
+import client from 'graphql/client/client'
 
 const LoginServer = () => {
   const router = useRouter()

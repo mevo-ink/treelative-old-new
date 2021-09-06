@@ -17,8 +17,8 @@ import {
 } from 'recharts'
 
 import { useQuery } from 'urql'
-import { INSIGHTS_BY_LOCATION } from 'graphql/queries/insights'
-import { GET_USERS_BY_COUNTRY } from 'graphql/queries/users'
+import { INSIGHTS_BY_LOCATION } from 'graphql/client/queries/insights'
+import { GET_USERS_BY_COUNTRY } from 'graphql/client/queries/users'
 
 import Loading from 'components/_common/Loading'
 

@@ -1,6 +1,6 @@
 import { useMutation } from 'urql'
 
-import { UPDATE_SOCIAL } from 'graphql/mutations/social'
+import { UPDATE_SOCIAL } from 'graphql/client/mutations/social'
 
 import SocialTrigger from 'components/_trigger/SocialTrigger'
 

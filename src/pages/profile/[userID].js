@@ -1,9 +1,9 @@
 import ProfileCardServer from 'components/ProfileCardServer'
 
 import { withUrqlClient } from 'next-urql'
-import client from 'graphql/client'
+import client from 'graphql/client/client'
 
-import { GET_USER } from 'graphql/queries/users'
+import { GET_USER } from 'graphql/client/queries/users'
 
 const Profile = ({ userID }) => {
   return <ProfileCardServer userID={userID} />

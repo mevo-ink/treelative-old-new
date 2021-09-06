@@ -12,7 +12,7 @@ import { HiCamera } from 'react-icons/hi'
 import { useMutation } from 'urql'
 import { useRecoilValue } from 'recoil'
 
-import { UPDATE_AVATAR } from 'graphql/mutations/users'
+import { UPDATE_AVATAR } from 'graphql/client/mutations/users'
 import { networkMethodsAtom, isEditModeAtom, layoutAtom } from 'utils/atoms.js'
 
 import ImageCropper from 'components/_common/ImageCropper'

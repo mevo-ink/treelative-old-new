@@ -1,7 +1,7 @@
 import { string } from 'yup'
 import { useMutation } from 'urql'
 
-import { UPDATE_SHORT_NAME } from 'graphql/mutations/users'
+import { UPDATE_SHORT_NAME } from 'graphql/client/mutations/users'
 
 import InputTrigger from 'components/_trigger/InputTrigger'
 

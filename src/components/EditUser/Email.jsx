@@ -1,7 +1,7 @@
 import { string } from 'yup'
 import { useMutation } from 'urql'
 
-import { UPDATE_EMAIL } from 'graphql/mutations/phoneAndEmail'
+import { UPDATE_EMAIL } from 'graphql/client/mutations/phoneAndEmail'
 
 import InputWithIconTrigger from 'components/_trigger/InputWithIconTrigger'
 

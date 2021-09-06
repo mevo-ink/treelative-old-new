@@ -1,6 +1,6 @@
 import { useQuery } from 'urql'
 
-import { WHO_AM_I } from 'graphql/queries/auth'
+import { WHO_AM_I } from 'graphql/client/queries/auth'
 
 import FindMe from 'components/Menu/UserOptions/FindMe'
 import Profile from 'components/Menu/UserOptions/Profile'

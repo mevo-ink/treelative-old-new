@@ -10,7 +10,7 @@ import { BsSearch } from 'react-icons/bs'
 import { IoMdClose } from 'react-icons/io'
 
 import { useQuery } from 'urql'
-import { SEARCH_USERS } from 'graphql/queries/users'
+import { SEARCH_USERS } from 'graphql/client/queries/users'
 
 import SearchResult from 'components/Menu/SearchResult'
 

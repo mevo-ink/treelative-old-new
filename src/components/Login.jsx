@@ -18,7 +18,7 @@ import { FaGoogle, FaFacebook } from 'react-icons/fa'
 import { useMutation } from 'urql'
 
 import { google, facebook } from 'utils/firebase'
-import { LOGIN_WITH_PROVIDER } from 'graphql/mutations/auth'
+import { LOGIN_WITH_PROVIDER } from 'graphql/client/mutations/auth'
 
 import ErrorModal from 'components/_common/ErrorModal'
 import LoginButton from 'components/Login/LoginButton'

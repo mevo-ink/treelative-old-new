@@ -6,9 +6,9 @@ import { RiDeleteBin6Line } from 'react-icons/ri'
 import { useRecoilValue } from 'recoil'
 import { useQuery, useMutation } from 'urql'
 
-import { WHO_AM_I } from 'graphql/queries/auth'
+import { WHO_AM_I } from 'graphql/client/queries/auth'
 import { isEditModeAtom } from 'utils/atoms.js'
-import { DELETE_USER } from 'graphql/mutations/users'
+import { DELETE_USER } from 'graphql/client/mutations/users'
 
 import ConfirmationModal from 'components/_common/ConfirmationModal'
 

@@ -1,0 +1,27 @@
+import { ApolloError } from 'apollo-server-micro'
+
+import { isOwner } from 'utils/auth'
+
+import getParsedLocations from 'utils/getParsedLocations'
+
+export default async (parent, args, context, info) => {
+  if (!isOwner(context, args.userID)) {
+    throw new ApolloError('You are not authorized to perform this action', 'UNAUTHORIZED')
+  }
+
+  // parse location data
+  const parsedLocations = await getParsedLocations(args.input)
+
+  const user = await context.db.findOneByIdAndUpdate('users', args.userID, { ...args.input, ...parsedLocations })
+
+  // clear cache
+  if (Object.keys(args.input).find(field => field.includes('location'))) {
+    context.db.deleteCache('map-layout')
+  }
+  if (Object.keys(args.input).find(field => field.includes('dateOfBirth'))) {
+    context.db.deleteCache('age-layout')
+    context.db.deleteCache('birthday-layout')
+  }
+
+  return user
+}

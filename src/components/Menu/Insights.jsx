@@ -14,7 +14,7 @@ import { SiApollographql } from 'react-icons/si'
 
 import { useQuery } from 'urql'
 
-import { COUNT_MEMBERS } from 'graphql/queries/insights'
+import { COUNT_MEMBERS } from 'graphql/client/queries/insights'
 
 import InsightModal from 'components/Menu/Insights/InsightModal'
 
