@@ -10,9 +10,6 @@ export default gql`
     # profile card
     getUser (id: String!): JSON
 
-    # search
-    searchUsers (query: String!): JSON!
-
     # layouts
     getGraphData: JSON!
     getMapData: JSON!
@@ -25,12 +22,13 @@ export default gql`
     insightsByAge: JSON!
     insightsByLocation: JSON!
 
-    # dropdown suggestions
-    suggestParents (userID: String! query: String): JSON!
-    suggestChildren (userID: String! query: String): JSON!
-    suggestPartners (userID: String! query: String): JSON!
-    suggestNewUsers (query: String): JSON!
-    suggestLocations (query: String): JSON!
+    # search
+    searchUsers (query: String!): JSON!
+    searchParents (userID: String! query: String): JSON!
+    searchChildren (userID: String! query: String): JSON!
+    searchPartners (userID: String! query: String): JSON!
+    searchNewUsers (query: String): JSON!
+    searchLocations (query: String): JSON!
 
     # insights tooltip
     getUsersByAges (ages: String!): JSON!

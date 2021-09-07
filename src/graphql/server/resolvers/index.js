@@ -21,13 +21,7 @@ import removeUserChild from './mutations/relations/removeUserChild'
 import removeUserPartner from './mutations/relations/removeUserPartner'
 
 import getUser from './queries/users/getUser'
-import getUserAvatar from './queries/users/getUserAvatar'
-import getUserPartner from './queries/users/getUserPartner'
-import getUserParents from './queries/users/getUserParents'
-import getUserChildren from './queries/users/getUserChildren'
 import getContactUsers from './queries/users/getContactUsers'
-
-import searchUsers from './queries/users/searchUsers'
 
 import countUsers from './queries/insights/countUsers'
 import countCouples from './queries/insights/countCouples'
@@ -36,12 +30,12 @@ import insightsByLocation from './queries/insights/insightsByLocation'
 import getUsersByAges from './queries/insights/getUsersByAges'
 import getUsersByCountry from './queries/insights/getUsersByCountry'
 
-import suggestParents from './queries/suggestions/suggestParents'
-import suggestChildren from './queries/suggestions/suggestChildren'
-import suggestPartners from './queries/suggestions/suggestPartners'
-import suggestLocations from './queries/suggestions/suggestLocations'
-
-import suggestNewUsers from './queries/suggestions/suggestNewUsers'
+import searchParents from './queries/search/searchParents'
+import searchUsers from './queries/search/searchUsers'
+import searchChildren from './queries/search/searchChildren'
+import searchPartners from './queries/search/searchPartners'
+import searchLocations from './queries/search/searchLocations'
+import searchNewUsers from './queries/search/searchNewUsers'
 
 import getGraphData from './queries/layouts/getGraphData'
 import getMapData from './queries/layouts/getMapData'
@@ -56,31 +50,24 @@ export default {
   JSON: JSONResolver,
   DateTime: DateTimeResolver,
 
-  User: {
-    avatar: getUserAvatar,
-    partner: getUserPartner,
-    parents: getUserParents,
-    children: getUserChildren
-  },
-
   Query: {
     healthCheck: () => 'Welcome to Treelative API',
     whoAmI,
     getUser,
-    searchUsers,
     countUsers,
     countCouples,
-    suggestParents,
-    suggestChildren,
-    suggestPartners,
-    suggestLocations,
+    searchUsers,
+    searchNewUsers,
+    searchParents,
+    searchChildren,
+    searchPartners,
+    searchLocations,
     getGraphData,
     getMapData,
     getAgeData,
     getBirthdayData,
     insightsByAge,
     insightsByLocation,
-    suggestNewUsers,
     getUsersByAges,
     getUsersByCountry,
     getContactUsers
