@@ -5,20 +5,20 @@ export default gql`
     loginWithProvider (email: String! token: String!): String!
     connectUserEmail (userID: String email: String! token: String!): Boolean!
 
-    createUser (input: CreateUserInput!): User!
+    createUser (input: CreateUserInput!): String!
     deleteUser (userID: String!): Boolean!
 
-    updateUserGeneral (userID: String! input: UpdateUserGeneralInput!): User!
-    updateUserSocial (userID: String! input: UpdateUserSocialInput!): User!
-    updateUserAvatar (userID: String!): String!
+    updateUserGeneral (userID: String! input: UpdateUserGeneralInput!): JSON!
+    updateUserSocial (userID: String! input: UpdateUserSocialInput!): JSON!
+    updateUserAvatar (userID: String!): JSON!
 
-    addUserParent (userID: String! parentID: String!): User!
-    addUserChild (userID: String! childID: String!): User!
-    addUserPartner(userID: String! partnerID: String!): User!
+    addUserParent (userID: String! parentID: String!): JSON!
+    addUserChild (userID: String! childID: String!): JSON!
+    addUserPartner(userID: String! partnerID: String!): JSON!
 
-    removeUserParent (userID: String! parentID: String!): User!
-    removeUserChild (userID: String! childID: String!): User!
-    removeUserPartner(userID: String! partnerID: String!): User!
+    removeUserParent (userID: String! parentID: String!): JSON!
+    removeUserChild (userID: String! childID: String!): JSON!
+    removeUserPartner(userID: String! partnerID: String!): JSON!
 
     scriptAvatars: Boolean
     scriptMigrate: Boolean

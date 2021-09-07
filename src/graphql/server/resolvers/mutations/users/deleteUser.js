@@ -1,23 +1,43 @@
+import { ApolloError } from 'apollo-server-micro'
+
+import { ObjectId } from 'mongodb'
+
+import dbConnect from 'utils/mongodb'
 import { isAdmin } from 'utils/auth'
 
 export default async (parent, args, context, info) => {
-  isAdmin(context)
+  const session = await isAdmin(context.cookies.AUTH_SESSION_ID)
+  if (session.error) {
+    throw new ApolloError('You are not authorized to perform this action', 'UNAUTHORIZED')
+  }
 
-  await context.db.deleteOneById('users', args.userID)
+  const db = await dbConnect()
 
-  const FieldValue = context.admin.firestore.FieldValue
-
+  const r = await db.collection('users').deleteOne({ _id: ObjectId(args.userID) })
+  console.log(r)
   // remove user from any parents or children list
-  await context.db.findOneAndUpdate('users', {}, { parents: FieldValue.arrayRemove(context.db.doc(`users/${args.userID}`)), children: FieldValue.arrayRemove(context.db.doc(`users/${args.userID}`)) })
+  await db.collection('users').updateMany(
+    {
+      $or: [
+        { parents: args.userID },
+        { children: args.userID }
+      ]
+    },
+    {
+      $pull: { parents: args.userID, children: args.userID }
+    }
+  )
 
   // remove user from partner's partner field
-  await context.db.findOneAndUpdate('users', { partner: { '==': args.userID } }, { partner: null })
+  await db.collection('users').updateOne(
+    { partner: args.userID },
+    {
+      $unset: { partner: '' }
+    }
+  )
 
   // clear cache
-  context.db.deleteCache('network-layout')
-  context.db.deleteCache('map-layout')
-  context.db.deleteCache('age-layout')
-  context.db.deleteCache('birthday-layout')
+  await db.collection('cache').deleteMany({})
 
   return true
 }

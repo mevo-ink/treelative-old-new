@@ -3,10 +3,21 @@ import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-co
 
 import schema from 'graphql/server/schema'
 
+import nookies from 'nookies'
+
+import dbConnect from 'utils/mongodb'
+
 const apolloServer = new ApolloServer({
   schema,
   playground: true,
-  plugins: [ApolloServerPluginLandingPageGraphQLPlayground()]
+  plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
+  context: async (ctx) => {
+    const db = await dbConnect()
+    return {
+      db,
+      cookies: nookies.get(ctx)
+    }
+  }
 })
 
 const startServer = apolloServer.start()

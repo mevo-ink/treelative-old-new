@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb'
+import { MongoClient, ObjectId } from 'mongodb'
 
 const { DATABASE_URL } = process.env
 
@@ -32,5 +32,7 @@ if (process.env.NODE_ENV === 'development') {
 // separate module, the client can be shared across functions.
 export default async function mongoConnect () {
   const client = await clientPromise
-  return client.db()
+  const db = client.db()
+  db.ObjectId = ObjectId
+  return db
 }

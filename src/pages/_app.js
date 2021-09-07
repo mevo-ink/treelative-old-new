@@ -91,9 +91,9 @@ export default function App ({ Component, pageProps }) {
     /contactUs
 
   DONE:
-    - query to suggest users with no email - unauthenticated endpoint
+    - query to suggest users with no email - unauthenticateTokend endpoint
        suggestNewUsers (query: "vara")
-    - mutation to update a user's email - authenticated endpoint by checking for firebase token
+    - mutation to update a user's email - authenticateTokend endpoint by checking for firebase token
        connectUserEmail(userID: "asd" email: "ad" token:"ad")
     - mutation to create a new user and link with email ^ same as above, send empty userID
       connectUserEmail(email: "ad" token:"ad")

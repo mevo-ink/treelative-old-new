@@ -1,9 +1,13 @@
 import { ApolloError } from 'apollo-server-micro'
 
+import { ObjectId } from 'mongodb'
+
+import dbConnect from 'utils/mongodb'
 import { isOwner } from 'utils/auth'
 
 export default async (parent, args, context, info) => {
-  if (!isOwner(context, args.userID)) {
+  const session = await isOwner(context.cookies.AUTH_SESSION_ID)
+  if (session.error) {
     throw new ApolloError('You are not authorized to perform this action', 'UNAUTHORIZED')
   }
 
@@ -12,7 +16,12 @@ export default async (parent, args, context, info) => {
     updateObject[`social.${key}`] = args.input[key]
   }
 
-  const user = await context.db.findOneByIdAndUpdate('users', args.userID, updateObject)
+  const db = await dbConnect()
 
-  return user
+  await db.collection('users').updateOne(
+    { _id: ObjectId(args.userID) },
+    { $set: updateObject }
+  )
+
+  return db.collection('users').findOne({ _id: ObjectId(args.userID) }, { projection: { social: 1 } })
 }

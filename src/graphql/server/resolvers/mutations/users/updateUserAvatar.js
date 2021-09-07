@@ -1,19 +1,26 @@
 import { ApolloError } from 'apollo-server-micro'
 
+import { ObjectId } from 'mongodb'
+
+import dbConnect from 'utils/mongodb'
 import { isOwner } from 'utils/auth'
+import { storage } from 'utils/firebase'
 
 export default async (parent, args, context, info) => {
-  if (!isOwner(context, args.userID)) {
+  const session = await isOwner(context.cookies.AUTH_SESSION_ID)
+  if (session.error) {
     throw new ApolloError('You are not authorized to perform this action', 'UNAUTHORIZED')
   }
 
-  const user = await context.db.findOneById('users', args.userID)
+  const db = await dbConnect()
+
+  const user = await db.collection('users').findOne({ _id: ObjectId(args.userID) })
 
   if (!user) {
-    throw new ApolloError('No such user exists', 'FORBIDDEN')
+    throw new ApolloError('No such user exists', 'NOT_FOUND')
   }
 
-  const file = context.storage.file(`avatars/${user.id}.png`)
+  const file = storage.file(`avatars/${user.id}.png`)
   const presignedUrl = await file.getSignedUrl({
     version: 'v4',
     action: 'write',

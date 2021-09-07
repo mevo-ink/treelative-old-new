@@ -1,11 +1,12 @@
 import { ApolloError } from 'apollo-server-micro'
 
+import { authenticateToken } from 'utils/auth'
+
 export default async (parent, args, context, info) => {
-  if (!context.user) {
-    throw new ApolloError('Session expired.', 'SESSION_EXPIRED')
+  const session = await authenticateToken(context.cookies.AUTH_SESSION_ID)
+  if (session.error) {
+    throw new ApolloError(session.error, 'UNAUTHORIZED')
   }
 
-  const user = await context.db.findOneById('users', context.user.id)
-
-  return user
+  return session.user
 }

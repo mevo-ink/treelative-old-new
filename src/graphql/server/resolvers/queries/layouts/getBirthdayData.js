@@ -44,14 +44,14 @@ export default async (parent, args, context, info) => {
                 $cond: {
                   if: {
                     // check if current date is before the birthday
-                    $lt: [{ $dayOfYear: new Date() }, { $dayOfYear: '$dateOfBirth' }]
+                    $lt: [{ $dayOfYear: '$$NOW' }, { $dayOfYear: '$dateOfBirth' }]
                   },
                   then: {
                     // subtract 1 from the age if current date is before the birthday
-                    $subtract: [{ $subtract: [{ $year: new Date() }, { $year: '$dateOfBirth' }] }, 1]
+                    $subtract: [{ $subtract: [{ $year: '$$NOW' }, { $year: '$dateOfBirth' }] }, 1]
                   },
                   else: {
-                    $subtract: [{ $year: new Date() }, { $year: '$dateOfBirth' }]
+                    $subtract: [{ $year: '$$NOW' }, { $year: '$dateOfBirth' }]
                   }
                 }
               }

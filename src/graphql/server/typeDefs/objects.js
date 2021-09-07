@@ -19,20 +19,11 @@ export default gql`
     dateOfBirth: DateTime
     dateOfMarriage: DateTime
     dateOfDeath: DateTime
-    social: Social
+    social: JSON
     partner: User
     parents: [User!]
     children: [User!]
     createdAt: DateTime
     updatedAt: DateTime
-    age: Int # transient
-  }
-
-  type Social {
-    facebook: String
-    twitter: String
-    instagram: String
-    linkedin: String
-    website: String
   }
 `

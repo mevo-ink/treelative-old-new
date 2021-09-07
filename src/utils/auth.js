@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb'
 import dbConnect from 'utils/mongodb'
 
 import jwt from 'jsonwebtoken'
@@ -11,13 +12,14 @@ export const generateToken = user => jwt.sign(
   user, JWT_SECRET, { expiresIn: JWT_EXPIRY }
 )
 
-export const authenticate = async (token) => {
+export const authenticateToken = async (token) => {
   try {
     if (!token) return null
     const { id } = jwt.verify(token, JWT_SECRET)
     if (!id) return null
     const db = await dbConnect()
-    return db.collection('authorized_users').findOne({ _id: id })
+    const user = db.collection('authorized_users').findOne({ _id: ObjectId(id) }, { projection: { isAdmin: 1 } })
+    return { user }
   } catch (error) {
     if (['TokenExpiredError', 'JsonWebTokenError'].includes(error.name)) {
       return {
@@ -31,10 +33,12 @@ export const authenticate = async (token) => {
   }
 }
 
-export const isAdmin = (user) => {
-  return user.isAdmin
+export const isAdmin = async (token) => {
+  const { user } = await authenticateToken(token)
+  return user?.isAdmin ? { user } : { error: 'You are not authorized to perform this action' }
 }
 
-export const isOwner = (user, userID) => {
-  return isAdmin(user) || user._id === userID
+export const isOwner = async (token, userID) => {
+  const { user } = await authenticateToken(token)
+  return user?.isAdmin || user?._id === userID ? { user } : { error: 'You are not authorized to perform this action' }
 }

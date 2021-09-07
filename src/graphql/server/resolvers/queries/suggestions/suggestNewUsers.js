@@ -1,25 +1,24 @@
+import fuzzySearch from 'utils/fuzzySearch'
+
 export default async (parent, args, context, info) => {
-  const searchQueries = args.query.toLowerCase().split(' ')
-  const results = []
+  const { query = '' } = args
 
-  const snapshot = await context.db.collection('users').where('email', '==', null).get()
-
-  for (const searchQuery of searchQueries) {
-    const partialResult = []
-    for (const doc of snapshot.docs) {
-      const snapshot = await doc.data()
-      // if snapshot matches the search query; add to partialResult
-      if (snapshot.shortName?.toLowerCase().includes(searchQuery)) {
-        partialResult.push(snapshot)
-      } else if (snapshot.fullName?.toLowerCase().includes(searchQuery)) {
-        partialResult.push(snapshot)
+  // get users matching the search query and don't have an email
+  const users = await context.db.collection('users').find(
+    {
+      $and: [
+        ...query.split(' ').map(fuzzySearch).map(q => ({ $or: q }))
+      ],
+      email: { $exists: false }
+    },
+    {
+      projection: {
+        _id: 0,
+        id: { $toString: '$_id' },
+        fullName: 1
       }
-      // limit partialResult to 5
-      if (partialResult.length === 5) break
     }
-    results.push(partialResult)
-  }
+  ).limit(5).toArray()
 
-  // get intersection of all partial results
-  return results.reduce((a, b) => a.filter(c => b.find(({ id }) => id === c.id)))
+  return users
 }

@@ -1,27 +1,37 @@
 import { ApolloError } from 'apollo-server-micro'
 
+import { ObjectId } from 'mongodb'
+
+import dbConnect from 'utils/mongodb'
 import { isOwner } from 'utils/auth'
 
 import getParsedLocations from 'utils/getParsedLocations'
 
 export default async (parent, args, context, info) => {
-  if (!isOwner(context, args.userID)) {
+  const session = await isOwner(context.cookies.AUTH_SESSION_ID)
+  if (session.error) {
     throw new ApolloError('You are not authorized to perform this action', 'UNAUTHORIZED')
   }
 
   // parse location data
   const parsedLocations = await getParsedLocations(args.input)
 
-  const user = await context.db.findOneByIdAndUpdate('users', args.userID, { ...args.input, ...parsedLocations })
+  const db = await dbConnect()
+
+  const userInput = { ...args.input, ...parsedLocations }
+  await db.collection('users').updateOne(
+    { _id: ObjectId(args.userID) },
+    { $set: userInput }
+  )
 
   // clear cache
   if (Object.keys(args.input).find(field => field.includes('location'))) {
-    context.db.deleteCache('map-layout')
+    db.collection('cache').deleteOne({ name: 'map-layout' })
   }
   if (Object.keys(args.input).find(field => field.includes('dateOfBirth'))) {
-    context.db.deleteCache('age-layout')
-    context.db.deleteCache('birthday-layout')
+    db.collection('cache').deleteOne({ name: 'age-layout' })
+    db.collection('cache').deleteOne({ name: 'birthday-layout' })
   }
 
-  return user
+  return db.collection('users').findOne({ _id: ObjectId(args.userID) })
 }

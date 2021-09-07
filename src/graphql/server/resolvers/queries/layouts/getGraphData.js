@@ -1,13 +1,9 @@
-import dbConnect from 'utils/mongodb'
-
 export default async (parent, args, context, info) => {
-  const db = await dbConnect()
-
   const cacheKey = 'graph-layout'
-  const cache = await db.collection('cache').findOne({ name: cacheKey })
+  const cache = await context.db.collection('cache').findOne({ name: cacheKey })
   if (cache) return cache.data
 
-  const users = await db
+  const users = await context.db
     .collection('users')
     .find()
     .project({ shortName: 1, fullName: 1, partner: 1, children: 1 })
@@ -69,7 +65,7 @@ export default async (parent, args, context, info) => {
 
   const response = { nodes, edges }
 
-  await db.collection('cache').updateOne(
+  await context.db.collection('cache').updateOne(
     { name: cacheKey },
     { $set: { data: response } },
     { upsert: true }
