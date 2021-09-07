@@ -19,9 +19,10 @@ export default async (parent, args, context, info) => {
   const db = await dbConnect()
 
   const userInput = { ...args.input, ...parsedLocations }
-  await db.collection('users').updateOne(
+  const { value: user } = await db.collection('users').findOneAndUpdate(
     { _id: ObjectId(args.userID) },
-    { $set: userInput }
+    { $set: userInput },
+    { returnDocument: 'after', returnOriginal: false }
   )
 
   // clear cache
@@ -33,5 +34,5 @@ export default async (parent, args, context, info) => {
     db.collection('cache').deleteOne({ name: 'birthday-layout' })
   }
 
-  return db.collection('users').findOne({ _id: ObjectId(args.userID) })
+  return user
 }

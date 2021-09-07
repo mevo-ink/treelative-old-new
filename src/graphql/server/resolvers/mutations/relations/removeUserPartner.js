@@ -7,19 +7,28 @@ import { removeUserChild } from './removeUserChild'
 export default async (parent, args, context, info) => {
   const { userID, partnerID } = args
 
-  if (!isOwner(context, userID) && !isOwner(context, partnerID)) {
+  const session = await isOwner(context.cookies.AUTH_SESSION_ID)
+  if (session.error) {
     throw new ApolloError('You are not authorized to perform this action', 'UNAUTHORIZED')
   }
 
   // remove the partnerID as a partner from userID
-  const user = await context.db.findOneByIdAndUpdate('users', userID, { partner: null })
+  const { value: user } = await context.db.collection('users').findOneAndUpdate(
+    { _id: context.db.ObjectId(userID) },
+    { $unset: { partner: '' } },
+    { returnDocument: 'after', returnOriginal: false, projection: { children: 1 } }
+  )
 
   // remove the userID as a partner from partnerID
-  const partner = await context.db.findOneByIdAndUpdate('users', partnerID, { partner: null })
+  const { value: partner } = await context.db.collection('users').findOneAndUpdate(
+    { _id: context.db.ObjectId(partnerID) },
+    { $unset: { partner: '' } },
+    { returnDocument: 'after', returnOriginal: false, projection: { children: 1 } }
+  )
 
   // if either couple has children - remove them all
-  const userChildIDs = user.children.map(child => child.id) || []
-  const partnerChildIDs = partner.children.map(child => child.id) || []
+  const userChildIDs = user.children?.map(child => child.toString()) || []
+  const partnerChildIDs = partner.children?.map(child => child.toString()) || []
 
   if (userChildIDs.length > 0) {
     for (const id of userChildIDs) {
@@ -34,7 +43,7 @@ export default async (parent, args, context, info) => {
   }
 
   // clear cache
-  context.db.deleteCache('network-layout')
+  context.db.collection('cache').deleteOne({ name: 'graph-layout' })
 
   return user
 }

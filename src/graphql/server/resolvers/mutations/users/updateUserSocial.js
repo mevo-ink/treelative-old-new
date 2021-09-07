@@ -18,10 +18,11 @@ export default async (parent, args, context, info) => {
 
   const db = await dbConnect()
 
-  await db.collection('users').updateOne(
+  const { value: user } = await db.collection('users').findOneAndUpdate(
     { _id: ObjectId(args.userID) },
-    { $set: updateObject }
+    { $set: updateObject },
+    { returnDocument: 'after', returnOriginal: false, projection: { social: 1, _id: 0, id: { $toString: '$_id' } } }
   )
 
-  return db.collection('users').findOne({ _id: ObjectId(args.userID) }, { projection: { social: 1 } })
+  return user
 }

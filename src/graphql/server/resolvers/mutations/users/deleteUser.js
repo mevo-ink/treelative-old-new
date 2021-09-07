@@ -13,8 +13,8 @@ export default async (parent, args, context, info) => {
 
   const db = await dbConnect()
 
-  const r = await db.collection('users').deleteOne({ _id: ObjectId(args.userID) })
-  console.log(r)
+  await db.collection('users').deleteOne({ _id: ObjectId(args.userID) })
+
   // remove user from any parents or children list
   await db.collection('users').updateMany(
     {

@@ -7,19 +7,28 @@ import { addUserChild } from './addUserChild'
 export default async (parent, args, context, info) => {
   const { userID, partnerID } = args
 
-  if (!isOwner(context, userID) && !isOwner(context, partnerID)) {
+  const session = await isOwner(context.cookies.AUTH_SESSION_ID)
+  if (session.error) {
     throw new ApolloError('You are not authorized to perform this action', 'UNAUTHORIZED')
   }
 
   // add the partnerID as a partner to userID
-  const user = await context.db.findOneByIdAndUpdate('users', userID, { partner: context.db.doc(`users/${partnerID}`) })
+  const { value: user } = await context.db.collection('users').findOneAndUpdate(
+    { _id: context.db.ObjectId(userID) },
+    { $set: { partner: context.db.ObjectId(partnerID) } },
+    { returnDocument: 'after', returnOriginal: false, projection: { children: 1 } }
+  )
 
   // add the userID as a partner to partnerID
-  const partner = await context.db.findOneByIdAndUpdate('users', partnerID, { partner: context.db.doc(`users/${userID}`) })
+  const partner = await context.db.collection('users').findOneAndUpdate(
+    { _id: context.db.ObjectId(partnerID) },
+    { $set: { partner: context.db.ObjectId(userID) } },
+    { returnDocument: 'after', returnOriginal: false, projection: { children: 1 } }
+  )
 
   // if either couple has children - connect any missing ones
-  const userChildIDs = user.children.map(child => child.id) || []
-  const partnerChildIDs = partner.children.map(child => child.id) || []
+  const userChildIDs = user.children?.map(child => child.toString()) || []
+  const partnerChildIDs = partner.children?.map(child => child.toString()) || []
 
   const userChildrenNotInPartner = []
   for (const userID of userChildIDs) {
@@ -48,7 +57,7 @@ export default async (parent, args, context, info) => {
   }
 
   // clear cache
-  context.db.deleteCache('network-layout')
+  context.db.collection('cache').deleteOne({ name: 'graph-layout' })
 
   return user
 }

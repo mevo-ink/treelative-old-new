@@ -34,11 +34,11 @@ export const authenticateToken = async (token) => {
 }
 
 export const isAdmin = async (token) => {
-  const { user } = await authenticateToken(token)
-  return user?.isAdmin ? { user } : { error: 'You are not authorized to perform this action' }
+  const { user } = await authenticateToken(token) || {}
+  return user && user?.isAdmin ? { user } : { error: 'You are not authorized to perform this action' }
 }
 
 export const isOwner = async (token, userID) => {
-  const { user } = await authenticateToken(token)
-  return user?.isAdmin || user?._id === userID ? { user } : { error: 'You are not authorized to perform this action' }
+  const { user } = await authenticateToken(token) || {}
+  return user && (user?.isAdmin || user?._id === userID) ? { user } : { error: 'You are not authorized to perform this action' }
 }
