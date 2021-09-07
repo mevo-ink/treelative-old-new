@@ -7,7 +7,7 @@ export const removeUserParent = async (context, userID, parentID) => {
   const { value: user } = await context.db.collection('users').findOneAndUpdate(
     { _id: context.db.ObjectId(userID) },
     { $pull: { parents: context.db.ObjectId(parentID) } },
-    { returnDocument: 'after', returnOriginal: false, projection: { _id: 1 } }
+    { returnDocument: 'after', returnOriginal: false, projection: { parents: 1, _id: 0, id: { $toString: '$_id' } } }
   )
 
   // remove this user as a child from the parentID

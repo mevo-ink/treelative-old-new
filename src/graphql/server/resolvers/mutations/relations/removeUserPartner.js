@@ -23,7 +23,7 @@ export default async (parent, args, context, info) => {
   const { value: partner } = await context.db.collection('users').findOneAndUpdate(
     { _id: context.db.ObjectId(partnerID) },
     { $unset: { partner: '' } },
-    { returnDocument: 'after', returnOriginal: false, projection: { children: 1 } }
+    { returnDocument: 'after', returnOriginal: false, projection: { partner: 1, children: 1, _id: 0, id: { $toString: '$_id' } } }
   )
 
   // if either couple has children - remove them all

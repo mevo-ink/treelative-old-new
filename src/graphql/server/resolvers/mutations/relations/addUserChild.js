@@ -7,7 +7,7 @@ export const addUserChild = async (context, userID, childID) => {
   const { value: user } = await context.db.collection('users').findOneAndUpdate(
     { _id: context.db.ObjectId(userID) },
     { $addToSet: { children: context.db.ObjectId(childID) } },
-    { returnDocument: 'after', returnOriginal: false, projection: { partner: 1 } }
+    { returnDocument: 'after', returnOriginal: false, projection: { children: 1, partner: 1, _id: 0, id: { $toString: '$_id' } } }
   )
 
   // add this user as a parent for the childID

@@ -16,7 +16,7 @@ export default async (parent, args, context, info) => {
   const { value: user } = await context.db.collection('users').findOneAndUpdate(
     { _id: context.db.ObjectId(userID) },
     { $set: { partner: context.db.ObjectId(partnerID) } },
-    { returnDocument: 'after', returnOriginal: false, projection: { children: 1 } }
+    { returnDocument: 'after', returnOriginal: false, projection: { partner: 1, children: 1, _id: 0, id: { $toString: '$_id' } } }
   )
 
   // add the userID as a partner to partnerID

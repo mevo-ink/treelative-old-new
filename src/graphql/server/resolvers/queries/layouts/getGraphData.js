@@ -20,16 +20,16 @@ export default async (parent, args, context, info) => {
   const couplesMap = {}
   for (const user of users) {
     if (user.partner) {
-      const coupleID = [user._id.toString(), user.partner.id].sort().join('-')
+      const coupleID = [user._id.toString(), user.partner.toString()].sort().join('-')
       if (!couplesMap[coupleID]) {
-        const coupleOneChildIDs = user.children.map(child => child.id)
-        const coupleTwoChildIDs = (await context.db.findAll('users', { parent: { 'array-contains': context.db.doc(`users/${user.partner}`) } })).map(child => child.id)
+        const coupleOneChildIDs = user.children?.map(child => child.toString()) || []
+        const coupleTwoChildIDs = (await context.db.collection('users').find({ parents: { $in: [user.partner] } }).toArray()).map(child => child._id.toString()) || []
         const uniqueChildren = coupleOneChildIDs.concat(coupleTwoChildIDs.filter((item) => coupleOneChildIDs.indexOf(item) < 0))
         couplesMap[coupleID] = {
           id: coupleID,
           group: 'couple',
           coupleOne: user._id.toString(),
-          coupleTwo: user.partner.id,
+          coupleTwo: user.partner.toString(),
           children: uniqueChildren
         }
       }
@@ -41,7 +41,7 @@ export default async (parent, args, context, info) => {
         id: coupleID,
         group: 'singleParent',
         coupleOne: user._id.toString(),
-        children: user.children.map(child => child.id)
+        children: user.children.map(child => child.toString())
       }
     }
   }
