@@ -1,7 +1,7 @@
 import { useMutation } from 'urql'
 
 import { ADD_PARENT, REMOVE_PARENT } from 'graphql/client/mutations/parent'
-import { SUGGEST_PARENTS } from 'graphql/client/queries/suggestList'
+import { SUGGEST_PARENTS } from 'graphql/client/queries/search'
 
 import AvatarTrigger from 'components/_trigger/AvatarTrigger'
 

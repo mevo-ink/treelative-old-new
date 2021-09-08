@@ -1,23 +1,15 @@
-import { gql } from 'urql'
+import { request, gql } from 'graphql-request'
+import { useQuery } from 'react-query'
 
-export const WHO_AM_I = gql`
-  query WHO_AM_I {
-    whoAmI {
-      id
-      isAdmin
-      avatar
-      fullName
-      dateOfBirth
-      currentLocation
-      parents {
-        id
-      }
-      children {
-        id
-      }
-      partner {
-        id
-      }
+export const useWhoAmI = () => {
+  return useQuery(
+    ['whoAmI'],
+    async () => {
+      const { whoAmI } = await request(
+        '/api/graphql',
+        gql`query { whoAmI }`
+      )
+      return whoAmI
     }
-  }
-`
+  )
+}

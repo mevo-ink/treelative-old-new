@@ -1,9 +1,13 @@
-export default async (parent, args, context, info) => {
+import dbConnect from 'utils/mongodb'
+
+export const getGraphData = async () => {
+  const db = await dbConnect()
+
   const cacheKey = 'graph-layout'
-  const cache = await context.db.collection('cache').findOne({ name: cacheKey })
+  const cache = await db.collection('cache').findOne({ name: cacheKey })
   if (cache) return cache.data
 
-  const users = await context.db
+  const users = await db
     .collection('users')
     .find()
     .project({ shortName: 1, fullName: 1, partner: 1, children: 1 })
@@ -23,7 +27,7 @@ export default async (parent, args, context, info) => {
       const coupleID = [user._id.toString(), user.partner.toString()].sort().join('-')
       if (!couplesMap[coupleID]) {
         const coupleOneChildIDs = user.children?.map(child => child.toString()) || []
-        const coupleTwoChildIDs = (await context.db.collection('users').find({ parents: { $in: [user.partner] } }).toArray()).map(child => child._id.toString()) || []
+        const coupleTwoChildIDs = (await db.collection('users').find({ parents: { $in: [user.partner] } }).toArray()).map(child => child._id.toString()) || []
         const uniqueChildren = coupleOneChildIDs.concat(coupleTwoChildIDs.filter((item) => coupleOneChildIDs.indexOf(item) < 0))
         couplesMap[coupleID] = {
           id: coupleID,
@@ -65,11 +69,15 @@ export default async (parent, args, context, info) => {
 
   const response = { nodes, edges }
 
-  await context.db.collection('cache').updateOne(
+  await db.collection('cache').updateOne(
     { name: cacheKey },
     { $set: { data: response } },
     { upsert: true }
   )
 
   return response
+}
+
+export default async (parent, args, context, info) => {
+  return getGraphData()
 }

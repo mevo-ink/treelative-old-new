@@ -13,6 +13,7 @@ export const generateToken = user => jwt.sign(
 )
 
 export const authenticateToken = async (token) => {
+  return { user: { id: 'adas', name: 'asdasd' } } // REMOVE
   try {
     if (!token) return null
     const { id } = jwt.verify(token, JWT_SECRET)

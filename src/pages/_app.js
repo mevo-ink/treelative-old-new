@@ -1,6 +1,6 @@
 import 'styles.css'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import Head from 'next/head'
 
@@ -9,7 +9,19 @@ import theme from 'utils/theme'
 
 import { RecoilRoot } from 'recoil'
 
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { Hydrate } from 'react-query/hydration'
+
 export default function App ({ Component, pageProps }) {
+  const [queryClient] = useState(() => new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+        retry: false
+      }
+    }
+  }))
+
   useEffect(() => {
     // set language
     document.documentElement.lang = 'en-us'
@@ -25,23 +37,30 @@ export default function App ({ Component, pageProps }) {
   }, [])
 
   return (
-    <ChakraProvider theme={theme}>
-      <RecoilRoot>
-        <Head>
-          <title>Treelative</title>
-          <meta charSet='utf-8' />
-          <link rel='icon' href='/favicon.ico' />
-          <link rel='manifest' href='/manifest.json' />
-          <meta property='og:image' content='/logo512.png' />
-          <meta name='viewport' content='width=device-width, initial-scale=1' />
-          <meta name='theme-color' content='hsla(225, 36%, 4%, 1)' />
-          <meta name='description' content='Family Tree Visualization' />
-          <link rel='apple-touch-icon' href='/logo192.png' />
-          <link href='https://fonts.googleapis.com/css2?family=Lato&display=swap' rel='stylesheet' />
-        </Head>
-        <Component {...pageProps} />
-      </RecoilRoot>
-    </ChakraProvider>
+    <>
+      <Head>
+        <title>Treelative</title>
+        <meta charSet='utf-8' />
+        <link rel='icon' href='/favicon.ico' />
+        <link rel='manifest' href='/manifest.json' />
+        <meta property='og:image' content='/logo512.png' />
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <meta name='theme-color' content='hsla(225, 36%, 4%, 1)' />
+        <meta name='description' content='Family Tree Visualization' />
+        <link rel='apple-touch-icon' href='/logo192.png' />
+        <link href='https://fonts.googleapis.com/css2?family=Lato&display=swap' rel='stylesheet' />
+      </Head>
+      <ChakraProvider theme={theme}>
+        <QueryClientProvider client={queryClient}>
+          <Hydrate state={pageProps.dehydratedState}>
+            <RecoilRoot>
+              <Component {...pageProps} />
+            </RecoilRoot>
+          </Hydrate>
+        </QueryClientProvider>
+      </ChakraProvider>
+    </>
+
   )
 }
 

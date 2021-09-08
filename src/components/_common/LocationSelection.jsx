@@ -4,7 +4,7 @@ import { Stack } from '@chakra-ui/react'
 
 import { useClient } from 'urql'
 
-import { SUGGEST_LOCATIONS } from 'graphql/client/queries/suggestList'
+import { SUGGEST_LOCATIONS } from 'graphql/client/queries/search'
 
 import ErrorAlert from 'components/_common/ErrorAlert'
 import AsyncSelect from 'components/_select/AsyncSelect'

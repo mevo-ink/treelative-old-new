@@ -19,8 +19,8 @@ export default gql`
     # insights
     countUsers: Int!
     countCouples: Int!
-    insightsByAge: JSON!
-    insightsByLocation: JSON!
+    getAgeInsights: JSON!
+    getCountryInsights: JSON!
 
     # search
     searchUsers (query: String!): JSON!

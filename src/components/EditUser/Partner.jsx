@@ -1,6 +1,6 @@
 import { useMutation } from 'urql'
 
-import { SUGGEST_PARTNERS } from 'graphql/client/queries/suggestList'
+import { SUGGEST_PARTNERS } from 'graphql/client/queries/search'
 import { ADD_PARTNER, REMOVE_PARTNER } from 'graphql/client/mutations/partner'
 
 import AvatarTrigger from 'components/_trigger/AvatarTrigger'

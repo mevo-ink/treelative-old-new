@@ -1,92 +1,55 @@
-import { gql } from 'urql'
+import { request, gql } from 'graphql-request'
+import { useQuery } from 'react-query'
 
-export const GET_USER = gql`
-  query GET_USER ($id: String!) {
-    getUser (id: $id) {
-      id
-      isAdmin
-      isPublic
-      avatar
-      fullName
-      shortName
-      dateOfBirth
-      dateOfDeath
-      dateOfMarriage
-      birthLocation
-      currentLocation
-      marriageLocation
-      email
-      phoneNumber
-      social {
-        facebook
-        twitter
-        instagram
-        linkedin
-        website
-      }
-      parents {
-        id
-        fullName
-        avatar
-        shortName
-      }
-      children {
-        id
-        fullName
-        avatar
-        shortName
-      }
-      partner {
-        id
-        fullName
-        avatar
-        shortName
-      }
-    }
-  }
-`
+export const useGetUser = (userID) => {
+  return useQuery(
+    ['getUser', userID],
+    async () => {
+      const { getUser } = await request(
+        '/api/graphql',
+        gql`query { getUser(id: "${userID}") }`
+      )
+      return getUser
+    },
+    { enabled: !!userID }
+  )
+}
 
-export const SEARCH_USERS = gql`
-  query SEARCH_USERS ($query: String!) {
-    users: searchUsers (query: $query) {
-      id
-      avatar
-      fullName
-      dateOfBirth
-      currentLocation
+export const useUsersByCountry = (country) => {
+  return useQuery(
+    ['getUsersByCountry', country],
+    async () => {
+      const { getUsersByCountry } = await request(
+        '/api/graphql',
+        gql`query { getUsersByCountry(country: "${country}") }`
+      )
+      return getUsersByCountry
     }
-  }
-`
+  )
+}
 
-export const GET_CONTACT_USERS = gql`
-  query GET_CONTACT_USERS {
-    getContactUsers {
-      id
-      avatar
-      shortName
+export const useUsersByAges = (ages) => {
+  return useQuery(
+    ['getUsersByAges', ages],
+    async () => {
+      const { getUsersByAges } = await request(
+        '/api/graphql',
+        gql`query { getUsersByAges(ages: "${ages}") }`
+      )
+      return getUsersByAges
     }
-  }
-`
+  )
+}
 
-export const GET_USERS_BY_COUNTRY = gql`
-  query GET_USERS_BY_COUNTRY ($country: String!) {
-    users: getUsersByCountry (country: $country) {
-      id
-      fullName
-      avatar
-      currentLocation
+export const useContactUsers = () => {
+  return useQuery(
+    ['getContactUsers'],
+    async () => {
+      const { getContactUsers } = await request(
+        '/api/graphql',
+        gql`query { getContactUsers }`
+      )
+      return getContactUsers
     }
-  }
-`
-
-export const GET_USERS_BY_AGES = gql`
-  query GET_USERS_BY_AGES ($ages: String!) {
-    users: getUsersByAges (ages: $ages) {
-      id
-      fullName
-      avatar
-      age
-      dateOfBirth
-    }
-  }
-`
+  )
+}

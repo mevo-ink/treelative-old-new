@@ -14,11 +14,10 @@ import {
 } from '@chakra-ui/react'
 import { MdClose } from 'react-icons/md'
 
-import { useQuery } from 'urql'
 import { useSetRecoilState } from 'recoil'
 
 import { activeNodeIDAtom } from 'utils/atoms.js'
-import { GET_CONTACT_USERS } from 'graphql/client/queries/users'
+import { useContactUsers } from 'graphql/client/queries/users'
 
 export default function ErrorModal (props) {
   const {
@@ -29,7 +28,7 @@ export default function ErrorModal (props) {
     handleBtnClick
   } = props
 
-  const [result] = useQuery({ query: GET_CONTACT_USERS })
+  const { data } = useContactUsers()
 
   const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true })
 
@@ -102,7 +101,7 @@ export default function ErrorModal (props) {
             Please, Contact Us:
           </Text>
           <Flex justifyContent='space-between' w='40%'>
-            {result.data && result.data.getContactUsers.map(user => (
+            {data && data.map(user => (
               <Box key={user.id}>
                 <Image
                   src={user.avatar}

@@ -1,26 +1,22 @@
+import { useRouter } from 'next/router'
+
 import { Text, Box, Image, Button } from '@chakra-ui/react'
 
-import { useRecoilState, useSetRecoilState } from 'recoil'
-
-import { layoutAtom, activeNodePulseIDAtom } from 'utils/atoms.js'
-
 export default function Layouts ({ onClose }) {
-  const [layout, setLayout] = useRecoilState(layoutAtom)
-  const setActiveNodeID = useSetRecoilState(activeNodePulseIDAtom)
+  const router = useRouter()
 
   const iconsAndNames = [
-    { icon: '/images/graphView.png', name: 'network' },
+    { icon: '/images/graphView.png', name: 'graph' },
     { icon: '/images/mapView.png', name: 'map' },
     { icon: '/images/ageView.png', name: 'age' },
     { icon: '/images/birthdayView.png', name: 'birthday' }
   ]
 
-  const handleLayoutChange = async (layout) => {
-    onClose()
-    setActiveNodeID(null)
-    await new Promise(resolve => setTimeout(resolve, 110))
-    setLayout(layout)
+  const handleLayoutChange = (layout) => {
+    router.push(`/layouts/${layout}`)
   }
+
+  console.log(router.pathname)
 
   return (
     <Box>
@@ -37,7 +33,7 @@ export default function Layouts ({ onClose }) {
             mr='1rem'
             bg='hsla(0, 0%, 100%, .3)'
             borderRadius='10px'
-            border={layout === iconAndName.name && '1px solid white'}
+            border={router.pathname.endsWith(iconAndName.name) ? '1px solid white' : ''}
             onClick={() => handleLayoutChange(iconAndName.name)}
           >
             <Image

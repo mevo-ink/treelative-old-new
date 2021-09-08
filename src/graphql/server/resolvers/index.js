@@ -25,8 +25,8 @@ import getContactUsers from './queries/users/getContactUsers'
 
 import countUsers from './queries/insights/countUsers'
 import countCouples from './queries/insights/countCouples'
-import insightsByAge from './queries/insights/insightsByAge'
-import insightsByLocation from './queries/insights/insightsByLocation'
+import getAgeInsights from './queries/insights/getAgeInsights'
+import getCountryInsights from './queries/insights/getCountryInsights'
 import getUsersByAges from './queries/insights/getUsersByAges'
 import getUsersByCountry from './queries/insights/getUsersByCountry'
 
@@ -66,8 +66,8 @@ export default {
     getMapData,
     getAgeData,
     getBirthdayData,
-    insightsByAge,
-    insightsByLocation,
+    getAgeInsights,
+    getCountryInsights,
     getUsersByAges,
     getUsersByCountry,
     getContactUsers

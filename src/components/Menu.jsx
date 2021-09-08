@@ -14,16 +14,13 @@ import {
 } from '@chakra-ui/react'
 import { FaGripLines } from 'react-icons/fa'
 
-import Search from 'components/Menu/Search'
+// import Search from 'components/Menu/Search'
 import Layouts from 'components/Menu/Layouts'
-import Insights from 'components/Menu/Insights'
+// import UserOptions from 'components/Menu/UserOptions'
+// import Insights from 'components/Menu/Insights'
 import Copyright from 'components/Menu/Copyright'
-import UserOptions from 'components/Menu/UserOptions'
 
-import { withUrqlClient } from 'next-urql'
-import client from 'graphql/client/client'
-
-const Menu = () => {
+export default function Menu () {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()
 
@@ -78,12 +75,12 @@ const Menu = () => {
           />
           <DrawerBody sx={{ '&::-webkit-scrollbar': { display: 'none' }, scrollbarWidth: 'none' }}>
             <Stack p='1.5em .5em' spacing='2rem'>
+                {/* <UserOptions onClose={onClose} /> */}
               <HStack justifyContent='space-between' alignItems='end'>
-                <Search onClose={onClose} />
-                <UserOptions onClose={onClose} />
+                {/* <Search onClose={onClose} /> */}
               </HStack>
               <Layouts onClose={onClose} />
-              <Insights />
+              {/* <Insights /> */}
             </Stack>
             <Copyright />
           </DrawerBody>
@@ -92,5 +89,3 @@ const Menu = () => {
     </Box>
   )
 }
-
-export default withUrqlClient(client)(Menu)
