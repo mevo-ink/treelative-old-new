@@ -16,8 +16,6 @@ export default function Layouts ({ onClose }) {
     router.push(`/layouts/${layout}`)
   }
 
-  console.log(router.pathname)
-
   return (
     <Box>
       <Text mb='.5rem' opacity='.8'>

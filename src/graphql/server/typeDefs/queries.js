@@ -31,7 +31,7 @@ export default gql`
     searchLocations (query: String!): JSON!
 
     # insights tooltip
-    getUsersByAges (ages: String!): JSON!
+    getUsersByAgeRange (ageRange: String!): JSON!
     getUsersByCountry (country: String!): JSON!
 
     getContactUsers: JSON!

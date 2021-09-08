@@ -58,14 +58,14 @@ export default async (parent, args, context, info) => {
         }
       },
       {
-        // rename count of each age range with eg. { ages: '0-10', count: 1 }
+        // rename count of each age range with eg. { ageRange: '0-10', count: 1 }
         $project: {
-          ages: {
+          ageRange: {
             $map: {
               input: '$ageRanges',
               as: 'ageRange',
               in: {
-                ages: {
+                ageRange: {
                   $concat: [
                     { $toString: '$$ageRange._id' },
                     {
@@ -88,7 +88,7 @@ export default async (parent, args, context, info) => {
     .next()
 
   return {
-    data,
+    ages: data.ageRange,
     unknownCount
   }
 }

@@ -17,7 +17,7 @@ import { FaGripLines } from 'react-icons/fa'
 // import Search from 'components/Menu/Search'
 import Layouts from 'components/Menu/Layouts'
 // import UserOptions from 'components/Menu/UserOptions'
-// import Insights from 'components/Menu/Insights'
+import Insights from 'components/Menu/Insights'
 import Copyright from 'components/Menu/Copyright'
 
 export default function Menu () {
@@ -80,7 +80,7 @@ export default function Menu () {
                 {/* <Search onClose={onClose} /> */}
               </HStack>
               <Layouts onClose={onClose} />
-              {/* <Insights /> */}
+              <Insights />
             </Stack>
             <Copyright />
           </DrawerBody>

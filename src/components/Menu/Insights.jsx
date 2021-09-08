@@ -12,21 +12,19 @@ import {
 import { BiWorld } from 'react-icons/bi'
 import { SiApollographql } from 'react-icons/si'
 
-import { useQuery } from 'urql'
-
-import { COUNT_MEMBERS } from 'graphql/client/queries/insights'
+import { useCountUsers } from 'graphql/client/queries/insights'
 
 import InsightModal from 'components/Menu/Insights/InsightModal'
 
 export default function Insights () {
-  const [resultGetMembers] = useQuery({ query: COUNT_MEMBERS })
+  const { data: usersCount } = useCountUsers()
 
   const [openInsight, setOpenInsight] = useState(null)
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const data = [
-    { title: 'Members', description: 'Overview', value: resultGetMembers.data?.countUsers || 0 },
+    { title: 'Members', description: 'Overview', value: usersCount || 0 },
     { title: 'Country', description: 'Country Distribution', value: <Icon as={BiWorld} h='30px' /> },
     { title: 'Age', description: 'Age Distribution', value: <Icon as={SiApollographql} h='30px' /> }
   ]

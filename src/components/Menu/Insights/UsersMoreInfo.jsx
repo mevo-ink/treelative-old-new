@@ -1,4 +1,3 @@
-import { useQuery } from 'urql'
 import { format } from 'date-fns'
 
 import { useSetRecoilState } from 'recoil'
@@ -18,10 +17,10 @@ import {
   ModalBody
 } from '@chakra-ui/react'
 
-export default function UsersMoreInfo ({ query, variables, onClose, title }) {
+export default function UsersMoreInfo ({ queryHook, variables, onClose, title }) {
   const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
 
-  const [result] = useQuery({ query, variables })
+  const { data, isFetching } = queryHook(...Object.values(variables))
 
   const handleDate = (date) => {
     const dt = new Date(date)
@@ -33,7 +32,7 @@ export default function UsersMoreInfo ({ query, variables, onClose, title }) {
     <Modal isOpen isCentered onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>{title} ({result.data?.users?.length})</ModalHeader>
+        <ModalHeader>{title} ({data?.length})</ModalHeader>
         <ModalBody
           maxH='300px'
           overflowY='auto'
@@ -43,10 +42,10 @@ export default function UsersMoreInfo ({ query, variables, onClose, title }) {
             '::-webkit-scrollbar-thumb': { background: 'hsla(0, 0%, 100%, 1)' }
           }}
         >
-          {result.fetching && <Loading />}
-          {result.data && (
+          {isFetching && <Loading />}
+          {data && (
             <Stack>
-              {result.data.users.map(user => (
+              {data.map(user => (
                 <HStack key={user.id} position='relative'>
                   <Box
                     w='35px'

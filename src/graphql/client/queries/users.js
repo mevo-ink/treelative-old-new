@@ -29,17 +29,17 @@ export const useGetUsersByCountry = (country) => {
   )
 }
 
-export const useGetUsersByAges = (ages) => {
+export const useGetUsersByAgeRange = (ageRange) => {
   return useQuery(
-    ['getUsersByAges', ages],
+    ['getUsersByAgeRange', ageRange],
     async () => {
-      const { getUsersByAges } = await graphQLClient.request(
-        gql`query GET_USERS_BY_AGES ($ages: String!) { getUsersByAges(ages: $ages) }`,
-        { ages }
+      const { getUsersByAgeRange } = await graphQLClient.request(
+        gql`query GET_USERS_BY_AGE_RANGE ($ageRange: String!) { getUsersByAgeRange(ageRange: $ageRange) }`,
+        { ageRange }
       )
-      return getUsersByAges
+      return getUsersByAgeRange
     },
-    { enabled: !!ages }
+    { enabled: !!ageRange }
   )
 }
 

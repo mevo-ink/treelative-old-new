@@ -27,7 +27,7 @@ import countUsers from './queries/insights/countUsers'
 import countCouples from './queries/insights/countCouples'
 import getAgeInsights from './queries/insights/getAgeInsights'
 import getCountryInsights from './queries/insights/getCountryInsights'
-import getUsersByAges from './queries/insights/getUsersByAges'
+import getUsersByAgeRange from './queries/insights/getUsersByAgeRange'
 import getUsersByCountry from './queries/insights/getUsersByCountry'
 
 import searchUsers from './queries/search/searchUsers'
@@ -68,7 +68,7 @@ export default {
     getBirthdayData,
     getAgeInsights,
     getCountryInsights,
-    getUsersByAges,
+    getUsersByAgeRange,
     getUsersByCountry,
     getContactUsers
   },

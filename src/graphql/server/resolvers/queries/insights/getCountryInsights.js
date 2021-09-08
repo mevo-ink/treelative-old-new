@@ -35,7 +35,7 @@ export default async (parent, args, context, info) => {
     .toArray()
 
   return {
-    data,
+    countries: data,
     unknownCount
   }
 }

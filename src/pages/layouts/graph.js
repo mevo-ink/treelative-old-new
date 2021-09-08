@@ -6,6 +6,7 @@ import { QueryClient } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
 
 import { getGraphData } from 'graphql/server/resolvers/queries/layouts/getGraphData'
+import { useGetGraphData } from 'graphql/client/queries/layouts'
 
 import Wrapper from 'components/Wrapper'
 import Loading from 'components/Loading'
@@ -14,8 +15,6 @@ import ErrorModal from 'components/_common/ErrorModal'
 import { Network } from 'vis-network/peer/umd/vis-network.js'
 
 import { Box } from '@chakra-ui/react'
-
-import { useGraphData } from 'graphql/client/queries/layouts'
 
 export async function getServerSideProps () {
   // pre-fetch the layout data
@@ -84,7 +83,7 @@ const options = {
 export default function Graph () {
   const router = useRouter()
 
-  const { data, error } = useGraphData()
+  const { data, error } = useGetGraphData()
 
   const graphRef = useRef()
 

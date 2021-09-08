@@ -1,9 +1,13 @@
 import { useRouter } from 'next/router'
 
+import useServiceWorker from 'hooks/useServiceWorker'
+
 import Menu from 'components/Menu'
 import ProfileCard from 'components/ProfileCard'
 
 export default function Wrapper ({ children }) {
+  useServiceWorker()
+
   const router = useRouter()
 
   const onProfileClose = () => {
