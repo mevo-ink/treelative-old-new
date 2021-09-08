@@ -1,13 +1,12 @@
-import { request, gql } from 'graphql-request'
+import { graphQLClient, gql } from 'graphql/client'
 import { useQuery } from 'react-query'
 
 export const useCountUsers = () => {
   return useQuery(
     ['countUsers'],
     async () => {
-      const { countUsers } = await request(
-        '/api/graphql',
-        gql`query { countUsers }`
+      const { countUsers } = await graphQLClient.request(
+        gql`query COUNT_USERS { countUsers }`
       )
       return countUsers
     }
@@ -18,35 +17,32 @@ export const useCountCouples = () => {
   return useQuery(
     ['countCouples'],
     async () => {
-      const { countCouples } = await request(
-        '/api/graphql',
-        gql`query { countCouples }`
+      const { countCouples } = await graphQLClient.request(
+        gql`query COUNT_COUPLES { countCouples }`
       )
       return countCouples
     }
   )
 }
 
-export const useAgeInsights = () => {
+export const useGetAgeInsights = () => {
   return useQuery(
     ['getAgeInsights'],
     async () => {
-      const { getAgeInsights } = await request(
-        '/api/graphql',
-        gql`query { getAgeInsights }`
+      const { getAgeInsights } = await graphQLClient.request(
+        gql`query GET_AGE_INSIGHTS { getAgeInsights }`
       )
       return getAgeInsights
     }
   )
 }
 
-export const useCountryInsights = () => {
+export const useGetCountryInsights = () => {
   return useQuery(
     ['getCountryInsights'],
     async () => {
-      const { getCountryInsights } = await request(
-        '/api/graphql',
-        gql`query { getCountryInsights }`
+      const { getCountryInsights } = await graphQLClient.request(
+        gql`query GET_COUNTRY_INSIGHTS { getCountryInsights }`
       )
       return getCountryInsights
     }

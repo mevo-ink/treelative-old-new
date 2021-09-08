@@ -1,16 +1,17 @@
-import { request, gql } from 'graphql-request'
+import { graphQLClient, gql } from 'graphql/client'
 import { useQuery } from 'react-query'
 
 export const useSearchUsers = (query) => {
   return useQuery(
     ['searchUsers', query],
     async () => {
-      const { searchUsers } = await request(
-        '/api/graphql',
-        gql`query { searchUsers(query: "${query}") }`
+      const { searchUsers } = await graphQLClient.request(
+        gql`query SEARCH_USERS ($query: String!) { searchUsers(query: $query) }`,
+        { query }
       )
       return searchUsers
-    }
+    },
+    { enabled: !!query }
   )
 }
 
@@ -18,9 +19,9 @@ export const useSearchLocations = (query) => {
   return useQuery(
     ['searchLocations', query],
     async () => {
-      const { searchLocations } = await request(
-        '/api/graphql',
-        gql`query { searchLocations(query: "${query}") }`
+      const { searchLocations } = await graphQLClient.request(
+        gql`query SEARCH_LOCATIONS ($query: String!) { searchLocations(query: $query) }`,
+        { query }
       )
       return searchLocations
     },
@@ -28,41 +29,57 @@ export const useSearchLocations = (query) => {
   )
 }
 
-export const useSearchPartners = (userID, query) => {
+export const useSearchUserPartners = (userID, query) => {
   return useQuery(
-    ['searchPartners', userID, query],
+    ['searchUserPartners', userID, query],
     async () => {
-      const { searchPartners } = await request(
-        '/api/graphql',
-        gql`query { searchPartners(userID: "${userID}" query: "${query}") }`
+      const { searchUserPartners } = await graphQLClient.request(
+        gql`query SEARCH_USER_PARTNERS ($userID: String! $query: String) { searchUserPartners(userID: $userID query: $query) }`,
+        { userID, query }
       )
-      return searchPartners
-    }
+      return searchUserPartners
+    },
+    { enabled: !!userID }
   )
 }
 
-export const useSearchParents = (userID, query) => {
+export const useSearchUserParents = (userID, query) => {
   return useQuery(
-    ['searchParents', userID, query],
+    ['searchUserParents', userID, query],
     async () => {
-      const { searchParents } = await request(
-        '/api/graphql',
-        gql`query { searchParents(userID: "${userID}" query: "${query}") }`
+      const { searchUserParents } = await graphQLClient.request(
+        gql`query SEARCH_USER_PARENTS ($userID: String! $query: String) { searchUserParents(userID: $userID query: $query) }`,
+        { userID, query }
       )
-      return searchParents
-    }
+      return searchUserParents
+    },
+    { enabled: !!userID }
   )
 }
 
-export const useSearchChildren = (userID, query) => {
+export const useSearchUserChildren = (userID, query) => {
   return useQuery(
-    ['searchChildren', userID, query],
+    ['searchUserChildren', userID, query],
     async () => {
-      const { searchChildren } = await request(
-        '/api/graphql',
-        gql`query { searchChildren(userID: "${userID}" query: "${query}") }`
+      const { searchUserChildren } = await graphQLClient.request(
+        gql`query SEARCH_USER_CHILDREN ($userID: String! $query: String) { searchUserChildren(userID: $userID query: $query) }`,
+        { userID, query }
       )
-      return searchChildren
+      return searchUserChildren
+    },
+    { enabled: !!userID }
+  )
+}
+
+export const useSearchNewUsers = (query) => {
+  return useQuery(
+    ['searchNewUsers', query],
+    async () => {
+      const { searchNewUsers } = await graphQLClient.request(
+        gql`query SEARCH_NEW_USERS ($query: String) { searchNewUsers(query: $query) }`,
+        { query }
+      )
+      return searchNewUsers
     }
   )
 }

@@ -24,11 +24,11 @@ export default gql`
 
     # search
     searchUsers (query: String!): JSON!
-    searchParents (userID: String! query: String): JSON!
-    searchChildren (userID: String! query: String): JSON!
-    searchPartners (userID: String! query: String): JSON!
+    searchUserParents (userID: String! query: String): JSON!
+    searchUserChildren (userID: String! query: String): JSON!
+    searchUserPartners (userID: String! query: String): JSON!
     searchNewUsers (query: String): JSON!
-    searchLocations (query: String): JSON!
+    searchLocations (query: String!): JSON!
 
     # insights tooltip
     getUsersByAges (ages: String!): JSON!

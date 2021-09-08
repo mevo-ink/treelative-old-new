@@ -1,84 +1,67 @@
-import { gql } from 'urql'
+import { graphQLClient, gql } from 'graphql/client'
+import { useQuery } from 'react-query'
 
-export const CREATE_USER = gql`
-  mutation CREATE_USER ($input: CreateUserInput!) {
-    createUser(input: $input) {
-      id
+export const useCreateUser = (input) => {
+  return useQuery(
+    ['createUser', input],
+    async () => {
+      const { createUser } = await graphQLClient.request(
+        gql`mutation CREATE_USER ($input: CreateUserInput!) { createUser(input: $input) }`,
+        { input }
+      )
+      return createUser
     }
-  }
-`
+  )
+}
 
-export const UPDATE_AVATAR = gql`
-  mutation UPDATE_AVATAR ($userID: String!) {
-    updateUserAvatar(userID: $userID)
-  }
-`
-
-export const UPDATE_FULL_NAME = gql`
-  mutation UPDATE_FULL_NAME ($userID: String! $input: UpdateUserGeneralInput!) {
-    updateUserGeneral(userID: $userID input: $input) {
-      id
-      fullName
+export const useUpdateUserAvatar = (userID) => {
+  return useQuery(
+    ['updateUserAvatar', userID],
+    async () => {
+      const { updateUserAvatar } = await graphQLClient.request(
+        gql`mutation UPDATE_AVATAR ($userID: String!) { updateUserAvatar(userID: $userID) }`,
+        { userID }
+      )
+      return updateUserAvatar
     }
-  }
-`
+  )
+}
 
-export const UPDATE_DATE_OF_BIRTH = gql`
-  mutation UPDATE_DATE_OF_BIRTH ($userID: String! $input: UpdateUserGeneralInput!) {
-    updateUserGeneral(userID: $userID input: $input) {
-      id
-      dateOfBirth
+export const useUpdateUserGeneral = (userID, input) => {
+  return useQuery(
+    ['updateUserGeneral', userID, input],
+    async () => {
+      const { updateUserGeneral } = await graphQLClient.request(
+        gql`mutation UPDATE_FULL_NAME ($userID: String! $input: UpdateUserGeneralInput!) { updateUserGeneral(userID: $userID input: $input) }`,
+        { userID, input }
+      )
+      return updateUserGeneral
     }
-  }
-`
+  )
+}
 
-export const UPDATE_BIRTH_LOCATION = gql`
-  mutation UPDATE_BIRTH_LOCATION ($userID: String! $input: UpdateUserGeneralInput!) {
-    updateUserGeneral(userID: $userID input: $input) {
-      id
-      birthLocation
+export const useUpdateUserSocial = (userID, input) => {
+  return useQuery(
+    ['updateUserSocial', userID, input],
+    async () => {
+      const { updateUserSocial } = await graphQLClient.request(
+        gql`mutation UPDATE_FULL_NAME ($userID: String! $input: UpdateUserSocialInput!) { updateUserSocial(userID: $userID input: $input) }`,
+        { userID, input }
+      )
+      return updateUserSocial
     }
-  }
-`
+  )
+}
 
-export const UPDATE_CURRENT_LOCATION = gql`
-  mutation UPDATE_CURRENT_LOCATION ($userID: String! $input: UpdateUserGeneralInput!) {
-    updateUserGeneral(userID: $userID input: $input) {
-      id
-      currentLocation
+export const useDeleteUser = (userID) => {
+  return useQuery(
+    ['deleteUser', userID],
+    async () => {
+      const { deleteUser } = await graphQLClient.request(
+        gql`mutation DELETE_USER ($userID: String!) { deleteUser(userID: $userID) }`,
+        { userID }
+      )
+      return deleteUser
     }
-  }
-`
-
-export const UPDATE_DATE_OF_DEATH = gql`
-  mutation UPDATE_DATE_OF_DEATH ($userID: String! $input: UpdateUserGeneralInput!) {
-    updateUserGeneral(userID: $userID input: $input) {
-      id
-      dateOfDeath
-    }
-  }
-`
-
-export const UPDATE_SHORT_NAME = gql`
-  mutation UPDATE_SHORT_NAME ($userID: String! $input: UpdateUserGeneralInput!) {
-    updateUserGeneral(userID: $userID input: $input) {
-      id
-      shortName
-    }
-  }
-`
-
-export const TOGGLE_PUBLIC = gql`
-  mutation TOGGLE_PUBLIC ($userID: String! $input: UpdateUserGeneralInput!) {
-    updateUserGeneral(userID: $userID input: $input) {
-      id
-      isPublic
-    }
-  }
-`
-
-export const DELETE_USER = gql`
-  mutation DELETE_USER ($userID: String!) {
-    deleteUser(userID: $userID)
-  }
-`
+  )
+}

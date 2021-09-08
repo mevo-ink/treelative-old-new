@@ -25,6 +25,14 @@ export default async (parent, args, context, info) => {
     { returnDocument: 'after', returnOriginal: false }
   )
 
+  if ((args.input.dateOfMarriage || args.input.marriageLocation) && user.partner) {
+    // update the partner's marriage date and location
+    await db.collection('users').findOneAndUpdate(
+      { _id: user.partner },
+      { $set: { dateOfMarriage: user.dateOfMarriage, marriageLocation: user.marriageLocation } }
+    )
+  }
+
   // clear cache
   if (Object.keys(args.input).find(field => field.includes('location'))) {
     db.collection('cache').deleteOne({ name: 'map-layout' })

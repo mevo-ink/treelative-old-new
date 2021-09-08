@@ -30,10 +30,10 @@ import getCountryInsights from './queries/insights/getCountryInsights'
 import getUsersByAges from './queries/insights/getUsersByAges'
 import getUsersByCountry from './queries/insights/getUsersByCountry'
 
-import searchParents from './queries/search/searchParents'
 import searchUsers from './queries/search/searchUsers'
-import searchChildren from './queries/search/searchChildren'
-import searchPartners from './queries/search/searchPartners'
+import searchUserParents from './queries/search/searchUserParents'
+import searchUserChildren from './queries/search/searchUserChildren'
+import searchUserPartners from './queries/search/searchUserPartners'
 import searchLocations from './queries/search/searchLocations'
 import searchNewUsers from './queries/search/searchNewUsers'
 
@@ -58,9 +58,9 @@ export default {
     countCouples,
     searchUsers,
     searchNewUsers,
-    searchParents,
-    searchChildren,
-    searchPartners,
+    searchUserParents,
+    searchUserChildren,
+    searchUserPartners,
     searchLocations,
     getGraphData,
     getMapData,

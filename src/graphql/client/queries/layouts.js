@@ -1,52 +1,48 @@
-import { request, gql } from 'graphql-request'
+import { graphQLClient, gql } from 'graphql/client'
 import { useQuery } from 'react-query'
 
-export const useGraphData = () => {
+export const useGetGraphData = () => {
   return useQuery(
     ['getGraphData'],
     async () => {
-      const { getGraphData } = await request(
-        '/api/graphql',
-        gql`query { getGraphData }`
+      const { getGraphData } = await graphQLClient.request(
+        gql`query GET_GRAPH_DATA { getGraphData }`
       )
       return getGraphData
     }
   )
 }
 
-export const useMapData = () => {
+export const useGetMapData = () => {
   return useQuery(
     ['getMapData'],
     async () => {
-      const { getMapData } = await request(
-        '/api/graphql',
-        gql`query { getMapData }`
+      const { getMapData } = await graphQLClient.request(
+        gql`query GET_MAP_DATA { getMapData }`
       )
       return getMapData
     }
   )
 }
 
-export const useAgeData = () => {
+export const useGetAgeData = () => {
   return useQuery(
     ['getAgeData'],
     async () => {
-      const { getAgeData } = await request(
-        '/api/graphql',
-        gql`query { getAgeData }`
+      const { getAgeData } = await graphQLClient.request(
+        gql`query GET_AGE_DATA { getAgeData }`
       )
       return getAgeData
     }
   )
 }
 
-export const useBirthdayData = () => {
+export const useGetBirthdayData = () => {
   return useQuery(
     ['getBirthdayData'],
     async () => {
-      const { getBirthdayData } = await request(
-        '/api/graphql',
-        gql`query { getBirthdayData }`
+      const { getBirthdayData } = await graphQLClient.request(
+        gql`query GET_BIRTHDAY_DATA { getBirthdayData }`
       )
       return getBirthdayData
     }
