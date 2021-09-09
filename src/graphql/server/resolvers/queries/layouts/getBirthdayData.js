@@ -95,7 +95,7 @@ export const getBirthdayData = async () => {
       }
     ]).next()
 
-  const response = { users: data, unknownCount, generatedAt: new Date().getDay() }
+  const response = { birthdays: data, unknownCount, generatedAt: new Date().getDay() }
 
   await db.collection('cache').updateOne(
     { name: cacheKey },

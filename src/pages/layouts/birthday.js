@@ -23,6 +23,8 @@ import {
   Divider
 } from '@chakra-ui/react'
 
+import blurImagePlaceholder from 'utils/blurImagePlaceholder'
+
 export async function getServerSideProps () {
   // pre-fetch the layout data
   const queryClient = new QueryClient()
@@ -44,15 +46,21 @@ export default function Birthday () {
   const activeNodePulseID = useRecoilValue(activeNodePulseIDAtom)
 
   useEffect(() => {
-    if (data) return
-    if (Object.keys(data.users).length > 0) {
+    if (error) return
+    // find the next upcoming birthday
+    if (Object.keys(data.birthdays).length > 0) {
       const date = new Date()
-      while (!data.users[parseInt(date.toISOString().slice(5, 10).replace('-', ''))]) {
-        date.setDate(date.getDate() + 1)
+      const upcomingBirthDayMonth = Object.keys(data.birthdays)
+        .find(birthDateMonth => {
+          const [birthDate, birthMonth] = birthDateMonth.split('-')
+          const birthDay = new Date(`${birthDate}-${birthMonth}-${date.getFullYear()}`)
+          return birthDay >= date
+        })
+      if (upcomingBirthDayMonth) {
+        const upcomingBirthDate = document.getElementById(upcomingBirthDayMonth)
+        upcomingBirthDate.style.background = 'hsla(100, 100%, 25%, 1)'
+        upcomingBirthDate.scrollIntoView({ behavior: 'smooth', block: 'center' })
       }
-      const upcomingBirthDate = document.getElementById(parseInt(date.toISOString().slice(5, 10).replace('-', '')))
-      upcomingBirthDate.style.background = 'hsla(100, 100%, 25%, 1)'
-      upcomingBirthDate.scrollIntoView({ behavior: 'smooth', block: 'center' })
     }
     // eslint-disable-next-line
   }, [])
@@ -73,9 +81,8 @@ export default function Birthday () {
         bg='hsla(0, 0%, 0%, .75)'
         sx={{ '&::-webkit-scrollbar': { display: 'none' }, scrollbarWidth: 'none' }}
       >
-        {Object.entries(data.users).map(([dayMonth, users]) => {
+        {Object.entries(data.birthdays).map(([dayMonth, users]) => {
           // convert dob to proper date
-          const dob = dayMonth.padStart(4, '0')
           return (
             <Flex
               key={dayMonth}
@@ -101,7 +108,7 @@ export default function Birthday () {
                 textAlign='center'
                 boxShadow='1px 3px 5px hsla(0, 0%, 0%, .5)'
               >
-                {months[parseInt(dob.slice(0, 2), 10) - 1]} <br /> {dob.substring(2)}
+                {months[parseInt(dayMonth.slice(0, 2), 10) - 1]} <br /> {dayMonth.substring(3)}
               </Text>
               <Divider orientation='vertical' mx='1rem' my='40px' />
               <Flex
@@ -118,6 +125,8 @@ export default function Birthday () {
                       layout='fill'
                       objectFit='contain'
                       className='avatar'
+                      placeholder='blur'
+                      blurDataURL={blurImagePlaceholder(40, 40)}
                       onClick={() => router.push(`?userID=${user.id}`, `/users/${user.id}`, { shallow: true, scroll: false })}
                     />
                     <style jsx global>
@@ -127,19 +136,6 @@ export default function Birthday () {
                       }
                     `}
                     </style>
-                    {/* <Box
-                    w='40px'
-                    h='40px'
-                    mx='.5rem'
-                    my='3'
-                    objectFit='contain'
-                    borderRadius='50%'
-                    zIndex='4'
-                    backgroundImage={user.avatar}
-                    backgroundSize='100% auto'
-                    backgroundPosition='center'
-                    onClick={() => setActiveNodeID(user.id)}
-                  /> */}
                     {user.id === activeNodePulseID && <ActivePulse />}
                     <Text
                       w='20px'
