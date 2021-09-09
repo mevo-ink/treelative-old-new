@@ -1,6 +1,6 @@
 import dbConnect from 'utils/mongodb'
 
-export default async (parent, args, context, info) => {
+export const getAgeData = async () => {
   const db = await dbConnect()
 
   const cacheKey = 'age-layout'
@@ -63,7 +63,7 @@ export default async (parent, args, context, info) => {
       }
     ]).next()
 
-  const response = { data, unknownCount }
+  const response = { users: data, unknownCount }
 
   await db.collection('cache').updateOne(
     { name: cacheKey },
@@ -72,4 +72,8 @@ export default async (parent, args, context, info) => {
   )
 
   return response
+}
+
+export default async (parent, args, context, info) => {
+  return getAgeData()
 }

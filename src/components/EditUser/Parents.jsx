@@ -1,22 +1,20 @@
-import { useMutation } from 'urql'
+import { useMutation } from 'react-query'
 
-import { ADD_PARENT, REMOVE_PARENT } from 'graphql/client/mutations/parent'
-import { SUGGEST_PARENTS } from 'graphql/client/queries/search'
+import { addUserParent, removeUserParent } from 'graphql/client/mutations/relations'
+import { searchUserParents } from 'graphql/client/queries/search'
 
 import AvatarTrigger from 'components/_trigger/AvatarTrigger'
 
 export default function Parents ({ user }) {
-  const [addParentResult, addParent] = useMutation(ADD_PARENT)
-  const [removeParentResult, removeParent] = useMutation(REMOVE_PARENT)
+  const { mutateAsync: addUserParentMutation, ...addUserParentResult } = useMutation(addUserParent)
+  const { mutateAsync: removeUserParentMutation, ...removeUserParentResult } = useMutation(removeUserParent)
 
   const handleRemoveParent = (id) => {
-    const variables = { userID: user.id, parentID: id }
-    return removeParent(variables)
+    return removeUserParentMutation({ userID: user.id, parentID: id })
   }
 
   const handleAddParent = (id) => {
-    const variables = { userID: user.id, parentID: id }
-    return addParent(variables)
+    return addUserParentMutation({ userID: user.id, parentID: id })
   }
 
   return (
@@ -26,10 +24,10 @@ export default function Parents ({ user }) {
       limit={2}
       relations={user.parents}
       removeRelation={handleRemoveParent}
-      removeRelationResult={removeParentResult}
+      removeRelationResult={removeUserParentResult}
       addRelation={handleAddParent}
-      addRelationResult={addParentResult}
-      SUGGEST_RELATIONS={SUGGEST_PARENTS}
+      addRelationResult={addUserParentResult}
+      SUGGEST_RELATIONS={searchUserParents}
     />
   )
 }

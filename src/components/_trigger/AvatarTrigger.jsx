@@ -83,7 +83,7 @@ export default function AvatarTrigger (props) {
                 <RemoveButton
                   title={'Remove' + title.substring(3)}
                   onRemove={() => handleRemoveRelation(user.id)}
-                  isLoading={removeRelationResult.fetching}
+                  isLoading={removeRelationResult.isLoading}
                 />
               )}
               <Button

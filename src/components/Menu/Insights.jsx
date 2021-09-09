@@ -12,12 +12,13 @@ import {
 import { BiWorld } from 'react-icons/bi'
 import { SiApollographql } from 'react-icons/si'
 
-import { useCountUsers } from 'graphql/client/queries/insights'
+import { useQuery } from 'react-query'
+import { countUsers } from 'graphql/client/queries/insights'
 
 import InsightModal from 'components/Menu/Insights/InsightModal'
 
 export default function Insights () {
-  const { data: usersCount } = useCountUsers()
+  const { data: usersCount } = useQuery('countUsers', countUsers)
 
   const [openInsight, setOpenInsight] = useState(null)
 

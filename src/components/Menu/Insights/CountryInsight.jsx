@@ -11,27 +11,28 @@ import {
   ResponsiveContainer
 } from 'recharts'
 
-import { useGetCountryInsights } from 'graphql/client/queries/insights'
-import { useGetUsersByCountry } from 'graphql/client/queries/users'
+import { useQuery } from 'react-query'
+import { getCountryInsights } from 'graphql/client/queries/insights'
+import { getUsersByCountry } from 'graphql/client/queries/users'
 
 import Loading from 'components/_common/Loading'
 import UsersMoreInfo from 'components/Menu/Insights/UsersMoreInfo'
 
 export default function CountryInsight () {
-  const { data, isFetching } = useGetCountryInsights()
+  const { data, isLoading } = useQuery('getCountryInsights', getCountryInsights)
 
   const [activeIndex, setActiveIndex] = useState(0)
 
   const [isMoreInfoOpen, setIsMoreInfoOpen] = useState(false)
 
-  if (isFetching) return <Loading />
+  if (isLoading) return <Loading />
 
   return (
     <>
       {isMoreInfoOpen && (
         <UsersMoreInfo
           title={`Country ${isMoreInfoOpen}`}
-          queryHook={useGetUsersByCountry}
+          queryFn={getUsersByCountry}
           variables={{ country: isMoreInfoOpen }}
           onClose={() => setIsMoreInfoOpen(null)}
         />

@@ -1,6 +1,6 @@
 import dbConnect from 'utils/mongodb'
 
-export default async (parent, args, context, info) => {
+export const getBirthdayData = async () => {
   const db = await dbConnect()
 
   const cacheKey = 'birthday-layout'
@@ -95,7 +95,7 @@ export default async (parent, args, context, info) => {
       }
     ]).next()
 
-  const response = { data, unknownCount, generatedAt: new Date().getDay() }
+  const response = { users: data, unknownCount, generatedAt: new Date().getDay() }
 
   await db.collection('cache').updateOne(
     { name: cacheKey },
@@ -104,4 +104,8 @@ export default async (parent, args, context, info) => {
   )
 
   return response
+}
+
+export default async (parent, args, context, info) => {
+  return getBirthdayData()
 }

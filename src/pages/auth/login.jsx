@@ -1,13 +1,33 @@
 import { useRouter } from 'next/router'
-import { withUrqlClient } from 'next-urql'
 
-import Login from 'components/Login'
+import LoginCard from 'components/Login'
 
-import client from 'graphql/client/client'
+import { getSession } from 'utils/auth'
 
-const LoginServer = () => {
-  const router = useRouter()
-  return <Login onClose={() => router.push('/')} isServer />
+export async function getServerSideProps (ctx) {
+  const session = await getSession(ctx)
+  if (session.user) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: 'layouts/graph'
+      }
+    }
+  }
+
+  return {
+    props: { }
+  }
 }
 
-export default withUrqlClient(client)(LoginServer)
+export default function Login () {
+  const router = useRouter()
+
+  const onLoginClose = () => {
+    router.push('/')
+  }
+
+  return (
+    <LoginCard onClose={onLoginClose} />
+  )
+}

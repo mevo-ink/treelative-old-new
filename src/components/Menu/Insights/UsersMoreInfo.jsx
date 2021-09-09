@@ -1,5 +1,7 @@
 import { format } from 'date-fns'
 
+import { useQuery } from 'react-query'
+
 import { useSetRecoilState } from 'recoil'
 import { activeNodeIDAtom } from 'utils/atoms.js'
 
@@ -17,10 +19,10 @@ import {
   ModalBody
 } from '@chakra-ui/react'
 
-export default function UsersMoreInfo ({ queryHook, variables, onClose, title }) {
+export default function UsersMoreInfo ({ queryFn, variables, onClose, title }) {
   const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
 
-  const { data, isFetching } = queryHook(...Object.values(variables))
+  const { data, isLoading } = useQuery([title, variables], queryFn)
 
   const handleDate = (date) => {
     const dt = new Date(date)
@@ -42,7 +44,7 @@ export default function UsersMoreInfo ({ queryHook, variables, onClose, title })
             '::-webkit-scrollbar-thumb': { background: 'hsla(0, 0%, 100%, 1)' }
           }}
         >
-          {isFetching && <Loading />}
+          {isLoading && <Loading />}
           {data && (
             <Stack>
               {data.map(user => (

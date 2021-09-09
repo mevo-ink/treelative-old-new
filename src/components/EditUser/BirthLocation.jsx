@@ -1,15 +1,13 @@
-import { useMutation } from 'urql'
-
-import { UPDATE_BIRTH_LOCATION } from 'graphql/client/mutations/users'
+import { useMutation } from 'react-query'
+import { updateUserGeneral } from 'graphql/client/mutations/users'
 
 import LocationTrigger from 'components/_trigger/LocationTrigger'
 
 export default function BirthLocation ({ user }) {
-  const [editBirthLocationResult, editBirthLocation] = useMutation(UPDATE_BIRTH_LOCATION)
+  const { mutateAsync, error, isLoading } = useMutation(updateUserGeneral)
 
   const handleEditBirthLocation = birthLocation => {
-    const variables = { userID: user.id, input: { birthLocation } }
-    return editBirthLocation(variables)
+    return mutateAsync({ userID: user.id, input: { birthLocation } })
   }
 
   return (
@@ -17,8 +15,8 @@ export default function BirthLocation ({ user }) {
       title='Edit Birth Location'
       value={user?.birthLocation}
       onSubmit={handleEditBirthLocation}
-      isLoading={editBirthLocationResult.fetching}
-      error={editBirthLocationResult.error}
+      isLoading={isLoading}
+      error={error}
     />
   )
 }

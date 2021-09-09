@@ -6,11 +6,12 @@ import {
   Divider
 } from '@chakra-ui/react'
 
-import { useCountUsers, useCountCouples } from 'graphql/client/queries/insights'
+import { useQuery } from 'react-query'
+import { countUsers, countCouples } from 'graphql/client/queries/insights'
 
 export default function MembersInsight () {
-  const { data: usersCount } = useCountUsers()
-  const { data: couplesCount } = useCountCouples()
+  const { data: usersCount } = useQuery('countUsers', countUsers)
+  const { data: couplesCount } = useQuery('countCouples', countCouples)
 
   const data = [
     { title: 'Members', value: usersCount || 0 },

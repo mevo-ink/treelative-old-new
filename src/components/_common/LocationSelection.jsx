@@ -2,34 +2,30 @@ import React, { useState } from 'react'
 
 import { Stack } from '@chakra-ui/react'
 
-import { useClient } from 'urql'
-
-import { SUGGEST_LOCATIONS } from 'graphql/client/queries/search'
+import { useQueryClient } from 'react-query'
+import { searchLocations } from 'graphql/client/queries/search'
 
 import ErrorAlert from 'components/_common/ErrorAlert'
 import AsyncSelect from 'components/_select/AsyncSelect'
 
 export default function LocationSelection (props) {
-  const client = useClient()
-
   const {
     placeholder = 'Select a Location',
     ...rest
   } = props
 
+  const queryClient = useQueryClient()
+
   const [error, setError] = useState()
 
   const transformLocations = (location) => ({ value: location, label: location.description })
 
-  const loadLocations = async search => {
+  const loadLocations = async query => {
     try {
-      const result = await client.query(SUGGEST_LOCATIONS, { search }).toPromise()
-      if (result.data) {
-        return result?.data?.locations.map(transformLocations)
+      const data = await queryClient.fetchQuery(['searchLocations', { query }], searchLocations)
+      if (data) {
+        return data.map(transformLocations)
       } else {
-        if (result.error) {
-          setError(result.error)
-        }
         return []
       }
     } catch (error) {

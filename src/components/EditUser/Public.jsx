@@ -1,17 +1,15 @@
 import { Box, Button } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
-import { useMutation } from 'urql'
-
-import { TOGGLE_PUBLIC } from 'graphql/client/mutations/users'
+import { useMutation } from 'react-query'
+import { updateUserGeneral } from 'graphql/client/mutations/users'
 
 const MotionBox = motion(Box)
 export default function Public ({ user }) {
-  const [togglePublicResult, togglePublic] = useMutation(TOGGLE_PUBLIC)
+  const { mutateAsync, isLoading } = useMutation(updateUserGeneral)
 
   const handleTogglePublic = () => {
-    const variables = { userID: user.id, input: { isPublic: !user.isPublic } }
-    return togglePublic(variables)
+    return mutateAsync({ userID: user.id, input: { isPublic: !user.isPublic } })
   }
 
   const spring = {
@@ -36,7 +34,7 @@ export default function Public ({ user }) {
       _hover={{
         background: user.isPublic ? 'hsla(130, 65%, 55%, 1)' : 'hsla(0, 0%, 100%, .2)'
       }}
-      isDisabled={togglePublicResult.fetching}
+      isDisabled={isLoading}
       onClick={handleTogglePublic}
     >
       <MotionBox

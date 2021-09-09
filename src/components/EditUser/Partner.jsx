@@ -1,22 +1,20 @@
-import { useMutation } from 'urql'
+import { useMutation } from 'react-query'
 
-import { SUGGEST_PARTNERS } from 'graphql/client/queries/search'
-import { ADD_PARTNER, REMOVE_PARTNER } from 'graphql/client/mutations/partner'
+import { addUserPartner, removeUserPartner } from 'graphql/client/mutations/relations'
+import { searchUserPartners } from 'graphql/client/queries/search'
 
 import AvatarTrigger from 'components/_trigger/AvatarTrigger'
 
 export default function Partner ({ user }) {
-  const [addPartnerResult, addPartner] = useMutation(ADD_PARTNER)
-  const [removePartnerResult, removePartner] = useMutation(REMOVE_PARTNER)
+  const { mutateAsync: addUserPartnerMutation, ...addUserPartnerResult } = useMutation(addUserPartner)
+  const { mutateAsync: removeUserPartnerMutation, ...removeUserPartnerResult } = useMutation(removeUserPartner)
 
   const handleRemovePartner = (id) => {
-    const variables = { userID: user.id, partnerID: id }
-    return removePartner(variables)
+    return removeUserPartnerMutation({ userID: user.id, partnerID: id })
   }
 
   const handleAddPartner = (id) => {
-    const variables = { userID: user.id, partnerID: id }
-    return addPartner(variables)
+    return addUserPartnerMutation({ userID: user.id, partnerID: id })
   }
 
   return (
@@ -26,10 +24,10 @@ export default function Partner ({ user }) {
       limit={1}
       relations={user.partner ? [user.partner] : []}
       removeRelation={handleRemovePartner}
-      removeRelationResult={removePartnerResult}
+      removeRelationResult={removeUserPartnerResult}
       addRelation={handleAddPartner}
-      addRelationResult={addPartnerResult}
-      SUGGEST_RELATIONS={SUGGEST_PARTNERS}
+      addRelationResult={addUserPartnerResult}
+      SUGGEST_RELATIONS={searchUserPartners}
     />
   )
 }

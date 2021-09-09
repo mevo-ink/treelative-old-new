@@ -11,7 +11,7 @@ import { useSetRecoilState } from 'recoil'
 
 import { activeNodeIDAtom } from 'utils/atoms.js'
 
-export default function SearchResult ({ users, isFetching }) {
+export default function SearchResult ({ users, isLoading }) {
   const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
   const handleClick = (id) => { setActiveNodeID(id) }
 
@@ -30,7 +30,7 @@ export default function SearchResult ({ users, isFetching }) {
         p='.5em .6em'
         bg='hsla(0, 0%, 100%, .2)'
         onClick={() => handleClick(user.id)}
-        isLoading={isFetching}
+        isLoading={isLoading}
       >
         <Flex w='100%' alignItems='center'>
           <Image

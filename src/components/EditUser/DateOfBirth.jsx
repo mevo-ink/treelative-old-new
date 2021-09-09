@@ -1,15 +1,13 @@
-import { useMutation } from 'urql'
-
-import { UPDATE_DATE_OF_BIRTH } from 'graphql/client/mutations/users'
+import { useMutation } from 'react-query'
+import { updateUserGeneral } from 'graphql/client/mutations/users'
 
 import DateTrigger from 'components/_trigger/DateTrigger'
 
 export default function DateOfBirth ({ user, ...props }) {
-  const [editDateOfBirthResult, editDateOfBirth] = useMutation(UPDATE_DATE_OF_BIRTH)
+  const { mutateAsync, ...editDateOfBirthResult } = useMutation(updateUserGeneral)
 
   const handleEditDateOfBirth = dateOfBirth => {
-    const variables = { userID: user.id, input: { dateOfBirth } }
-    return editDateOfBirth(variables)
+    return mutateAsync({ userID: user.id, input: { dateOfBirth } })
   }
 
   return (

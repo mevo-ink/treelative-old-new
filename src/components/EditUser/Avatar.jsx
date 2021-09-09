@@ -9,10 +9,10 @@ import {
 } from '@chakra-ui/react'
 import { HiCamera } from 'react-icons/hi'
 
-import { useMutation } from 'urql'
-import { useRecoilValue } from 'recoil'
+import { useMutation } from 'react-query'
+import { updateUserAvatar } from 'graphql/client/mutations/users'
 
-import { UPDATE_AVATAR } from 'graphql/client/mutations/users'
+import { useRecoilValue } from 'recoil'
 import { networkMethodsAtom, isEditModeAtom, layoutAtom } from 'utils/atoms.js'
 
 import ImageCropper from 'components/_common/ImageCropper'
@@ -48,7 +48,7 @@ export default function Avatar ({ user }) {
 
   const [avatarURL, setAvatarURL] = useState(user.avatar)
 
-  const [, updateUserAvatar] = useMutation(UPDATE_AVATAR)
+  const updateUserAvatarMutation = useMutation(updateUserAvatar)
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -86,10 +86,9 @@ export default function Avatar ({ user }) {
   const handleUpload = selectedFile => {
     setIsLoading(true)
     const variables = { userID: user.id }
-    updateUserAvatar(variables)
-      .then(result => {
-        if (result.data) {
-          const url = result.data.updateUserAvatar
+    updateUserAvatarMutation.mutateAsync(variables)
+      .then(url => {
+        if (url) {
           window.fetch(url, { method: 'PUT', body: selectedFile })
             .then((response) => {
               if (response.status === 200) {
@@ -105,9 +104,6 @@ export default function Avatar ({ user }) {
             })
             .catch(handleError)
             .finally(() => setIsLoading(false))
-        }
-        if (result.error) {
-          handleError(result.error)
         }
       })
       .catch(error => {
@@ -125,7 +121,7 @@ export default function Avatar ({ user }) {
     const selectedFile = event.target.files[0]
     if (!selectedFile) return
 
-    const reader = new FileReader()
+    const reader = new window.FileReader()
     reader.readAsDataURL(selectedFile)
     reader.onload = (e) => {
       setSelectedFile(e.target.result)

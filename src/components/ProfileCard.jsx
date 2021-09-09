@@ -6,10 +6,11 @@ import {
 } from '@chakra-ui/react'
 import { MdClose } from 'react-icons/md'
 
-import { useRecoilValue } from 'recoil'
-import { isEditModeAtom } from 'utils/atoms.js'
+// import { useRecoilValue } from 'recoil'
+// import { isEditModeAtom } from 'utils/atoms.js'
 
-import { useGetUser } from 'graphql/client/queries/users'
+import { useQuery } from 'react-query'
+import { getUser } from 'graphql/client/queries/users'
 
 import Loading from 'components/Loading'
 import OuterWrapper from 'components/ProfileCard/OuterWrapper'
@@ -40,9 +41,9 @@ import OuterWrapper from 'components/ProfileCard/OuterWrapper'
 // }
 
 export default function ProfileCard ({ userID, onClose }) {
-  const isEditMode = useRecoilValue(isEditModeAtom)
+  // const isEditMode = useRecoilValue(isEditModeAtom)
 
-  const { data: user, error, isFetching } = useGetUser(userID)
+  const { data: user, error, isLoading } = useQuery(['getUser', { id: userID }], getUser)
 
   return (
     <Modal isOpen onClose={onClose} isCentered>
@@ -60,7 +61,7 @@ export default function ProfileCard ({ userID, onClose }) {
           onClick={onClose}
         />
         <OuterWrapper>
-          {isFetching && <Loading />}
+          {isLoading && <Loading />}
           {error && <h1>{error.message}</h1>}
           {user && (
             <h1>{user.fullName}</h1>

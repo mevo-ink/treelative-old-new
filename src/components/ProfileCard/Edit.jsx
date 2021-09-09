@@ -2,10 +2,10 @@ import { IconButton } from '@chakra-ui/react'
 import { FiEdit } from 'react-icons/fi'
 import { MdDone } from 'react-icons/md'
 
-import { useQuery } from 'urql'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useQuery } from 'react-query'
+import { whoAmI } from 'graphql/client/queries/auth'
 
-import { WHO_AM_I } from 'graphql/client/queries/auth'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { isEditModeAtom, activeNodeIDAtom } from 'utils/atoms.js'
 
 import Delete from 'components/ProfileCard/Delete'
@@ -14,8 +14,7 @@ export default function Edit ({ innerBtnStyles, user }) {
   const [isEditMode, setIsEditMode] = useRecoilState(isEditModeAtom)
   const activeNodeID = useRecoilValue(activeNodeIDAtom)
 
-  const [whoAmIResult] = useQuery({ query: WHO_AM_I })
-  const authUser = whoAmIResult.data?.whoAmI
+  const { data: authUser } = useQuery('whoAmI', whoAmI)
 
   const checkEditable = () => {
     if (authUser?.children.find(child => child.id === activeNodeID)) return true

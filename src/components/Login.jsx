@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import {
   Box,
@@ -15,10 +15,8 @@ import { FiLogIn } from 'react-icons/fi'
 import { MdClose } from 'react-icons/md'
 import { FaGoogle, FaFacebook } from 'react-icons/fa'
 
-import { useMutation } from 'urql'
-
+import { useLoginWithProvider } from 'graphql/client/mutations/auth'
 import { google, facebook } from 'utils/firebase'
-import { LOGIN_WITH_PROVIDER } from 'graphql/client/mutations/auth'
 
 import ErrorModal from 'components/_common/ErrorModal'
 import LoginButton from 'components/Login/LoginButton'
@@ -32,20 +30,18 @@ const loginProviders = [
 export default function Login ({ onClose, isServer }) {
   const [showLoginWithEmail, setShowLoginWithEmail] = useState(false)
 
-  const [loginWithProviderResult, loginWithProvider] = useMutation(LOGIN_WITH_PROVIDER)
-
-  const [internalError, setInternalError] = useState()
-
   const onLoginSuccess = (result) => {
     // setInternalError({ message: 'OATHA' })
     result.data && window.localStorage.setItem('AUTH_SESSION_ID', result.data.login)
     isServer && onClose()
   }
 
+  const [internalError, setInternalError] = useState()
+
+  const { mutate: loginWithProvider, error } = useLoginWithProvider()
+
   const onLoginWithProvider = (token, { email }) => {
-    loginWithProvider({ email, token })
-      .then(onLoginSuccess)
-      .catch(setInternalError)
+    loginWithProvider({ email, token }, { onSuccess: onLoginSuccess, onError: setInternalError })
   }
 
   if (internalError?.message) return <ErrorModal icon title='Ops!' message={internalError.message} />
@@ -66,7 +62,7 @@ export default function Login ({ onClose, isServer }) {
           onClick={onClose}
         />
         <Box w='100%' p='2rem 2.5rem'>
-          {loginWithProviderResult.error && <ErrorModal> {loginWithProviderResult.error.message} </ErrorModal>}
+          {error && <ErrorModal> {error.message} </ErrorModal>}
           <Text
             mb='1rem'
             fontSize='1.8rem'

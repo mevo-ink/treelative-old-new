@@ -1,16 +1,15 @@
 import { string } from 'yup'
-import { useMutation } from 'urql'
 
-import { UPDATE_PHONE_NUMBER } from 'graphql/client/mutations/phoneAndEmail'
+import { useMutation } from 'react-query'
+import { updateUserGeneral } from 'graphql/client/mutations/users'
 
 import InputWithIconTrigger from 'components/_trigger/InputWithIconTrigger'
 
 export default function PhoneNumber ({ user, icon }) {
-  const [editPhoneNumberResult, editPhoneNumber] = useMutation(UPDATE_PHONE_NUMBER)
+  const { mutateAsync, isLoading, error } = useMutation(updateUserGeneral)
 
   const handleEditPhoneNumber = phoneNumber => {
-    const variables = { userID: user.id, input: { phoneNumber } }
-    return editPhoneNumber(variables)
+    return mutateAsync({ userID: user.id, input: { phoneNumber } })
   }
 
   return (
@@ -22,8 +21,8 @@ export default function PhoneNumber ({ user, icon }) {
       value={user?.phoneNumber}
       validation={string().matches(/^\+?\d{10,14}$/, { message: 'Invalid Phone Number', excludeEmptyString: true })}
       onSubmit={handleEditPhoneNumber}
-      isLoading={editPhoneNumberResult.fetching}
-      error={editPhoneNumberResult.error}
+      isLoading={isLoading}
+      error={error}
     />
   )
 }

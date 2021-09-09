@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router'
 
-import { QueryClient } from 'react-query'
+import { QueryClient, useQuery } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
 
 import { getMapData } from 'graphql/server/resolvers/queries/layouts/getMapData'
-import { useMapData } from 'graphql/client/queries/layouts'
+import { getMapData as getMapDataQueryFn } from 'graphql/client/queries/layouts'
 
 import Wrapper from 'components/Wrapper'
 import ErrorModal from 'components/_common/ErrorModal'
@@ -98,8 +98,8 @@ const styles = [
 export async function getServerSideProps () {
   // pre-fetch the layout data
   const queryClient = new QueryClient()
-  const graphData = await getMapData()
-  queryClient.setQueryData('getMapData', graphData)
+  const mapData = await getMapData()
+  queryClient.setQueryData('getMapData', mapData)
 
   return {
     props: {
@@ -111,7 +111,7 @@ export async function getServerSideProps () {
 export default function Map () {
   const router = useRouter()
 
-  const { data, error } = useMapData()
+  const { data, error } = useQuery('getMapData', getMapDataQueryFn)
 
   const authUserID = '' // TODO: get from auth
 

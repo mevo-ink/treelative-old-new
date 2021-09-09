@@ -3,12 +3,12 @@ import { useState } from 'react'
 import { IconButton } from '@chakra-ui/react'
 import { RiDeleteBin6Line } from 'react-icons/ri'
 
-import { useRecoilValue } from 'recoil'
-import { useQuery, useMutation } from 'urql'
+import { useQuery, useMutation } from 'react-query'
+import { whoAmI } from 'graphql/client/queries/auth'
+import { deleteUser } from 'graphql/client/mutations/users'
 
-import { WHO_AM_I } from 'graphql/client/queries/auth'
+import { useRecoilValue } from 'recoil'
 import { isEditModeAtom } from 'utils/atoms.js'
-import { DELETE_USER } from 'graphql/client/mutations/users'
 
 import ConfirmationModal from 'components/_common/ConfirmationModal'
 
@@ -17,14 +17,12 @@ export default function Edit ({ innerBtnStyles, user }) {
 
   const [isConfirm, setIsConfirm] = useState(false)
 
-  const [deleteUserResult, deleteUser] = useMutation(DELETE_USER)
+  const { mutateAsync, isLoading } = useMutation(deleteUser)
 
-  const [whoAmIResult] = useQuery({ query: WHO_AM_I })
-  const authUser = whoAmIResult.data?.whoAmI
+  const { data: authUser } = useQuery('whoAmI', whoAmI)
 
   const handleDeleteUser = () => {
-    const variables = { userID: user.id }
-    return deleteUser(variables)
+    return mutateAsync({ userID: user.id })
   }
 
   const handleClear = (e) => {
@@ -46,7 +44,7 @@ export default function Edit ({ innerBtnStyles, user }) {
           title={`Delete ${user.shortName}`}
           onConfirm={confirmClear}
           onCancel={cancelClear}
-          isLoading={deleteUserResult.fetching}
+          isLoading={isLoading}
         />
       )}
       {isEditMode && authUser.isAdmin && (

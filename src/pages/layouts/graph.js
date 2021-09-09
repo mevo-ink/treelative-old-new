@@ -2,11 +2,11 @@ import { useRouter } from 'next/router'
 
 import { useState, useEffect, useRef } from 'react'
 
-import { QueryClient } from 'react-query'
+import { QueryClient, useQuery } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
 
 import { getGraphData } from 'graphql/server/resolvers/queries/layouts/getGraphData'
-import { useGetGraphData } from 'graphql/client/queries/layouts'
+import { getGraphData as getGraphDataQueryFn } from 'graphql/client/queries/layouts'
 
 import Wrapper from 'components/Wrapper'
 import Loading from 'components/Loading'
@@ -83,7 +83,7 @@ const options = {
 export default function Graph () {
   const router = useRouter()
 
-  const { data, error } = useGetGraphData()
+  const { data, error } = useQuery('getGraphData', getGraphDataQueryFn)
 
   const graphRef = useRef()
 

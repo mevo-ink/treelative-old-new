@@ -12,12 +12,12 @@ import {
 } from '@chakra-ui/react'
 import { IoPersonAddSharp } from 'react-icons/io5'
 
-import { useMutation } from 'urql'
+import { useMutation } from 'react-query'
+import { createUser } from 'graphql/client/mutations/users'
+
 import { object, string } from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-
-import { CREATE_USER } from 'graphql/client/mutations/users'
 
 import useDevice from 'hooks/useDevice'
 import FormDialog from 'components/_common/FormDialog'
@@ -42,7 +42,7 @@ export default function CreateUser ({ initialValue = '', onClose: onParentClose 
 
   const [internalError, setInternalError] = useState()
 
-  const [{ error, fetching }, createUser] = useMutation(CREATE_USER)
+  const { mutateAsync, error, isLoading } = useMutation(createUser)
 
   const { register, handleSubmit, formState: { errors }, reset: resetForm, setFocus } = useForm({
     defaultValues: { fullName: initialValue },
@@ -53,9 +53,9 @@ export default function CreateUser ({ initialValue = '', onClose: onParentClose 
   useEffect(() => { (isDesktop || initialValue) && isOpen && setTimeout(() => setFocus('fullName'), 1) }, [isOpen])
 
   const onSubmit = (input) => {
-    createUser({ input })
-      .then(async result => {
-        if (result.data) {
+    mutateAsync({ input })
+      .then(async data => {
+        if (data) {
           toast({
             title: 'Successfully User Created',
             status: 'success',
@@ -63,7 +63,7 @@ export default function CreateUser ({ initialValue = '', onClose: onParentClose 
             duration: 5000,
             isClosable: true
           })
-          handleClose(result.data)
+          handleClose(data)
         }
       })
       .catch(setInternalError)
@@ -86,7 +86,7 @@ export default function CreateUser ({ initialValue = '', onClose: onParentClose 
           formID='#createUser'
           size='2xl'
           error={error || internalError}
-          loading={fetching}
+          loading={isLoading}
           onClose={handleClose}
           onSubmit={handleSubmit(onSubmit)}
         >

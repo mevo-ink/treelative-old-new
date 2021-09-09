@@ -5,8 +5,8 @@ import { firebaseAuth } from 'utils/firebase'
 import Loading from 'components/_common/Loading'
 import ErrorAlert from 'components/_common/ErrorAlert'
 
-import { useMutation } from 'urql'
-import { LOGIN_WITH_PROVIDER } from 'graphql/client/mutations/auth'
+import { useMutation } from 'react-query'
+import { loginWithProvider } from 'graphql/client/mutations/auth'
 
 import {
   Text,
@@ -33,16 +33,14 @@ export default function finishLoginWithEmail () {
 
   const [internalError, setInternalError] = useState()
 
-  const [loginWithProviderResult, loginWithProvider] = useMutation(LOGIN_WITH_PROVIDER)
+  const { mutate, error } = useMutation(loginWithProvider)
 
   const onLoginWithProvider = (token) => {
-    loginWithProvider({ email, token })
-      .then(onLoginSuccess)
-      .catch(setInternalError)
+    mutate({ email, token }, { onSuccess: onLoginSuccess, onError: setInternalError })
   }
 
   const onLoginSuccess = (result) => {
-    setInternalError({ message: 'OATHA' })
+    // setInternalError({ message: 'OATHA' })
     if (result.data) {
       window.localStorage.setItem('AUTH_SESSION_ID', result.data.login)
       // redirect back to the original page where login was initiated
@@ -83,7 +81,7 @@ export default function finishLoginWithEmail () {
     window.location.href = '/'
   }
 
-  const isError = !isValidUrl || internalError || firebaseLoginError || loginWithProviderResult?.error
+  const isError = !isValidUrl || internalError || firebaseLoginError || error
 
   return (
     <Modal isOpen onClose={() => {}} isCentered>
@@ -110,7 +108,7 @@ export default function finishLoginWithEmail () {
             <Stack spacing='4'>
               {!isValidUrl && <ErrorAlert>{isValidUrl}</ErrorAlert>}
               {firebaseLoginError && <ErrorAlert>{firebaseLoginError.message}</ErrorAlert>}
-              {loginWithProviderResult.error && <ErrorAlert> {loginWithProviderResult.error.message} </ErrorAlert>}
+              {error && <ErrorAlert> {error.message} </ErrorAlert>}
               {internalError?.error && <ErrorAlert> {internalError.message} </ErrorAlert>}
               <Button onClick={goBackHome}>Go Home Nigga</Button>
             </Stack>

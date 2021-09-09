@@ -1,16 +1,15 @@
 import { string } from 'yup'
-import { useMutation } from 'urql'
 
-import { UPDATE_EMAIL } from 'graphql/client/mutations/phoneAndEmail'
+import { useMutation } from 'react-query'
+import { updateUserGeneral } from 'graphql/client/mutations/users'
 
 import InputWithIconTrigger from 'components/_trigger/InputWithIconTrigger'
 
 export default function Email ({ user, icon }) {
-  const [editEmailResult, editEmail] = useMutation(UPDATE_EMAIL)
+  const { mutateAsync, isLoading, error } = useMutation(updateUserGeneral)
 
   const handleEditEmail = email => {
-    const variables = { userID: user.id, input: { email } }
-    return editEmail(variables)
+    return mutateAsync({ userID: user.id, input: { email } })
   }
 
   return (
@@ -22,8 +21,8 @@ export default function Email ({ user, icon }) {
       value={user?.email}
       validation={string().email().required()}
       onSubmit={handleEditEmail}
-      isLoading={editEmailResult.fetching}
-      error={editEmailResult.error}
+      isLoading={isLoading}
+      error={error}
     />
   )
 }

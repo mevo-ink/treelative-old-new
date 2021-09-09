@@ -99,7 +99,7 @@ export default function RelationModal (props) {
                   </Stack>
                 </Stack>
               </FormControl>
-              {(addRelationResult.fetching) && <Loading />}
+              {(addRelationResult.isLoading) && <Loading />}
               {addRelationResult.error && <ErrorAlert> {addRelationResult.error.message} </ErrorAlert>}
             </Stack>
           </ModalBody>

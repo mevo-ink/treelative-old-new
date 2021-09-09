@@ -57,7 +57,7 @@ export default function DateTimePickerDialogTrigger (props) {
   }
 
   if (defaultIsOpen) {
-    return isOpen ? <DateModal title={title} value={value} onClose={onClose} onSubmit={handleEditDate} isLoading={editDateResult?.fetching} /> : null
+    return isOpen ? <DateModal title={title} value={value} onClose={onClose} onSubmit={handleEditDate} isLoading={editDateResult?.isLoading} /> : null
   }
 
   if (!isEditMode) {
@@ -70,9 +70,9 @@ export default function DateTimePickerDialogTrigger (props) {
 
   return (
     <Flex w='90%' justifyContent='center' animation={`${wiggle} infinite .15s linear`}>
-      {isOpen && <DateModal title={title} value={value} onClose={onClose} onSubmit={handleEditDate} isLoading={editDateResult?.fetching} />}
+      {isOpen && <DateModal title={title} value={value} onClose={onClose} onSubmit={handleEditDate} isLoading={editDateResult?.isLoading} />}
       <Flex justifyContent='center' position='relative'>
-        {isEditMode && value && <RemoveButton title={'Remove' + title.substring(4)} onRemove={handleEditDate} isLoading={editDateResult?.fetching} />}
+        {isEditMode && value && <RemoveButton title={'Remove' + title.substring(4)} onRemove={handleEditDate} isLoading={editDateResult?.isLoading} />}
         <Button onClick={onOpen} variant='editable-input'>
           {value ? format(dtDateOnly, 'PP').replace(/[, ]+/g, '/') : 'Unavailable'}
         </Button>

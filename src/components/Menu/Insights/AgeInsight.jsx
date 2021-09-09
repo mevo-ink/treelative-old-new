@@ -11,28 +11,29 @@ import {
   ResponsiveContainer
 } from 'recharts'
 
-import { useGetAgeInsights } from 'graphql/client/queries/insights'
-import { useGetUsersByAgeRange } from 'graphql/client/queries/users'
+import { useQuery } from 'react-query'
+import { getAgeInsights } from 'graphql/client/queries/insights'
+import { getUsersByAgeRange } from 'graphql/client/queries/users'
 
 import Loading from 'components/_common/Loading'
 import UsersMoreInfo from 'components/Menu/Insights/UsersMoreInfo'
 
 export default function AgeInsight () {
-  const { data, isFetching } = useGetAgeInsights()
+  const { data, isLoading } = useQuery('getAgeInsights', getAgeInsights)
 
   const [activeIndex, setActiveIndex] = useState(0)
 
   const [isMoreInfoOpen, setIsMoreInfoOpen] = useState(false)
 
-  if (isFetching) return <Loading />
+  if (isLoading) return <Loading />
 
   return (
     <>
       {isMoreInfoOpen && (
         <UsersMoreInfo
           title={`Ages ${isMoreInfoOpen}`}
-          queryHook={useGetUsersByAgeRange}
-          variables={{ ages: isMoreInfoOpen }}
+          queryFn={getUsersByAgeRange}
+          variables={{ ageRange: isMoreInfoOpen }}
           onClose={() => setIsMoreInfoOpen(null)}
         />
       )}

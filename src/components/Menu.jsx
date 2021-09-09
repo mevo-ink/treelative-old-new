@@ -15,8 +15,8 @@ import {
 import { FaGripLines } from 'react-icons/fa'
 
 // import Search from 'components/Menu/Search'
+import UserOptions from 'components/Menu/UserOptions'
 import Layouts from 'components/Menu/Layouts'
-// import UserOptions from 'components/Menu/UserOptions'
 import Insights from 'components/Menu/Insights'
 import Copyright from 'components/Menu/Copyright'
 
@@ -75,7 +75,7 @@ export default function Menu () {
           />
           <DrawerBody sx={{ '&::-webkit-scrollbar': { display: 'none' }, scrollbarWidth: 'none' }}>
             <Stack p='1.5em .5em' spacing='2rem'>
-                {/* <UserOptions onClose={onClose} /> */}
+                <UserOptions onClose={onClose} />
               <HStack justifyContent='space-between' alignItems='end'>
                 {/* <Search onClose={onClose} /> */}
               </HStack>
