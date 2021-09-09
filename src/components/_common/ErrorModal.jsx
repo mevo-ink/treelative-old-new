@@ -14,10 +14,11 @@ import {
 } from '@chakra-ui/react'
 import { MdClose } from 'react-icons/md'
 
-import { useSetRecoilState } from 'recoil'
+import { useQuery } from 'react-query'
+import { getContactUsers } from 'graphql/client/queries/users'
 
+import { useSetRecoilState } from 'recoil'
 import { activeNodeIDAtom } from 'utils/atoms.js'
-import { useContactUsers } from 'graphql/client/queries/users'
 
 export default function ErrorModal (props) {
   const {
@@ -28,7 +29,7 @@ export default function ErrorModal (props) {
     handleBtnClick
   } = props
 
-  const { data } = useContactUsers()
+  const { data } = useQuery('getContactUsers', getContactUsers)
 
   const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true })
 

@@ -15,7 +15,8 @@ import { FiLogIn } from 'react-icons/fi'
 import { MdClose } from 'react-icons/md'
 import { FaGoogle, FaFacebook } from 'react-icons/fa'
 
-import { useLoginWithProvider } from 'graphql/client/mutations/auth'
+import { useMutation } from 'react-query'
+import { loginWithProvider } from 'graphql/client/mutations/auth'
 import { google, facebook } from 'utils/firebase'
 
 import ErrorModal from 'components/_common/ErrorModal'
@@ -38,10 +39,10 @@ export default function Login ({ onClose, isServer }) {
 
   const [internalError, setInternalError] = useState()
 
-  const { mutate: loginWithProvider, error } = useLoginWithProvider()
+  const { mutate, error } = useMutation(loginWithProvider)
 
   const onLoginWithProvider = (token, { email }) => {
-    loginWithProvider({ email, token }, { onSuccess: onLoginSuccess, onError: setInternalError })
+    mutate({ email, token }, { onSuccess: onLoginSuccess, onError: setInternalError })
   }
 
   if (internalError?.message) return <ErrorModal icon title='Ops!' message={internalError.message} />
