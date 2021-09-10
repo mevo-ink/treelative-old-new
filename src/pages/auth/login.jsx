@@ -35,7 +35,11 @@ export default function Login () {
       destroyCookie(null, 'REDIRECT_REFERRER', { path: '/' })
       router.push(REDIRECT_REFERRER)
     } else {
-      router.push('/layouts/graph')
+      if (router.query.userID) {
+        router.push(`/users/${router.query.userID}`)
+      } else {
+        router.push('/layouts/graph')
+      }
     }
   }
 

@@ -12,6 +12,16 @@ export async function getServerSideProps (ctx) {
   // pre-fetch the user data
   const queryClient = new QueryClient()
   const userData = await getUserData(ctx.query.userID)
+
+  if ((!userData || userData.error)) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/layouts/graph'
+      }
+    }
+  }
+
   queryClient.setQueryData('getUserData', userData)
 
   if (!userData.isPublic) {
@@ -21,7 +31,7 @@ export async function getServerSideProps (ctx) {
       return {
         redirect: {
           permanent: false,
-          destination: `/login?error=${session.error}`
+          destination: `/auth/login?userID=${ctx.query.userID}`
         }
       }
     }
