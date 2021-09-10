@@ -15,6 +15,9 @@ export const getUserData = async (userID) => {
     user.id = user._id
     delete user._id
 
+    user.avatar = `${process.env.STORAGE_ENDPOINT}/avatars/${user.id}.png`
+    user.brokenImage = `https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`
+
     // get user documents from user.children, user.parents and user.partner refs
     if (user.children) user.children = await db.collection('users').find({ _id: { $in: user.children } }).project(projectUserProfile).toArray()
     if (user.parents) user.parents = await db.collection('users').find({ _id: { $in: user.parents } }).project(projectUserProfile).toArray()

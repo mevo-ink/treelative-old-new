@@ -11,6 +11,7 @@ const OuterWrapper = ({ children }) => {
       placeItems='center'
       position='relative'
       overflow='hidden'
+      minH='30rem'
     >
       {children}
     </Box>
