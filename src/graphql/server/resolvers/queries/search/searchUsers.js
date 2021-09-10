@@ -1,5 +1,7 @@
 import fuzzySearch from 'utils/fuzzySearch'
 
+import { projectUserProfile } from 'utils/dbProjections'
+
 export default async (parent, args, context, info) => {
   const { query = '' } = args
 
@@ -11,11 +13,7 @@ export default async (parent, args, context, info) => {
       ]
     },
     {
-      projection: {
-        _id: 0,
-        id: { $toString: '$_id' },
-        fullName: 1
-      }
+      projection: projectUserProfile
     }
   ).limit(5).toArray()
 

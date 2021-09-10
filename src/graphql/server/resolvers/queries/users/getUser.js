@@ -1,13 +1,24 @@
 import { ApolloError } from 'apollo-server-micro'
 
 import { authenticateToken } from 'utils/auth'
-
 import dbConnect from 'utils/mongodb'
+import { projectUserProfile } from 'utils/dbProjections'
 
 export const getUserData = async (userID) => {
   const db = await dbConnect()
 
-  return db.collection('users').findOne({ _id: db.ObjectId(userID) })
+  const user = await db.collection('users').findOne({ _id: db.ObjectId(userID) })
+
+  user.id = user._id
+  delete user._id
+
+  // get user documents from user.children, user.parents and user.partner refs
+  if (user.children) user.children = await db.collection('users').find({ _id: { $in: user.children } }).project(projectUserProfile).toArray()
+  if (user.parents) user.parents = await db.collection('users').find({ _id: { $in: user.parents } }).project(projectUserProfile).toArray()
+  if (user.partner) user.partner = await db.collection('users').findOne({ _id: user.partner }).project(projectUserProfile)
+
+  // serialize the user object to make it JSON-serializable
+  return JSON.parse(JSON.stringify(user))
 }
 
 export default async (parent, args, context, info) => {
@@ -20,7 +31,5 @@ export default async (parent, args, context, info) => {
     }
   }
 
-  user.id = user._id
-  delete user._id
   return user
 }

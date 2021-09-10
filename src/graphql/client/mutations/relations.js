@@ -25,27 +25,37 @@ export const addUserChild = async (variables) => {
 }
 
 export const addUserPartner = async (variables) => {
-  const { addUserPartner } = await graphQLClient.request(
-    gql`
-      mutation ADD_USER_PARTNER ($userID: String! $partnerID: String!) {
-        addUserPartner (userID: $userID partnerID: $partnerID)
-      }
-    `,
-    variables
-  )
-  return addUserPartner
+  try {
+    const { addUserPartner } = await graphQLClient.request(
+      gql`
+        mutation ADD_USER_PARTNER ($userID: String! $partnerID: String!) {
+          addUserPartner (userID: $userID partnerID: $partnerID)
+        }
+      `,
+      variables
+    )
+    return addUserPartner
+  } catch (error) {
+    const [message] = error.message.split(': ')
+    throw Error(message)
+  }
 }
 
 export const removeUserParent = async (variables) => {
-  const { removeUserParent } = await graphQLClient.request(
-    gql`
-      mutation REMOVE_USER_PARENT ($userID: String! $parentID: String!) {
-        removeUserParent (userID: $userID parentID: $parentID)
-      }
-    `,
-    variables
-  )
-  return removeUserParent
+  try {
+    const { removeUserParent } = await graphQLClient.request(
+      gql`
+        mutation REMOVE_USER_PARENT ($userID: String! $parentID: String!) {
+          removeUserParent (userID: $userID parentID: $parentID)
+        }
+      `,
+      variables
+    )
+    return removeUserParent
+  } catch (error) {
+    const [message] = error.message.split(': ')
+    throw Error(message)
+  }
 }
 
 export const removeUserChild = async (variables) => {
@@ -61,13 +71,18 @@ export const removeUserChild = async (variables) => {
 }
 
 export const removeUserPartner = async (variables) => {
-  const { removeUserPartner } = await graphQLClient.request(
-    gql`
-      mutation REMOVE_USER_PARTNER ($userID: String! $partnerID: String!) {
-        removeUserPartner (userID: $userID partnerID: $partnerID)
-      }
-    `,
-    variables
-  )
-  return removeUserPartner
+  try {
+    const { removeUserPartner } = await graphQLClient.request(
+      gql`
+        mutation REMOVE_USER_PARTNER ($userID: String! $partnerID: String!) {
+          removeUserPartner (userID: $userID partnerID: $partnerID)
+        }
+      `,
+      variables
+    )
+    return removeUserPartner
+  } catch (error) {
+    const [message] = error.message.split(': ')
+    throw Error(message)
+  }
 }

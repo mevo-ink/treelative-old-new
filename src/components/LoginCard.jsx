@@ -38,15 +38,11 @@ export default function Login ({ onSuccess, onClose }) {
     onSuccess()
   }
 
-  const [internalError, setInternalError] = useState()
-
   const { mutate, error } = useMutation(loginWithProvider)
 
   const onLoginWithProvider = (token, { email }) => {
-    mutate({ email, token }, { onSuccess: onLoginSuccess, onError: setInternalError })
+    mutate({ email, token }, { onSuccess: onLoginSuccess })
   }
-
-  if (internalError?.message) return <ErrorModal icon title='Ops!' message={internalError.message} />
 
   return (
     <Modal isOpen onClose={onClose} isCentered>
@@ -100,7 +96,7 @@ export default function Login ({ onSuccess, onClose }) {
             </Stack>
           )}
           {showLoginWithEmail && (
-            <LoginWithEmail onLoginSuccess={onLoginSuccess} setInternalError={setInternalError} setShowLoginWithEmail={setShowLoginWithEmail} />
+            <LoginWithEmail onLoginSuccess={onLoginSuccess} setShowLoginWithEmail={setShowLoginWithEmail} />
           )}
         </Box>
       </ModalContent>

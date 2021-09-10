@@ -24,7 +24,7 @@ export default function ErrorModal (props) {
   const {
     icon,
     title,
-    message,
+    children,
     btn,
     handleBtnClick
   } = props
@@ -50,7 +50,7 @@ export default function ErrorModal (props) {
           bg='transparent'
           onClick={onClose}
         />
-        <ModalBody as={Grid} placeItems='center' p='2em'>
+        <ModalBody as={Grid} placeItems='center' p='2em' mt='1rem'>
           {icon && <Image src='/images/error.png' alt='Error' w='100px' mb='1rem' />}
           {title && (
             <Text
@@ -62,15 +62,15 @@ export default function ErrorModal (props) {
               {title}
             </Text>
           )}
-          {message && (
+          {children && (
             <Text
               w='100%'
-              py='1em'
+              p='1em'
               textAlign='center'
               borderRadius='10px'
               bg='hsla(0, 100%, 70%, .3)'
             >
-              {message}
+              {children}
             </Text>
           )}
           {btn && (

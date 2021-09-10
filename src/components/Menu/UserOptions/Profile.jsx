@@ -1,19 +1,18 @@
 import { useRouter } from 'next/router'
+import { setCookie } from 'nookies'
 
 import { Image, Button } from '@chakra-ui/react'
 
-import { useSetRecoilState } from 'recoil'
-
-import { activeNodeIDAtom } from 'utils/atoms.js'
-
 export default function Profile ({ onClose, authUser }) {
-  const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
-
   const router = useRouter()
 
   const handleClick = () => {
-    if (authUser) setActiveNodeID(authUser.id)
-    else router.push('/auth/login')
+    if (authUser) {
+      router.push(`?userID=${authUser.id}`, `/users/${authUser.id}`, { shallow: true, scroll: false })
+    } else {
+      setCookie(null, 'REDIRECT_REFERRER', router.pathname, { path: '/' })
+      router.push('?login=auth', '/auth/login', { shallow: true, scroll: false })
+    }
   }
 
   return (

@@ -31,8 +31,12 @@ export default function Wrapper ({ children }) {
   }
 
   const onLoginSuccess = async () => {
-    await queryClient.resetQueries(['getUser', { id: router.query.login }])
-    destroyCookie(null, 'REDIRECT_REFERRER', { path: '/' })
+    if (router.query.login === 'auth') {
+      await queryClient.resetQueries('whoAmI')
+    } else {
+      await queryClient.resetQueries(['getUser', { id: router.query.login }])
+      destroyCookie(null, 'REDIRECT_REFERRER', { path: '/' })
+    }
     router.back()
   }
 
