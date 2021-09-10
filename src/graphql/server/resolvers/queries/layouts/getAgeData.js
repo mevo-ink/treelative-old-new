@@ -1,4 +1,5 @@
 import dbConnect from 'utils/mongodb'
+import { projectUserProfile } from 'utils/dbProjections'
 
 export const getAgeData = async () => {
   const db = await dbConnect()
@@ -20,17 +21,8 @@ export const getAgeData = async () => {
       },
       {
         $project: {
-          _id: 0,
-          id: { $toString: '$_id' },
           year: { $year: '$dateOfBirth' },
-          shortName: 1,
-          fullName: 1,
-          avatar: {
-            $concat: [`${process.env.STORAGE_ENDPOINT}/avatars/`, { $toString: '$_id' }, '.png']
-          },
-          brokenAvatar: {
-            $concat: ['https://ui-avatars.com/api/?name=', '$fullName', '&background=random&rounded=true&font-size=0.5&bold=true']
-          }
+          ...projectUserProfile
         }
       },
       // Grouping all users by year and pushing them into "users" array
@@ -63,7 +55,7 @@ export const getAgeData = async () => {
       }
     ]).next()
 
-  const response = { users: data, unknownCount }
+  const response = { birthYears: data, unknownCount }
 
   await db.collection('cache').updateOne(
     { name: cacheKey },

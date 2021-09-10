@@ -1,3 +1,6 @@
+import { useRouter } from 'next/router'
+import { setCookie } from 'nookies'
+
 import {
   Modal,
   IconButton,
@@ -41,9 +44,19 @@ import OuterWrapper from 'components/ProfileCard/OuterWrapper'
 // }
 
 export default function ProfileCard ({ userID, onClose }) {
+  const router = useRouter()
+
   // const isEditMode = useRecoilValue(isEditModeAtom)
 
   const { data: user, error, isLoading } = useQuery(['getUser', { id: userID }], getUser)
+
+  if (error) {
+    console.log(error)
+    if (error.message.includes('session')) {
+      setCookie(null, 'REDIRECT_REFERRER', router.pathname, { path: '/' })
+      router.push(`?login=${userID}`, '/auth/login', { shallow: true, scroll: false })
+    }
+  }
 
   return (
     <Modal isOpen onClose={onClose} isCentered>
@@ -61,8 +74,7 @@ export default function ProfileCard ({ userID, onClose }) {
           onClick={onClose}
         />
         <OuterWrapper>
-          {isLoading && <Loading />}
-          {error && <h1>{error.message}</h1>}
+          {(isLoading || error) && <Loading />}
           {user && (
             <h1>{user.fullName}</h1>
             // <InnerWrapper>

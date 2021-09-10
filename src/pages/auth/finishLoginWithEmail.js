@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { firebaseAuth } from 'utils/firebase'
+import { firebaseAuth } from 'utils/firebaseApp'
 
 import Loading from 'components/_common/Loading'
 import ErrorAlert from 'components/_common/ErrorAlert'

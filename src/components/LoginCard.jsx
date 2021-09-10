@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+import { setCookie } from 'nookies'
+
 import {
   Box,
   Flex,
@@ -17,7 +19,7 @@ import { FaGoogle, FaFacebook } from 'react-icons/fa'
 
 import { useMutation } from 'react-query'
 import { loginWithProvider } from 'graphql/client/mutations/auth'
-import { google, facebook } from 'utils/firebase'
+import { google, facebook } from 'utils/firebaseApp'
 
 import ErrorModal from 'components/_common/ErrorModal'
 import LoginButton from 'components/Login/LoginButton'
@@ -28,13 +30,12 @@ const loginProviders = [
   { label: 'Login with Google', icon: FaGoogle, color: 'linear-gradient(180deg, hsl(13, 73%, 49%), hsl(13, 73%, 39%))', provider: google }
 ]
 
-export default function Login ({ onClose, isServer }) {
+export default function Login ({ onSuccess, onClose }) {
   const [showLoginWithEmail, setShowLoginWithEmail] = useState(false)
 
-  const onLoginSuccess = (result) => {
-    // setInternalError({ message: 'OATHA' })
-    result.data && window.localStorage.setItem('AUTH_SESSION_ID', result.data.login)
-    isServer && onClose()
+  const onLoginSuccess = (token) => {
+    setCookie(null, 'AUTH_SESSION_ID', token, { path: '/' })
+    onSuccess()
   }
 
   const [internalError, setInternalError] = useState()

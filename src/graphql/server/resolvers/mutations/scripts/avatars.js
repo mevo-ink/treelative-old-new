@@ -1,6 +1,6 @@
 import dbConnect from 'utils/mongodb'
 
-import { storage } from 'utils/firebase'
+import { storage } from 'utils/firebaseAdmin'
 
 import fs from 'fs'
 

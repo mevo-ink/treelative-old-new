@@ -1,13 +1,13 @@
 import { ApolloError } from 'apollo-server-micro'
 
-import admin from 'utils/firebase'
+import { auth } from 'utils/firebaseAdmin'
 import { generateToken } from 'utils/auth'
 
 export default async (parent, args, context, info) => {
   const { email, token } = args
 
   // verify firebase session id
-  await admin.auth().verifyIdToken(token)
+  await auth().verifyIdToken(token)
 
   if (!email) {
     throw new ApolloError('User is not registered.', 'UNREGISTERED')

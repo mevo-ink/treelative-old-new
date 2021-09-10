@@ -4,7 +4,7 @@ import { ObjectId } from 'mongodb'
 
 import dbConnect from 'utils/mongodb'
 import { isOwner } from 'utils/auth'
-import { storage } from 'utils/firebase'
+import { storage } from 'utils/firebaseAdmin'
 
 export default async (parent, args, context, info) => {
   const session = await isOwner(context.cookies.AUTH_SESSION_ID)

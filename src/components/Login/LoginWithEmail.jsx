@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react'
 import { IoCaretBack } from 'react-icons/io5'
 
-import { firebaseAuth } from 'utils/firebase'
+import { firebaseAuth } from 'utils/firebaseApp'
 
 import ErrorAlert from 'components/_common/ErrorAlert'
 

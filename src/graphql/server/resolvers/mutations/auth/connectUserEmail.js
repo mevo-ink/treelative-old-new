@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb'
 
 import dbConnect from 'utils/mongodb'
-import admin from 'utils/firebase'
+import admin from 'utils/firebaseAdmin'
 
 export default async (parent, args, context, info) => {
   const { userID, email, token } = args

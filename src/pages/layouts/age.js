@@ -55,7 +55,7 @@ export default function Age () {
         bg='hsla(0, 0%, 0%, .75)'
         sx={{ '&::-webkit-scrollbar': { display: 'none' }, scrollbarWidth: 'none' }}
       >
-        {Object.entries(data.users).map(([year, users]) =>
+        {Object.entries(data.birthYears).map(([year, users]) =>
           <Flex
             key={year}
             id={year}

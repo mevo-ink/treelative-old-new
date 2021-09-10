@@ -1,5 +1,6 @@
 import { ObjectId } from 'mongodb'
 import dbConnect from 'utils/mongodb'
+import { projectUserProfile } from 'utils/dbProjections'
 
 import nookies from 'nookies'
 
@@ -15,13 +16,13 @@ export const generateToken = user => jwt.sign(
 )
 
 export const authenticateToken = async (token) => {
-  return { user: { id: 'adas', name: 'asdasd' } } // REMOVE
+  // return { user: { id: 'adas', name: 'asdasd' } } // REMOVE
   try {
     if (!token) return { error: 'No valid session token provided' }
     const { id } = jwt.verify(token, JWT_SECRET)
     if (!id) return { error: 'The session token is invalid. Please login again' }
     const db = await dbConnect()
-    const user = db.collection('authorized_users').findOne({ _id: ObjectId(id) }, { projection: { isAdmin: 1, _id: 0, id: { $toString: '$_id' } } })
+    const user = await db.collection('users').findOne({ _id: ObjectId(id) }, { projection: { ...projectUserProfile, isAdmin: 1 } })
     return { user }
   } catch (error) {
     if (['TokenExpiredError', 'JsonWebTokenError'].includes(error.name)) {
@@ -46,7 +47,7 @@ export const isOwner = async (token, userID) => {
   return user && (user?.isAdmin || user?._id === userID) ? { user } : { error: 'You are not authorized to perform this action' }
 }
 
-export default async function getSession (ctx) {
+export const getSession = async (ctx) => {
   // get payload from cookie and set auth user in ctx.req.user
   const cookies = nookies.get(ctx)
   const payload = cookies.AUTH_SESSION_ID

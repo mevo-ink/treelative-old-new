@@ -1,8 +1,10 @@
 import { useRouter } from 'next/router'
 
-import LoginCard from 'components/Login'
+import LoginCard from 'components/LoginCard'
 
 import { getSession } from 'utils/auth'
+
+import { parseCookies, destroyCookie } from 'nookies'
 
 export async function getServerSideProps (ctx) {
   const session = await getSession(ctx)
@@ -10,7 +12,7 @@ export async function getServerSideProps (ctx) {
     return {
       redirect: {
         permanent: false,
-        destination: 'layouts/graph'
+        destination: '/layouts/graph'
       }
     }
   }
@@ -24,10 +26,20 @@ export default function Login () {
   const router = useRouter()
 
   const onLoginClose = () => {
-    router.push('/')
+    router.push('/layouts/graph')
+  }
+
+  const onLoginSuccess = () => {
+    const { REDIRECT_REFERRER } = parseCookies()
+    if (REDIRECT_REFERRER) {
+      destroyCookie(null, 'REDIRECT_REFERRER', { path: '/' })
+      router.push(REDIRECT_REFERRER)
+    } else {
+      router.push('/layouts/graph')
+    }
   }
 
   return (
-    <LoginCard onClose={onLoginClose} />
+    <LoginCard onSuccess={onLoginSuccess} onClose={onLoginClose} />
   )
 }

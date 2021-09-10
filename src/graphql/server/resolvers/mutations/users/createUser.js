@@ -1,7 +1,7 @@
 import { ApolloError } from 'apollo-server-micro'
 
 import dbConnect from 'utils/mongodb'
-import { storage } from 'utils/firebase'
+import { storage } from 'utils/firebaseAdmin'
 import { isAdmin } from 'utils/auth'
 
 import fs from 'fs'

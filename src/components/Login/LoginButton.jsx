@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { firebaseAuth } from 'utils/firebase'
+import { firebaseAuth } from 'utils/firebaseApp'
 
 import { Button } from '@chakra-ui/react'
 

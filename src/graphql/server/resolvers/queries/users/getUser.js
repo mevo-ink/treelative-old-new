@@ -20,5 +20,7 @@ export default async (parent, args, context, info) => {
     }
   }
 
+  user.id = user._id
+  delete user._id
   return user
 }
