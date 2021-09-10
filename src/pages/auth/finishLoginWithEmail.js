@@ -1,3 +1,7 @@
+import { useRouter } from 'next/router'
+
+import { parseCookies, setCookie, destroyCookie } from 'nookies'
+
 import { useEffect, useState } from 'react'
 
 import { firebaseAuth } from 'utils/firebaseApp'
@@ -22,6 +26,8 @@ import {
 } from '@chakra-ui/react'
 
 export default function finishLoginWithEmail () {
+  const router = useRouter()
+
   const [isLoading, setIsLoading] = useState(true)
 
   const [isValidUrl, setIsValidUrl] = useState(false)
@@ -31,22 +37,25 @@ export default function finishLoginWithEmail () {
   const [isVerifyingEmail, setIsVerifyingEmail] = useState(false)
   const [firebaseLoginError, setFirebaseLoginError] = useState(null)
 
-  const [internalError, setInternalError] = useState()
-
   const { mutate, error } = useMutation(loginWithProvider)
 
   const onLoginWithProvider = (token) => {
-    mutate({ email, token }, { onSuccess: onLoginSuccess, onError: setInternalError })
+    mutate({ email, token }, { onSuccess: onLoginSuccess })
   }
 
-  const onLoginSuccess = (result) => {
-    // setInternalError({ message: 'OATHA' })
-    if (result.data) {
-      window.localStorage.setItem('AUTH_SESSION_ID', result.data.login)
-      // redirect back to the original page where login was initiated
-      const referrer = window.localStorage.getItem('REDIRECT_REFERRER')
-      window.localStorage.removeItem('REDIRECT_REFERRER')
-      referrer ? window.location.href = referrer : window.location.href = '/'
+  const onLoginSuccess = (token) => {
+    setCookie(null, 'AUTH_SESSION_ID', token, { path: '/' })
+    // redirect back to the original page where login was initiated
+    const { REDIRECT_REFERRER } = parseCookies()
+    if (REDIRECT_REFERRER) {
+      destroyCookie(null, 'REDIRECT_REFERRER', { path: '/' })
+      router.push(REDIRECT_REFERRER)
+    } else {
+      if (router.query.userID) {
+        router.push(`/users/${router.query.userID}`)
+      } else {
+        router.push('/layouts/graph')
+      }
     }
   }
 
@@ -81,7 +90,7 @@ export default function finishLoginWithEmail () {
     window.location.href = '/'
   }
 
-  const isError = !isValidUrl || internalError || firebaseLoginError || error
+  const isError = !isValidUrl || firebaseLoginError || error
 
   return (
     <Modal isOpen onClose={() => {}} isCentered>
@@ -109,7 +118,6 @@ export default function finishLoginWithEmail () {
               {!isValidUrl && <ErrorAlert>{isValidUrl}</ErrorAlert>}
               {firebaseLoginError && <ErrorAlert>{firebaseLoginError.message}</ErrorAlert>}
               {error && <ErrorAlert> {error.message} </ErrorAlert>}
-              {internalError?.error && <ErrorAlert> {internalError.message} </ErrorAlert>}
               <Button onClick={goBackHome}>Go Home Nigga</Button>
             </Stack>
           </ModalFooter>

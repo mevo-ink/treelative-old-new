@@ -51,7 +51,6 @@ export default function ProfileCard ({ userID, onClose }) {
   const { data: user, error, isLoading } = useQuery(['getUser', { id: userID }], getUser)
 
   if (error) {
-    console.log(error)
     if (error.message.includes('session')) {
       setCookie(null, 'REDIRECT_REFERRER', router.pathname, { path: '/' })
       router.push(`?login=${userID}`, '/auth/login', { shallow: true, scroll: false })
