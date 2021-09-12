@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - refactor
 
 jobs:
   push_to_registry:
@@ -27,7 +28,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: jana19/treelative-client:prod
+          tags: jana19/treelative-client:${GITHUB_REF##*/}
       - name: Redeploy on Portainer
         uses: wei/curl@master
         with:
