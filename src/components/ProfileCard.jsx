@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react'
 import { MdClose } from 'react-icons/md'
 
-import { useRecoilValue } from 'recoil'
+import { useRecoilState } from 'recoil'
 import { isEditModeAtom } from 'utils/atoms.js'
 
 import { useQuery } from 'react-query'
@@ -46,9 +46,14 @@ const innerBtnStyles = {
 export default function ProfileCard ({ userID, onClose }) {
   const router = useRouter()
 
-  const isEditMode = useRecoilValue(isEditModeAtom)
+  const [isEditMode, setIsEditMode] = useRecoilState(isEditModeAtom)
 
   const { data: user, error, isLoading } = useQuery(['getUser', { id: userID }], getUser)
+
+  const handleClose = () => {
+    setIsEditMode(false)
+    onClose()
+  }
 
   if (error) {
     if (error.message.includes('session')) {
@@ -58,7 +63,7 @@ export default function ProfileCard ({ userID, onClose }) {
   }
 
   return (
-    <Modal isOpen onClose={onClose} isCentered>
+    <Modal isOpen onClose={handleClose} isCentered>
       <ModalOverlay />
       <ModalContent background='transparent' border='none'>
         <IconButton
@@ -70,14 +75,14 @@ export default function ProfileCard ({ userID, onClose }) {
           top='1rem'
           borderRadius='5px'
           bg='transparent'
-          onClick={onClose}
+          onClick={handleClose}
         />
         <OuterWrapper>
           {(isLoading || error) && <Loading />}
           {user && (
             <InnerWrapper>
               <Edit innerBtnStyles={innerBtnStyles} user={user} />
-              <FindMe onClose={onClose} user={user} {...innerBtnStyles} right='.3rem' />
+              <FindMe onClose={handleClose} user={user} {...innerBtnStyles} right='.3rem' />
               <Avatar user={user} />
               <FullName user={user} />
               <Slider>

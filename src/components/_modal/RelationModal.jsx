@@ -37,17 +37,15 @@ export default function RelationModal (props) {
 
   const handleAddRelation = (userID) => {
     addRelation(userID)
-      .then(result => {
-        if (result.data) {
-          toast({
-            title: 'Successfully Added Relation',
-            status: 'success',
-            position: 'top',
-            duration: 3000,
-            isClosable: true
-          })
-          onClose()
-        }
+      .then(() => {
+        toast({
+          title: 'Successfully Added Relation',
+          status: 'success',
+          position: 'top',
+          duration: 3000,
+          isClosable: true
+        })
+        onClose()
       })
   }
 

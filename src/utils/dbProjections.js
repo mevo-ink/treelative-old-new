@@ -1,3 +1,5 @@
+import dbConnect from 'utils/mongodb'
+
 export const projectUserProfile = {
   _id: 0,
   id: { $toString: '$_id' },
@@ -33,4 +35,16 @@ export const projectUserAge = {
       }
     }
   }
+}
+
+export const expandUserRelations = async (user) => {
+  const db = await dbConnect()
+
+  user.id = user._id
+  delete user._id
+
+  // get user documents from user.children, user.parents and user.partner refs
+  user.children = user.children ? await db.collection('users').find({ _id: { $in: user.children } }).project(projectUserProfile).toArray() : []
+  user.parents = user.parents ? await db.collection('users').find({ _id: { $in: user.parents } }).project(projectUserProfile).toArray() : []
+  user.partner = user.partner ? await db.collection('users').findOne({ _id: user.partner }, { projection: projectUserProfile }) : null
 }

@@ -21,6 +21,12 @@ import ImageCropper from 'components/_common/ImageCropper'
 
 const toast = createStandaloneToast()
 
+const wiggle = keyframes`
+  0% { transform: rotate(0deg) }
+  50% { transform: rotate(-2deg) }
+  100% { transform: rotate(2deg) }
+`
+
 export default function Avatar ({ user }) {
   const router = useRouter()
 
@@ -41,12 +47,13 @@ export default function Avatar ({ user }) {
       cache: 'no-cache'
     }
 
-    if (layout !== 'graph') return
-    window.fetch(new window.Request(user.avatar), init)
-      .then(() => {
-        // update network node with new image url
-        layoutMethods.updateNode(user.id, 'image', imageURL)
-      })
+    if (layout === 'graph') {
+      window.fetch(new window.Request(user.avatar), init)
+        .then(() => {
+          // update network node with new image url
+          layoutMethods.updateNode(user.id, 'image', imageURL)
+        })
+    }
   }
 
   const isEditMode = useRecoilValue(isEditModeAtom)
@@ -60,12 +67,6 @@ export default function Avatar ({ user }) {
   const [showCrop, setShowCrop] = useState(false)
   const [selectedFile, setSelectedFile] = useState(null)
   const [croppedImage, setCroppedImage] = useState(null)
-
-  const wiggle = keyframes`
-    0% { transform: rotate(0deg) }
-    50% { transform: rotate(-2deg) }
-    100% { transform: rotate(2deg) }
-  `
 
   const handleError = (error) => {
     toast({

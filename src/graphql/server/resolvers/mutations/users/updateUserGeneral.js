@@ -6,6 +6,7 @@ import dbConnect from 'utils/mongodb'
 import { isOwner } from 'utils/auth'
 
 import getParsedLocations from 'utils/getParsedLocations'
+import { projectUserProfile } from 'utils/dbProjections'
 
 export default async (parent, args, context, info) => {
   const session = await isOwner(context.cookies.AUTH_SESSION_ID)
@@ -22,10 +23,17 @@ export default async (parent, args, context, info) => {
   const { value: user } = await db.collection('users').findOneAndUpdate(
     { _id: ObjectId(args.userID) },
     { $set: userInput },
-    { returnDocument: 'after', returnOriginal: false }
+    {
+      returnDocument: 'after',
+      returnOriginal: false,
+      projection: {
+        ...projectUserProfile,
+        ...Object.keys(userInput).reduce((acc, curr) => { acc[curr] = 1; return acc }, {})
+      }
+    }
   )
 
-  if ((args.input.dateOfMarriage || args.input.marriageLocation) && user.partner) {
+  if ((userInput.dateOfMarriage || userInput.marriageLocation) && user.partner) {
     // update the partner's marriage date and location
     await db.collection('users').findOneAndUpdate(
       { _id: user.partner },
@@ -34,10 +42,10 @@ export default async (parent, args, context, info) => {
   }
 
   // clear cache
-  if (Object.keys(args.input).find(field => field.includes('location'))) {
+  if (Object.keys(userInput).find(field => field.includes('currentLocation'))) {
     db.collection('cache').deleteOne({ name: 'map-layout' })
   }
-  if (Object.keys(args.input).find(field => field.includes('dateOfBirth'))) {
+  if (Object.keys(userInput).find(field => field.includes('dateOfBirth'))) {
     db.collection('cache').deleteOne({ name: 'age-layout' })
     db.collection('cache').deleteOne({ name: 'birthday-layout' })
   }

@@ -41,17 +41,15 @@ export default function DateTimePickerDialogTrigger (props) {
 
   const handleEditDate = async (newValue) => {
     return editDate(newValue)
-      .then(result => {
-        if (result.data) {
-          toast({
-            title: 'Successfully Date Updated',
-            status: 'success',
-            position: 'top',
-            duration: 3000,
-            isClosable: true
-          })
-          onClose()
-        }
+      .then(() => {
+        toast({
+          title: 'Successfully Date Updated',
+          status: 'success',
+          position: 'top',
+          duration: 3000,
+          isClosable: true
+        })
+        onClose()
       })
       .catch(console.log)
   }

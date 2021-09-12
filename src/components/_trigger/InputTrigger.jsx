@@ -53,7 +53,17 @@ export default function InputTrigger (props) {
 
   return (
     <>
-      {isOpen && <InputModal onClose={onClose} title={title} name={name} value={value} onSubmit={onSubmit} isLoading={isLoading} {...inputProps} />}
+      {isOpen && (
+        <InputModal
+          onClose={onClose}
+          title={title}
+          name={name}
+          value={value}
+          onSubmit={onSubmit}
+          isLoading={isLoading}
+          {...inputProps}
+        />
+      )}
       <Flex
         w='60%'
         my={name === 'fullName' && '1rem'}

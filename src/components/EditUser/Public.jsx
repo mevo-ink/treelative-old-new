@@ -1,15 +1,21 @@
 import { Box, Button } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import { updateUserGeneral } from 'graphql/client/mutations/users'
 
 const MotionBox = motion(Box)
 export default function Public ({ user }) {
   const { mutateAsync, isLoading } = useMutation(updateUserGeneral)
 
+  const queryClient = useQueryClient()
+  const onSuccess = (updatedData) => {
+    const existingData = queryClient.getQueryData(['getUser', { id: user.id }]) || {}
+    queryClient.setQueryData(['getUser', { id: user.id }], { ...existingData, ...updatedData })
+  }
+
   const handleTogglePublic = () => {
-    return mutateAsync({ userID: user.id, input: { isPublic: !user.isPublic } })
+    return mutateAsync({ userID: user.id, input: { isPublic: !user.isPublic } }, { onSuccess })
   }
 
   const spring = {

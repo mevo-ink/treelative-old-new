@@ -84,8 +84,8 @@ export default function Map () {
                 setActiveNodePulseID(user.id)
                 return true
               },
-              refetch: () => {
-                queryClient.resetQueries('getMapData')
+              refetch: async () => {
+                await queryClient.resetQueries('getMapData')
               }
             })
           }}

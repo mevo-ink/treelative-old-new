@@ -1,6 +1,7 @@
 import { ApolloError } from 'apollo-server-micro'
 
 import { isOwner } from 'utils/auth'
+import { expandUserRelations } from 'utils/dbProjections'
 
 import { removeUserChild } from './removeUserChild'
 
@@ -44,6 +45,8 @@ export default async (parent, args, context, info) => {
 
   // clear cache
   context.db.collection('cache').deleteOne({ name: 'graph-layout' })
+
+  await expandUserRelations(user)
 
   return user
 }

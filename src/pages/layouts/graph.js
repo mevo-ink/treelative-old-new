@@ -42,7 +42,7 @@ export default function Graph () {
 
   const setLayoutMethods = useSetRecoilState(layoutMethodsAtom)
 
-  const { data, error } = useQuery('getGraphData', getGraphDataQueryFn)
+  const { data, error, isFetching } = useQuery('getGraphData', getGraphDataQueryFn)
 
   const graphRef = useRef()
 
@@ -50,12 +50,15 @@ export default function Graph () {
 
   const { AUTH_SESSION_USER: authUserID } = parseCookies()
 
+  const centerUserID = router.query.userID || authUserID
+
   useEffect(() => {
     if (error) return
+    if (isFetching) return
     const network = new Network(graphRef.current, data, graphOptions)
     // zoom on Graph mount
     network.on('stabilized', () => {
-      const position = authUserID ? network.getPosition(authUserID) : null
+      const position = centerUserID ? network.getPosition(centerUserID) : null
       position && network.moveTo({
         position,
         scale: 0.8,
@@ -120,7 +123,7 @@ export default function Graph () {
       }
     })
     // eslint-disable-next-line
-  }, [])
+  }, [isFetching])
 
   if (error) {
     return <ErrorModal> {error.message} </ErrorModal>

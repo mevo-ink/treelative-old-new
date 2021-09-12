@@ -39,17 +39,15 @@ export default function LocationModal (props) {
   const handleOnSubmit = (e) => {
     e.preventDefault()
     onSubmit(location.value)
-      .then(result => {
-        if (result.data) {
-          toast({
-            title: 'Successfully Location Updated',
-            status: 'success',
-            position: 'top',
-            duration: 3000,
-            isClosable: true
-          })
-          onClose(true)
-        }
+      .then(() => {
+        toast({
+          title: 'Successfully Location Updated',
+          status: 'success',
+          position: 'top',
+          duration: 3000,
+          isClosable: true
+        })
+        onClose(true)
       })
       .catch(console.log)
   }
