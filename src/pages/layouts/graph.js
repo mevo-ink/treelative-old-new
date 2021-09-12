@@ -59,7 +59,7 @@ export default function Graph () {
     // zoom on Graph mount
     network.on('stabilized', () => {
       const position = centerUserID ? network.getPosition(centerUserID) : null
-      position && network.moveTo({
+      network.moveTo({
         position,
         scale: 0.8,
         animation: {

@@ -22,6 +22,7 @@ import { google, facebook } from 'utils/firebaseApp'
 import ErrorModal from 'components/_common/ErrorModal'
 import LoginButton from 'components/Login/LoginButton'
 import LoginWithEmail from 'components/Login/LoginWithEmail'
+import ConnectUserEmail from 'components/EditUser/ConnectUserEmail'
 
 const loginProviders = [
   { label: 'Login with Facebook', icon: FaFacebook, color: 'linear-gradient(180deg, hsl(222, 47%, 43%), hsl(222, 47%, 33%))', provider: facebook },
@@ -33,8 +34,15 @@ export default function Login ({ onSuccess, onClose }) {
 
   const { mutate, error } = useMutation(loginWithProvider)
 
+  const [email, setEmail] = useState('')
+
   const onLoginWithProvider = (token, { email }) => {
+    setEmail(email)
     mutate({ email, token }, { onSuccess })
+  }
+
+  if (error?.message.includes('associated with the email')) {
+    return <ConnectUserEmail email={email} message={error.message} onClose={onClose} />
   }
 
   return (

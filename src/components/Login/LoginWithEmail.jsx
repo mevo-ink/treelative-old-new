@@ -42,17 +42,6 @@ export default function LoginWithEmail ({ setShowLoginWithEmail }) {
       })
   }
 
-  // try {
-  //   if (firebaseAuth.isSignInWithEmailLink(window.location.href)) {
-  //     let email = window.localStorage.getItem('emailForSignIn')
-  //     if (!email) {
-  //       email = window.prompt('Please provide your email for confirmation')
-  //     }
-  //     firebaseAuth.signInWithEmailLink(email, window.location.href)
-  //     window.localStorage.removeItem('emailForSignIn')
-  //   }
-  // } catch (err) { console.log(err) }
-
   return (
     <>
       <Stack
@@ -62,20 +51,16 @@ export default function LoginWithEmail ({ setShowLoginWithEmail }) {
         onSubmit={onLoginWithEmail}
       >
         {email && verificationMsg && (
-          <Stack spacing='unset'>
+          <Stack>
             <Text
-              _before={{
-                content: '"Check Your Email"',
-                display: 'block',
-                marginBottom: '.5rem',
-                textAlign: 'center',
-                fontWeight: '600'
-              }}
+              p='2'
               textAlign='center'
+              borderRadius='10px'
+              bg='hsla(150, 100%, 70%, .3)'
             >
-              We sent an email to you at {email}.
+              We have sent you an email with a link to verify your email address. <br /><br />
+              Please check your email and click the link to complete the sign in process.
             </Text>
-            <Text textAlign='center'>It has a magic link that'll sign you in.</Text>
           </Stack>
         )}
         {!verificationMsg && (

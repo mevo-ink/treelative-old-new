@@ -3,7 +3,7 @@ import { gql } from 'apollo-server-micro'
 export default gql`
   type Mutation {
     loginWithProvider (email: String! token: String!): String!
-    connectUserEmail (userID: String email: String! token: String!): Boolean!
+    connectUserEmail (userID: String email: String! token: String!): JSON!
 
     createUser (input: CreateUserInput!): String!
     deleteUser (userID: String!): Boolean!

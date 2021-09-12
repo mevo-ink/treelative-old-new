@@ -16,3 +16,20 @@ export const loginWithProvider = async (variables) => {
     throw Error(message)
   }
 }
+
+export const connectUserEmail = async (variables) => {
+  try {
+    const { connectUserEmail } = await graphQLClient.request(
+      gql`
+      mutation LOGIN_WITH_PROVIDER ($userID: String! $email: String! $token: String!) {
+        connectUserEmail (userID: $userID email: $email token: $token)
+      }
+    `,
+      variables
+    )
+    return connectUserEmail
+  } catch (error) {
+    const [message] = error.message.split(': ')
+    throw Error(message)
+  }
+}

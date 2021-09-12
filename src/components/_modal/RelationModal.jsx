@@ -64,6 +64,7 @@ export default function RelationModal (props) {
       handleAddRelation(userRelation.value)
     }
   }
+
   return (
     <>
       {isAddNewOpen && <CreateUser initialValue={isAddNewOpen} onClose={handleCreateUserClose} />}

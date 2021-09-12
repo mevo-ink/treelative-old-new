@@ -10,6 +10,7 @@ import {
   Button,
   ModalBody,
   IconButton,
+  ModalFooter,
   ModalOverlay,
   ModalContent,
   useDisclosure
@@ -98,12 +99,10 @@ export default function ErrorModal (props) {
               Refresh
             </Button>
           )}
-          <Text
-            textAlign='center'
-            fontSize='.8rem'
-            my='1.5rem'
-          >
-            Please, Contact Us:
+        </ModalBody>
+        <ModalFooter d='flex' flexDir='column'>
+          <Text textAlign='center' fontSize='.8rem' mb='1.5'>
+            Please contact us for further assistance
           </Text>
           <Flex justifyContent='space-between' w='40%'>
             {data && data.map(user => (
@@ -114,11 +113,11 @@ export default function ErrorModal (props) {
                   borderRadius='50%'
                   onClick={() => router.push(`?userID=${user.id}`, `/users/${user.id}`, { shallow: true, scroll: false })}
                 />
-                <Text fontSize='1rem' mt='.5rem' textAlign='center'>{user.shortName}</Text>
+                <Text fontSize='sm' mt='.5rem' textAlign='center'>{user.shortName}</Text>
               </Box>
             ))}
           </Flex>
-        </ModalBody>
+        </ModalFooter>
       </ModalContent>
     </Modal>
   )

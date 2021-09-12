@@ -8,6 +8,8 @@ import { firebaseAuth } from 'utils/firebaseApp'
 
 import Loading from 'components/_common/Loading'
 import ErrorAlert from 'components/_common/ErrorAlert'
+import ErrorModal from 'components/_common/ErrorModal'
+import ConnectUserEmail from 'components/EditUser/ConnectUserEmail'
 
 import { useMutation } from 'react-query'
 import { loginWithProvider } from 'graphql/client/mutations/auth'
@@ -87,10 +89,16 @@ export default function finishLoginWithEmail () {
   }
 
   const goBackHome = () => {
-    window.location.href = '/'
+    router.push('/layouts/graph')
   }
 
   const isError = !isValidUrl || firebaseLoginError || error
+
+  if (error?.message.includes('associated with the email')) {
+    return <ConnectUserEmail email={email} message={error.message} onClose={goBackHome} />
+  }
+
+  if (error) return <ErrorModal onClose={goBackHome}> {error.message} </ErrorModal>
 
   return (
     <Modal isOpen onClose={() => {}} isCentered>
@@ -117,8 +125,7 @@ export default function finishLoginWithEmail () {
             <Stack spacing='4'>
               {!isValidUrl && <ErrorAlert>{isValidUrl}</ErrorAlert>}
               {firebaseLoginError && <ErrorAlert>{firebaseLoginError.message}</ErrorAlert>}
-              {error && <ErrorAlert> {error.message} </ErrorAlert>}
-              <Button onClick={goBackHome}>Go Home Nigga</Button>
+              <Button onClick={goBackHome}>Go Back Home</Button>
             </Stack>
           </ModalFooter>
         )}
