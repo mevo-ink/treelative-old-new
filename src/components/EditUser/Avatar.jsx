@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router'
+
 import { useState, useEffect } from 'react'
 
 import {
@@ -13,15 +15,18 @@ import { useMutation } from 'react-query'
 import { updateUserAvatar } from 'graphql/client/mutations/users'
 
 import { useRecoilValue } from 'recoil'
-import { networkMethodsAtom, isEditModeAtom, layoutAtom } from 'utils/atoms.js'
+import { layoutMethodsAtom, isEditModeAtom } from 'utils/atoms.js'
 
 import ImageCropper from 'components/_common/ImageCropper'
 
 const toast = createStandaloneToast()
 
 export default function Avatar ({ user }) {
-  const layout = useRecoilValue(layoutAtom)
-  const networkMethods = useRecoilValue(networkMethodsAtom)
+  const router = useRouter()
+
+  const layout = router.pathname.split('/')[2]
+
+  const layoutMethods = useRecoilValue(layoutMethodsAtom)
 
   const invalidateImageCache = (imageURL) => {
     // invalidate cached image from browser
@@ -36,11 +41,11 @@ export default function Avatar ({ user }) {
       cache: 'no-cache'
     }
 
-    if (layout !== 'network') return
+    if (layout !== 'graph') return
     window.fetch(new window.Request(user.avatar), init)
       .then(() => {
         // update network node with new image url
-        networkMethods.updateNode(user.id, 'image', imageURL)
+        layoutMethods.updateNode(user.id, 'image', imageURL)
       })
   }
 

@@ -1,82 +1,52 @@
+import { useRouter } from 'next/router'
 import { useState } from 'react'
+
+import { useQueryClient } from 'react-query'
 
 import { IconButton } from '@chakra-ui/react'
 import { BiCurrentLocation } from 'react-icons/bi'
 
-import { useRecoilValue, useSetRecoilState } from 'recoil'
-
-import {
-  layoutAtom,
-  layoutMethodsAtom,
-  networkMethodsAtom,
-  activeNodePulseIDAtom,
-  mapMethodsAtom
-} from 'utils/atoms.js'
+import { useRecoilValue } from 'recoil'
+import { layoutMethodsAtom } from 'utils/atoms.js'
 
 import DateOfBirth from 'components/EditUser/DateOfBirth'
 import CurrentLocation from 'components/EditUser/CurrentLocation'
 
 export default function FindMe ({ onClose, user, ...styles }) {
-  const layout = useRecoilValue(layoutAtom)
+  const router = useRouter()
+
+  const queryClient = useQueryClient()
+
+  const layout = router.pathname.split('/')[2]
+
   const layoutMethods = useRecoilValue(layoutMethodsAtom)
-
-  const networkMethods = useRecoilValue(networkMethodsAtom)
-  const mapMethods = useRecoilValue(mapMethodsAtom)
-
-  const setActiveNodePulseID = useSetRecoilState(activeNodePulseIDAtom)
 
   const [isEditDateOfBirthOpen, setIsEditDateOfBirthOpen] = useState(false)
   const [isEditCurrentLocationOpen, setIsEditCurrentLocationOpen] = useState(false)
 
   const handleFindMe = () => {
-    let position
-    switch (layout) {
-      case 'map':
-        position = mapMethods.panTo(user.id)
-        setActiveNodePulseID(user.id)
-        if (!position) {
-          setIsEditCurrentLocationOpen(true)
-        } else {
-          onClose()
-        }
-        break
-      case 'age':
-        if (!user.dateOfBirth) {
-          setIsEditDateOfBirthOpen(true)
-        } else {
-          setTimeout(() => {
-            setActiveNodePulseID(user.id)
-            document.getElementById(user.dateOfBirth.slice(0, 4)).scrollIntoView({ behavior: 'smooth', block: 'center' })
-          }, 150)
-          onClose()
-        }
-        break
-      case 'birthday':
-        if (!user.dateOfBirth) {
-          setIsEditDateOfBirthOpen(true)
-        } else {
-          setTimeout(() => {
-            setActiveNodePulseID(user.id)
-            document.getElementById(user.dateOfBirth.slice(5, 10)).scrollIntoView({ behavior: 'smooth', block: 'center' })
-          }, 150)
-          onClose()
-        }
-        break
-      default:
-        networkMethods.moveTo(user.id)
-        onClose()
-        break
+    const hasFoundUser = layoutMethods.findUser(user)
+    if (hasFoundUser) {
+      onClose()
+    } else {
+      if (layout === 'map') setIsEditCurrentLocationOpen(true)
+      else if (['age', 'birthday'].includes(layout)) setIsEditDateOfBirthOpen(true)
     }
   }
 
-  const handleEditDateOfBirthClose = (response) => {
+  const handleEditDateOfBirthClose = async (response) => {
+    if (response) {
+      queryClient.resetQueries('getBirthdayData')
+      queryClient.resetQueries('getAgeData')
+    }
     setIsEditDateOfBirthOpen(false)
-    response && layoutMethods.refetch()
   }
 
-  const handleEditCurrentLocationClose = (response) => {
+  const handleEditCurrentLocationClose = async (response) => {
+    if (response) {
+      queryClient.resetQueries('getMapData')
+    }
     setIsEditCurrentLocationOpen(false)
-    response && layoutMethods.refetch()
   }
 
   return (

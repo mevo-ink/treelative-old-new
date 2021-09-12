@@ -1,7 +1,5 @@
 import { useState } from 'react'
 
-import { setCookie } from 'nookies'
-
 import {
   Box,
   Flex,
@@ -33,15 +31,10 @@ const loginProviders = [
 export default function Login ({ onSuccess, onClose }) {
   const [showLoginWithEmail, setShowLoginWithEmail] = useState(false)
 
-  const onLoginSuccess = (token) => {
-    setCookie(null, 'AUTH_SESSION_ID', token, { path: '/' })
-    onSuccess()
-  }
-
   const { mutate, error } = useMutation(loginWithProvider)
 
   const onLoginWithProvider = (token, { email }) => {
-    mutate({ email, token }, { onSuccess: onLoginSuccess })
+    mutate({ email, token }, { onSuccess })
   }
 
   return (
@@ -96,7 +89,7 @@ export default function Login ({ onSuccess, onClose }) {
             </Stack>
           )}
           {showLoginWithEmail && (
-            <LoginWithEmail onLoginSuccess={onLoginSuccess} setShowLoginWithEmail={setShowLoginWithEmail} />
+            <LoginWithEmail setShowLoginWithEmail={setShowLoginWithEmail} />
           )}
         </Box>
       </ModalContent>

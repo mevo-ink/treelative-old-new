@@ -14,6 +14,7 @@ const apolloServer = new ApolloServer({
   context: async (ctx) => {
     const db = await dbConnect()
     return {
+      res: ctx.res,
       db,
       cookies: nookies.get(ctx)
     }

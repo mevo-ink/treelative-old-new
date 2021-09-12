@@ -1,99 +1,27 @@
 import { useRouter } from 'next/router'
 
-import { QueryClient, useQuery } from 'react-query'
+import { parseCookies } from 'nookies'
+
+import { QueryClient, useQuery, useQueryClient } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
 
 import { getMapData } from 'graphql/server/resolvers/queries/layouts/getMapData'
 import { getMapData as getMapDataQueryFn } from 'graphql/client/queries/layouts'
 
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import { layoutMethodsAtom, activeNodePulseIDAtom } from 'utils/atoms.js'
+
+import { Box, Text } from '@chakra-ui/react'
+
+import Image from 'next/image'
 import Wrapper from 'components/Wrapper'
 import ErrorModal from 'components/_common/ErrorModal'
+import ActivePulse from 'components/_common/ActivePulse'
 
-import { Box, Image, Text } from '@chakra-ui/react'
+import blurImagePlaceholder from 'utils/blurImagePlaceholder'
 
 import GoogleMapReact from 'google-map-react'
-
-// https://developers.google.com/maps/documentation/javascript/examples/style-array
-const styles = [
-  { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
-  { elementType: 'labels.text.stroke', stylers: [{ color: '#242f3e' }] },
-  { elementType: 'labels.text.fill', stylers: [{ color: '#746855' }] },
-  {
-    featureType: 'administrative.locality',
-    elementType: 'labels.text.fill',
-    stylers: [{ color: '#d59563' }]
-  },
-  {
-    featureType: 'poi',
-    elementType: 'labels.text.fill',
-    stylers: [{ color: '#d59563' }]
-  },
-  {
-    featureType: 'poi.park',
-    elementType: 'geometry',
-    stylers: [{ color: '#263c3f' }]
-  },
-  {
-    featureType: 'poi.park',
-    elementType: 'labels.text.fill',
-    stylers: [{ color: '#6b9a76' }]
-  },
-  {
-    featureType: 'road',
-    elementType: 'geometry',
-    stylers: [{ color: '#38414e' }]
-  },
-  {
-    featureType: 'road',
-    elementType: 'geometry.stroke',
-    stylers: [{ color: '#212a37' }]
-  },
-  {
-    featureType: 'road',
-    elementType: 'labels.text.fill',
-    stylers: [{ color: '#9ca5b3' }]
-  },
-  {
-    featureType: 'road.highway',
-    elementType: 'geometry',
-    stylers: [{ color: '#746855' }]
-  },
-  {
-    featureType: 'road.highway',
-    elementType: 'geometry.stroke',
-    stylers: [{ color: '#1f2835' }]
-  },
-  {
-    featureType: 'road.highway',
-    elementType: 'labels.text.fill',
-    stylers: [{ color: '#f3d19c' }]
-  },
-  {
-    featureType: 'transit',
-    elementType: 'geometry',
-    stylers: [{ color: '#2f3948' }]
-  },
-  {
-    featureType: 'transit.station',
-    elementType: 'labels.text.fill',
-    stylers: [{ color: '#d59563' }]
-  },
-  {
-    featureType: 'water',
-    elementType: 'geometry',
-    stylers: [{ color: '#17263c' }]
-  },
-  {
-    featureType: 'water',
-    elementType: 'labels.text.fill',
-    stylers: [{ color: '#515c6d' }]
-  },
-  {
-    featureType: 'water',
-    elementType: 'labels.text.stroke',
-    stylers: [{ color: '#17263c' }]
-  }
-]
+import { mapStyles } from 'utils/layouts'
 
 export async function getServerSideProps () {
   // pre-fetch the layout data
@@ -111,9 +39,14 @@ export async function getServerSideProps () {
 export default function Map () {
   const router = useRouter()
 
+  const queryClient = useQueryClient()
+
   const { data, error } = useQuery('getMapData', getMapDataQueryFn)
 
-  const authUserID = '' // TODO: get from auth
+  const [activeNodePulseID, setActiveNodePulseID] = useRecoilState(activeNodePulseIDAtom)
+  const setLayoutMethods = useSetRecoilState(layoutMethodsAtom)
+
+  const { AUTH_SESSION_USER: authUserID } = parseCookies()
 
   // center on auth user if location is available - else center on Sri Lanka
   const sriLanka = { lat: 10.99835602, lng: 77.01502627 }
@@ -141,21 +74,21 @@ export default function Map () {
           bootstrapURLKeys={{ key: process.env.NEXT_PUBLIC_GOOGLE_LOCATION_API_KEY }}
           defaultCenter={defaultCenter}
           defaultZoom={4}
-          options={{ styles, fullscreenControl: false, zoomControl: false }}
-          // onGoogleApiLoaded={({ map }) => {
-          //   setMapMethods({
-          //     panTo: (userID) => {
-          //       const position = data.users.find(user => user.id === userID)?.position
-          //       position && map.panTo(position)
-          //       return position
-          //     }
-          //   })
-          //   setLayoutMethods({
-          //     refetch: () => {
-          //       refetch({ requestPolicy: 'network-only' })
-          //     }
-          //   })
-          // }}
+          options={{ styles: mapStyles, fullscreenControl: false, zoomControl: false }}
+          onGoogleApiLoaded={({ map }) => {
+            setLayoutMethods({
+              findUser: (user) => {
+                if (!user.currentLocation) return null
+                const { position } = data.users.find(({ id }) => id === user.id)
+                map.panTo(position)
+                setActiveNodePulseID(user.id)
+                return true
+              },
+              refetch: () => {
+                queryClient.resetQueries('getMapData')
+              }
+            })
+          }}
         >
           {data.users.map(user => (
             <Box
@@ -163,19 +96,26 @@ export default function Map () {
               position='relative'
               lat={user.position.lat}
               lng={user.position.lng}
+              boxSize='40px'
+              zIndex={[activeNodePulseID, authUserID].includes(user.id) ? '4' : '2'}
             >
               <Image
-                w='40px'
-                h='40px'
-                src={user.image}
-                alt='avatar'
+                src={user.avatar}
+                layout='fill'
                 objectFit='contain'
-                borderRadius='50%'
-                position='absolute'
-                // zIndex={(user.id === activeNodePulseID || user.id === authUserID) ? '4' : '2'}
+                className='avatar'
+                placeholder='blur'
+                blurDataURL={blurImagePlaceholder(40, 40)}
                 onClick={() => router.push(`?userID=${user.id}`, `/users/${user.id}`, { shallow: true, scroll: false })}
               />
-              {/* {user.id === activeNodePulseID && <ActivePulse mapView />} */}
+              <style jsx global>
+                {`
+                  .avatar {
+                    border-radius: 50%;
+                  }
+                `}
+              </style>
+              {user.id === activeNodePulseID && <ActivePulse />}
             </Box>
           ))}
         </GoogleMapReact>

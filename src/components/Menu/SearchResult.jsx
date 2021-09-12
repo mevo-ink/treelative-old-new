@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router'
+
 import {
   Box,
   Text,
@@ -7,13 +9,9 @@ import {
 } from '@chakra-ui/react'
 
 import { format } from 'date-fns'
-import { useSetRecoilState } from 'recoil'
-
-import { activeNodeIDAtom } from 'utils/atoms.js'
 
 export default function SearchResult ({ users, isLoading }) {
-  const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
-  const handleClick = (id) => { setActiveNodeID(id) }
+  const router = useRouter()
 
   const handleDateOfBirth = (dateOfBirth) => {
     const dt = new Date(dateOfBirth)
@@ -29,7 +27,7 @@ export default function SearchResult ({ users, isLoading }) {
         borderRadius='999px'
         p='.5em .6em'
         bg='hsla(0, 0%, 100%, .2)'
-        onClick={() => handleClick(user.id)}
+        onClick={() => router.push(`?userID=${user.id}`, `/users/${user.id}`, { shallow: true, scroll: false })}
         isLoading={isLoading}
       >
         <Flex w='100%' alignItems='center'>

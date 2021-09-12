@@ -16,10 +16,6 @@ import {
   createStandaloneToast
 } from '@chakra-ui/react'
 
-import { useRecoilValue } from 'recoil'
-
-import { layoutAtom, networkMethodsAtom } from 'utils/atoms.js'
-
 import Loading from 'components/_common/Loading'
 import ErrorAlert from 'components/_common/ErrorAlert'
 import UserSelection from 'components/_common/UserSelection'
@@ -39,9 +35,6 @@ export default function RelationModal (props) {
 
   const [isAddNewOpen, setIsAddNewOpen] = useState('')
 
-  const layout = useRecoilValue(layoutAtom)
-  const networkMethods = useRecoilValue(networkMethodsAtom)
-
   const handleAddRelation = (userID) => {
     addRelation(userID)
       .then(result => {
@@ -53,7 +46,6 @@ export default function RelationModal (props) {
             duration: 3000,
             isClosable: true
           })
-          layout === 'network' && networkMethods.refetch()
           onClose()
         }
       })

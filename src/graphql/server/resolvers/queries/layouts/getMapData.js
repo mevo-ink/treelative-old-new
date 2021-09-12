@@ -30,7 +30,7 @@ export const getMapData = async () => {
         id: user._id.toString(),
         shortName: user.shortName,
         fullName: user.fullName,
-        image: `${process.env.STORAGE_ENDPOINT}/avatars/${user._id.toString()}.png`,
+        avatar: `${process.env.STORAGE_ENDPOINT}/avatars/${user._id.toString()}.png`,
         brokenImage: `https://ui-avatars.com/api/?name=${user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`,
         position: seenLocations[locationKey] ? adjustLocation(seenLocations[locationKey], { lat, lng }) : { lat, lng }
       }

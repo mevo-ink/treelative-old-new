@@ -22,6 +22,7 @@ export const getAgeData = async () => {
       {
         $project: {
           year: { $year: '$dateOfBirth' },
+          dateOfDeath: { $dateToString: { format: '%Y-%m-%d', date: '$dateOfDeath' } },
           ...projectUserProfile
         }
       },

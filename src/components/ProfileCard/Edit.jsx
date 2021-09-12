@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router'
+
 import { IconButton } from '@chakra-ui/react'
 import { FiEdit } from 'react-icons/fi'
 import { MdDone } from 'react-icons/md'
@@ -5,14 +7,16 @@ import { MdDone } from 'react-icons/md'
 import { useQuery } from 'react-query'
 import { whoAmI } from 'graphql/client/queries/auth'
 
-import { useRecoilState, useRecoilValue } from 'recoil'
-import { isEditModeAtom, activeNodeIDAtom } from 'utils/atoms.js'
+import { useRecoilState } from 'recoil'
+import { isEditModeAtom } from 'utils/atoms.js'
 
 import Delete from 'components/ProfileCard/Delete'
 
 export default function Edit ({ innerBtnStyles, user }) {
+  const router = useRouter()
+
   const [isEditMode, setIsEditMode] = useRecoilState(isEditModeAtom)
-  const activeNodeID = useRecoilValue(activeNodeIDAtom)
+  const activeNodeID = router.query.userID
 
   const { data: authUser } = useQuery('whoAmI', whoAmI)
 

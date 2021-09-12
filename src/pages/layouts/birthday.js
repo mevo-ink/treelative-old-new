@@ -2,14 +2,14 @@ import { useRouter } from 'next/router'
 
 import { useEffect } from 'react'
 
-import { QueryClient, useQuery } from 'react-query'
+import { QueryClient, useQuery, useQueryClient } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
 
 import { getBirthdayData } from 'graphql/server/resolvers/queries/layouts/getBirthdayData'
 import { getBirthdayData as getBirthdayDataQueryFn } from 'graphql/client/queries/layouts'
 
-import { useRecoilValue } from 'recoil'
-import { activeNodePulseIDAtom } from 'utils/atoms.js'
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import { layoutMethodsAtom, activeNodePulseIDAtom } from 'utils/atoms.js'
 
 import Image from 'next/image'
 import Wrapper from 'components/Wrapper'
@@ -41,9 +41,12 @@ export async function getServerSideProps () {
 export default function Birthday () {
   const router = useRouter()
 
+  const queryClient = useQueryClient()
+
   const { data, error } = useQuery('getBirthdayData', getBirthdayDataQueryFn)
 
-  const activeNodePulseID = useRecoilValue(activeNodePulseIDAtom)
+  const [activeNodePulseID, setActiveNodePulseID] = useRecoilState(activeNodePulseIDAtom)
+  const setLayoutMethods = useSetRecoilState(layoutMethodsAtom)
 
   useEffect(() => {
     if (error) return
@@ -62,6 +65,20 @@ export default function Birthday () {
         upcomingBirthDate.scrollIntoView({ behavior: 'smooth', block: 'center' })
       }
     }
+    setLayoutMethods({
+      findUser: (user) => {
+        if (!user.dateOfBirth) return null
+        setTimeout(() => {
+          const dayMonth = user.dateOfBirth.slice(5, 10)
+          document.getElementById(dayMonth).scrollIntoView({ behavior: 'smooth', block: 'center' })
+        }, 150)
+        setActiveNodePulseID(user.id)
+        return true
+      },
+      refetch: () => {
+        queryClient.resetQueries('getBirthdayData')
+      }
+    })
     // eslint-disable-next-line
   }, [])
 
@@ -147,6 +164,7 @@ export default function Birthday () {
                       right='-3px'
                       zIndex='5'
                       fontSize='12px'
+                      fontWeight='semibold'
                       bg='hsla(310, 100%, 40%, 1)'
                       borderRadius='50%'
                       boxShadow='0px 3px 5px hsla(0, 0%, 0%, .8)'

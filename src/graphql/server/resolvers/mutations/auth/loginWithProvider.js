@@ -3,6 +3,8 @@ import { ApolloError } from 'apollo-server-micro'
 import { auth } from 'utils/firebaseAdmin'
 import { generateToken } from 'utils/auth'
 
+import nookies from 'nookies'
+
 export default async (parent, args, context, info) => {
   const { email, token } = args
 
@@ -26,5 +28,10 @@ export default async (parent, args, context, info) => {
     throw new ApolloError(`You account with email ${email} has not been activated yet.`, 'UNREGISTERED')
   }
 
-  return generateToken(user)
+  const authToken = generateToken(user)
+
+  nookies.set(context, 'AUTH_SESSION_USER', user.id, { path: '/' })
+  nookies.set(context, 'AUTH_SESSION_ID', authToken, { path: '/' })
+
+  return authToken
 }

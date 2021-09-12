@@ -1,9 +1,8 @@
+import { useRouter } from 'next/router'
+
 import { format } from 'date-fns'
 
 import { useQuery } from 'react-query'
-
-import { useSetRecoilState } from 'recoil'
-import { activeNodeIDAtom } from 'utils/atoms.js'
 
 import Loading from 'components/_common/Loading'
 
@@ -20,7 +19,7 @@ import {
 } from '@chakra-ui/react'
 
 export default function UsersMoreInfo ({ queryFn, variables, onClose, title }) {
-  const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
+  const router = useRouter()
 
   const { data, isLoading } = useQuery([title, variables], queryFn)
 
@@ -57,7 +56,7 @@ export default function UsersMoreInfo ({ queryFn, variables, onClose, title }) {
                     backgroundImage={user.avatar}
                     backgroundSize='100% auto'
                     backgroundPosition='center'
-                    onClick={() => setActiveNodeID(user.id)}
+                    onClick={() => router.push(`?userID=${user.id}`, `/users/${user.id}`, { shallow: true, scroll: false })}
                   />
                   <Box>
                     <Text>{user.fullName}</Text>

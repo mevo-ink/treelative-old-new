@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router'
+
 import {
   Box,
   Text,
@@ -10,9 +12,9 @@ import {
 } from '@chakra-ui/react'
 import { MdAdd } from 'react-icons/md'
 
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilValue } from 'recoil'
 
-import { isEditModeAtom, activeNodeIDAtom, layoutAtom, networkMethodsAtom } from 'utils/atoms.js'
+import { isEditModeAtom } from 'utils/atoms.js'
 
 import RemoveButton from 'components/_common/RemoveButton'
 import RelationModal from 'components/_modal/RelationModal'
@@ -23,18 +25,16 @@ export default function AvatarTrigger (props) {
   const {
     user,
     title,
-    relations,
+    relations = [],
     removeRelation,
     removeRelationResult,
     limit = 8,
     ...inputProps
   } = props
 
-  const layout = useRecoilValue(layoutAtom)
-  const isEditMode = useRecoilValue(isEditModeAtom)
-  const networkMethods = useRecoilValue(networkMethodsAtom)
+  const router = useRouter()
 
-  const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
+  const isEditMode = useRecoilValue(isEditModeAtom)
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -43,10 +43,6 @@ export default function AvatarTrigger (props) {
     50% { transform: rotate(-1deg); }
     100% { transform: rotate(1deg); }
   `
-
-  const handleAvatarClick = (userID) => {
-    setActiveNodeID(userID)
-  }
 
   const handleRemoveRelation = (id) => {
     return removeRelation(id)
@@ -59,7 +55,6 @@ export default function AvatarTrigger (props) {
             duration: 3000,
             isClosable: true
           })
-          layout === 'network' && networkMethods.refetch()
         }
       })
   }
@@ -93,7 +88,7 @@ export default function AvatarTrigger (props) {
                 borderRadius='50%'
                 isDisabled={isEditMode}
                 _disabled={{ opacity: '1' }}
-                onClick={() => handleAvatarClick(user.id)}
+                onClick={() => router.push(`?userID=${user.id}`, `/users/${user.id}`, { shallow: true, scroll: false })}
               >
                 <Box
                   w='2.5rem'

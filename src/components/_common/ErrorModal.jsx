@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router'
+
 import {
   Box,
   Grid,
@@ -17,9 +19,6 @@ import { MdClose } from 'react-icons/md'
 import { useQuery } from 'react-query'
 import { getContactUsers } from 'graphql/client/queries/users'
 
-import { useSetRecoilState } from 'recoil'
-import { activeNodeIDAtom } from 'utils/atoms.js'
-
 export default function ErrorModal (props) {
   const {
     icon,
@@ -29,11 +28,11 @@ export default function ErrorModal (props) {
     handleBtnClick
   } = props
 
+  const router = useRouter()
+
   const { data } = useQuery('getContactUsers', getContactUsers)
 
   const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true })
-
-  const setActiveNodeID = useSetRecoilState(activeNodeIDAtom)
 
   return (
     <Modal isOpen={isOpen} isCentered scrollBehavior='inside'>
@@ -108,7 +107,7 @@ export default function ErrorModal (props) {
                   src={user.avatar}
                   w='3rem'
                   borderRadius='50%'
-                  onClick={() => setActiveNodeID(user.id)}
+                  onClick={() => router.push(`?userID=${user.id}`, `/users/${user.id}`, { shallow: true, scroll: false })}
                 />
                 <Text fontSize='.5rem' mt='.5rem' textAlign='center'>{user.shortName}</Text>
               </Box>

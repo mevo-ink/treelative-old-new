@@ -14,7 +14,7 @@ import { firebaseAuth } from 'utils/firebaseApp'
 
 import ErrorAlert from 'components/_common/ErrorAlert'
 
-export default function LoginWithEmail ({ onLoginSuccess, setInternalError, setShowLoginWithEmail }) {
+export default function LoginWithEmail ({ setShowLoginWithEmail }) {
   const [email, setEmail] = useState(null)
   const [error, setError] = useState(null)
   const [verificationMsg, setVerificationMsg] = useState(false)

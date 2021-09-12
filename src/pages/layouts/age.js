@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router'
 
+import { useEffect } from 'react'
+
 import {
   Box,
   Flex,
@@ -9,18 +11,21 @@ import {
 } from '@chakra-ui/react'
 import { FaSkullCrossbones } from 'react-icons/fa'
 
-import { QueryClient, useQuery } from 'react-query'
+import { QueryClient, useQuery, useQueryClient } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
 
 import { getAgeData } from 'graphql/server/resolvers/queries/layouts/getAgeData'
 import { getAgeData as getAgeDataQueryFn } from 'graphql/client/queries/layouts'
 
-import { useRecoilValue } from 'recoil'
-import { activeNodePulseIDAtom } from 'utils/atoms.js'
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import { activeNodePulseIDAtom, layoutMethodsAtom } from 'utils/atoms.js'
 
+import Image from 'next/image'
 import Wrapper from 'components/Wrapper'
 import ErrorModal from 'components/_common/ErrorModal'
 import ActivePulse from 'components/_common/ActivePulse'
+
+import blurImagePlaceholder from 'utils/blurImagePlaceholder'
 
 export async function getServerSideProps () {
   // pre-fetch the layout data
@@ -38,9 +43,30 @@ export async function getServerSideProps () {
 export default function Age () {
   const router = useRouter()
 
+  const queryClient = useQueryClient()
+
   const { data, error } = useQuery('getAgeData', getAgeDataQueryFn)
 
-  const activeNodePulseID = useRecoilValue(activeNodePulseIDAtom)
+  const [activeNodePulseID, setActiveNodePulseID] = useRecoilState(activeNodePulseIDAtom)
+  const setLayoutMethods = useSetRecoilState(layoutMethodsAtom)
+
+  useEffect(() => {
+    if (error) return
+    setLayoutMethods({
+      findUser: (user) => {
+        if (!user.dateOfBirth) return null
+        setTimeout(() => {
+          const birthYear = user.dateOfBirth.slice(0, 4)
+          document.getElementById(birthYear).scrollIntoView({ behavior: 'smooth', block: 'center' })
+        }, 150)
+        setActiveNodePulseID(user.id)
+        return true
+      },
+      refetch: () => {
+        queryClient.resetQueries('getAgeData')
+      }
+    })
+  }, [])
 
   if (error) return <ErrorModal icon title='Oops!' message={error.message} />
 
@@ -89,20 +115,23 @@ export default function Age () {
               }}
             >
               {users.map(user => (
-                <Flex key={user.id} position='relative'>
-                  <Box
-                    w='40px'
-                    h='40px'
-                    mx='.5rem'
-                    my='3'
+                <Flex key={user.id} position='relative' boxSize='40px' my='3' mx='.5rem'>
+                  <Image
+                    src={user.avatar}
+                    layout='fill'
                     objectFit='contain'
-                    borderRadius='50%'
-                    zIndex='4'
-                    backgroundImage={user.avatar}
-                    backgroundSize='100% auto'
-                    backgroundPosition='center'
+                    className='avatar'
+                    placeholder='blur'
+                    blurDataURL={blurImagePlaceholder(40, 40)}
                     onClick={() => router.push(`?userID=${user.id}`, `/users/${user.id}`, { shallow: true, scroll: false })}
                   />
+                  <style jsx global>
+                    {`
+                      .avatar {
+                        border-radius: 50%;
+                      }
+                    `}
+                  </style>
                   {user.id === activeNodePulseID && <ActivePulse />}
                   {user.dateOfDeath && (
                     <Icon
@@ -111,8 +140,8 @@ export default function Age () {
                       h='20px'
                       p='2px'
                       position='absolute'
-                      top='5px'
-                      right='5px'
+                      top='-7px'
+                      right='-3px'
                       zIndex='5'
                       color='hsla(0, 0%, 0%, 1)'
                       bg='hsla(0, 0%, 100%, 1)'

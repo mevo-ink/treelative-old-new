@@ -25,7 +25,7 @@ export async function getServerSideProps (ctx) {
   queryClient.setQueryData('getUserData', userData)
 
   if (!userData.isPublic) {
-    // if the user is not public, we need to check if the user is logged in
+    // if the user is not public, authenticate
     const session = await getSession(ctx)
     if (session.error) {
       return {
@@ -48,7 +48,7 @@ export default function Profile () {
   const router = useRouter()
 
   const onProfileClose = () => {
-    router.push('/')
+    router.push('/layouts/graph')
   }
 
   return (
