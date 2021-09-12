@@ -139,6 +139,7 @@ export default function Birthday () {
                   <Flex key={user.id} position='relative' boxSize='40px' my='3' mx='.5rem'>
                     <Image
                       src={user.avatar}
+                      alt={user.shortName}
                       layout='fill'
                       objectFit='contain'
                       className='avatar'

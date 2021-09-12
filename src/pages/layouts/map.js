@@ -101,6 +101,7 @@ export default function Map () {
             >
               <Image
                 src={user.avatar}
+                alt={user.shortName}
                 layout='fill'
                 objectFit='contain'
                 className='avatar'
