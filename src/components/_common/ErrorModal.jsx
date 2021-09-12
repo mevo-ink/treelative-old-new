@@ -40,6 +40,8 @@ export default function ErrorModal (props) {
     props.onClose && props.onClose()
   }
 
+  const showBody = icon || title || children || btn
+
   return (
     <Modal isOpen={isOpen} isCentered scrollBehavior='inside'>
       <ModalOverlay />
@@ -55,53 +57,55 @@ export default function ErrorModal (props) {
           bg='transparent'
           onClick={handleClose}
         />
-        <ModalBody as={Grid} placeItems='center' p='2em' mt='1rem'>
-          {icon && <Image src='/images/error.png' alt='Error' w='100px' mb='1rem' />}
-          {title && (
-            <Text
-              textAlign='center'
-              fontSize='1.3rem'
-              fontWeight='600'
-              mb='2rem'
-            >
-              {title}
-            </Text>
-          )}
-          {children && (
-            <Text
-              w='100%'
-              p='1em'
-              textAlign='center'
-              borderRadius='10px'
-              bg='hsla(0, 100%, 70%, .3)'
-            >
-              {children}
-            </Text>
-          )}
-          {btn && (
-            <Button
-              w='8em'
-              h='2em'
-              mt='2rem'
-              fontSize='1.3rem'
-              color='white'
-              border='none'
-              borderRadius='0.5em'
-              bg='linear-gradient(hsl(337, 100%, 55%), hsl(16, 60%, 65%) 100%)'
-              _hover={{
-                bg: 'linear-gradient(hsla(337, 100%, 55%, .5), hsla(16, 60%, 65%, .5) 100%)'
-              }}
-              _active={{
-                bg: 'linear-gradient(hsla(337, 100%, 55%, .5), hsla(16, 60%, 65%, .5) 100%)'
-              }}
-              onClick={handleBtnClick}
-            >
-              Refresh
-            </Button>
-          )}
-        </ModalBody>
+        {showBody && (
+          <ModalBody as={Grid} placeItems='center' p='2em' mt='1rem'>
+            {icon && <Image src='/images/error.png' alt='Error' w='100px' mb='1rem' />}
+            {title && (
+              <Text
+                textAlign='center'
+                fontSize='1.3rem'
+                fontWeight='600'
+                mb='2rem'
+              >
+                {title}
+              </Text>
+            )}
+            {children && (
+              <Text
+                w='100%'
+                p='1em'
+                textAlign='center'
+                borderRadius='10px'
+                bg='hsla(0, 100%, 70%, .3)'
+              >
+                {children}
+              </Text>
+            )}
+            {btn && (
+              <Button
+                w='8em'
+                h='2em'
+                mt='2rem'
+                fontSize='1.3rem'
+                color='white'
+                border='none'
+                borderRadius='0.5em'
+                bg='linear-gradient(hsl(337, 100%, 55%), hsl(16, 60%, 65%) 100%)'
+                _hover={{
+                  bg: 'linear-gradient(hsla(337, 100%, 55%, .5), hsla(16, 60%, 65%, .5) 100%)'
+                }}
+                _active={{
+                  bg: 'linear-gradient(hsla(337, 100%, 55%, .5), hsla(16, 60%, 65%, .5) 100%)'
+                }}
+                onClick={handleBtnClick}
+              >
+                Refresh
+              </Button>
+            )}
+          </ModalBody>
+        )}
         <ModalFooter d='flex' flexDir='column'>
-          <Text textAlign='center' fontSize='.8rem' mb='1.5'>
+          <Text textAlign='center' fontSize='.8rem' mb='4'>
             Please contact us for further assistance
           </Text>
           <Flex justifyContent='space-between' w='40%'>

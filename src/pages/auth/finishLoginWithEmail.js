@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 
-import { parseCookies, setCookie, destroyCookie } from 'nookies'
+import { parseCookies, destroyCookie } from 'nookies'
 
 import { useEffect, useState } from 'react'
 
@@ -45,8 +45,7 @@ export default function finishLoginWithEmail () {
     mutate({ email, token }, { onSuccess: onLoginSuccess })
   }
 
-  const onLoginSuccess = (token) => {
-    setCookie(null, 'AUTH_SESSION_ID', token, { path: '/' })
+  const onLoginSuccess = () => {
     // redirect back to the original page where login was initiated
     const { REDIRECT_REFERRER } = parseCookies()
     if (REDIRECT_REFERRER) {

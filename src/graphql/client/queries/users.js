@@ -69,3 +69,19 @@ export const getContactUsers = async () => {
     throw Error(message)
   }
 }
+
+export const getUnverifiedUsers = async () => {
+  try {
+    const { getUnverifiedUsers } = await graphQLClient.request(
+      gql`
+        query GET_UNVERIFIED_USERS {
+          getUnverifiedUsers
+        }
+      `
+    )
+    return getUnverifiedUsers
+  } catch (error) {
+    const [message] = error.message.split(': ')
+    throw Error(message)
+  }
+}

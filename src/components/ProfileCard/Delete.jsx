@@ -8,12 +8,13 @@ import { whoAmI } from 'graphql/client/queries/auth'
 import { deleteUser } from 'graphql/client/mutations/users'
 
 import { useRecoilValue } from 'recoil'
-import { isEditModeAtom } from 'utils/atoms.js'
+import { isEditModeAtom, layoutMethodsAtom } from 'utils/atoms.js'
 
 import ConfirmationModal from 'components/_common/ConfirmationModal'
 
 export default function Edit ({ innerBtnStyles, user }) {
   const isEditMode = useRecoilValue(isEditModeAtom)
+  const layoutMethods = useRecoilValue(layoutMethodsAtom)
 
   const [isConfirm, setIsConfirm] = useState(false)
 
@@ -22,7 +23,7 @@ export default function Edit ({ innerBtnStyles, user }) {
   const { data: authUser } = useQuery('whoAmI', whoAmI)
 
   const handleDeleteUser = () => {
-    return mutateAsync({ userID: user.id })
+    return mutateAsync({ userID: user.id }, { onSuccess: () => { layoutMethods.refetch() } })
   }
 
   const handleClear = (e) => {

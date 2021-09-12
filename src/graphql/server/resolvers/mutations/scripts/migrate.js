@@ -19,7 +19,7 @@ export default async (parent, args, context, info) => {
     const userInput = {
       isAdmin: false,
       isPublic: false,
-      isEmailVerified: false
+      isVerified: false
     }
     if (user.fullName) userInput.fullName = user.fullName
     if (user.shortName) userInput.shortName = user.shortName

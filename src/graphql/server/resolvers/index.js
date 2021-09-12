@@ -2,6 +2,8 @@ import { JSONResolver, DateTimeResolver } from 'graphql-scalars'
 
 import loginWithProvider from './mutations/auth/loginWithProvider'
 import connectUserEmail from './mutations/auth/connectUserEmail'
+import connectUserPhoneNumber from './mutations/auth/connectUserPhoneNumber'
+import verifyUser from './mutations/auth/verifyUser'
 
 import whoAmI from './queries/auth/whoAmI'
 
@@ -22,6 +24,7 @@ import removeUserPartner from './mutations/relations/removeUserPartner'
 
 import getUser from './queries/users/getUser'
 import getContactUsers from './queries/users/getContactUsers'
+import getUnverifiedUsers from './queries/users/getUnverifiedUsers'
 
 import countUsers from './queries/insights/countUsers'
 import countCouples from './queries/insights/countCouples'
@@ -70,12 +73,15 @@ export default {
     getCountryInsights,
     getUsersByAgeRange,
     getUsersByCountry,
-    getContactUsers
+    getContactUsers,
+    getUnverifiedUsers
   },
 
   Mutation: {
     loginWithProvider,
     connectUserEmail,
+    connectUserPhoneNumber,
+    verifyUser,
     createUser,
     deleteUser,
     updateUserGeneral,

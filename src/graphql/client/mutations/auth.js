@@ -33,3 +33,20 @@ export const connectUserEmail = async (variables) => {
     throw Error(message)
   }
 }
+
+export const verifyUser = async (variables) => {
+  try {
+    const { verifyUser } = await graphQLClient.request(
+      gql`
+        mutation VERIFY_USER ($userID: String! $isVerified: Boolean!) {
+          verifyUser (userID: $userID isVerified: $isVerified)
+        }
+      `,
+      variables
+    )
+    return verifyUser
+  } catch (error) {
+    const [message] = error.message.split(': ')
+    throw Error(message)
+  }
+}

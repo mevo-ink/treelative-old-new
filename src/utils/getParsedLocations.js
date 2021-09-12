@@ -15,7 +15,8 @@ export default async (input) => {
         const country = parsedLocation.address_components.find(({ types }) => types.includes('country'))
 
         parsedLocations[field] = {
-          description: parsedLocation.formatted_address,
+          fullDescription: parsedLocation.formatted_address,
+          description: suggestedLocation.terms?.slice(-3).map(val => val.value).join(', '),
           lat,
           lng,
           placeID: suggestedLocation.place_id,

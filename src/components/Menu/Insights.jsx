@@ -14,11 +14,15 @@ import { SiApollographql } from 'react-icons/si'
 
 import { useQuery } from 'react-query'
 import { countUsers } from 'graphql/client/queries/insights'
+import { whoAmI } from 'graphql/client/queries/auth'
 
 import InsightModal from 'components/Menu/Insights/InsightModal'
+import UnverifiedUsers from './Insights/UnverifiedUsers'
 
 export default function Insights () {
   const { data: usersCount } = useQuery('countUsers', countUsers)
+
+  const { data: authUser } = useQuery('whoAmI', whoAmI)
 
   const [openInsight, setOpenInsight] = useState(null)
 
@@ -42,6 +46,7 @@ export default function Insights () {
           Insights
         </Text>
         <Flex w='100%'>
+          {authUser?.isAdmin && <UnverifiedUsers />}
           {data.map((insight, idx) => (
             <Grid
               key={idx}

@@ -63,12 +63,18 @@ export default function Login ({ onSuccess, onClose }) {
         <Box w='100%' p='2rem 2.5rem'>
           {error && <ErrorModal> {error.message} </ErrorModal>}
           <Text
-            mb='1rem'
             fontSize='1.8rem'
             fontWeight='600'
             color='unset'
           >
             Sign In
+          </Text>
+          <Text
+            mb='1rem'
+            fontSize='xs'
+            color='unset'
+          >
+            You need to be signed in to view this user profile
           </Text>
           {!showLoginWithEmail && (
             <Stack

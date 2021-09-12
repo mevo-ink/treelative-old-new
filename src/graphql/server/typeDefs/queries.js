@@ -35,5 +35,6 @@ export default gql`
     getUsersByCountry (country: String!): JSON!
 
     getContactUsers: JSON!
+    getUnverifiedUsers: JSON!
   }
 `
