@@ -18,6 +18,19 @@ import { getUsersByCountry } from 'graphql/client/queries/users'
 import Loading from 'components/_common/Loading'
 import UsersMoreInfo from 'components/Menu/Insights/UsersMoreInfo'
 
+const FLAG_BASE_URL = ' https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.3/flags/4x3/'
+
+const CustomXAxisLabel = ({ x, y, payload }) => {
+  // show country flag as image
+  const countryCode = payload.value.toLowerCase()
+  const countryFlag = `${FLAG_BASE_URL}${countryCode}.svg`
+  return (
+    <g transform={`translate(${x - 15},${y - 15})`}>
+      <image xlinkHref={countryFlag} width={30} height={20} />
+    </g>
+  )
+}
+
 export default function CountryInsight () {
   const { data, isLoading } = useQuery('getCountryInsights', getCountryInsights)
 
@@ -31,7 +44,7 @@ export default function CountryInsight () {
     <>
       {isMoreInfoOpen && (
         <UsersMoreInfo
-          title={`Country ${isMoreInfoOpen}`}
+          title={isMoreInfoOpen}
           queryFn={getUsersByCountry}
           variables={{ country: isMoreInfoOpen }}
           onClose={() => setIsMoreInfoOpen(null)}
@@ -46,7 +59,7 @@ export default function CountryInsight () {
       </Text>
       <ResponsiveContainer>
         <BarChart data={data.countries}>
-          <XAxis dataKey='country' height={100} angle={290} tickMargin={40} tickSize={0} interval={0} />
+          <XAxis dataKey='code' height={50} tickMargin={40} tickSize={0} interval={0} tick={<CustomXAxisLabel />} />
           <Bar dataKey='count' fill='#ffffff'>
             {data.countries.map((entry, index) => (
               <Cell

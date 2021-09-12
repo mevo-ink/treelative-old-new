@@ -33,7 +33,10 @@ export default function UsersMoreInfo ({ queryFn, variables, onClose, title }) {
     <Modal isOpen isCentered onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>{title} ({data?.length})</ModalHeader>
+        <ModalHeader>
+          {title}
+          <Box as='span' ml='2' fontSize='md'>({data?.length})</Box>
+        </ModalHeader>
         <ModalBody
           maxH='300px'
           overflowY='auto'

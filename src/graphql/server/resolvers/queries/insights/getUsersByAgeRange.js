@@ -24,6 +24,7 @@ export default async (parent, args, context, info) => {
       {
         $project: {
           ...projectUserProfile,
+          dateOfBirth: 1,
           age: projectUserAge
         }
       },
