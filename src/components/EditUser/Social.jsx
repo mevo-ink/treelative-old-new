@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from 'react-query'
-import { updateUseSocial } from 'graphql/client/mutations/users'
+import { updateUserSocial } from 'graphql/client/mutations/users'
 
 import SocialTrigger from 'components/_trigger/SocialTrigger'
 
 export default function Social ({ social, userID }) {
-  const { mutateAsync, isLoading, error } = useMutation(updateUseSocial)
+  const { mutateAsync, isLoading, error } = useMutation(updateUserSocial)
 
   const queryClient = useQueryClient()
   const onSuccess = (updatedData) => {
