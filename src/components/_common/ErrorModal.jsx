@@ -34,6 +34,11 @@ export default function ErrorModal (props) {
 
   const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true })
 
+  const handleClose = () => {
+    onClose()
+    props.onClose && props.onClose()
+  }
+
   return (
     <Modal isOpen={isOpen} isCentered scrollBehavior='inside'>
       <ModalOverlay />
@@ -47,7 +52,7 @@ export default function ErrorModal (props) {
           top='1rem'
           borderRadius='5px'
           bg='transparent'
-          onClick={onClose}
+          onClick={handleClose}
         />
         <ModalBody as={Grid} placeItems='center' p='2em' mt='1rem'>
           {icon && <Image src='/images/error.png' alt='Error' w='100px' mb='1rem' />}
@@ -109,7 +114,7 @@ export default function ErrorModal (props) {
                   borderRadius='50%'
                   onClick={() => router.push(`?userID=${user.id}`, `/users/${user.id}`, { shallow: true, scroll: false })}
                 />
-                <Text fontSize='.5rem' mt='.5rem' textAlign='center'>{user.shortName}</Text>
+                <Text fontSize='1rem' mt='.5rem' textAlign='center'>{user.shortName}</Text>
               </Box>
             ))}
           </Flex>

@@ -8,7 +8,7 @@ export default function Copyright () {
   const [showContactUs, setShowContactUs] = useState(false)
   return (
     <>
-      {showContactUs && <ErrorModal />}
+      {showContactUs && <ErrorModal onClose={() => setShowContactUs(false)} />}
       <Flex w='100%' justifyContent='space-between'>
         <Text fontSize='.6rem' pb='1rem'>
           &#xA9; {new Date().getFullYear()}. Designed by &nbsp;

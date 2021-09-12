@@ -20,17 +20,17 @@ import Layouts from 'components/Menu/Layouts'
 import Insights from 'components/Menu/Insights'
 import Copyright from 'components/Menu/Copyright'
 
+const wiggle = keyframes`
+  80% { transform: scaleY(1); }
+  95% { transform: scaleY(1.3); }
+  97% { transform: scaleY(1); }
+  99% { transform: scaleY(1.2); }
+  100% { transform: scaleY(1); }
+`
+
 export default function Menu () {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()
-
-  const wiggle = keyframes`
-    80% { transform: scaleY(1); }
-    95% { transform: scaleY(1.3); }
-    97% { transform: scaleY(1); }
-    99% { transform: scaleY(1.2); }
-    100% { transform: scaleY(1); }
-  `
 
   return (
     <Box>
