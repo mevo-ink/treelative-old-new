@@ -23,12 +23,14 @@ jobs:
           touch .env
           echo NEXT_PUBLIC_GOOGLE_LOCATION_API_KEY=${{ secrets.NEXT_PUBLIC_GOOGLE_LOCATION_API_KEY }} >> .env
           cat .env
+      - name: Expose branch name as an env variable
+        run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
       - name: Push to Docker Hub
         uses: docker/build-push-action@v2
         with:
           context: .
           push: true
-          tags: jana19/treelative-client:${{ github.head_ref }}
+          tags: jana19/treelative-client:${{ env.BRANCH }}
       - name: Redeploy on Portainer
         uses: wei/curl@master
         with:
