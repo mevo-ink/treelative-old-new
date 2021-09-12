@@ -33,9 +33,12 @@ export default function InputWithIconTrigger (props) {
   `
 
   const handleClick = () => {
-    if (!props.value) return
-    if (isEditMode) onOpen()
-    else window.location.href = baseURL + props.value
+    if (isEditMode) {
+      onOpen()
+    } else {
+      if (!props.value) return
+      window.location.href = baseURL + props.value
+    }
   }
 
   return (
@@ -65,6 +68,7 @@ export default function InputWithIconTrigger (props) {
             fontSize='14px'
             borderLeftRadius='unset'
             onClick={handleClick}
+            isDisabled={!isEditMode && !props.value}
           >
             {props.value ? props.value : 'Unavailable'}
           </Button>
