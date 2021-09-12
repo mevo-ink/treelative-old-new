@@ -2,10 +2,6 @@ import { MongoClient, ObjectId } from 'mongodb'
 
 const { DATABASE_URL } = process.env
 
-if (!DATABASE_URL) {
-  throw new Error('Please add your Mongo URI to .env.local')
-}
-
 const options = {
   useUnifiedTopology: true,
   useNewUrlParser: true
