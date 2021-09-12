@@ -49,10 +49,10 @@ export default function RelationModal (props) {
       })
   }
 
-  const handleCreateUserClose = (response) => {
+  const handleCreateUserClose = (userID) => {
     setIsAddNewOpen('')
-    if (response) {
-      handleAddRelation(response.addUser.id)
+    if (userID) {
+      handleAddRelation(userID)
     }
   }
 

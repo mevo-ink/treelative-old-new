@@ -15,6 +15,9 @@ import { IoPersonAddSharp } from 'react-icons/io5'
 import { useMutation } from 'react-query'
 import { createUser } from 'graphql/client/mutations/users'
 
+import { useRecoilValue } from 'recoil'
+import { layoutMethodsAtom } from 'utils/atoms.js'
+
 import { object, string } from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -33,6 +36,8 @@ export default function CreateUser ({ initialValue = '', onClose: onParentClose 
   const { isDesktop } = useDevice()
 
   const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: initialValue })
+
+  const layoutMethods = useRecoilValue(layoutMethodsAtom)
 
   const handleClose = (response) => {
     onClose()
@@ -54,17 +59,16 @@ export default function CreateUser ({ initialValue = '', onClose: onParentClose 
 
   const onSubmit = (input) => {
     mutateAsync({ input })
-      .then(async data => {
-        if (data) {
-          toast({
-            title: 'Successfully User Created',
-            status: 'success',
-            position: 'top',
-            duration: 5000,
-            isClosable: true
-          })
-          handleClose(data)
-        }
+      .then(data => {
+        toast({
+          title: 'Successfully User Created',
+          status: 'success',
+          position: 'top',
+          duration: 5000,
+          isClosable: true
+        })
+        layoutMethods.refetch()
+        handleClose(data)
       })
       .catch(setInternalError)
   }
