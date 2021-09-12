@@ -9,7 +9,11 @@ export default async (parent, args, context, info) => {
       $and: [
         ...query.split(' ').map(fuzzySearch).map(q => ({ $or: q }))
       ],
-      email: { $exists: false }
+      $or: [
+        { email: { $exists: false } },
+        { phoneNumber: { $exists: false } }
+      ],
+      isVerified: false
     },
     {
       projection: {

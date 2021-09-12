@@ -2,6 +2,7 @@ import firebase from 'firebase/app'
 
 import 'firebase/auth'
 import 'firebase/analytics'
+import 'firebase/messaging'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAYwyuzHLuCtdEWZs-g552auLodHI5g9sA',
@@ -13,12 +14,14 @@ const firebaseConfig = {
   measurementId: 'G-9SNJVQ27BK'
 }
 
+let messaging
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig)
   // Check that `window` is in scope for the analytics module!
   if (typeof window !== 'undefined') {
     // Enable analytics. https://firebase.google.com/docs/analytics/get-started
     firebase.analytics()
+    messaging = firebase.messaging()
   }
 }
 
@@ -34,5 +37,6 @@ google.addScope('https://www.googleapis.com/auth/userinfo.email')
 export {
   firebaseAuth,
   facebook,
-  google
+  google,
+  messaging
 }
