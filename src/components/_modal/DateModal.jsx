@@ -60,6 +60,9 @@ export default function DateModal (props) {
               },
               '.react-datepicker__day-name': {
                 color: 'white'
+              },
+              '.react-datepicker__day--disabled': {
+                opacity: '0.2'
               }
             }}
           >
