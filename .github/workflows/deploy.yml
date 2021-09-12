@@ -22,8 +22,6 @@ jobs:
         run: |
           touch .env
           echo NEXT_PUBLIC_GOOGLE_LOCATION_API_KEY=${{ secrets.NEXT_PUBLIC_GOOGLE_LOCATION_API_KEY }} >> .env
-          echo NODE_ENV=production >> .env
-          echo DATABASE_URL=mongodb://aaaaa:bbbb@1.2.3.4:5555/cccc?authSource=dddd
           cat .env
       - name: Expose branch name as an env variable
         run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
