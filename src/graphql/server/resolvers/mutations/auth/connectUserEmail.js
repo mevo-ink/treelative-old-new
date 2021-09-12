@@ -1,13 +1,13 @@
 import { ObjectId } from 'mongodb'
 
 import dbConnect from 'utils/mongodb'
-import admin from 'utils/firebaseAdmin'
+import { auth } from 'utils/firebaseAdmin'
 
 export default async (parent, args, context, info) => {
   const { userID, email, token } = args
 
   // verify firebase session id
-  await admin.auth().verifyIdToken(token)
+  await auth().verifyIdToken(token)
 
   const db = await dbConnect()
 
