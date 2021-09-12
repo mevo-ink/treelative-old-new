@@ -1,7 +1,7 @@
 import { ApolloError } from 'apollo-server-micro'
 
 import { isOwner } from 'utils/auth'
-import { expandUserRelations } from 'utils/dbProjections'
+import { projectUserRelations, expandUserRelations } from 'utils/dbProjections'
 
 import { addUserChild } from './addUserChild'
 
@@ -17,7 +17,7 @@ export default async (parent, args, context, info) => {
   const { value: user } = await context.db.collection('users').findOneAndUpdate(
     { _id: context.db.ObjectId(userID) },
     { $set: { partner: context.db.ObjectId(partnerID) } },
-    { returnDocument: 'after', returnOriginal: false, projection: { partner: 1, children: 1, _id: 0, id: { $toString: '$_id' } } }
+    { returnDocument: 'after', returnOriginal: false, projection: projectUserRelations }
   )
 
   // add the userID as a partner to partnerID

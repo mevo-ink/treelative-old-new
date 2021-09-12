@@ -13,6 +13,14 @@ export const projectUserProfile = {
   }
 }
 
+export const projectUserRelations = {
+  _id: 0,
+  id: { $toString: '$_id' },
+  parents: 1,
+  children: 1,
+  partner: 1
+}
+
 export const projectUserAge = {
   $cond: {
     if: '$dateOfDeath',

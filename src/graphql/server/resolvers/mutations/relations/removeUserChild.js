@@ -1,14 +1,14 @@
 import { ApolloError } from 'apollo-server-micro'
 
 import { isOwner } from 'utils/auth'
-import { expandUserRelations } from 'utils/dbProjections'
+import { projectUserRelations, expandUserRelations } from 'utils/dbProjections'
 
 export const removeUserChild = async (context, userID, childID) => {
   // remove the childID from this user
   const { value: user } = await context.db.collection('users').findOneAndUpdate(
     { _id: context.db.ObjectId(userID) },
     { $pull: { children: context.db.ObjectId(childID) } },
-    { returnDocument: 'after', returnOriginal: false, projection: { children: 1, partner: 1, _id: 0, id: { $toString: '$_id' } } }
+    { returnDocument: 'after', returnOriginal: false, projection: projectUserRelations }
   )
 
   // remove this user as a parent from childID
