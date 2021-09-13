@@ -21,8 +21,8 @@ export default function Edit ({ innerBtnStyles, user }) {
   const { data: authUser } = useQuery('whoAmI', whoAmI)
 
   const checkEditable = () => {
-    if (authUser?.children.find(child => child.id === activeNodeID)) return true
-    if (authUser?.parents.find(parent => parent.id === activeNodeID)) return true
+    if (authUser?.children?.find(child => child.id === activeNodeID)) return true
+    if (authUser?.parents?.find(parent => parent.id === activeNodeID)) return true
     if (activeNodeID === authUser?.partner?.id) return true
   }
 
