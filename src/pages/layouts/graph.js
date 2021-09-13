@@ -58,7 +58,10 @@ export default function Graph () {
     const network = new Network(graphRef.current, data, graphOptions)
     // zoom on Graph mount
     network.on('stabilized', () => {
-      const position = centerUserID ? network.getPosition(centerUserID) : null
+      let position
+      try {
+        position = centerUserID ? network.getPosition(centerUserID) : null
+      } catch (e) {}
       network.moveTo({
         position,
         scale: 0.8,

@@ -16,7 +16,7 @@ import { MdEmail, MdPhoneIphone, MdClose } from 'react-icons/md'
 import { FaGoogle, FaFacebook } from 'react-icons/fa'
 
 import { useMutation, useQueryClient } from 'react-query'
-import { loginWithProvider } from 'graphql/client/mutations/auth'
+import { loginWithEmail } from 'graphql/client/mutations/auth'
 import { google, facebook } from 'utils/firebaseApp'
 
 import ErrorModal from 'components/_common/ErrorModal'
@@ -36,7 +36,7 @@ export default function Login ({ onSuccess, onClose }) {
   const [showLoginWithEmail, setShowLoginWithEmail] = useState(false)
   const [showLoginWithPhoneNumber, setShowLoginWithPhoneNumber] = useState(false)
 
-  const { mutate, error } = useMutation(loginWithProvider)
+  const { mutate, error } = useMutation(loginWithEmail)
 
   const [email, setEmail] = useState('')
 
@@ -49,7 +49,7 @@ export default function Login ({ onSuccess, onClose }) {
     mutate({ email, token }, { onSuccess })
   }
 
-  if (error?.message.includes('associated with the email')) {
+  if (error?.message?.includes('associated with the email')) {
     return <ConnectUserEmail email={email} message={error.message} onClose={onClose} />
   }
 

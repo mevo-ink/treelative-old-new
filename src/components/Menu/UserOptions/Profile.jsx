@@ -3,7 +3,7 @@ import { setCookie } from 'nookies'
 
 import { Image, Button } from '@chakra-ui/react'
 
-export default function Profile ({ onClose, authUser }) {
+export default function Profile ({ authUser }) {
   const router = useRouter()
 
   const handleClick = () => {

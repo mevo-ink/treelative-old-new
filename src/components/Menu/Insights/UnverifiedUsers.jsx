@@ -37,6 +37,8 @@ export default function UnverifiedUsers () {
     mutate({ userID, isVerified }, { onSuccess: refetch })
   }
 
+  if (data?.length === 0) return null
+
   return (
     <>
       <Grid

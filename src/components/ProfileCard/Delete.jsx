@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 import { IconButton } from '@chakra-ui/react'
 import { RiDeleteBin6Line } from 'react-icons/ri'
@@ -7,13 +8,15 @@ import { useQuery, useMutation } from 'react-query'
 import { whoAmI } from 'graphql/client/queries/auth'
 import { deleteUser } from 'graphql/client/mutations/users'
 
-import { useRecoilValue } from 'recoil'
+import { useRecoilValue, useRecoilState } from 'recoil'
 import { isEditModeAtom, layoutMethodsAtom } from 'utils/atoms.js'
 
 import ConfirmationModal from 'components/_common/ConfirmationModal'
 
 export default function Edit ({ innerBtnStyles, user }) {
-  const isEditMode = useRecoilValue(isEditModeAtom)
+  const router = useRouter()
+
+  const [isEditMode, setIsEditMode] = useRecoilState(isEditModeAtom)
   const layoutMethods = useRecoilValue(layoutMethodsAtom)
 
   const [isConfirm, setIsConfirm] = useState(false)
@@ -22,8 +25,14 @@ export default function Edit ({ innerBtnStyles, user }) {
 
   const { data: authUser } = useQuery('whoAmI', whoAmI)
 
+  const onSuccess = () => {
+    setIsEditMode(false)
+    router.push('/')
+    layoutMethods.refetch()
+  }
+
   const handleDeleteUser = () => {
-    return mutateAsync({ userID: user.id }, { onSuccess: () => { layoutMethods.refetch() } })
+    return mutateAsync({ userID: user.id }, { onSuccess })
   }
 
   const handleClear = (e) => {
