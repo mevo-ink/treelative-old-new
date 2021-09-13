@@ -1,16 +1,33 @@
 import { graphQLClient, gql } from 'graphql/client'
 
-export const loginWithProvider = async (variables) => {
+export const loginWithEmail = async (variables) => {
   try {
-    const { loginWithProvider } = await graphQLClient.request(
+    const { loginWithEmail } = await graphQLClient.request(
       gql`
       mutation LOGIN_WITH_PROVIDER ($email: String! $token: String!) {
-        loginWithProvider (email: $email token: $token)
+        loginWithEmail (email: $email token: $token)
       }
     `,
       variables
     )
-    return loginWithProvider
+    return loginWithEmail
+  } catch (error) {
+    const [message] = error.message.split(': ')
+    throw Error(message)
+  }
+}
+
+export const loginWithPhoneNumber = async (variables) => {
+  try {
+    const { loginWithPhoneNumber } = await graphQLClient.request(
+      gql`
+      mutation LOGIN_WITH_PROVIDER ($phoneNumber: String! $token: String!) {
+        loginWithPhoneNumber (phoneNumber: $phoneNumber token: $token)
+      }
+    `,
+      variables
+    )
+    return loginWithPhoneNumber
   } catch (error) {
     const [message] = error.message.split(': ')
     throw Error(message)
@@ -21,13 +38,30 @@ export const connectUserEmail = async (variables) => {
   try {
     const { connectUserEmail } = await graphQLClient.request(
       gql`
-      mutation LOGIN_WITH_PROVIDER ($userID: String! $email: String! $token: String!) {
+      mutation CONNECT_USER_EMAIL ($userID: String! $email: String! $token: String!) {
         connectUserEmail (userID: $userID email: $email token: $token)
       }
     `,
       variables
     )
     return connectUserEmail
+  } catch (error) {
+    const [message] = error.message.split(': ')
+    throw Error(message)
+  }
+}
+
+export const connectUserPhoneNumber = async (variables) => {
+  try {
+    const { connectUserPhoneNumber } = await graphQLClient.request(
+      gql`
+      mutation CONNECT_USER_PHONE_NUMBER ($userID: String! $phoneNumber: String! $token: String!) {
+        connectUserPhoneNumber (userID: $userID phoneNumber: $phoneNumber token: $token)
+      }
+    `,
+      variables
+    )
+    return connectUserPhoneNumber
   } catch (error) {
     const [message] = error.message.split(': ')
     throw Error(message)

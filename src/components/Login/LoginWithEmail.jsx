@@ -82,17 +82,6 @@ export default function LoginWithEmail ({ setShowLoginWithEmail }) {
             Send Verification
           </Button>
         )}
-        {/* {verificationMsg && (
-          <Button
-            variant='submit'
-            bg='linear-gradient(180deg, hsl(0, 0%, 27%), hsl(0, 0%, 17%))'
-            _hover={{ bg: 'linear-gradient(180deg, hsl(0, 0%, 27%), hsl(0, 0%, 17%))' }}
-            _active={{ bg: 'linear-gradient(180deg, hsl(0, 0%, 27%), hsl(0, 0%, 17%))' }}
-            onClick={() => (window.location.href = 'mailto:' + email)}
-          >
-            Open Mail App
-          </Button>
-        )} */}
       </Stack>
       <Button
         leftIcon={<IoCaretBack />}

@@ -12,7 +12,7 @@ import ErrorModal from 'components/_common/ErrorModal'
 import ConnectUserEmail from 'components/EditUser/ConnectUserEmail'
 
 import { useMutation } from 'react-query'
-import { loginWithProvider } from 'graphql/client/mutations/auth'
+import { loginWithEmail } from 'graphql/client/mutations/auth'
 
 import {
   Text,
@@ -39,7 +39,7 @@ export default function finishLoginWithEmail () {
   const [isVerifyingEmail, setIsVerifyingEmail] = useState(false)
   const [firebaseLoginError, setFirebaseLoginError] = useState(null)
 
-  const { mutate, error } = useMutation(loginWithProvider)
+  const { mutate, error } = useMutation(loginWithEmail)
 
   const onLoginWithProvider = (token) => {
     mutate({ email, token }, { onSuccess: onLoginSuccess })

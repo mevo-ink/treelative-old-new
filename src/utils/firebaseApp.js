@@ -26,6 +26,7 @@ if (!firebase.apps.length) {
 }
 
 const firebaseAuth = firebase.auth()
+firebaseAuth.useDeviceLanguage()
 
 // setup additional OAuth providers
 const facebook = new firebase.auth.FacebookAuthProvider()
@@ -35,6 +36,7 @@ const google = new firebase.auth.GoogleAuthProvider()
 google.addScope('https://www.googleapis.com/auth/userinfo.email')
 
 export {
+  firebase,
   firebaseAuth,
   facebook,
   google,

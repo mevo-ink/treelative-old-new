@@ -80,8 +80,6 @@ export default function App ({ Component, pageProps }) {
 
 // TODO:
 /*
-  Review Firebase Magic Email - also add phone number login
-
   Investigate firebase cloud notifications
 
   Add find me ring indicator graph view - version 2.1 - if server side canvas rendering is a success !

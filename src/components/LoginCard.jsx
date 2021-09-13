@@ -11,8 +11,8 @@ import {
   ModalOverlay,
   ModalContent
 } from '@chakra-ui/react'
-import { FiLogIn } from 'react-icons/fi'
-import { MdClose } from 'react-icons/md'
+
+import { MdEmail, MdPhoneIphone, MdClose } from 'react-icons/md'
 import { FaGoogle, FaFacebook } from 'react-icons/fa'
 
 import { useMutation } from 'react-query'
@@ -23,6 +23,7 @@ import ErrorModal from 'components/_common/ErrorModal'
 import LoginButton from 'components/Login/LoginButton'
 import LoginWithEmail from 'components/Login/LoginWithEmail'
 import ConnectUserEmail from 'components/EditUser/ConnectUserEmail'
+import LoginWithPhoneNumber from 'components/Login/LoginWithPhoneNumber'
 
 const loginProviders = [
   { label: 'Login with Facebook', icon: FaFacebook, color: 'linear-gradient(180deg, hsl(222, 47%, 43%), hsl(222, 47%, 33%))', provider: facebook },
@@ -31,6 +32,7 @@ const loginProviders = [
 
 export default function Login ({ onSuccess, onClose }) {
   const [showLoginWithEmail, setShowLoginWithEmail] = useState(false)
+  const [showLoginWithPhoneNumber, setShowLoginWithPhoneNumber] = useState(false)
 
   const { mutate, error } = useMutation(loginWithProvider)
 
@@ -76,7 +78,7 @@ export default function Login ({ onSuccess, onClose }) {
           >
             You need to be signed in to view this user profile
           </Text>
-          {!showLoginWithEmail && (
+          {(!showLoginWithEmail && !showLoginWithPhoneNumber) && (
             <Stack
               width='100%'
               spacing='1rem'
@@ -96,14 +98,23 @@ export default function Login ({ onSuccess, onClose }) {
               </Flex>
               <LoginButton
                 label='Login with Email'
-                icon={FiLogIn}
+                icon={MdEmail}
                 color='linear-gradient(180deg, hsl(0, 0%, 27%), hsl(0, 0%, 17%))'
                 setShowLoginWithEmail={setShowLoginWithEmail}
+              />
+              <LoginButton
+                label='Login with Phone Number'
+                icon={MdPhoneIphone}
+                color='linear-gradient(180deg, hsl(0, 0%, 27%), hsl(0, 0%, 17%))'
+                setShowLoginWithEmail={setShowLoginWithPhoneNumber}
               />
             </Stack>
           )}
           {showLoginWithEmail && (
             <LoginWithEmail setShowLoginWithEmail={setShowLoginWithEmail} />
+          )}
+          {showLoginWithPhoneNumber && (
+            <LoginWithPhoneNumber setShowLoginWithPhoneNumber={setShowLoginWithPhoneNumber} />
           )}
         </Box>
       </ModalContent>

@@ -1,6 +1,7 @@
 import { JSONResolver, DateTimeResolver } from 'graphql-scalars'
 
-import loginWithProvider from './mutations/auth/loginWithProvider'
+import loginWithEmail from './mutations/auth/loginWithEmail'
+import loginWithPhoneNumber from './mutations/auth/loginWithPhoneNumber'
 import connectUserEmail from './mutations/auth/connectUserEmail'
 import connectUserPhoneNumber from './mutations/auth/connectUserPhoneNumber'
 import verifyUser from './mutations/auth/verifyUser'
@@ -78,7 +79,8 @@ export default {
   },
 
   Mutation: {
-    loginWithProvider,
+    loginWithEmail,
+    loginWithPhoneNumber,
     connectUserEmail,
     connectUserPhoneNumber,
     verifyUser,
