@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import {
   Box,
@@ -15,7 +15,7 @@ import {
 import { MdEmail, MdPhoneIphone, MdClose } from 'react-icons/md'
 import { FaGoogle, FaFacebook } from 'react-icons/fa'
 
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import { loginWithProvider } from 'graphql/client/mutations/auth'
 import { google, facebook } from 'utils/firebaseApp'
 
@@ -31,12 +31,18 @@ const loginProviders = [
 ]
 
 export default function Login ({ onSuccess, onClose }) {
+  const queryClient = useQueryClient()
+
   const [showLoginWithEmail, setShowLoginWithEmail] = useState(false)
   const [showLoginWithPhoneNumber, setShowLoginWithPhoneNumber] = useState(false)
 
   const { mutate, error } = useMutation(loginWithProvider)
 
   const [email, setEmail] = useState('')
+
+  useEffect(() => {
+    queryClient.resetQueries('whoAmI')
+  }, [])
 
   const onLoginWithProvider = (token, { email }) => {
     setEmail(email)
