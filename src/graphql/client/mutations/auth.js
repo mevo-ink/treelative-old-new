@@ -1,5 +1,22 @@
 import { graphQLClient, gql } from 'graphql/client'
 
+export const sendFCMToken = async (variables) => {
+  try {
+    const { sendFCMToken } = await graphQLClient.request(
+      gql`
+        mutation SEND_FCM_TOKEN ($token: String! $navigator: JSON) {
+          sendFCMToken (token: $token navigator: $navigator)
+        }
+      `,
+      variables
+    )
+    return sendFCMToken
+  } catch (error) {
+    // no need to throw error, just return false
+    return false
+  }
+}
+
 export const loginWithEmail = async (variables) => {
   try {
     const { loginWithEmail } = await graphQLClient.request(

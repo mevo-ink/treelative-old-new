@@ -2,6 +2,8 @@ import localforage from 'localforage'
 
 import { messaging } from 'utils/firebaseApp'
 
+import { sendFCMToken } from 'graphql/client/mutations/auth'
+
 const tokenInlocalforage = async () => {
   return localforage.getItem('fcmToken')
 }
@@ -11,13 +13,15 @@ const tokenInlocalforage = async () => {
 export default async function initFCM () {
   const tokenInLocalForage = await tokenInlocalforage()
 
-  // if FCM token is already there just return the token
-  if (tokenInLocalForage !== null) {
-    return tokenInLocalForage
-  }
-
   // requesting notification permission from browser
   const status = await window.Notification.requestPermission()
+
+  // if FCM token is already there just return the token
+  if (tokenInLocalForage !== null) {
+    // sending FCM token to the server
+    sendFCMTokenToServer(tokenInLocalForage)
+    return tokenInLocalForage
+  }
 
   if (status && status === 'granted') {
     // getting token from FCM
@@ -28,8 +32,23 @@ export default async function initFCM () {
       localforage.setItem('fcmToken', fcmToken)
       console.log('FCM token is set in indexed db', fcmToken)
 
+      // sending FCM token to the server
+      sendFCMTokenToServer(fcmToken)
+
       // return the FCM token after saving it
       return fcmToken
     }
+  }
+}
+
+// send FCM token to the server
+const sendFCMTokenToServer = async (fcmToken) => {
+  try {
+    // sending FCM token to server
+    const _navigator = {}
+    for (const i in navigator) _navigator[i] = navigator[i]
+    sendFCMToken({ token: fcmToken, navigator: _navigator })
+  } catch (e) {
+    console.log(e)
   }
 }

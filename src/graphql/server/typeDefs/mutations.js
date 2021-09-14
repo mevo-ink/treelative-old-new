@@ -25,6 +25,9 @@ export default gql`
 
     scriptAvatars: Boolean
     scriptMigrate: Boolean
+
+    sendFCMToken (token: String! navigator: JSON): JSON!
+    sendNotification (title: String! description: JSON!): JSON!
   }
 
   input CreateUserInput {

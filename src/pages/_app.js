@@ -12,9 +12,6 @@ import { RecoilRoot } from 'recoil'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { Hydrate } from 'react-query/hydration'
 
-import { messaging } from 'utils/firebaseApp'
-import initFirebaseCloudMessaging from 'utils/webPush'
-
 export default function App ({ Component, pageProps }) {
   const [queryClient] = useState(() => new QueryClient({
     defaultOptions: {
@@ -25,13 +22,6 @@ export default function App ({ Component, pageProps }) {
     }
   }))
 
-  const setToken = async () => {
-    const token = await initFirebaseCloudMessaging()
-    if (token) {
-      messaging.onMessage((message) => console.log('foreground', message))
-    }
-  }
-
   useEffect(() => {
     // set language
     document.documentElement.lang = 'en-us'
@@ -41,9 +31,6 @@ export default function App ({ Component, pageProps }) {
     const resize = window.addEventListener('resize', () => {
       document.querySelector(':root').style.setProperty('--vh', window.innerHeight / 100 + 'px')
     })
-
-    // init firebase cloud messaging
-    setToken()
 
     return () => {
       window.removeEventListener('resize', resize)
@@ -77,10 +64,3 @@ export default function App ({ Component, pageProps }) {
 
   )
 }
-
-// TODO:
-/*
-  Investigate firebase cloud notifications
-  Check if user has enabled notifications - if not, ask to enable
-
-*/

@@ -1,3 +1,8 @@
+import { useEffect } from 'react'
+
+import { messaging } from 'utils/firebaseApp'
+import initFirebaseCloudMessaging from 'utils/webPush'
+
 import { useRouter } from 'next/router'
 import { parseCookies, destroyCookie } from 'nookies'
 
@@ -9,8 +14,34 @@ import Menu from 'components/Menu'
 import ProfileCard from 'components/ProfileCard'
 import LoginCard from 'components/LoginCard'
 
+import { createStandaloneToast } from '@chakra-ui/react'
+
+const toast = createStandaloneToast()
+
 export default function Wrapper ({ children }) {
   useServiceWorker()
+
+  const setToken = async () => {
+    const token = await initFirebaseCloudMessaging()
+    if (token) {
+      messaging.onMessage((message) => {
+        const { data } = message
+        toast({
+          title: data.title,
+          description: data.description,
+          status: 'warning',
+          position: 'top',
+          duration: null,
+          isClosable: true
+        })
+      })
+    }
+  }
+
+  useEffect(() => {
+    // init firebase cloud messaging
+    setToken()
+  }, [])
 
   const queryClient = useQueryClient()
 

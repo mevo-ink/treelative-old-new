@@ -6,6 +6,9 @@ import connectUserEmail from './mutations/auth/connectUserEmail'
 import connectUserPhoneNumber from './mutations/auth/connectUserPhoneNumber'
 import verifyUser from './mutations/auth/verifyUser'
 
+import sendFCMToken from './mutations/notifications/sendFCMToken'
+import sendNotification from './mutations/notifications/sendNotification'
+
 import whoAmI from './queries/auth/whoAmI'
 
 import createUser from './mutations/users/createUser'
@@ -95,6 +98,8 @@ export default {
     removeUserParent,
     removeUserChild,
     removeUserPartner,
+    sendFCMToken,
+    sendNotification,
     scriptAvatars: avatars,
     scriptMigrate: migrate
   }

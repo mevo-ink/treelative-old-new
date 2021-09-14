@@ -17,6 +17,7 @@ import {
   Modal,
   Stack,
   Image,
+  Button,
   ModalBody,
   IconButton,
   ModalFooter,
@@ -120,6 +121,24 @@ export default function ConnectUserPhoneNumber ({ phoneNumber, message, onClose 
                   Thank you for requesting to connect your phone number with <br /><strong>{successData.fullName}</strong>. <br /><br />
                   We will verify the phone number and notify you once it has been approved.
                 </Text>
+                {window.Notification.permission !== 'granted' && (
+                  <>
+                    <Text
+                      w='100%'
+                      p='1em'
+                      textAlign='center'
+                      borderRadius='10px'
+                    >
+                      Please make sure to allow notifications for this website.
+                    </Text>
+                    <Button
+                      colorScheme='orange'
+                      onClick={() => window.Notification.requestPermission()}
+                    >
+                      Allow Notifications
+                    </Button>
+                  </>
+                )}
               </Stack>
             )}
           </ModalBody>

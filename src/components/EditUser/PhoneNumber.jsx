@@ -25,7 +25,7 @@ export default function PhoneNumber ({ user, icon }) {
       baseURL='https://wa.me/'
       icon={icon}
       value={user?.phoneNumber}
-      validation={string().matches(/^\+?\d{10,14}$/, { message: 'Invalid Phone Number', excludeEmptyString: true })}
+      validation={string().matches(/^\+\d{10,14}$/, { message: 'Invalid Phone Number', excludeEmptyString: true })}
       onSubmit={handleEditPhoneNumber}
       isLoading={isLoading}
       error={error}

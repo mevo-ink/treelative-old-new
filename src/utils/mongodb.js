@@ -28,6 +28,10 @@ export default async function mongoConnect () {
   }
   const connection = await clientPromise
   const db = connection.db()
+  // create indexes on collections
+  db.collection('users').createIndex({ email: 1 }, { unique: true, sparse: true })
+  db.collection('cache').createIndex({ name: 1 }, { unique: true })
+  db.collection('fcm').createIndex({ token: 1 }, { unique: true })
   db.ObjectId = ObjectId
   return db
 }

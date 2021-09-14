@@ -11,6 +11,7 @@ const auth = admin.auth
 const storage = admin.storage().bucket('gs://treelative-007.appspot.com')
 
 export {
+  admin,
   auth,
   storage
 }
