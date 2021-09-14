@@ -4,8 +4,8 @@ export const createUser = async (variables) => {
   try {
     const { createUser } = await graphQLClient.request(
       gql`
-        mutation CREATE_USER ($input: CreateUserInput!) {
-          createUser (input: $input)
+        mutation CREATE_USER ($input: CreateUserInput! $token: String) {
+          createUser (input: $input token: $token)
         }
       `,
       variables

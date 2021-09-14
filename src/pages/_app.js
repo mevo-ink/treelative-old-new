@@ -81,13 +81,6 @@ export default function App ({ Component, pageProps }) {
 // TODO:
 /*
   Investigate firebase cloud notifications
-
   Check if user has enabled notifications - if not, ask to enable
 
-  Add find me ring indicator graph view - version 2.1 - if server side canvas rendering is a success !
-
-  MAKE YouTube VIDEO OF how to / intro
-
-  LOGIN PROCESS - OAUTH
-     - If the user chooses to create a new user, create a new profile with the email: remove the unverified flag after manual verification
 */

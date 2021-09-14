@@ -8,7 +8,7 @@ export default gql`
     connectUserPhoneNumber (userID: String! phoneNumber: String! token: String!): JSON!
     verifyUser (userID: String! isVerified: Boolean!): JSON!
 
-    createUser (input: CreateUserInput!): String!
+    createUser (input: CreateUserInput! token: String): String!
     deleteUser (userID: String!): Boolean!
 
     updateUserGeneral (userID: String! input: UpdateUserGeneralInput!): JSON!

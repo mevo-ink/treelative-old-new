@@ -25,6 +25,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import useDevice from 'hooks/useDevice'
 import FormDialog from 'components/_common/FormDialog'
 
+import { firebaseAuth } from 'utils/firebaseApp'
+
 const toast = createStandaloneToast()
 
 const schemaValidation = object().shape({
@@ -57,8 +59,9 @@ export default function CreateUser ({ initialValue = '', onClose: onParentClose 
   // eslint-disable-next-line
   useEffect(() => { (isDesktop || initialValue) && isOpen && setTimeout(() => setFocus('fullName'), 1) }, [isOpen])
 
-  const onSubmit = (input) => {
-    mutateAsync({ input })
+  const onSubmit = async (input) => {
+    const token = await firebaseAuth.currentUser.getIdToken()
+    mutateAsync({ input, token })
       .then(data => {
         toast({
           title: 'Successfully User Created',

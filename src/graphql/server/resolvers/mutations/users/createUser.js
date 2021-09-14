@@ -1,16 +1,21 @@
 import { ApolloError } from 'apollo-server-micro'
 
 import dbConnect from 'utils/mongodb'
-import { storage } from 'utils/firebaseAdmin'
+import { auth, storage } from 'utils/firebaseAdmin'
 import { isAdmin } from 'utils/auth'
 
 import fs from 'fs'
 import fetch from 'node-fetch'
 
 export default async (parent, args, context, info) => {
-  const session = await isAdmin(context.cookies.AUTH_SESSION_ID)
-  if (session.error) {
-    throw new ApolloError(session.error, 'UNAUTHORIZED')
+  if (!args.token) {
+    const session = await isAdmin(context.cookies.AUTH_SESSION_ID)
+    if (session.error) {
+      throw new ApolloError(session.error, 'UNAUTHORIZED')
+    }
+  } else {
+    // verify firebase session id
+    await auth().verifyIdToken(args.token)
   }
 
   const db = await dbConnect()
