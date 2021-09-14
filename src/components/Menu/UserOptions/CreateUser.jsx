@@ -70,7 +70,7 @@ export default function CreateUser ({ initialValue = '', onClose: onParentClose 
           duration: 5000,
           isClosable: true
         })
-        layoutMethods.refetch()
+        layoutMethods.refetch && layoutMethods.refetch()
         handleClose(data)
       })
       .catch(setInternalError)

@@ -9,7 +9,6 @@ import { loginWithPhoneNumber } from 'graphql/client/mutations/auth'
 
 import {
   Text,
-  Input,
   Stack,
   Button,
   PinInput,
@@ -17,6 +16,7 @@ import {
   FormControl,
   PinInputField
 } from '@chakra-ui/react'
+
 import { IoCaretBack } from 'react-icons/io5'
 
 import { firebaseAuth, firebase } from 'utils/firebaseApp'
@@ -25,6 +25,9 @@ import Loading from 'components/_common/Loading'
 import ErrorAlert from 'components/_common/ErrorAlert'
 import ErrorModal from 'components/_common/ErrorModal'
 import ConnectUserPhoneNumber from 'components/EditUser/ConnectUserPhoneNumber'
+
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 
 export default function LoginWithPhoneNumber ({ setShowLoginWithPhoneNumber }) {
   const router = useRouter()
@@ -39,18 +42,7 @@ export default function LoginWithPhoneNumber ({ setShowLoginWithPhoneNumber }) {
     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('sign-in-button', {
       size: 'invisible',
       callback: () => {
-        // reCAPTCHA solved, allow signInWithPhoneNumber.
         onLoginWithPhoneNumber()
-      },
-      'expired-callback': () => {
-        window.recaptchaVerifier.render().then((widgetId) => {
-          window.recaptchaVerifier.reset(widgetId)
-        })
-      },
-      'error-callback': () => {
-        window.recaptchaVerifier.render().then((widgetId) => {
-          window.recaptchaVerifier.reset(widgetId)
-        })
       }
     })
   }, [])
@@ -59,11 +51,10 @@ export default function LoginWithPhoneNumber ({ setShowLoginWithPhoneNumber }) {
     e.preventDefault()
     const appVerifier = window.recaptchaVerifier
     setIsLoading(true)
-    setPhoneNumber(e.target[0].value)
     setFirebaseError(null)
-    firebaseAuth.signInWithPhoneNumber(e.target[0].value, appVerifier)
+    firebaseAuth.signInWithPhoneNumber('+' + phoneNumber, appVerifier)
       .then((confirmationResult) => {
-        window.localStorage.setItem('phoneNumberForSignIn', e.target[0].value)
+        window.localStorage.setItem('phoneNumberForSignIn', '+' + phoneNumber)
         setVerificationMsg(true)
         setIsLoading(false)
         // SMS sent. Prompt user to type the code from the message, then sign the
@@ -74,9 +65,7 @@ export default function LoginWithPhoneNumber ({ setShowLoginWithPhoneNumber }) {
         setFirebaseError(err.message)
         setIsLoading(false)
         // reset the reCAPTCHA
-        window.recaptchaVerifier.render().then((widgetId) => {
-          window.recaptchaVerifier.reset(widgetId)
-        })
+        grecaptcha.reset(window.recaptchaWidgetId) // eslint-disable-line
       })
   }
 
@@ -118,7 +107,7 @@ export default function LoginWithPhoneNumber ({ setShowLoginWithPhoneNumber }) {
   }
 
   if (error?.message.includes('associated with the phone number')) {
-    return <ConnectUserPhoneNumber phoneNumber={phoneNumber} message={error.message} onClose={onClose} />
+    return <ConnectUserPhoneNumber phoneNumber={'+' + phoneNumber} message={error.message} onClose={onClose} />
   }
 
   if (error) return <ErrorModal onClose={onClose}> {error.message} </ErrorModal>
@@ -161,7 +150,35 @@ export default function LoginWithPhoneNumber ({ setShowLoginWithPhoneNumber }) {
         {!verificationMsg && (
           <FormControl isRequired>
             <FormLabel>PhoneNumber</FormLabel>
-            <Input type='phoneNumber' aria-label='PhoneNumber Input' autoComplete='off' defaultValue={phoneNumber} />
+            <PhoneInput
+              onChange={setPhoneNumber}
+              enableSearch
+              inputProps={{
+                name: 'phone',
+                required: true,
+                placeholder: 'Phone Number',
+                autoComplete: 'off'
+              }}
+              containerStyle={{
+                height: '2.5rem'
+              }}
+              buttonStyle={{
+                background: 'inherit',
+                borderColor: 'inherit',
+                _focus: {
+                  borderColor: 'inherit'
+                }
+              }}
+              dropdownStyle={{
+                color: '#000'
+              }}
+              inputStyle={{
+                height: '100%',
+                background: 'inherit',
+                borderColor: 'inherit',
+                fontSize: '1.1rem'
+              }}
+            />
           </FormControl>
         )}
         {isVerifyingPhoneNumber && <Text p='8'>Verifying code...</Text>}

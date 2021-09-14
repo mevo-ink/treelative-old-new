@@ -75,14 +75,14 @@ export default function Login ({ onSuccess, onClose }) {
             fontWeight='600'
             color='unset'
           >
-            Sign In
+            Login
           </Text>
           <Text
             mb='1rem'
-            fontSize='xs'
+            fontSize='sm'
             color='unset'
           >
-            You need to be signed in to view this user profile
+            You need to be logged in to view this user
           </Text>
           {(!showLoginWithEmail && !showLoginWithPhoneNumber) && (
             <Stack
