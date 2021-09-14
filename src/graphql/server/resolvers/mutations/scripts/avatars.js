@@ -24,7 +24,7 @@ export default async (parent, args, context, info) => {
 
     await storage.upload(userID, {
       public: true,
-      destination: `avatars/${userID}.png`
+      destination: `/tmp/${userID}.png`
     })
 
     fs.unlinkSync(userID)

@@ -31,7 +31,7 @@ export default async (parent, args, context, info) => {
 
   fs.writeFileSync(tmpFile, buffer)
 
-  await storage.upload(tmpFile, { destination: `avatars/${userID}.png` })
+  await storage.upload(tmpFile, { destination: `/tmp/${userID}.png` })
 
   fs.unlinkSync(tmpFile)
 
