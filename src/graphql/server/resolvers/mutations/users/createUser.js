@@ -27,11 +27,11 @@ export default async (parent, args, context, info) => {
   const response = await fetch(url)
   const data = await response.arrayBuffer()
   const buffer = Buffer.from(data)
-  const tmpFile = 'avatar.png'
+  const tmpFile = '/tmp/avatar.png'
 
   fs.writeFileSync(tmpFile, buffer)
 
-  await storage.upload(tmpFile, { destination: `/tmp/${userID}.png` })
+  await storage.upload(tmpFile, { destination: `avatars/${userID}.png` })
 
   fs.unlinkSync(tmpFile)
 
