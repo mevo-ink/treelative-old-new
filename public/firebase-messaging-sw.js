@@ -24,7 +24,8 @@ if (!firebase.apps.length) {
     const notificationTitle = payload.data.title
     const notificationOptions = {
       body: payload.data.description,
-      icon: '/logo192.png'
+      icon: '/logo192.png',
+      click_action: payload.data.link
     }
     self.registration.showNotification(notificationTitle, notificationOptions)
   })

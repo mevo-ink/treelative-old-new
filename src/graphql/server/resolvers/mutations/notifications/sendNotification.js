@@ -1,7 +1,7 @@
 import { admin } from 'utils/firebaseAdmin'
 
 export default async (parent, args, context, info) => {
-  const { title, description } = args
+  const { title, description, link } = args
 
   const fcmTokens = (await context.db.collection('fcm')
     .find({}, { projection: { _id: 0, token: 1 } })
@@ -15,7 +15,8 @@ export default async (parent, args, context, info) => {
   const response = await admin.messaging().sendToDevice(fcmTokens, {
     data: {
       title,
-      description
+      description,
+      link: link || context.req.headers.origin || 'https://treelative.com'
     }
   })
 

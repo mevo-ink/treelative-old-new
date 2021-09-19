@@ -27,7 +27,7 @@ export default gql`
     scriptMigrate: Boolean
 
     sendFCMToken (token: String! fingerprint: String! browser: String): JSON!
-    sendNotification (title: String! description: JSON!): JSON!
+    sendNotification (title: String! description: String link: String): JSON!
   }
 
   input CreateUserInput {
