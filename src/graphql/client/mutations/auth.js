@@ -4,8 +4,8 @@ export const sendFCMToken = async (variables) => {
   try {
     const { sendFCMToken } = await graphQLClient.request(
       gql`
-        mutation SEND_FCM_TOKEN ($token: String! $navigator: JSON) {
-          sendFCMToken (token: $token navigator: $navigator)
+        mutation SEND_FCM_TOKEN ($token: String! $fingerprint: String! $browser: String) {
+          sendFCMToken (token: $token fingerprint: $fingerprint browser: $browser)
         }
       `,
       variables

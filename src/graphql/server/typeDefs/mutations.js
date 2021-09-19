@@ -26,7 +26,7 @@ export default gql`
     scriptAvatars: Boolean
     scriptMigrate: Boolean
 
-    sendFCMToken (token: String! navigator: JSON): JSON!
+    sendFCMToken (token: String! fingerprint: String! browser: String): JSON!
     sendNotification (title: String! description: JSON!): JSON!
   }
 

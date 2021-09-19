@@ -31,7 +31,7 @@ export default async function mongoConnect () {
   // create indexes on collections
   db.collection('users').createIndex({ email: 1 }, { unique: true, sparse: true })
   db.collection('cache').createIndex({ name: 1 }, { unique: true })
-  db.collection('fcm').createIndex({ token: 1 }, { unique: true })
+  db.collection('fcm').createIndex({ token: 1, fingerprint: 1 }, { unique: true })
   db.ObjectId = ObjectId
   return db
 }

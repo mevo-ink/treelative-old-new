@@ -22,20 +22,20 @@ export default function Wrapper ({ children }) {
   useServiceWorker()
 
   const setToken = async () => {
-    const token = await initFirebaseCloudMessaging()
-    if (token) {
-      messaging.onMessage((message) => {
-        const { data } = message
-        toast({
-          title: data.title,
-          description: data.description,
-          status: 'warning',
-          position: 'top',
-          duration: null,
-          isClosable: true
-        })
+    await initFirebaseCloudMessaging()
+    // listen to notifications from firebase on topic 'notifications'
+    messaging.onMessage((message) => {
+      console.log(message)
+      const { data } = message
+      toast({
+        title: data.title,
+        description: data.description,
+        status: 'warning',
+        position: 'top',
+        duration: null,
+        isClosable: true
       })
-    }
+    })
   }
 
   useEffect(() => {
