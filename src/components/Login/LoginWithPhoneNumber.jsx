@@ -87,7 +87,7 @@ export default function LoginWithPhoneNumber ({ setShowLoginWithPhoneNumber }) {
   }
 
   const onLoginWithProvider = (token) => {
-    mutate({ phoneNumber, token }, { onSuccess: onLoginSuccess })
+    mutate({ phoneNumber: '+' + phoneNumber, token }, { onSuccess: onLoginSuccess })
   }
 
   const onVerifyCode = (code) => {

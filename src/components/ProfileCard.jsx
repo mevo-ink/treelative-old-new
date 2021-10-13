@@ -9,8 +9,8 @@ import {
 } from '@chakra-ui/react'
 import { MdClose } from 'react-icons/md'
 
-import { useRecoilState } from 'recoil'
-import { isEditModeAtom } from 'utils/atoms.js'
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import { isEditModeAtom, isMenuOpenAtom } from 'utils/atoms.js'
 
 import { useQuery } from 'react-query'
 import { getUser } from 'graphql/client/queries/users'
@@ -47,11 +47,13 @@ export default function ProfileCard ({ userID, onClose }) {
   const router = useRouter()
 
   const [isEditMode, setIsEditMode] = useRecoilState(isEditModeAtom)
+  const setIsMenuOpen = useSetRecoilState(isMenuOpenAtom)
 
   const { data: user, error, isLoading } = useQuery(['getUser', { id: userID }], getUser)
 
   const handleClose = () => {
     setIsEditMode(false)
+    setIsMenuOpen(false)
     onClose()
   }
 

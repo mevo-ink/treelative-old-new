@@ -1,5 +1,8 @@
 import { useRef } from 'react'
 
+import { useRecoilState } from 'recoil'
+import { isMenuOpenAtom } from 'utils/atoms.js'
+
 import {
   Box,
   Stack,
@@ -8,7 +11,6 @@ import {
   keyframes,
   IconButton,
   DrawerBody,
-  useDisclosure,
   DrawerOverlay,
   DrawerContent
 } from '@chakra-ui/react'
@@ -29,12 +31,17 @@ const wiggle = keyframes`
 `
 
 export default function Menu () {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [isMenuOpen, setIsMenuOpen] = useRecoilState(isMenuOpenAtom)
+
+  const onOpen = () => setIsMenuOpen(true)
+
+  const onClose = () => setIsMenuOpen(false)
+
   const btnRef = useRef()
 
   return (
     <Box>
-      {!isOpen && (
+      {!isMenuOpen && (
         <IconButton
           ref={btnRef}
           icon={<FaGripLines color='white' />}
@@ -46,7 +53,7 @@ export default function Menu () {
           right='0'
           bottom='0'
           zIndex='6'
-          bg='hsla(0, 0%, 100%, .2)'
+          bg='hsla(0, 0%, 100%, .3)'
           backdropFilter='blur(8px)'
           borderRadius='0'
           borderTopLeftRadius='20px'
@@ -57,7 +64,7 @@ export default function Menu () {
         />
       )}
       <Drawer
-        isOpen={isOpen}
+        isOpen={isMenuOpen}
         isCentered
         placement='bottom'
         onClose={onClose}

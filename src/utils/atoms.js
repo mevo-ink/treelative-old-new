@@ -5,6 +5,11 @@ export const activeNodePulseIDAtom = atom({
   default: null
 })
 
+export const isMenuOpenAtom = atom({
+  key: 'isMenuOpen',
+  default: false
+})
+
 export const isEditModeAtom = atom({
   key: 'isEditMode',
   default: false
