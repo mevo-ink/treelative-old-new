@@ -1,3 +1,5 @@
+import { Flex } from '@chakra-ui/layout'
+
 import { useQuery } from 'react-query'
 import { whoAmI } from 'graphql/client/queries/auth'
 
@@ -9,10 +11,14 @@ export default function UserOptions ({ onClose }) {
   const { data: authUser } = useQuery('whoAmI', whoAmI)
 
   return (
-    <>
+    <Flex
+      w='45%'
+      ml='.5rem'
+      justifyContent='space-between'
+    >
       {authUser?.isAdmin && <CreateUser />}
       <Profile onClose={onClose} authUser={authUser} />
       {authUser && <FindMe onClose={onClose} user={authUser} size='sm' />}
-    </>
+    </Flex>
   )
 }

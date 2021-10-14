@@ -5,8 +5,8 @@ import { isMenuOpenAtom } from 'utils/atoms.js'
 
 import {
   Box,
+  Flex,
   Stack,
-  HStack,
   Drawer,
   keyframes,
   IconButton,
@@ -82,10 +82,10 @@ export default function Menu () {
           />
           <DrawerBody sx={{ '&::-webkit-scrollbar': { display: 'none' }, scrollbarWidth: 'none' }}>
             <Stack p='1.5em .5em' spacing='2rem'>
-              <HStack justifyContent='space-between' alignItems='end'>
+              <Flex>
                 <Search onClose={onClose} />
                 <UserOptions onClose={onClose} />
-              </HStack>
+              </Flex>
               <Layouts onClose={onClose} />
               <Insights />
             </Stack>

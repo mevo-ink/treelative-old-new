@@ -70,6 +70,5 @@ export default function App ({ Component, pageProps }) {
 // Show logout button in user's own profile card
 // Refactor storing FCM token along with user's data
 // Fix onclick action on pwa notification
-// Fix search results pushing icons to the bottom
 // Fix FCM on iOS devices
 // Make all profiles public by default - show login popup on initial load and allow user to continue as guest - store preference in local storage
