@@ -26,7 +26,7 @@ export default function Profile ({ authUser }) {
     >
       <Image
         src={authUser?.avatar}
-        fallbackSrc='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7HjQfYqYBsspqy-iV0-Cw5uHo-cH-3TbhbAugLXu7RnL9lmqiPZUkqBy-XpKfandg7FQ&usqp=CAU'
+        fallbackSrc='https://www.w3schools.com/howto/img_avatar.png'
         alt='avatar'
         w='2rem'
         h='2rem'
