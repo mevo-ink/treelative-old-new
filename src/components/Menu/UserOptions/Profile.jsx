@@ -18,6 +18,7 @@ export default function Profile ({ authUser }) {
   return (
     <Button
       size='sm'
+      mx='0.4rem'
       p='0'
       bg='hsla(220, 100%, 60%, .8)'
       borderRadius='50%'

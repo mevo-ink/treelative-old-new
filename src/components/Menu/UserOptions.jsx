@@ -12,7 +12,6 @@ export default function UserOptions ({ onClose }) {
 
   return (
     <Flex
-      w='45%'
       ml='.5rem'
       justifyContent='space-between'
     >
