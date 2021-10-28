@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import { setCookie } from 'nookies'
 
 import { IconButton } from '@chakra-ui/react'
 import { FiEdit } from 'react-icons/fi'
@@ -21,26 +22,35 @@ export default function Edit ({ innerBtnStyles, user }) {
   const { data: authUser } = useQuery('whoAmI', whoAmI)
 
   const checkEditable = () => {
+    if (authUser?.isAdmin) return true
+    if (authUser?.id === activeNodeID) return true
     if (authUser?.children?.find(child => child.id === activeNodeID)) return true
     if (authUser?.parents?.find(parent => parent.id === activeNodeID)) return true
     if (activeNodeID === authUser?.partner?.id) return true
   }
 
+  const handleEdit = () => {
+    if (!checkEditable()) {
+      setCookie(null, 'REDIRECT_REFERRER', `/users/${activeNodeID}`, { path: '/' })
+      router.push('?login=auth', '/auth/login', { shallow: true, scroll: false })
+    } else {
+      setIsEditMode(!isEditMode)
+    }
+  }
+
   return (
     <>
-      {(authUser?.isAdmin || authUser?.id === activeNodeID || checkEditable()) && (
-        <>
-          <IconButton
-            icon={isEditMode ? <MdDone /> : <FiEdit />}
-            {...innerBtnStyles}
-            left='.3rem'
-            bgColor={isEditMode && 'hsla(130, 65%, 55%, .5)'}
-            _active={{ bgColor: isEditMode && 'hsla(130, 65%, 45%, .5)' }}
-            _hover={{ bgColor: isEditMode && 'hsla(130, 65%, 45%, .5)' }}
-            onClick={() => setIsEditMode(!isEditMode)}
-          />
-          <Delete innerBtnStyles={innerBtnStyles} user={user} />
-        </>
+      <IconButton
+        icon={isEditMode ? <MdDone /> : <FiEdit />}
+        {...innerBtnStyles}
+        left='.3rem'
+        bgColor={isEditMode && 'hsla(130, 65%, 55%, .5)'}
+        _active={{ bgColor: isEditMode && 'hsla(130, 65%, 45%, .5)' }}
+        _hover={{ bgColor: isEditMode && 'hsla(130, 65%, 45%, .5)' }}
+        onClick={handleEdit}
+      />
+      {checkEditable() && (
+        <Delete innerBtnStyles={innerBtnStyles} user={user} />
       )}
     </>
   )

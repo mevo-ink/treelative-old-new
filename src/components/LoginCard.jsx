@@ -74,15 +74,9 @@ export default function Login ({ onSuccess, onClose }) {
             fontSize='1.8rem'
             fontWeight='600'
             color='unset'
+            mb='4'
           >
             Login
-          </Text>
-          <Text
-            mb='1rem'
-            fontSize='sm'
-            color='unset'
-          >
-            You need to be logged in to view this user
           </Text>
           {(!showLoginWithEmail && !showLoginWithPhoneNumber) && (
             <Stack

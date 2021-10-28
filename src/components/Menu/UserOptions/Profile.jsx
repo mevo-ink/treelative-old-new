@@ -20,13 +20,13 @@ export default function Profile ({ authUser }) {
       size='sm'
       mx='0.4rem'
       p='0'
-      bg='hsla(220, 100%, 60%, .8)'
+      bg='hsla(220, 100%, 60%, .9)'
       borderRadius='50%'
       onClick={handleClick}
     >
       <Image
         src={authUser?.avatar}
-        fallbackSrc='https://www.w3schools.com/howto/img_avatar.png'
+        fallbackSrc='/images/avatar.png'
         alt='avatar'
         w='2rem'
         h='2rem'

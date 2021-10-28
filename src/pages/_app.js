@@ -70,4 +70,3 @@ export default function App ({ Component, pageProps }) {
 // Refactor storing FCM token along with user's data
 // Fix onclick action on pwa notification
 // Fix FCM on iOS devices
-// Make all profiles public by default - show login popup on initial load and allow user to continue as guest - store preference in local storage

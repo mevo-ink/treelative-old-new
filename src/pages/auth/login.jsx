@@ -26,7 +26,13 @@ export default function Login () {
   const router = useRouter()
 
   const onLoginClose = () => {
-    router.push('/layouts/graph')
+    const { REDIRECT_REFERRER } = parseCookies()
+    if (REDIRECT_REFERRER) {
+      destroyCookie(null, 'REDIRECT_REFERRER', { path: '/' })
+      router.push(REDIRECT_REFERRER)
+    } else {
+      router.push('/layouts/graph')
+    }
   }
 
   const onLoginSuccess = () => {
