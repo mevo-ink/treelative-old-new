@@ -98,7 +98,9 @@ export default function Graph () {
       network.unselectAll()
       const activeNode = data.nodes.find(node => nodes[0] === node.id)
       if (activeNode.group === 'individual') {
-        router.push(`?userID=${activeNode.id}`, `/users/${activeNode.id}`, { shallow: true, scroll: false })
+        setTimeout(() => {
+          router.push(`?userID=${activeNode.id}`, `/users/${activeNode.id}`, { shallow: true, scroll: false })
+        }, 1)
       }
     })
     // disable drag on node click

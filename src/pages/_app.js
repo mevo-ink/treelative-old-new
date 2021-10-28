@@ -65,7 +65,6 @@ export default function App ({ Component, pageProps }) {
 }
 
 // TODOS
-// Fix bug on touch devices where clicking on modal double clicks the button behind it
 // Add logic to detect if user is currently authenticated
 // Refactor storing FCM token along with user's data
 // Fix onclick action on pwa notification
