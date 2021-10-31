@@ -17,7 +17,7 @@ import Wrapper from 'components/Wrapper'
 import Loading from 'components/Loading'
 import ErrorModal from 'components/_common/ErrorModal'
 
-import { Network } from 'vis-network/peer/umd/vis-network.js'
+import { Network } from 'vis-network'
 import { graphOptions } from 'utils/layouts'
 
 import { Box } from '@chakra-ui/react'
