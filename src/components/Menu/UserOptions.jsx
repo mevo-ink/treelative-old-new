@@ -20,6 +20,12 @@ export default function UserOptions ({ onClose }) {
     router.push('?login=auth', '/auth/login', { shallow: true, scroll: false })
   }
 
+  const onCreateUserSuccess = (userID) => {
+    if (userID) {
+      router.push(`?userID=${userID}`, `/users/${userID}`, { shallow: true, scroll: false })
+    }
+  }
+
   if (!authUser) {
     return (
       <Button size='sm' ml='4' onClick={onLogin}>Login</Button>
@@ -28,7 +34,7 @@ export default function UserOptions ({ onClose }) {
 
   return (
     <Flex ml='.5rem' justifyContent='space-between'>
-      {authUser?.isAdmin && <CreateUser />}
+      {authUser?.isAdmin && <CreateUser onClose={onCreateUserSuccess} />}
       <Profile onClose={onClose} authUser={authUser} />
       {authUser && <FindMe onClose={onClose} user={authUser} size='sm' />}
     </Flex>
