@@ -20,7 +20,7 @@ export default async (parent, args, context, info) => {
     throw new ApolloError('No such user exists', 'NOT_FOUND')
   }
 
-  const file = storage.file(`avatars/${user.id}.png`)
+  const file = storage.file(`avatars/${user._id.toString()}.png`)
   const presignedUrl = await file.getSignedUrl({
     version: 'v4',
     action: 'write',
