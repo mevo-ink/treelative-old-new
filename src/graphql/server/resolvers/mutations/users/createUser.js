@@ -20,7 +20,10 @@ export default async (parent, args, context, info) => {
 
   const db = await dbConnect()
 
-  const { insertedId: userID } = await db.collection('users').insertOne(args.input)
+  const { insertedId: userID } = await db.collection('users').insertOne({
+    ...args.input,
+    isPublic: true
+  })
 
   // download default user avatar from ui-avatars and upload to storage
   const url = `https://ui-avatars.com/api/?name=${args.input.fullName}&background=random&rounded=true&font-size=0.5&bold=true`
