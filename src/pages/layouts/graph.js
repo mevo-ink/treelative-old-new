@@ -79,9 +79,9 @@ export default function Graph () {
           const position = network.getPosition(user.id)
           network.moveTo({
             position,
-            scale: 1,
+            scale: 1.75,
             animation: {
-              duration: 500,
+              duration: 2000,
               easingFunction: 'easeInCubic'
             }
           })
