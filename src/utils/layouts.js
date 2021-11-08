@@ -1,6 +1,6 @@
 export const graphOptions = {
   layout: {
-    improvedLayout: false
+    improvedLayout: true
   },
   nodes: {
     borderWidth: 2,
